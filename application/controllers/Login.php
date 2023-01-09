@@ -38,7 +38,7 @@ class Login extends CI_Controller {
 	public function Account() {
 		$setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
 		
-		$this->template->set_master_template('themes/'. $this->theme .'/view_login.php');
+		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_login.php');
 		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
 
@@ -53,7 +53,7 @@ class Login extends CI_Controller {
 		
 	// }
 	public function forgotpassword() {
-		$this->template->set_master_template('themes/'. $this->theme .'/view_forgotpassword.php');
+		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_forgotpassword.php');
 		$this->template->render();
 	}
 	public function checkLogin() {
@@ -63,7 +63,7 @@ class Login extends CI_Controller {
 		echo $rs;
 	}
 	public function Home(){
-		$this->template->set_master_template('themes/'. $this->theme .'/view_Homepage.php');
+		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_Homepage.php');
 		$this->template->render();
 	}
 	public function cCheckEmail(){

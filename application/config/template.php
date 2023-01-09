@@ -59,7 +59,7 @@ $template['active_template'] = 'public';
   |--------------------------------------------------------------------------
  */
 //public template
-$template['public']['template'] = 'themes/aventAdmin/tpl_backend.php';
+$template['public']['template'] = 'themes/aventAdmin/Homepage/tpl_backend.php';
 $template['public']['regions'] = array(
 	'js_url',
 	'css_url',

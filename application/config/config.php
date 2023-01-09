@@ -91,7 +91,7 @@ $theme = 'aventAdmin';
 
 $config['theme'] = $theme;
 $config['asset_url'] = 'themes/'.$theme.'/';
-$config['js_url'] = 'assets2/assets/';
-$config['css_url'] = 'assets2/assets/';
-$config['image_url'] = 'assets2/assets/';
 $config['jquery_url'] = "assets/";
+$config['js_url'] = 'assets/';
+$config['css_url'] = 'assets/';
+$config['image_url'] = 'assets/';
