@@ -59,7 +59,8 @@ class Login extends CI_Controller {
 	public function checkLogin() {
 		$empcode = $_POST["empcode"];
 		$password = $_POST["password"];
-    $rs = $this->backoffice_model->modelCheckLogin($empcode,$password);
+		$password_encoded = base64_encode($password);
+    $rs = $this->backoffice_model->modelCheckLogin($empcode,$password_encoded);
 		echo $rs;
 	}
 	public function Home(){
@@ -74,7 +75,8 @@ class Login extends CI_Controller {
 	public function cSetNewPassword(){
 		$email = $_POST["email"];
 		$password = $_POST["password"];
-		$res = $this->backoffice_model->modelSetPassword($email,$password);
+		$password_encoded = base64_encode($password);
+		$res = $this->backoffice_model->modelSetPassword($email,$password_encoded);
 		echo $res;
 	}
 

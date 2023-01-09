@@ -20,12 +20,13 @@
   <link rel="shortcut icon" href="<?php echo base_url() . $image_url; ?>images/logoQgate.png" />
 </head>
 <style>
-  .colorbtnSend {
+  .colorbtnConfirm {
     background-color: #D80032;
     border-color: #D80032;
+    border-radius: 12rem;
   }
 
-  .colorbtnLogin:hover {
+  .colorbtnConfirm:hover {
     background-color: #800000;
   }
 
@@ -35,7 +36,7 @@
     color: #D80032;
   }
   .txtback:hover {
-    color: #D80032;
+    color: #800000;
   }
 </style>
 
@@ -62,10 +63,11 @@
               <div class="form-group d-flex align-items-center justify-content-between">
               </div>
               <div class="text-center ">
-                <button type="submit" class="btn colorbtnSend btn-block enter-btn " id="confirm">CONFIRM</button>
+                <button type="submit" class="btn colorbtnConfirm btn-block enter-btn " id="confirm">CONFIRM</button>
+                <hr style="background-color:aliceblue">
+                <a href="<?php echo base_url() ?>Login/Account" class="forgot-pass txtback">Back</a>
               </div>
-              <a href="<?php echo base_url() ?>Login/Account" class="txtback">Back</a>
-
+            
             </div>
           </div>
         </div>

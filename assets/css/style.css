@@ -10649,6 +10649,7 @@ pre code {
     border: 1px solid #2c2e33;
     border-radius: 2px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 15rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -10847,6 +10848,7 @@ select.tt-hint:focus::-ms-value {
     background-color: transparent;
     border: solid transparent;
     border-width: 1px 0;
+    border-radius: 5rem;
 }
 
 .form-control-plaintext.form-control-sm,
@@ -27041,7 +27043,7 @@ body.avgrund-active {
     font-size: 25px;
     line-height: 1;
     font-weight: 500;
-    color: #ffffff;
+    color: #000000;
     font-weight: initial;
     margin-bottom: 0;
 }

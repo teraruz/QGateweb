@@ -11,8 +11,7 @@
   <link href="<?php echo base_url() . $css_url; ?>vendors/css/vendor.bundle.base.css" rel="stylesheet" type="text/css">
   <!-- endinject -->
   <!-- import JQuery -->
-  <!-- <script src="<?php //echo base_url() . $js_url; 
-                    ?>jquery-2.1.4.min.js"></script> -->
+  <script src="<?php echo base_url() . $js_url; ?>jquery-2.1.4.min.js"></script>
   <!-- Plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
@@ -26,6 +25,7 @@
   .colorbtnLogin {
     background-color: #D80032;
     border-color: #D80032;
+    border-radius: 3rem;
   }
 
   .colorbtnLogin:hover {
@@ -74,9 +74,10 @@
                 <label>Password :</label>
                 <input type="text" class="form-control" id="password">
               </div><br>
-              
+            
               <div class="text-center ">
                 <button type="submit" class="btn colorbtnLogin btn-block enter-btn " id="login">LOGIN</button>
+                <hr style="background-color:aliceblue">
                 <a href="<?php echo base_url() ?>Login/forgotpassword" class="forgot-pass">Forgot Password?</a>
               </div>
             </div>
@@ -155,12 +156,12 @@
           title :'Login Success',
           text: 'Welcome to Q-Gate Website',
           showConfirmButton: false,
-          footer: '<a href="<?php echo base_url() ?>Manage/Homepage2">GO TO WEBSITE</a>',
+          footer: '<a href="<?php echo base_url() ?>Manage/Homepage">GO TO WEBSITE</a>',
         })
       } else {
         Swal.fire({
           icon: 'error',
-          text: 'Oops...',
+          title :'Oops!!',
           text: 'Employee Code or Password is Incorrect!',
         })
       }

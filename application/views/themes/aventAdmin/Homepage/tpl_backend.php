@@ -29,9 +29,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?php echo base_url() . $image_url; ?>assets/images/favicon.png" />
+    <link rel="shortcut icon" href="<?php echo base_url() . $image_url; ?>images/favicon.png" />
 
     </head>
 
@@ -46,7 +46,7 @@
 </html>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url() . $js_url; ?>vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url() . $jquery_url; ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?php echo base_url() . $js_url; ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
@@ -79,5 +79,5 @@
 <script src="<?php echo base_url() . $js_url; ?>js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
-<script src="assets/js/dashboard.js"></script>
+<script src="<?php echo base_url() . $js_url; ?>js/dashboard.js"></script>
 <!-- End custom js for this page -->

@@ -45,7 +45,7 @@ class manage extends CI_Controller {
     
 		
 		$this->template->write_view('page_content', 'themes/'. $this->theme .'/Homepage/view_home.php');
-		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/Homepage/first_set/view_footer.php');
+		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/Homepage/view_footer.php');
 
 		$this->template->render();
 	}
