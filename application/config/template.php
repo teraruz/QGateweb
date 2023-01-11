@@ -65,6 +65,7 @@ $template['public']['regions'] = array(
 	'css_url',
 	'asset_url',
   'image_url',
+  'jquery_url',
 	'page_title',
   'page_header',
 	'page_menu',

@@ -82,7 +82,6 @@ $config['compress_output'] = FALSE;
 
 $config['time_reference'] = 'local';
 
-
 $config['rewrite_short_tags'] = FALSE;
 
 $config['proxy_ips'] = '';
@@ -90,6 +89,7 @@ $config['proxy_ips'] = '';
 $theme = 'aventAdmin';
 
 $config['theme'] = $theme;
+$config['asset_url'] = 'themes/';
 $config['asset_url'] = 'themes/'.$theme.'/';
 $config['jquery_url'] = "assets/";
 $config['js_url'] = 'assets/';
