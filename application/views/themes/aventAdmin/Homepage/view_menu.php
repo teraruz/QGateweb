@@ -3,6 +3,7 @@
 <div class="container-fluid page-body-wrapper">
 <nav class="navbar p-0 fixed-top d-flex flex-row">
           <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url()?>assets/images/logoQgate-mini.png" width="60" height="50"></a> 
           </div>
           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -159,7 +160,7 @@
                   <div class="navbar-profile">
                     <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt=""> -->
                     <img class="img-xs rounded-circle " src="<?php echo base_url()?>assets/images/faces/face15.jpg" >
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><?php echo $data[0]["ss_emp_fname"]; ?></p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>
@@ -188,7 +189,7 @@
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
+                  <a class="dropdown-item preview-item" id="btnLogout">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">
                         <i class="mdi mdi-logout text-danger"></i>
@@ -198,8 +199,9 @@
                       <p class="preview-subject mb-1">Log out</p>
                     </div>
                   </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
+                  <!-- ปิด footer ของ dropdown -->
+                  <!-- <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">Advanced settings</p> -->
                 </div>
               </li>
             </ul>
@@ -208,4 +210,7 @@
             </button>
           </div>
         </nav>
+
+
+        
 

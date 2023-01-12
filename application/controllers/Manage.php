@@ -37,15 +37,16 @@ class manage extends CI_Controller {
 					
 	}
 	public function Homepage() {
+		$empcode = $_GET["empcode"];
+		// echo $empcode;
+		// exit();
+		$data["data"] = $this->backoffice_model->modelGetName($empcode);
 		$setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
-
     $this->template->write('page_title', 'TBKK | '.$setTitle.'');
-		$this->template->write_view('page_menu', 'themes/'. $this->theme .'/Homepage/view_menu.php');
+		$this->template->write_view('page_menu', 'themes/'. $this->theme .'/Homepage/view_menu.php',$data);
 		$this->template->write_view('page_header', 'themes/'. $this->theme .'/Homepage/view_header.php');
-		
 		$this->template->write_view('page_content', 'themes/'. $this->theme .'/Homepage/view_home.php');
 		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/Homepage/view_footer.php');
-
 		$this->template->render();
 	}
 	// public function Homepage2() {

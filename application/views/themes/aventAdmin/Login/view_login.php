@@ -68,15 +68,15 @@
 
               <div class="form-group">
                 <label>Employee Code :</label>
-                <input type="text" class="form-control" id="empcode">
+                <input type="text" class="form-control" id="empcode" value  ="">
               </div>
               <div class="form-group">
                 <label>Password :</label>
-                <input type="text" class="form-control" id="password">
+                <input type="text" class="form-control" id="password" value  ="">
               </div><br>
             
               <div class="text-center ">
-                <button type="submit" class="btn colorbtnLogin btn-block enter-btn " id="login">LOGIN</button>
+                <button type="submit" class="btn colorbtnLogin btn-block enter-btn " id="btnLogin">LOGIN</button>
                 <hr style="background-color:aliceblue">
                 <a href="<?php echo base_url() ?>Login/forgotpassword" class="forgot-pass">Forgot Password?</a>
               </div>
@@ -125,8 +125,11 @@
 <link rel="stylesheet" href="sweetalert2.min.css">
 <script src="<?php echo base_url() . $jquery_url; ?>jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-  $("#login").click(function() {
+  $("#btnLogin").click(function() {
     login()
+  })
+  $("#btnLogin").click(function() {
+    getName()
   })
 
   function login() {
@@ -146,9 +149,7 @@
 
     // รับresult กลับมาจาก controller เพื่อกำหนดเงื่อนไข
     path.done(function(rs) {
-      alert(rs)
-      console.log(rs);
-
+      var empcode = $("#empcode").val();
       if (rs === "true") {
         Swal.fire({
           template: '#my-template',
@@ -156,7 +157,7 @@
           title :'Login Success',
           text: 'Welcome to Q-Gate Website',
           showConfirmButton: false,
-          footer: '<a href="<?php echo base_url() ?>Manage/Homepage">GO TO WEBSITE</a>',
+          footer: '<a href="<?php echo base_url() ?>Manage/Homepage?empcode='+empcode+'">GO TO WEBSITE</a>',
         })
       } else {
         Swal.fire({
@@ -166,6 +167,18 @@
         })
       }
     })
+  }
+  function getName(){
+    var empcode = $("#empcode").val();
+    var path = $.ajax({
+      method: "GET",
+      // เก็บตัวแปรจากด้านบนเพื่อส่งไป controllerโดยตัวหน้าคือตัวที่ถูกส่งไป
+      url: "<?php echo base_url(); ?>Manage/Homepage",
+      data: {
+        empcode: empcode
+      }
+    })
+
   }
 
   // function addUser() {

@@ -10498,7 +10498,7 @@ pre code {
 }
 
 .table-dark th,
-.table-dark td,
+active .table-dark td,
 .table-dark thead th,
 .table-dark tbody+tbody {
     border-color: #818181;
@@ -10679,7 +10679,7 @@ pre code {
 .typeahead::-ms-expand,
 .tt-query::-ms-expand,
 .tt-hint::-ms-expand {
-    background-color: transparent;
+    background-color: white;
     border: 0;
 }
 
@@ -10695,7 +10695,7 @@ pre code {
 .tt-query:-moz-focusring,
 .tt-hint:-moz-focusring {
     color: transparent;
-    text-shadow: 0 0 0 #495057;
+    text-shadow: 0 0 0 #ffffff;
 }
 
 .form-control:focus,
@@ -10709,7 +10709,7 @@ pre code {
 .typeahead:focus,
 .tt-query:focus,
 .tt-hint:focus {
-    color: #495057;
+    color: #ffffff;
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
@@ -10805,8 +10805,8 @@ select.asColorPicker-input:focus::-ms-value,
 select.typeahead:focus::-ms-value,
 select.tt-query:focus::-ms-value,
 select.tt-hint:focus::-ms-value {
-    color: #495057;
-    background-color: #2A3038;
+    color: #000000;
+    background-color: #000000;
 }
 
 .form-control-file,
@@ -12288,7 +12288,7 @@ input[type="button"].btn-block {
     color: #ffffff;
     text-align: left;
     list-style: none;
-    background-color: #191c24;
+    background-color: #950224;
     background-clip: padding-box;
     border: 1px solid #2c2e33;
     border-radius: 0.25rem;
@@ -12464,14 +12464,14 @@ input[type="button"].btn-block {
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-    color: #16181b;
+    color: #6d1515;
     text-decoration: none;
-    background-color: #13151b;
+    background-color: #6d1515;
 }
 
 .dropdown-item.active,
 .dropdown-item:active {
-    color: #fff;
+    color: #;
     text-decoration: none;
     background-color: #007bff;
 }
@@ -14873,7 +14873,7 @@ input[type="button"].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #191c24;
+    background-color: #2B2D42;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
@@ -17011,7 +17011,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-    background-color: #0d0d0d !important;
+    background-color: #2B2D42 !important;
 }
 
 a.bg-dark:hover,
@@ -22630,7 +22630,7 @@ code {
 }
 
 .card.corona-gradient-card {
-    background-image: linear-gradient(to left, #d41459, #911a6c);
+    background-image: linear-gradient(to left, #D80032, #2B2D42);
     border-radius: 6px;
 }
 
@@ -23049,9 +23049,9 @@ code {
     font-weight: normal;
     font-size: 0.875rem;
     padding: 0.625rem 0.6875rem;
-    background-color: #2A3038;
+    background-color: #ffffff;
     border-radius: 2px;
-    color: #ffffff;
+    color: #000000;
 }
 
 .form-control:focus,
@@ -23065,7 +23065,7 @@ code {
 .typeahead:focus,
 .tt-query:focus,
 .tt-hint:focus {
-    border: 1px solid rgba(71, 164, 71, 0.5);
+    border: 2px solid #D80032;
     background-color: #2A3038;
 }
 
@@ -28149,7 +28149,7 @@ div.tagsinput span.tag a {
 }
 
 .auth .brand-logo img {
-    width: 150px;
+    width: 100px;
 }
 
 .auth form .auth-form-btn {
@@ -28218,7 +28218,7 @@ div.tagsinput span.tag a {
 
 .navbar {
     font-weight: normal;
-    background: #191c24;
+    background: #2B2D42;
     left: 244px;
     transition: left 0.25s ease;
     -webkit-transition: left 0.25s ease;
@@ -28313,13 +28313,13 @@ div.tagsinput span.tag a {
 
 .navbar .navbar-menu-wrapper .navbar-toggler {
     border: 0;
-    color: #6c7293;
+    color: #D80032;
     height: 70px;
     border-radius: 0px;
 }
 
 .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-right) {
-    font-size: 0.875rem;
+    font-size: 1.5rem;
 }
 
 @media (max-width: 991px) {
@@ -28492,7 +28492,7 @@ div.tagsinput span.tag a {
     top: 48px;
     right: 0;
     left: auto;
-    -webkit-box-shadow: 0px 0px 35px -3px black;
+    -webkit-box-shadow: 0px 0px 35px px black;
     -moz-box-shadow: 0px 0px 35px -3px black;
     box-shadow: 0px 0px 35px -3px black;
     padding: 0;
@@ -28658,7 +28658,8 @@ div.tagsinput span.tag a {
 
 .sidebar {
     min-height: calc(100vh - 70px);
-    background: #191c24;
+    background: #2B2D42;
+    ;
     font-weight: normal;
     padding: 0;
     width: 244px;
@@ -28674,7 +28675,7 @@ div.tagsinput span.tag a {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #191c24;
+    background: #2B2D42;
     width: 244px;
     height: 70px;
 }
@@ -28690,7 +28691,7 @@ div.tagsinput span.tag a {
     font-size: 1.5rem;
     line-height: 48px;
     margin-right: 0;
-    padding: 0rem 0.4rem 1.1rem 0.4rem;
+    padding: 0rem 0.4rem 1.1rem 0.rem;
     width: 80%;
 }
 
@@ -28714,7 +28715,7 @@ div.tagsinput span.tag a {
 
 .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini img {
     width: calc(180px - 90px);
-    max-width: 130%;
+    max-width: 100%;
     height: 43px;
     margin: auto;
 }
@@ -28826,7 +28827,7 @@ div.tagsinput span.tag a {
     content: "";
     width: 3px;
     height: 100%;
-    background: #0090e7;
+    background: #ffff;
     display: inline-block;
     position: absolute;
     left: 0;
@@ -28834,7 +28835,7 @@ div.tagsinput span.tag a {
 }
 
 .sidebar .nav .nav-item.active>.nav-link .menu-title {
-    color: #ffffff;
+    color: #D80032;
 }
 
 .sidebar .nav .nav-item.active>.nav-link i {
@@ -29025,7 +29026,7 @@ div.tagsinput span.tag a {
 }
 
 .sidebar .nav .nav-item.nav-category .nav-link {
-    color: #6c7293;
+    color: #D80032;
     font-weight: 500;
     font-size: 14px;
     font-weight: 500;
@@ -29087,7 +29088,7 @@ div.tagsinput span.tag a {
 
 .sidebar .nav:not(.sub-menu)>.nav-item:hover:not(.nav-category):not(.account-dropdown)>.nav-link {
     background: #0f1015;
-    color: #ffffff;
+    color: #D80032;
 }
 
 .sidebar .nav .menu-items:nth-child(5n+1) .nav-link .menu-icon i {
@@ -29274,7 +29275,7 @@ div.tagsinput span.tag a {
         text-align: left;
         top: 0;
         bottom: 0;
-        width: 190px;
+        width: 210px;
         z-index: 1;
         line-height: 1.8;
     }
@@ -29297,7 +29298,7 @@ div.tagsinput span.tag a {
         border-radius: 0 0 5px 0;
         position: absolute;
         left: 70px;
-        width: 190px;
+        width: 210px;
     }
     .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
     .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
@@ -29401,7 +29402,8 @@ div.tagsinput span.tag a {
 }
 
 .content-wrapper {
-    background: #ffffff;
+    background: #EDF2F4;
+    ;
     padding: 1.875rem 1.75rem;
     width: 100%;
     -webkit-flex-grow: 1;
