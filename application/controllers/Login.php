@@ -36,6 +36,7 @@ class Login extends CI_Controller {
 					
 	}
 	public function Account() {
+		$this->load->library('session');
 		$setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
 		
 		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_login.php');
@@ -53,6 +54,7 @@ class Login extends CI_Controller {
 		
 	// }
 	public function forgotpassword() {
+		$this->load->library('session');
 		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_forgotpassword.php');
 		$this->template->render();
 	}

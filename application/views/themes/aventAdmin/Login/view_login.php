@@ -1,3 +1,12 @@
+<?php 
+  if (isset($_POST['submit'])) {
+  session_start();
+
+  $_SESSION['empcode'] = htmlentities($_POST['empcode']);
+  header('location: tpl_backend.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,13 +75,13 @@
               </div>
               <h1 class="card-title text-center ">QUALITY SYSTEM</h1>
 
-              <div class="form-group">
+              <div class="form-group" action="<?php $_SERVER['PHP_SELF']?>"
                 <label>Employee Code :</label>
-                <input type="text" class="form-control" id="empcode" value  ="">
+                <input type="text" class="form-control" id="empcode" name="empcode" >
               </div>
               <div class="form-group">
                 <label>Password :</label>
-                <input type="text" class="form-control" id="password" value  ="">
+                <input type="password" class="form-control" id="password" name="password">
               </div><br>
             
               <div class="text-center ">
@@ -117,7 +126,6 @@
 	<swal-function-param name="didOpen" value="popup => console.log(popup)" />
 </template>
 </html>
-
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.all.min.js"></script>

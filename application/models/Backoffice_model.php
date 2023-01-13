@@ -1,33 +1,7 @@
 <?php
 class Backoffice_model extends CI_Model
 {
-
-	public function Login($usr = '', $pwd = '')
-	{
-		$p['usr'] = trim($usr);
-		$p['pwd'] = base64_encode(trim($pwd));
-
-		$sqlSel = "SELECT * FROM sys_users WHERE username='{$p['usr']}' and password='{$p['pwd']}';";
-		$query = $this->db->query($sqlSel);
-
-		if ($query->num_rows() != 0) {
-
-			$result = $query->result_array();
-
-			if ($result['0']['enable'] != 0) {
-
-				return $result[0];
-			} else {
-
-				$error = array('action' => 'err', 'value' => 'b');
-				return $error;
-			}
-		} else {
-
-			$error = array('action' => 'err', 'value' => 'i');
-			return $error;
-		}
-	}
+	// LOGINPAGE
 	public function modelCheckLogin($empcode, $password_encoded)
 	{
 		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
@@ -40,7 +14,7 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
-
+	// FORGOTPASSWORD
 	public function modelCheckEmail($email)
 	{
 		$sql = "select * from sys_staff_web where ss_email ='{$email}'";
@@ -68,8 +42,9 @@ class Backoffice_model extends CI_Model
 			return 'true';
 		}
 
-		// }
+		// GETNAMETOHOME
 
+	
 	}
 	public function modelGetName($empcode)
 	{

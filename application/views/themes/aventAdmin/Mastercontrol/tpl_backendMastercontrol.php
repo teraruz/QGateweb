@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8" />
@@ -73,7 +70,7 @@ session_start();
 <!-- End custom js for this page -->
 
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.all.min.js"></script>
 <script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
@@ -103,15 +100,14 @@ session_start();
     }
 
     function Menuhomepage() {
-        var load = 0;
-        var dataString = <?php echo $data ?>
+        var dataString = <?php echo $data[0]["ss_emp_fname"]; ?>
         var path = $.ajax({
             method: "POST",
-            url: "<?php echo base_url() ?>Managehome/Homepage?ss_emp_fname",
+            url:  "<?php echo base_url() ?>Manage/Homepage?ss_emp_fname" ,
             data: {
-                dataString: <?php echo $data[0]["ss_emp_fname"]; ?>
+                empcode : dataString 
             }
         })
 
-    }
+    } -->
 </script>
