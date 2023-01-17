@@ -14,6 +14,26 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
+	public function modelCheckLoginSession($empcode, $password_encoded)
+	{
+		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
+		$res = $this->db->query($sql);
+		if($res->num_rows()!=0)
+        {
+            $result = $res->result_array();
+            return $result[0];  
+        }
+        else
+        {    
+            return false;
+        }
+		// if (empty($row)) {
+		// 	return "false";
+		// } else {
+		// 	return "true";
+		// }
+	}
+	
 	// FORGOTPASSWORD
 	public function modelCheckEmail($email)
 	{
@@ -48,7 +68,7 @@ class Backoffice_model extends CI_Model
 	}
 	public function modelGetName($empcode)
 	{
-		$sql = "select ss_emp_fname,ss_emp_lname from sys_staff_web where ss_emp_code ='{$empcode}'";
+		$sql = "select ss_emp_fname from sys_staff_web where ss_emp_code ='{$empcode}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;

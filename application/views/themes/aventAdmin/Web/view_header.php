@@ -62,7 +62,7 @@
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
           </li>
-          <li class="nav-item menu-items active">
+          <li class="nav-item menu-items">
             <a class="nav-link" href="<?php echo base_url() ?>Manage/Homepage" id="menuhomepage" >
               <span class="menu-icon">
                 <i class="mdi mdi-home"></i>
@@ -80,7 +80,8 @@
             </a>
             <div class="collapse" id="AdministratorWeb">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Manage User Web</a></li>
+             
+                <li class="nav-item"> <a class="nav-link"  href="<?php echo base_url() ?>Manage/ManageUserWeb?empcode">Manage User Web</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Manage Permission Web</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Manage Menu Web</a></li>
               </ul>

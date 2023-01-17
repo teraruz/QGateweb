@@ -12208,7 +12208,7 @@ fieldset:disabled .wizard>.actions a,
 }
 
 .btn-block+.btn-block {
-    margin-top: 0.5rem;
+    margin-top: 5rem;
 }
 
 input[type="submit"].btn-block,
@@ -20273,7 +20273,7 @@ a.text-dark:focus {
 
 .text-muted,
 .preview-list .preview-item .preview-item-content p .content-category {
-    color: #EDF2F4 !important;
+    color: #ffffff !important;
 }
 
 .text-black-50 {
@@ -21085,8 +21085,8 @@ code {
 /* Footer */
 
 .footer {
-    background: #ffffff;
-    padding: 20px 1rem;
+    background: #D80032;
+    padding: 5px 1rem;
     transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
     -webkit-transition: all 0.25s ease;
@@ -22410,13 +22410,13 @@ code {
 }
 
 .btn-inverse-danger:not(.btn-inverse-light) {
-    color: #fc424a;
+    color: #ffffff;
 }
 
 .btn-inverse-danger:hover {
     color: #ffffff;
-    background-color: #fc424a;
-    border-color: #fc424a;
+    background-color: #D80032;
+    border-color: #D80032;
 }
 
 .btn-inverse-danger.focus,
@@ -22631,7 +22631,12 @@ code {
 
 .card.corona-gradient-card {
     background-image: linear-gradient(to left, #D80032, #2B2D42);
-    border-radius: 6px;
+    border-radius: 0px;
+}
+
+.card.corona-gradient-card-reverse {
+    background-image: linear-gradient(to left, #2B2D42, #D80032);
+    border-radius: 0px;
 }
 
 .card.corona-gradient-card .gradient-corona-img {
@@ -22659,8 +22664,8 @@ code {
 }
 
 .card-inverse-secondary {
-    background: rgba(228, 234, 236, 0.2);
-    border: 1px solid #d2d7d9;
+    background: rgba(0, 0, 0, 0.2);
+    /* border: 1px solid #000000; */
     color: #adb2b3;
 }
 
@@ -22689,9 +22694,7 @@ code {
 }
 
 .card-inverse-light {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid #ebebeb;
-    color: #c2c2c2;
+    color: #8D99AE;
 }
 
 .card-inverse-dark {
@@ -27870,7 +27873,7 @@ div.tagsinput span.tag a {
 }
 
 .auth.new-full-bg {
-    background: url("../images/auth/razer.jpg");
+    background: url("../images/auth/bg_qgate_big.png");
     background-size: cover;
 }
 

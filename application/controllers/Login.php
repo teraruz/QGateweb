@@ -38,9 +38,7 @@ class Login extends CI_Controller {
 	public function Account() {
 		$this->load->library('session');
 		$setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
-		
 		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_login.php');
-		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
 
 		
@@ -63,6 +61,18 @@ class Login extends CI_Controller {
 		$password = $_POST["password"];
 		$password_encoded = base64_encode($password);
     $rs = $this->backoffice_model->modelCheckLogin($empcode,$password_encoded);
+
+
+		$data = $this->backoffice_model->modelCheckLoginSession($empcode,$password_encoded);
+		if ($data == true) {
+			$session_data = array(
+				'fname' => $data['ss_emp_fname'],
+				'lname' => $data['ss_emp_lname'],
+				'login' => "OK"
+			);
+			$this->session->set_userdata($session_data);
+		}
+
 		echo $rs;
 	}
 	public function Home(){

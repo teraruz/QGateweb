@@ -19,7 +19,7 @@
 <!-- Layout styles -->
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>css/style.css">
 <!-- End layout styles -->
-<link rel="shortcut icon" href="<?php echo base_url()?>assets/images/logoQgate.png" />
+<link rel="shortcut icon" href="<?php echo base_url() . $image_url; ?>images/logoQgate.png" />
 
 
 <body>  

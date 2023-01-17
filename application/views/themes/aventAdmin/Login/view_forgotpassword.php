@@ -45,7 +45,7 @@
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="row w-100 m-0">
         <div class="content-wrapper full-page-wrapper d-flex align-items-center auth new-full-bg">
-          <div class="card col-lg-4 mx-auto">
+          <div class="card card-inverse-secondary col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
               <!-- <div class="card-title text-center">
                 <img src="<?php echo base_url() . $image_url; ?>images/logoQgate.png" width="150" height="130">

@@ -27,8 +27,13 @@ class manage extends CI_Controller
 		$this->template->write('image_url', $this->image_url);
 		$this->template->write('jquery_url', $this->jquery_url);
 
+		// $empcode = $_GET["empcode"];
+		// $data["data"] = $this->backoffice_model->modelGetName($empcode);
+
+		
 		// ini_set('display_errors', 1);
 		// error_reporting(E_ALL);
+
 	}
 
 	public function index()
@@ -37,31 +42,39 @@ class manage extends CI_Controller
 		$this->backoffice_model->checksession();
 		redirect('manage');
 	}
+
 	public function Homepage()
 	{
-		$this->load->library('session');
-		$empcode = $_GET["empcode"];
-		// echo $empcode;
-		// exit();
-		$data["data"] = $this->backoffice_model->modelGetName($empcode);
+		$data["username"] = $this->session->userdata("fname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
-		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Homepage/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Homepage/view_header.php');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php' , $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Homepage/view_home.php');
-		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Homepage/view_footer.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+
+
 	public function MasterControl()
 	{
-		$empcode = $_GET["empcode"];
-		$data["data"] = $this->backoffice_model->modelGetName($empcode);
+		$data["username"] = $this->session->userdata("fname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
-		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Homepage/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Homepage/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_mastercontrol.php');
-		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Homepage/view_footer.php');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_masterControl.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	public function ManageUserWeb()
+	{
+		$data["username"] = $this->session->userdata("fname");
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/ManageUserWeb/view_manageUserWeb.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
 }
