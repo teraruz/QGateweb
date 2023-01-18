@@ -162,8 +162,6 @@
                     <img class="img-xs rounded-circle " src="<?php echo base_url()?>assets/images/faces/face15.jpg" >
                     <p class="mb-0 d-none d-sm-block navbar-profile-name" id="empcode" name="empcode" ><?php echo $fullname; ?></p>
 
-                    <!-- <input id = "empcode" name = "empcode" value="<?php echo $data["ss_emp_fname"]; ?>" hidden> -->
-
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>
@@ -192,7 +190,7 @@
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item" id="btnLogout">
+                  <a class="dropdown-item preview-item" href="<?php echo base_url() ?>Login/Account">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">
                         <i class="mdi mdi-logout text-danger"></i>

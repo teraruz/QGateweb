@@ -81,7 +81,7 @@
             <div class="collapse" id="AdministratorWeb">
               <ul class="nav flex-column sub-menu">
              
-                <li class="nav-item"> <a class="nav-link"  href="<?php echo base_url() ?>Manage/ManageUserWeb?empcode">Manage User Web</a></li>
+                <li class="nav-item"> <a class="nav-link"  href="<?php echo base_url() ?>Manage/ManageUserWeb">Manage User Web</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Manage Permission Web</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Manage Menu Web</a></li>
               </ul>

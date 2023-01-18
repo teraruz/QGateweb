@@ -133,7 +133,6 @@
       }
     })
     path.done(function(res) {
-      alert(res)
       if (res === 'true') {
         Swal.fire({
           icon: 'success',
@@ -146,5 +145,7 @@
         })
       } 
     })
+    $("#email").val("");
+    $("#password").val("");
   }
 </script>

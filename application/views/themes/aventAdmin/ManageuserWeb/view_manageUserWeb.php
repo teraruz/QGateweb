@@ -36,7 +36,7 @@
       </div>
       <div class="col-lg-4">
       <button type="button" class="btn btn-danger btn-lg">
-                            <i class="mdi mdi-file-check btn-icon-prepend"></i> Add Users </button>
+                            <i class="mdi mdi-account-plus btn-icon-prepend"></i> Add Users </button>
       </div>
     </div>
     <div class="row ">

@@ -70,6 +70,7 @@ class Login extends CI_Controller {
 				'empcode'=> $data['ss_emp_code'],
 				'fname' => $data['ss_emp_fname'],
 				'lname' => $data['ss_emp_lname'],
+				'pic'=> $data['ss_pic'],
 				'login' => "OK"
 			);
 			$this->session->set_userdata($session_data);
