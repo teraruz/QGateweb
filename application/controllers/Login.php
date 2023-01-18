@@ -66,6 +66,8 @@ class Login extends CI_Controller {
 		$data = $this->backoffice_model->modelCheckLoginSession($empcode,$password_encoded);
 		if ($data == true) {
 			$session_data = array(
+				'id'=> $data['ss_id'],
+				'empcode'=> $data['ss_emp_code'],
 				'fname' => $data['ss_emp_fname'],
 				'lname' => $data['ss_emp_lname'],
 				'login' => "OK"

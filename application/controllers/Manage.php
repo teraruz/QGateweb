@@ -45,7 +45,8 @@ class manage extends CI_Controller
 
 	public function Homepage()
 	{
-		$data["username"] = $this->session->userdata("fname");
+		$data["fullname"] = $this->session->userdata("fname")." ".$this->session->userdata("lname");
+
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -58,7 +59,7 @@ class manage extends CI_Controller
 
 	public function MasterControl()
 	{
-		$data["username"] = $this->session->userdata("fname");
+		$data["fullname"] = $this->session->userdata("fname")." ".$this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -70,7 +71,7 @@ class manage extends CI_Controller
 
 	public function ManageUserWeb()
 	{
-		$data["username"] = $this->session->userdata("fname");
+		$data["fullname"] = $this->session->userdata("fname")." ".$this->session->userdata("lname");
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/ManageUserWeb/view_manageUserWeb.php');

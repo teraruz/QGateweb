@@ -160,7 +160,7 @@
                   <div class="navbar-profile">
                     <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt=""> -->
                     <img class="img-xs rounded-circle " src="<?php echo base_url()?>assets/images/faces/face15.jpg" >
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name" id="empcode" name="empcode" ><?php echo $username; ?></p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name" id="empcode" name="empcode" ><?php echo $fullname; ?></p>
 
                     <!-- <input id = "empcode" name = "empcode" value="<?php echo $data["ss_emp_fname"]; ?>" hidden> -->
 
