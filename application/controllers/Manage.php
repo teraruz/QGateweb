@@ -55,6 +55,13 @@ class manage extends CI_Controller
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+	public function ShowMenu()
+	{
+		$empcode = $_POST["empcode"];
+		$rs = $this->backoffice_model->modelShowMenu($empcode);
+		echo $rs;
+
+	}
 
 
 	public function MasterControl()
@@ -74,8 +81,22 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname")." ".$this->session->userdata("lname");
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/ManageUserWeb/view_manageUserWeb.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManageuserWeb/view_manageUserWeb.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+
+	public function ManagePermissionWeb()
+	{
+		$data["fullname"] = $this->session->userdata("fname")." ".$this->session->userdata("lname");
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/ManageUserWeb/AdminWeb/view_manageUserWeb.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
 }
+
+	

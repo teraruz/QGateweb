@@ -18,22 +18,19 @@ class Backoffice_model extends CI_Model
 	{
 		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
 		$res = $this->db->query($sql);
-		if($res->num_rows()!=0)
-        {
-            $result = $res->result_array();
-            return $result[0];  
-        }
-        else
-        {    
-            return false;
-        }
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0];
+		} else {
+			return false;
+		}
 		// if (empty($row)) {
 		// 	return "false";
 		// } else {
 		// 	return "true";
 		// }
 	}
-	
+
 	// FORGOTPASSWORD
 	public function modelCheckEmail($email)
 	{
@@ -64,7 +61,7 @@ class Backoffice_model extends CI_Model
 
 		// GETNAMETOHOME
 
-	
+
 	}
 	public function modelGetName($empcode)
 	{
@@ -73,5 +70,21 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 		// print_r($row);
+	}
+
+	public function modelShowMenu($empcode)
+	{
+		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu FROM sys_staff_web 
+		INNER JOIN sys_permision_group_web ON sys_staff_web.spg_id=sys_permision_group_web.spg_id
+		INNER JOIN sys_permision_detail_web ON sys_permision_group_web.spg_id = sys_permision_detail_web.spg_id
+		INNER JOIN sys_submenu_web ON sys_permision_detail_web.ssm_id =sys_submenu_web.ssm_id
+		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
+		
+		
+		WHERE  ss_emp_code = {$empcode} ORDER BY ss_id";
+
+		$res= $this->db->query($sql);
+		$row = $res->result_array();
+		echo $row;
 	}
 }
