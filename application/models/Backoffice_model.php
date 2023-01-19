@@ -1,7 +1,7 @@
 <?php
 class Backoffice_model extends CI_Model
 {
-	// LOGINPAGE
+	// *********************************LOGINPAGE *********************************************************
 	public function modelCheckLogin($empcode, $password_encoded)
 	{
 		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
@@ -31,7 +31,7 @@ class Backoffice_model extends CI_Model
 		// }
 	}
 
-	// FORGOTPASSWORD
+// ******************** FORGOTPASSWORD *********************************************************
 	public function modelCheckEmail($email)
 	{
 		$sql = "select * from sys_staff_web where ss_email ='{$email}'";
@@ -59,7 +59,7 @@ class Backoffice_model extends CI_Model
 			return 'true';
 		}
 
-		// GETNAMETOHOME
+// ******************** GETNAMETOHOMEPAGE *********************************************************
 
 
 	}
@@ -69,9 +69,8 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-		// print_r($row);
 	}
-
+// ******************** SHOWMENU ***********************************************************************
 	public function modelShowMenu($empcode)
 	{
 		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu FROM sys_staff_web 
@@ -81,10 +80,10 @@ class Backoffice_model extends CI_Model
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
 		
 		
-		WHERE  ss_emp_code = {$empcode} ORDER BY ss_id";
+		WHERE  ss_emp_code = '{$empcode}' ORDER BY ss_id";
 
 		$res= $this->db->query($sql);
 		$row = $res->result_array();
-		echo $row;
+		 print_r($row);
 	}
 }

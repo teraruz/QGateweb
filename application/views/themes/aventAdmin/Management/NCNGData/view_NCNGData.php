@@ -1,7 +1,7 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-      <h1 class="col-12" style="color:black">Manage Menu Web</h1>
+      <h1 class="col-12" style="color:black">NC/NG Data</h1>
       <div class="col-12 grid-margin stretch-card">
         <div class="card corona-gradient-card">
           <div class="card-body py-0 px-0 px-sm-3">

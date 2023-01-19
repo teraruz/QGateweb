@@ -32,8 +32,8 @@
               <ul class="nav flex-column sub-menu">
              
                 <li class="nav-item"> <a class="nav-link"  href="<?php echo base_url() ?>Manage/ManageUserWeb">Manage User Web</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Manage Permission Web</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Manage Menu Web</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/ManagePermisionWeb">Manage Permission Web</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage//ManageMenuWeb">Manage Menu Web</a></li>
               </ul>
             </div>
           </li>
@@ -47,9 +47,9 @@
             </a>
             <div class="collapse" id="AdministratorApp">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Manage User App</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Manage Permission App</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Manage Menu App</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/ManageUserApp">Manage User App</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/ManagePermisionApp">Manage Permission App</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/ManageMenuApp">Manage Menu App</a></li>
               </ul>
             </div>
           </li>
@@ -71,9 +71,9 @@
             </a>
             <div class="collapse" id="Manage">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Q-Gate Check Data</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">NC/NG Data</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Add Menu Data</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/QgateCheckData">Q-Gate Check Data</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/NCNGData">NC/NG Data</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/AddMenuData">Add Menu Data</a></li>
               </ul>
             </div>
           </li>
@@ -87,9 +87,9 @@
             </a>
             <div class="collapse" id="report">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Daily</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Weekly</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Monthly</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/DailyReport">Daily</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/WeeklyReport">Weekly</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() ?>Manage/MonthlyReport">Monthly</a></li>
               </ul>
             </div>
           </li>
