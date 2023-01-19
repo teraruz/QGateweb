@@ -63,6 +63,25 @@ class manage extends CI_Controller
 		$rs = $this->backoffice_model->modelShowMenu($empcode);
 		echo $rs;
 	}
+//  ****************************** Profile ******************************************
+public function EditProFile()
+{
+	$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/EditProfile//view_EditProfile.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+}
+public function ChangePassword()
+{
+	$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+	$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+	$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+	$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/ChangePassword//view_ChangePassword.php');
+	$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+	$this->template->render();
+}
 
 	// ************************* Administartor WEB *************************************
 	public function ManageUserWeb()
