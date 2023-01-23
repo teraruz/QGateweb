@@ -49,6 +49,8 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
@@ -87,6 +89,8 @@ public function ChangePassword()
 	public function ManageUserWeb()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManageuserWeb/view_manageUserWeb.php');
@@ -96,6 +100,8 @@ public function ChangePassword()
 	public function ManagePermisionWeb()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManagePermisionWeb/view_ManagePermisionWeb.php');
@@ -106,6 +112,8 @@ public function ChangePassword()
 	public function ManageMenuWeb()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManageMenuWeb/view_ManageMenuWeb.php');
@@ -118,6 +126,8 @@ public function ChangePassword()
 	public function ManageUserApp()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp//ManageuserApp/view_ManageUserApp.php');
@@ -127,6 +137,8 @@ public function ChangePassword()
 	public function ManagePermisionApp()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp//ManagePermisionApp/view_ManagePermisionApp.php');
@@ -137,6 +149,8 @@ public function ChangePassword()
 	public function ManageMenuApp()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/ManageMenuApp/view_ManageMenuApp.php');
@@ -149,6 +163,8 @@ public function ChangePassword()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
@@ -162,6 +178,8 @@ public function ChangePassword()
 	public function QgateCheckData()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -173,6 +191,8 @@ public function ChangePassword()
 	public function NCNGData()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -182,14 +202,16 @@ public function ChangePassword()
 		$this->template->render();
 	}
 
-	public function AddMenuData()
+	public function ReturnPart()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/AddMenuData/view_AddMenuData.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/ReturnPart/view_ReturnPart.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -209,6 +231,8 @@ public function ChangePassword()
 	public function WeeklyReport()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -221,6 +245,8 @@ public function ChangePassword()
 	public function MonthlyReport()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);

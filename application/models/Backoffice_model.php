@@ -73,18 +73,19 @@ class Backoffice_model extends CI_Model
 // *********************** SHOWMENU ***********************************************************************
 	public function modelShowMenu($empcode)
 	{
-		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu FROM sys_staff_web 
+		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu,ssm_method,sm_name_icon FROM sys_staff_web 
 		INNER JOIN sys_permision_group_web ON sys_staff_web.spg_id=sys_permision_group_web.spg_id
 		INNER JOIN sys_permision_detail_web ON sys_permision_group_web.spg_id = sys_permision_detail_web.spg_id
 		INNER JOIN sys_submenu_web ON sys_permision_detail_web.ssm_id =sys_submenu_web.ssm_id
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
 		
-		WHERE  ss_emp_code = '{$empcode}' ORDER BY ss_id";
+		WHERE  ss_emp_code = '{$empcode}' and  ssm_status = '1' ORDER BY ss_id";
 
 		$res= $this->db->query($sql);
 		$row = $res->result_array();
-		echo "<pre>";
-		 print_r($row);
-		echo "</pre>";
+		return $row;
+		// echo "<pre>";
+		//  print_r($row);
+		// echo "</pre>";
 	}
 }
