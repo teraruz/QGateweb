@@ -65,25 +65,31 @@ class manage extends CI_Controller
 		$rs = $this->backoffice_model->modelShowMenu($empcode);
 		echo $rs;
 	}
-//  ****************************** Profile ******************************************
-public function EditProFile()
-{
-	$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+	//  ****************************** Profile ******************************************
+	public function EditProFile()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["empcode"] = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/EditProfile//view_EditProfile.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
-}
-public function ChangePassword()
-{
-	$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-	$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-	$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-	$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/ChangePassword//view_ChangePassword.php');
-	$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
-	$this->template->render();
-}
+	}
+	public function ChangePassword()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$data["empcode"] = $this->session->userdata("empcode");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/ChangePassword//view_ChangePassword.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
 
 	// ************************* Administartor WEB *************************************
 	public function ManageUserWeb()
@@ -174,7 +180,7 @@ public function ChangePassword()
 	}
 
 
-// ************************* Management  *************************************
+	// ************************* Management  *************************************
 	public function QgateCheckData()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
@@ -255,7 +261,4 @@ public function ChangePassword()
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
-
-	
-
 }

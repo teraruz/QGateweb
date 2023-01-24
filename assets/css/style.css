@@ -11346,6 +11346,7 @@ textarea.is-invalid.tt-hint {
         flex-flow: row wrap;
         align-items: center;
         margin-bottom: 0;
+        width: 60%;
     }
     .form-inline .form-control,
     .form-inline .asColorPicker-input,

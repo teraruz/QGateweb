@@ -58,6 +58,7 @@
               </div>
               <div class="form-group">
                 <label>New Password :</label>
+
                 <input type="text" class="form-control" id="password">
               </div>
               <div class="form-group d-flex align-items-center justify-content-between">
