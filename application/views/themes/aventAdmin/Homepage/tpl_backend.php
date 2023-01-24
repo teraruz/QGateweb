@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/css/vendor.bundle.base.css">
 <!-- endinject -->
 <!-- Plugin css for this page -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/jvectormap/jquery-jvectormap.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/flag-icon-css/css/flag-icon.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/owl-carousel-2/owl.carousel.min.css">
@@ -74,6 +75,19 @@
 <script src="sweetalert2.all.min.js"></script><script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
 <script src="<?php echo base_url() . $jquery_url; ?>jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript">
+ const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#id_password');
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('mdi mdi-eye-off');
+});
+</script>
+
 <script type="text/javascript">
     $("#btnLogout").click(function() {
         Logout()

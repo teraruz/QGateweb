@@ -31,7 +31,7 @@ class Backoffice_model extends CI_Model
 		// }
 	}
 
-// ******************** FORGOTPASSWORD *********************************************************
+	// ******************** FORGOTPASSWORD *********************************************************
 	public function modelCheckEmail($email)
 	{
 		$sql = "select * from sys_staff_web where ss_email ='{$email}'";
@@ -59,7 +59,7 @@ class Backoffice_model extends CI_Model
 			return 'true';
 		}
 
-// ******************** GETNAMETOHOMEPAGE *********************************************************
+		// ******************** GETNAMETOHOMEPAGE *********************************************************
 
 
 	}
@@ -70,7 +70,7 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
-// *********************** SHOWMENU ***********************************************************************
+	// *********************** SHOWMENU ***********************************************************************
 	public function modelShowMenu($empcode)
 	{
 		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu,ssm_method,sm_name_icon FROM sys_staff_web 
@@ -81,11 +81,20 @@ class Backoffice_model extends CI_Model
 		
 		WHERE  ss_emp_code = '{$empcode}' and  ssm_status = '1' ORDER BY ss_id";
 
-		$res= $this->db->query($sql);
+		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 		// echo "<pre>";
 		//  print_r($row);
 		// echo "</pre>";
+	}
+	// *********************** getphasetoEditProfile ***********************************************************************
+
+	public function modelGetPhase()
+	{
+		$sql = "select mpa_phase_plant,mpa_name from mst_plant_admin_web ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
 	}
 }

@@ -6,7 +6,7 @@
       <!-- <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo"></a>
           <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo"></a> -->
       <img class="sidebar-brand brand-logo" src="<?php echo base_url() ?>assets/images/QualityRed.png">
-      <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url() ?>assets/images/logoQgate-mini.png"></a>
+      <a class="sidebar-brand brand-logo-mini" href="<?php echo base_url() ?>Manage/Homepage"><img src="<?php echo base_url() ?>assets/images/logoQgate-mini.png"></a>
     </div>
     <ul class="nav">
       <li class="nav-item nav-category">

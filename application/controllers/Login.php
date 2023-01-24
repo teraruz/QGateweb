@@ -70,6 +70,8 @@ class Login extends CI_Controller {
 				'empcode'=> $data['ss_emp_code'],
 				'fname' => $data['ss_emp_fname'],
 				'lname' => $data['ss_emp_lname'],
+				'email' => $data['ss_email'],
+				'plant' => $data['ss_plant_code'],
 				'pic'=> $data['ss_pic'],
 				'login' => "OK"
 			);

@@ -47,7 +47,6 @@ class manage extends CI_Controller
 	public function Homepage()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
@@ -65,18 +64,29 @@ class manage extends CI_Controller
 		$rs = $this->backoffice_model->modelShowMenu($empcode);
 		echo $rs;
 	}
-	//  ****************************** Profile ******************************************
+	//  ****************************** setting ******************************************
 	public function EditProFile()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
 		$data["empcode"] = $this->session->userdata("empcode");
+		$data["email"] = $this->session->userdata("email");
+		$data["fname"] = $this->session->userdata("fname");
+		$data["lname"] = $this->session->userdata("lname");
+		$data["pic"] = $this->session->userdata("pic");
+		$data["plant"] = $this->session->userdata("plant");
+		$data["getplant"] = $this->backoffice_model->modelGetPhase();
+		// print_r($data["getplant"]);
+		// exit();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/EditProfile//view_EditProfile.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/view_EditProfile.php',$data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+	public function ModelUpdateUser(){
+
 	}
 	public function ChangePassword()
 	{
@@ -86,7 +96,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/ChangePassword//view_ChangePassword.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/view_ChangePassword.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -99,7 +109,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManageuserWeb/view_manageUserWeb.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_manageUserWeb.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -110,7 +120,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManagePermisionWeb/view_ManagePermisionWeb.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManagePermisionWeb.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -122,7 +132,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb//ManageMenuWeb/view_ManageMenuWeb.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManageMenuWeb.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -190,7 +200,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/QgateCheckData/view_QgateCheckData.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_QgateCheckData.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -203,7 +213,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/NCNGData/view_NCNGData.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_NCNGData.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -217,7 +227,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/ReturnPart/view_ReturnPart.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_ReturnPart.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -226,11 +236,13 @@ class manage extends CI_Controller
 	public function DailyReport()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Report/Daily/view_Daily.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Report/view_Daily.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -243,7 +255,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Report/Weekly/view_Weekly.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Report/view_Weekly.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -257,7 +269,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Report/Monthly/view_Monthly.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Report/view_Monthly.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}

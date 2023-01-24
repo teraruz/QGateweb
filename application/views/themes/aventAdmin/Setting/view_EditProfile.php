@@ -36,44 +36,39 @@
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">First Name :</label>
                   <div class="col-sm-8">
-                    <input type="text" class="
-                      form-control
-                      ng-pristine ng-valid ng-empty ng-touched
-                    " />
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" value="<?php echo $fname; ?>"/>
                   </div>
                 </div>
 
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">Last Name :</label>
                   <div class="col-sm-8">
-                    <input type="text" class="
-                      form-control
-                      ng-pristine ng-valid ng-empty ng-touched
-                    " ng-model="Newpassword" ng-change="checkconfig()" />
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" value="<?php echo $lname; ?>" />
                   </div>
                 </div>
 
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">Email :</label>
                   <div class="col-sm-8">
-                    <input ng-model="rePassword" type="password" class="
-                      form-control
-                      ng-pristine ng-valid ng-empty ng-touched
-                    " ng-change="checkre()" />
+                    <input ng-model="email" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" value="<?php echo $email; ?>" />
                   </div>
                 </div>
-
                 <div class="card-body col-md-10 row mb-3">
-                  <label class="col-sm-4 col-form-label">Plant :</label>
+                  <label class="col-sm-4 col-form-label">Plant Code :</label>
                   <div class="col-sm-3 dropdown">
-                    <button class="btn btn dropdown-toggle col-sm" style="border-color:#d1d3e2" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Choose... </button>
+
+                    <button class="btn btn dropdown-toggle col-sm" style="border-color:#d1d3e2" type="button" id="dropdowninfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                       <h6 class="dropdown-header">Choose Phase</h6>
-                      <a class="dropdown-item" href="#">TBK Phase 8</a>
-                      <a class="dropdown-item" href="#">TBK Phase 10</a>
+                      <?php
+                        foreach($getplant as $valuesPlant){
+                      ?>
+                      <a class="dropdown-item" ><?php echo $valuesPlant["mpa_name"];?></a>
+                   <?php  }?>
                     </div>
+
                   </div>
+                
                 </div>
               </div>
             </form>
