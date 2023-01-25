@@ -72,29 +72,112 @@
 
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.all.min.js"></script><script src="sweetalert2.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
 <script src="<?php echo base_url() . $jquery_url; ?>jquery-2.1.4.min.js"></script>
 
+<!-- ************************************** AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE *************************************** -->
 <script type="text/javascript">
- const togglePassword = document.querySelector('#togglePassword');
-  const password = document.querySelector('#id_password');
-  togglePassword.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('mdi mdi-eye-off');
-});
+    $("#wow1").click(function() {
+        BacktoHome()
+    });
+    $("#wow").click(function() {
+        // alert("wow");
+        BacktoHome()
+    });
+    $("#btnEditProfile").click(function() {
+        // alert("wow");
+        SaveProfile()
+    });
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const password1 = document.querySelector('#id_password1');
+    togglePassword1.addEventListener('click', function(e) {
+        // toggle the type attribute
+        const type1 = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+        password1.setAttribute('type', type1);
+        // toggle the eye slash icon
+        this.classList.toggle('mdi mdi-eye-off');
+    });
+    const togglePassword2 = document.querySelector('#togglePassword2');
+    const password2 = document.querySelector('#id_password2');
+    togglePassword2.addEventListener('click', function(e) {
+        // toggle the type attribute
+        const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+        password2.setAttribute('type', type2);
+        // toggle the eye slash icon
+        this.classList.toggle('mdi mdi-eye-off');
+    });
+    const togglePassword3 = document.querySelector('#togglePassword3');
+    const password3 = document.querySelector('#id_password3');
+    togglePassword3.addEventListener('click', function(e) {
+        // toggle the type attribute
+        const type3 = password3.getAttribute('type') === 'password' ? 'text' : 'password';
+        password3.setAttribute('type', type3);
+        // toggle the eye slash icon
+        this.classList.toggle('mdi mdi-eye-off');
+    });
+
+
+    function BacktoHome() {
+        Swal.fire({
+            title: 'Cancel',
+            text: "Are you sure?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '<?php echo base_url(); ?>Manage/Homepage'
+            }
+        })
+    };
+
+    function SaveProfile() {
+        var empcode = $("#empcode1").val();
+        var firstname = $("#firstname").val();
+        var lastname = $("#lastname").val();
+        var email = $("#email").val();
+        var plant = $("#plant").val();
+        var path = $.ajax({
+            method: "GET",
+            url: "<?php echo base_url(); ?>Manage/ConUpdateUser",
+            data: {
+                empcode: empcode,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                plant: plant
+            }
+
+        })
+        path.done(function(rs) {
+            if (rs === "true") {
+                Swal.fire(
+                    'Success!',
+                    'Edit Profile Detail Complete!',
+                    'success'
+                )
+            } else {
+                Swal.fire(
+                    'error',
+                    'Oops!!',
+                    'Edit Profile Detail Not Complete!',
+                )
+            }
+        })
+    }
 </script>
 
 <script type="text/javascript">
     $("#btnLogout").click(function() {
         Logout()
-    })
+    });
     $("#menuhomepage").click(function() {
         Menuhomepage()
-    })
+    });
 
     function Logout() {
         Swal.fire({
@@ -107,10 +190,10 @@
             confirmButtonText: 'Logout'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = `<?php echo base_url() ?>Login/Account`
+                window.location.href = '<?php echo base_url() ?>Login/Account'
             }
         })
-    }
+    };
 
     function Menuhomepage() {
         var load = 0;
@@ -123,5 +206,5 @@
             }
         })
 
-    }
+    };
 </script>

@@ -20,7 +20,8 @@
               <img src="<?php echo base_url() ?>assets/images/faces/yeji.jpg" width="300" height="400" class="img-thumbnail" />
             </div>
             <div class="bg-gray-dark d-flex d-md-block flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-              <h4 class="mb-1"> <?php echo $empcode; ?></h4>
+              <h4 class="mb-1"></h4><?php echo $empcode; ?></h4>
+              <input type="hidden" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="empcode1" value="<?php echo $empcode; ?>" />
             </div>
           </div>
         </div>
@@ -29,55 +30,57 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
-              <h4 class="card-title mb-1">Your Detail</h4>
+              <h4 class="card-title mb-1">Edit Your Details</h4>
             </div>
             <form class="card-body  text-center">
               <div>
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">First Name :</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" value="<?php echo $fname; ?>"/>
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="firstname" value="<?php echo $fname; ?>" />
                   </div>
                 </div>
 
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">Last Name :</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" value="<?php echo $lname; ?>" />
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="lastname" value="<?php echo $lname; ?>" />
                   </div>
                 </div>
 
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">Email :</label>
                   <div class="col-sm-8">
-                    <input ng-model="email" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" value="<?php echo $email; ?>" />
+                    <input ng-model="email" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="email" value="<?php echo $email; ?>" />
                   </div>
                 </div>
                 <div class="card-body col-md-10 row mb-3">
-                  <label class="col-sm-4 col-form-label">Plant Code :</label>
-                  <div class="col-sm-3 dropdown">
-
-                    <button class="btn btn dropdown-toggle col-sm" style="border-color:#d1d3e2" type="button" id="dropdowninfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                      <h6 class="dropdown-header">Choose Phase</h6>
+                  <label class="col-sm-4 col-form-label">Plant :</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" id="plant">
                       <?php
-                        foreach($getplant as $valuesPlant){
+                      foreach ($getplant as $valuesPlant) {
                       ?>
-                      <a class="dropdown-item" ><?php echo $valuesPlant["mpa_name"];?></a>
-                   <?php  }?>
-                    </div>
-
+                        <option><?php echo $valuesPlant["mpa_name"]; ?></option>
+                      <?php  } ?>
+                    </select>
                   </div>
-                
+
+
                 </div>
               </div>
             </form>
-            <div class="text-right">
+            <!-- <div class="text-right">
               <button type="submit" class="btn btn-success">Save</button>
-              <button type="submit" class="btn btn-secondary">Cancel</button>
+              <a type="button" class="btn btn-secondary" id="btnCancelEditProfile">Cancel</a>
+            </div> -->
+            <div class="text-right">
+              <button type="submit" class="btn btn-success" id="btnEditProfile">Save</button>
+              <a type="submit" class="btn btn-secondary" id="wow1">Cancel</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- </div> -->

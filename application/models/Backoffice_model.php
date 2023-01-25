@@ -7,7 +7,6 @@ class Backoffice_model extends CI_Model
 		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		// return json_encode($row);
 		if (empty($row)) {
 			return "false";
 		} else {
@@ -16,7 +15,9 @@ class Backoffice_model extends CI_Model
 	}
 	public function modelCheckLoginSession($empcode, $password_encoded)
 	{
-		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
+		$sql = "SELECT * FROM sys_staff_web
+		INNER JOIN mst_plant_admin_web  ON  sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id 
+		WHERE ss_emp_code ='{$empcode}' AND ss_emp_password ='{$password_encoded}'";
 		$res = $this->db->query($sql);
 		if ($res->num_rows() != 0) {
 			$result = $res->result_array();
@@ -70,16 +71,17 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
-	// *********************** SHOWMENU ***********************************************************************
+	// *********************** SHOWMENU AND GET STAFF DATA***********************************************************************
 	public function modelShowMenu($empcode)
 	{
-		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu,ssm_method,sm_name_icon FROM sys_staff_web 
+		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu,ssm_method,sm_name_icon,mpa_phase_plant FROM sys_staff_web 
 		INNER JOIN sys_permision_group_web ON sys_staff_web.spg_id=sys_permision_group_web.spg_id
 		INNER JOIN sys_permision_detail_web ON sys_permision_group_web.spg_id = sys_permision_detail_web.spg_id
 		INNER JOIN sys_submenu_web ON sys_permision_detail_web.ssm_id =sys_submenu_web.ssm_id
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
+		INNER JOIN mst_plant_admin_web  ON  sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id 
 		
-		WHERE  ss_emp_code = '{$empcode}' and  ssm_status = '1' ORDER BY ss_id";
+		WHERE  ss_emp_code = 'SD463' and  ssm_status = '1' ORDER BY ss_id";
 
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
@@ -96,5 +98,30 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+	}
+	// *********************** UPDATEUSER IN EDITPROFILEPAGE ***********************************************************************
+
+	public function convert($attr, $table, $condition){
+		$sql ="select $attr from $table where $condition";
+		$query = $this->db->query($sql);
+		$get = $query->result_array();
+		if (empty($get)) {
+			return "0";
+		} else {
+			return $get["0"][$attr];
+		}
+	}
+	public function modelUpdateDetailUser($empcode,$firstname,$lastname,$email,$plant)
+	{
+		$sql = "UPDATE sys_staff_web 
+		SET ss_emp_fname = '{$firstname}',ss_emp_lname= '{$lastname}',ss_email='{$email}',mpa_id= '{$plant}'
+		,ss_update_by = '{$empcode}',ss_update_date = CURRENT_TIMESTAMP
+		WHERE ss_emp_code = '{$empcode}'";
+		$res = $this->db->query($sql);
+		if (empty($res)) {
+			return "false";
+		} else {
+			return "true";
+		}
 	}
 }

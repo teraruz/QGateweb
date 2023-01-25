@@ -44,15 +44,15 @@
               </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item" href="<?php echo base_url() ?>Login/Account">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-logout text-danger"></i>
-                </div>
+            <a class="dropdown-item preview-item" id="btnLogout" href="<?php echo base_url() ?>Login/Account">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-logout text-danger"></i>
               </div>
-              <div class="preview-item-content">
-                <p class="preview-subject mb-1">Log out</p>
-              </div>
+            </div>
+            <div class="preview-item-content">
+              <p class="preview-subject mb-1">Log out</p>
+            </div>
             </a>
             <!-- ปิด footer ของ dropdown -->
             <!-- <div class="dropdown-divider"></div>

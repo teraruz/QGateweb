@@ -69,6 +69,7 @@ class manage extends CI_Controller
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
+		$data["id"] = $this->session->userdata("id");
 		$data["empcode"] = $this->session->userdata("empcode");
 		$data["email"] = $this->session->userdata("email");
 		$data["fname"] = $this->session->userdata("fname");
@@ -85,8 +86,15 @@ class manage extends CI_Controller
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
-	public function ModelUpdateUser(){
-
+	public function ConUpdateUser(){
+		$empcode = $_GET["empcode"];
+		$firstname = $_GET["firstname"];
+		$lastname = $_GET["lastname"];
+		$email = $_GET["email"];
+		$plant = $_GET["plant"];
+		$convertplant = $this->backoffice_model->convert("mpa_id","mst_plant_admin_web","mpa_name = '$plant'");
+		$rs = $this->backoffice_model->modelUpdateDetailUser($empcode,$firstname,$lastname,$email,$convertplant);
+		echo $rs;
 	}
 	public function ChangePassword()
 	{
@@ -146,7 +154,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp//ManageuserApp/view_ManageUserApp.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageUserApp.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -157,7 +165,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp//ManagePermisionApp/view_ManagePermisionApp.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManagePermisionApp.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -169,7 +177,7 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/ManageMenuApp/view_ManageMenuApp.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageMenuApp.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}

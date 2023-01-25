@@ -71,7 +71,7 @@ class Login extends CI_Controller {
 				'fname' => $data['ss_emp_fname'],
 				'lname' => $data['ss_emp_lname'],
 				'email' => $data['ss_email'],
-				'plant' => $data['ss_plant_code'],
+				'plant' => $data['mpa_name'],
 				'pic'=> $data['ss_pic'],
 				'login' => "OK"
 			);
@@ -97,9 +97,6 @@ class Login extends CI_Controller {
 		echo $res;
 	}
 
-
-
-	
 }
 
 ?>
