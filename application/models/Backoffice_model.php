@@ -81,7 +81,7 @@ class Backoffice_model extends CI_Model
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
 		INNER JOIN mst_plant_admin_web  ON  sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id 
 		
-		WHERE  ss_emp_code = 'SD463' and  ssm_status = '1' ORDER BY ss_id";
+		WHERE  ss_emp_code = '{$empcode}' and  ssm_status = '1' ORDER BY ss_id";
 
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
@@ -121,6 +121,27 @@ class Backoffice_model extends CI_Model
 		if (empty($res)) {
 			return "false";
 		} else {
+			return "true";
+		}
+	}
+	// ****************************************************** Change PAssword *******************************************
+	public function modelCheckCurrentPass($empcode,$password_encoded){
+		$sql = "SELECT * FROM sys_staff_web WHERE ss_emp_code = '{$empcode}' AND ss_emp_password = '{$password_encoded}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if(empty($row)){
+			return "false";
+		}else {
+			return "true";
+		}
+	}
+	
+	public function modelChangePass($empcode,$confirmpass_encoded){
+		$sql = "UPDATE sys_staff_web SET ss_emp_password = '{$confirmpass_encoded}' WHERE ss_emp_code = '{$empcode}'";
+		$res = $this->db->query($sql);
+		if(empty($res)){
+			return "false";
+		}else {
 			return "true";
 		}
 	}

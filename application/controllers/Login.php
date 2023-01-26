@@ -60,7 +60,7 @@ class Login extends CI_Controller {
 		$empcode = $_POST["empcode"];
 		$password = $_POST["password"];
 		$password_encoded = base64_encode($password);
-    $rs = $this->backoffice_model->modelCheckLogin($empcode,$password_encoded);
+    $resultCheckLogin = $this->backoffice_model->modelCheckLogin($empcode,$password_encoded);
 
 
 		$data = $this->backoffice_model->modelCheckLoginSession($empcode,$password_encoded);
@@ -77,8 +77,7 @@ class Login extends CI_Controller {
 			);
 			$this->session->set_userdata($session_data);
 		}
-
-		echo $rs;
+		echo $resultCheckLogin;
 	}
 	public function Home(){
 		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_Homepage.php');

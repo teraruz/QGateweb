@@ -3,13 +3,13 @@
 <div class="container-fluid page-body-wrapper">
   <nav class="navbar p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-      <!-- <a class="sidebar-brand brand-logo-mini" href="<?php echo base_url() ?>Manage/Homepage"><img src="<?php echo base_url() ?>assets/images/logoQgate-mini.png" width="60" height="50"></a> -->
     </div>
     <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
         <span class="mdi mdi-menu"></span>
       </button>
-      <ul class="navbar-nav navbar-nav-right">
+      <ul class="navbar-nav navbar-nav-right ">
+      <p class="mb-0 d-none d-sm-block navbar-profile-name">TBKK THAILAND CO.LTD</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
             <div class="navbar-profile">
@@ -44,15 +44,15 @@
               </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item" id="btnLogout" href="<?php echo base_url() ?>Login/Account">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-logout text-danger"></i>
+            <a class="dropdown-item preview-item" id="btnLogout" >
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-logout text-danger"></i>
+                </div>
               </div>
-            </div>
-            <div class="preview-item-content">
-              <p class="preview-subject mb-1">Log out</p>
-            </div>
+              <div class="preview-item-content">
+                <p class="preview-subject mb-1">Log out</p>
+              </div>
             </a>
             <!-- ปิด footer ของ dropdown -->
             <!-- <div class="dropdown-divider"></div>

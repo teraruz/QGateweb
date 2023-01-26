@@ -73,9 +73,9 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.all.min.js"></script>
-<script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
-<script src="<?php echo base_url() . $jquery_url; ?>jquery-2.1.4.min.js"></script>
+<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
 <!-- ************************************** AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE *************************************** -->
 <script type="text/javascript">
@@ -90,32 +90,31 @@
         // alert("wow");
         SaveProfile()
     });
+    $("#SavePassNaJa").click(function() {
+        ChangePass()
+    });
     const togglePassword1 = document.querySelector('#togglePassword1');
-    const password1 = document.querySelector('#id_password1');
+    const password1 = document.querySelector('#currentpass');
     togglePassword1.addEventListener('click', function(e) {
         // toggle the type attribute
         const type1 = password1.getAttribute('type') === 'password' ? 'text' : 'password';
         password1.setAttribute('type', type1);
         // toggle the eye slash icon
-        this.classList.toggle('mdi mdi-eye-off');
+        this.classList.togglePassword1('mdi mdi-eye-off');
     });
     const togglePassword2 = document.querySelector('#togglePassword2');
-    const password2 = document.querySelector('#id_password2');
+    const password2 = document.querySelector('#newpass');
     togglePassword2.addEventListener('click', function(e) {
-        // toggle the type attribute
         const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
         password2.setAttribute('type', type2);
-        // toggle the eye slash icon
-        this.classList.toggle('mdi mdi-eye-off');
+        this.classList.togglePassword2('mdi mdi-eye-off');
     });
     const togglePassword3 = document.querySelector('#togglePassword3');
-    const password3 = document.querySelector('#id_password3');
+    const password3 = document.querySelector('#confirmpass');
     togglePassword3.addEventListener('click', function(e) {
-        // toggle the type attribute
         const type3 = password3.getAttribute('type') === 'password' ? 'text' : 'password';
         password3.setAttribute('type', type3);
-        // toggle the eye slash icon
-        this.classList.toggle('mdi mdi-eye-off');
+        this.classList.togglePassword3('mdi mdi-eye-off');
     });
 
 
@@ -151,24 +150,53 @@
                 email: email,
                 plant: plant
             }
-
         })
         path.done(function(rs) {
             if (rs === "true") {
-                Swal.fire(
-                    'Success!',
-                    'Edit Profile Detail Complete!',
-                    'success'
-                )
-            } else {
-                Swal.fire(
-                    'error',
-                    'Oops!!',
-                    'Edit Profile Detail Not Complete!',
-                )
+                setTimeout(function() {
+                    swal({
+                        title: "Success",
+                        text: "Your Profile Detail is Updated!",
+                        type: "success"
+                    }, function() {
+                        window.location = "<?php echo base_url() ?>Manage/Homepage";
+                    });
+                }, 1000);
+
+            }
+        });
+    }
+
+    function ChangePass() {
+        var empcode = $("#empcode2").val();
+        var currentpass = $("#currentpass").val();
+        var newpass = $("#newpass").val();
+        var confirmpass = $("#confirmpass").val();
+        var path = $.ajax({
+            method: "post",
+            url: "<?php echo base_url(); ?>Manage/ConChangePassword",
+            data: {
+                empcode: empcode,
+                currentpass: currentpass,
+                newpass: newpass,
+                confirmpass: confirmpass
             }
         })
-    }
+        path.done(function(rs) {
+            alert(rs)
+            if (rs === "true") {
+                setTimeout(function() {
+                    swal({
+                        title: "Success",
+                        text: "Password has been Changed!",
+                        type: "success"
+                    }, function() {
+                        window.location = "<?php echo base_url() ?>Manage/Homepage";
+                    });
+                }, 1000);
+            }
+        })
+    };
 </script>
 
 <script type="text/javascript">
@@ -193,18 +221,5 @@
                 window.location.href = '<?php echo base_url() ?>Login/Account'
             }
         })
-    };
-
-    function Menuhomepage() {
-        var load = 0;
-        var dataString = <?php echo $data ?>
-        var path = $.ajax({
-            method: "POST",
-            url: "<?php echo base_url() ?>Managehome/Homepage?ss_emp_fname",
-            data: {
-                dataString: <?php echo $data[0]["ss_emp_fname"]; ?>
-            }
-        })
-
     };
 </script>

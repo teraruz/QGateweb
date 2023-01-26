@@ -96,6 +96,28 @@ class manage extends CI_Controller
 		$rs = $this->backoffice_model->modelUpdateDetailUser($empcode,$firstname,$lastname,$email,$convertplant);
 		echo $rs;
 	}
+	public function ConChangePassword(){
+		$empcode = $_POST["empcode"];
+		$currentpass = $_POST["currentpass"];
+		$newpass = $_POST["newpass"];
+		$confirmpass = $_POST["confirmpass"];
+		$password_encoded = base64_encode($currentpass);
+		$checkcurrentpass = $this->backoffice_model->modelCheckCurrentPass($empcode,$password_encoded);
+		
+		if($checkcurrentpass === "true"){
+			if($newpass == $confirmpass){
+				$confirmpass_encoded =  base64_encode($confirmpass);
+				$rs = $this->backoffice_model->modelChangePass($empcode,$confirmpass_encoded);
+				echo $rs;
+			}else{
+				echo "wow";
+			}
+		}else{
+			echo $checkcurrentpass;
+		}
+		
+		
+	}
 	public function ChangePassword()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");

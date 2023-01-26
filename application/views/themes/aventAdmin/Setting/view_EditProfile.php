@@ -47,7 +47,6 @@
                     <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="lastname" value="<?php echo $lname; ?>" />
                   </div>
                 </div>
-
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-4 col-form-label">Email :</label>
                   <div class="col-sm-8">
@@ -65,15 +64,9 @@
                       <?php  } ?>
                     </select>
                   </div>
-
-
                 </div>
               </div>
             </form>
-            <!-- <div class="text-right">
-              <button type="submit" class="btn btn-success">Save</button>
-              <a type="button" class="btn btn-secondary" id="btnCancelEditProfile">Cancel</a>
-            </div> -->
             <div class="text-right">
               <button type="submit" class="btn btn-success" id="btnEditProfile">Save</button>
               <a type="submit" class="btn btn-secondary" id="wow1">Cancel</a>
@@ -83,4 +76,3 @@
       </div>
     </div>
   </div>
-  <!-- </div> -->
