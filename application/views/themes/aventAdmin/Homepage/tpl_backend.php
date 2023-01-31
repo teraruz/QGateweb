@@ -10,10 +10,14 @@
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/jvectormap/jquery-jvectormap.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/flag-icon-css/css/flag-icon.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/owl-carousel-2/owl.carousel.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/owl-carousel-2/owl.theme.default.min.css">
+<link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/mdi/css/materialdesignicons.min.css.map">
+<link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/mdi/css/materialdesignicons.css.map">
+<!-- <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendor/datatables/dataTables.bootstrap4.min.css"> -->
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <!-- endinject -->
@@ -33,31 +37,40 @@
 
 </html>
 
-<!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url() . $jquery_url; ?>vendor/jquery/jquery.min.js"></script>
+
+
+<!-- Bootstrap core JavaScript -->
+<!-- <script src="<?php echo base_url() . $jquery_url; ?>vendor/jquery/jquery.min.js"type="text/javascript"></script> -->
 <!-- <script src="<?php echo base_url() . $js_url; ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 <!-- Core plugin JavaScript-->
 <!-- <script src="<?php echo base_url() . $js_url; ?>vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
+
 <!-- Custom scripts for all pages-->
 <!-- <script src="<?php echo base_url() . $js_url; ?>js/sb-admin-2.min.js"></script> -->
 
+
 <!-- Page level plugins -->
-<!-- <script src="<?php echo base_url() . $js_url; ?>vendor/chart.js/Chart.min.js"></script> -->
+<script src="<?php echo base_url() . $js_url; ?>vendor/chart.js/Chart.min.js"></script>
+<!-- <script src="<?php echo base_url() . $js_url; ?>vendor/datatables/jquery.dataTables.min.js"></script> -->
+<!-- <script src="<?php echo base_url() . $js_url; ?>vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
 
 <!-- Page level custom scripts -->
-<!-- <script src="<?php echo base_url() . $js_url; ?>js/demo/chart-area-demo.js"></script>
-<script src="<?php echo base_url() . $js_url; ?>js/demo/chart-pie-demo.js"></script> -->
+<script src="<?php echo base_url() . $js_url; ?>js/demo/chart-area-demo.js"></script>
+<script src="<?php echo base_url() . $js_url; ?>js/demo/chart-pie-demo.js"></script>
+<!-- <script src="<?php echo base_url() . $js_url; ?>js/demo/datatables-demo.js"></script> -->
+
 <!-- plugins:js -->
 <script src="<?php echo base_url() . $js_url; ?>vendors/js/vendor.bundle.base.js"></script>
+
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script src="<?php echo base_url() . $js_url; ?>vendors/chart.js/Chart.min.js"></script>
-<script src="<?php echo base_url() . $js_url; ?>vendors/progressbar.js/progressbar.min.js"></script>
+<script src="<?php echo base_url() ?>assets/vendors/progressbar.js/progressbar.min.js"></script>
 <script src="<?php echo base_url() . $js_url; ?>vendors/jvectormap/jquery-jvectormap.min.js"></script>
 <script src="<?php echo base_url() . $js_url; ?>vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="<?php echo base_url() . $js_url; ?>vendors/owl-carousel-2/owl.carousel.min.js"></script>
+
 <!-- End plugin js for this page -->
 <!-- inject:js -->
 <script src="<?php echo base_url() . $js_url; ?>js/off-canvas.js"></script>
@@ -70,11 +83,17 @@
 <script src="<?php echo base_url() . $js_url; ?>js/dashboard.js"></script>
 <!-- End custom js for this page -->
 
+<!-- Datatables bootstrap -->
+<!-- <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendor/datatables/jquery.dataTables.min.css"> -->
+<script src="<?php echo base_url() . $js_url; ?>vendor/datatables/jquery.dataTables.min.js"></script>
+
+
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.all.min.js"></script>
-<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
 <!-- ************************************** AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE *************************************** -->
@@ -87,7 +106,6 @@
         BacktoHome()
     });
     $("#btnEditProfile").click(function() {
-        // alert("wow");
         SaveProfile()
     });
     $("#SavePassNaJa").click(function() {
@@ -140,7 +158,24 @@
         var lastname = $("#lastname").val();
         var email = $("#email").val();
         var plant = $("#plant").val();
-        var path = $.ajax({
+        var firstnamecheck = document.getElementById('firstname'); 
+        var lastnamecheck = document.getElementById('lastname'); 
+        var emailcheck = document.getElementById('email'); 
+        var plantcheck = document.getElementById('plant'); 
+
+        if (firstnamecheck.value == "" || lastnamecheck.value == "" || emailcheck.value == "" || plantcheck.value == "" ) {
+            setTimeout(function() {
+                swal({
+                    title: "warning",
+                    text: "Please fill textbox ",
+                    type: "warning"
+                }, function() {
+                    window.location = "<?php echo base_url() ?>Manage/EditProFile";
+                });
+            }, 1000);
+
+        } else {
+            var path = $.ajax({
             method: "GET",
             url: "<?php echo base_url(); ?>Manage/ConUpdateUser",
             data: {
@@ -157,14 +192,15 @@
                     swal({
                         title: "Success",
                         text: "Your Profile Detail is Updated!",
-                        type: "success"
+                        type: "success",
+                        confirmButtonColor: '#D80032'
                     }, function() {
                         window.location = "<?php echo base_url() ?>Manage/Homepage";
                     });
-                }, 1000);
-
+                });
             }
         });
+        }    
     }
 
     function ChangePass() {
@@ -172,7 +208,23 @@
         var currentpass = $("#currentpass").val();
         var newpass = $("#newpass").val();
         var confirmpass = $("#confirmpass").val();
-        var path = $.ajax({
+        var currentpasscheck = document.getElementById('currentpass'); 
+        var newpasscheck = document.getElementById('newpass'); 
+        var confirmpasscheck = document.getElementById('confirmpass'); 
+
+        if (currentpasscheck.value == "" || newpasscheck.value == "" || confirmpasscheck.value == "" ) {
+            setTimeout(function() {
+                swal({
+                    title: "warning",
+                    text: "Please fill your Password ",
+                    type: "warning",
+                    confirmButtonColor: '#D80032'
+                }, function() {
+                    window.location = "<?php echo base_url() ?>Manage/ChangePassword";
+                });
+            }, 1000);
+        }else{
+            var path = $.ajax({
             method: "post",
             url: "<?php echo base_url(); ?>Manage/ConChangePassword",
             data: {
@@ -182,23 +234,26 @@
                 confirmpass: confirmpass
             }
         })
+
+        }
+       
         path.done(function(rs) {
-            alert(rs)
             if (rs === "true") {
                 setTimeout(function() {
                     swal({
                         title: "Success",
                         text: "Password has been Changed!",
-                        type: "success"
+                        type: "success",
+                        confirmButtonColor: '#D80032'
                     }, function() {
                         window.location = "<?php echo base_url() ?>Manage/Homepage";
                     });
-                }, 1000);
+                });
             }
         })
     };
 </script>
-
+<!-- **************************************** LOGOUT AND MENUHOME *************************************** -->
 <script type="text/javascript">
     $("#btnLogout").click(function() {
         Logout()
@@ -222,4 +277,9 @@
             }
         })
     };
+</script>
+<script>
+    $(document).ready( function () {
+    $('#ManageUserTable').DataTable();
+} );
 </script>

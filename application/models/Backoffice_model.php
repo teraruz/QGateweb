@@ -101,8 +101,9 @@ class Backoffice_model extends CI_Model
 	}
 	// *********************** UPDATEUSER IN EDITPROFILEPAGE ***********************************************************************
 
-	public function convert($attr, $table, $condition){
-		$sql ="select $attr from $table where $condition";
+	public function convert($attr, $table, $condition)
+	{
+		$sql = "select $attr from $table where $condition";
 		$query = $this->db->query($sql);
 		$get = $query->result_array();
 		if (empty($get)) {
@@ -111,7 +112,7 @@ class Backoffice_model extends CI_Model
 			return $get["0"][$attr];
 		}
 	}
-	public function modelUpdateDetailUser($empcode,$firstname,$lastname,$email,$plant)
+	public function modelUpdateDetailUser($empcode, $firstname, $lastname, $email, $plant)
 	{
 		$sql = "UPDATE sys_staff_web 
 		SET ss_emp_fname = '{$firstname}',ss_emp_lname= '{$lastname}',ss_email='{$email}',mpa_id= '{$plant}'
@@ -125,24 +126,67 @@ class Backoffice_model extends CI_Model
 		}
 	}
 	// ****************************************************** Change PAssword *******************************************
-	public function modelCheckCurrentPass($empcode,$password_encoded){
+	public function modelCheckCurrentPass($empcode, $password_encoded)
+	{
 		$sql = "SELECT * FROM sys_staff_web WHERE ss_emp_code = '{$empcode}' AND ss_emp_password = '{$password_encoded}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		if(empty($row)){
+		if (empty($row)) {
 			return "false";
-		}else {
+		} else {
 			return "true";
 		}
 	}
-	
-	public function modelChangePass($empcode,$confirmpass_encoded){
+
+	public function modelChangePass($empcode, $confirmpass_encoded)
+	{
 		$sql = "UPDATE sys_staff_web SET ss_emp_password = '{$confirmpass_encoded}' WHERE ss_emp_code = '{$empcode}'";
 		$res = $this->db->query($sql);
-		if(empty($res)){
+		if (empty($res)) {
 			return "false";
-		}else {
+		} else {
 			return "true";
 		}
+	}
+	// ************************************************ MANAGE USER WEB *********************************************************
+	public function modelEditStatus($sa_id)
+	{
+		$sql = "EXEC [dbo].[GET_USER] @EMP_ID ='{$sa_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["sa_status"];
+		if ($result == 1) {
+			$sql = "EXEC [dbo].[GET_EDIT_STATUS_OFF] @EMP_ID ='{$sa_id}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} elseif ($result == 0) {
+			$sql = "EXEC [dbo].[GET_EDIT_STATUS_ON] @EMP_ID ='{$sa_id}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function gettableUserWeb()
+	{
+		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,ss_emp_lname,ss_email,spg_name,mpa_name,ss_status from sys_staff_web
+		INNER JOIN mst_plant_admin_web ON sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id
+		INNER JOIN sys_permision_group_web ON sys_staff_web.spg_id = sys_permision_group_web.spg_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function swiftStatus()
+	{
+		
 	}
 }

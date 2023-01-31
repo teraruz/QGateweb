@@ -8923,7 +8923,7 @@ th {
 
 label {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 button {
@@ -10294,7 +10294,7 @@ pre code {
 .table thead th,
 .jsgrid .jsgrid-table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #2c2e33;
+    border-bottom: 2px solid #EF233C;
 }
 
 .table tbody+tbody,
@@ -10313,7 +10313,7 @@ pre code {
 
 .table-bordered th,
 .table-bordered td {
-    border: 1px solid #2c2e33;
+    border: 1px solid #c1c1c1;
 }
 
 .table-bordered thead th,
@@ -10644,9 +10644,9 @@ active .table-dark td,
     font-weight: 400;
     line-height: 1;
     color: #ffffff;
-    background-color: #2A3038;
+    background-color: #ffffff;
     background-clip: padding-box;
-    border: 1px solid #2c2e33;
+    border: 1px solid #ffffff;
     border-radius: 2px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border-radius: 15rem;
@@ -10727,7 +10727,7 @@ active .table-dark td,
 .typeahead::placeholder,
 .tt-query::placeholder,
 .tt-hint::placeholder {
-    color: #4b5564;
+    color: #ffffff;
     opacity: 1;
 }
 
@@ -10805,8 +10805,8 @@ select.asColorPicker-input:focus::-ms-value,
 select.typeahead:focus::-ms-value,
 select.tt-query:focus::-ms-value,
 select.tt-hint:focus::-ms-value {
-    color: #000000;
-    background-color: #000000;
+    color: #ffffff;
+    background-color: #ffffff;
 }
 
 .form-control-file,
@@ -10844,8 +10844,8 @@ select.tt-hint:focus::-ms-value {
     margin-bottom: 0;
     font-size: 0.875rem;
     line-height: 1;
-    color: #212529;
-    background-color: transparent;
+    color: #ffffff;
+    background-color: #ffffff;
     border: solid transparent;
     border-width: 1px 0;
     border-radius: 5rem;
@@ -11711,43 +11711,43 @@ fieldset:disabled .wizard>.actions a,
 
 .btn-danger {
     color: #fff;
-    background-color: #fc424a;
-    border-color: #fc424a;
+    background-color: #EF233C;
+    border-color: #EF233C;
 }
 
 .btn-danger:hover {
     color: #fff;
-    background-color: #fb1c26;
-    border-color: #fb101a;
+    background-color: #D80032;
+    border-color: #D80032;
 }
 
 .btn-danger:focus,
 .btn-danger.focus {
     color: #fff;
-    background-color: #fb1c26;
-    border-color: #fb101a;
-    box-shadow: 0 0 0 0.2rem rgba(252, 94, 101, 0.5);
+    background-color: #D80032;
+    border-color: #D80032;
+    box-shadow: 0 0 0 0.2rem #D80032;
 }
 
 .btn-danger.disabled,
 .btn-danger:disabled {
     color: #fff;
-    background-color: #fc424a;
-    border-color: #fc424a;
+    background-color: #D80032;
+    border-color: #D80032;
 }
 
 .btn-danger:not(:disabled):not(.disabled):active,
 .btn-danger:not(:disabled):not(.disabled).active,
 .show>.btn-danger.dropdown-toggle {
     color: #fff;
-    background-color: #fb101a;
-    border-color: #fa040f;
+    background-color: #b3002a;
+    border-color: #b3002a;
 }
 
 .btn-danger:not(:disabled):not(.disabled):active:focus,
 .btn-danger:not(:disabled):not(.disabled).active:focus,
 .show>.btn-danger.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba(252, 94, 101, 0.5);
+    box-shadow: 0 0 0 0.2rem #D80032;
 }
 
 .btn-light {
@@ -13931,8 +13931,8 @@ input[type="button"].btn-block {
 
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
-    border-color: #007bff;
-    background-color: #007bff;
+    border-color: #D80032;
+    background-color: #D80032;
 }
 
 .custom-control-input:focus~.custom-control-label::before {
@@ -14880,6 +14880,18 @@ input[type="button"].btn-block {
     border-radius: 0.25rem;
 }
 
+.card-table {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #cbcbcb;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
 .card>hr {
     margin-right: 0;
     margin-left: 0;
@@ -14938,7 +14950,7 @@ input[type="button"].btn-block {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0.03);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 3px solid #ffff;
 }
 
 .card-header:first-child {
@@ -16086,13 +16098,13 @@ a.badge-dark.focus {
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
+    color: #ffff;
+    text-shadow: 0 1px 0 #ffff;
     opacity: .5;
 }
 
 .close:hover {
-    color: #000;
+    color: #D80032;
     text-decoration: none;
 }
 
@@ -16255,7 +16267,7 @@ a.close.disabled {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #000000;
+    background-color: #2B2D42;
     background-clip: padding-box;
     border: 1px solid #2c2e33;
     border-radius: 0.3rem;
@@ -24505,7 +24517,7 @@ div.tagsinput {
 .table,
 .jsgrid .jsgrid-table {
     margin-bottom: 0;
-    color: #6c7293;
+    color: #000;
 }
 
 .table thead th,
@@ -24513,7 +24525,7 @@ div.tagsinput {
     border-top: 0;
     border-bottom-width: 1px;
     font-weight: 500;
-    color: #6c7293;
+    color: #EF233C;
 }
 
 .table thead th i,

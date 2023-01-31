@@ -134,15 +134,72 @@ class manage extends CI_Controller
 	// ************************* Administartor WEB *************************************
 	public function ManageUserWeb()
 	{
-		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
-		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$data["id"] = $this->session->userdata("id");
+		$data["empcode"] = $this->session->userdata("empcode");
+		$data["email"] = $this->session->userdata("email");
+		$data["fname"] = $this->session->userdata("fname");
+		$data["lname"] = $this->session->userdata("lname");
+		$data["pic"] = $this->session->userdata("pic");
+		$data["plant"] = $this->session->userdata("plant");
+		$data["reUser"] = $this->backoffice_model->gettableUserWeb();
+
+		$menu["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_manageUserWeb.php');
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php' , $menu);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_manageUserWeb.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+	public function swiftStatus()
+    {
+        $empcode = $_GET["empcode"];
+        $res = $this->backoffice_model->editStatus($empcode);
+        echo json_encode($res);
+    }
+    public function ConEditManageUser()
+    {
+			$empcode = $_GET["empcode"];
+        $res = $this->backoffice_model->modelEditUser($empcode);
+        echo json_encode($res);
+    }
+    public function saveEdit()
+    {
+        $empcode = $_POST["empcode"];
+        $groupper = $_POST["groupper"];
+        $editemail = $_POST["editemail"];
+        if ($editemail !==" ") {
+            $groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
+            $rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail);
+            echo $rs;
+        } else {
+            echo "false";
+        }
+    }
+    public function addManageUser()
+    {
+        $empcode = $_POST["empcode"];
+        $firstname = $_POST["firstname"];
+        $lastname = $_POST["lastname"];
+        $groupper = $_POST["groupper"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $plant = $_POST["plant"];
+        $rscheck = $this->backoffice_model->checkUserAdd($empcode);
+        if ($rscheck == "true") {
+            $groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
+            $plantCon = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_name='$plant'");
+            $password_md5 = md5($password);
+            $rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password_md5, $plantCon);
+            echo $rs;
+        } else if ($rscheck == "false") {
+            return "false";
+        } else {
+            return "false";
+        }
+    }
+
 	public function ManagePermisionWeb()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");

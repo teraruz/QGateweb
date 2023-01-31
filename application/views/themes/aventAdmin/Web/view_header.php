@@ -30,18 +30,20 @@
               <span class="menu-title"><?php echo $value["sm_name_menu"]; ?></span>
               <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="<?php echo "list" . $key; ?>">
             <?php foreach ($menu as $key1 => $value1) {
               if ($value["sm_name_menu"] == $value1["sm_name_menu"]) {
             ?>
-                <div class="collapse" id="<?php echo "list" . $key; ?>">
+                 
                   <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="<?php echo base_url() . $value1["ssm_method"] ?>"><?php echo $value1["ssm_name_submenu"] ?></a></li>
                   </ul>
-                </div>
-          </li>
+             
       <?php
               }
             } ?>
+               </div>
+            </li>
   <?php
         }
         $name = $value["sm_name_menu"];

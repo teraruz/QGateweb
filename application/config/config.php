@@ -95,3 +95,5 @@ $config['jquery_url'] = "assets/";
 $config['js_url'] = 'assets/';
 $config['css_url'] = 'assets/';
 $config['image_url'] = 'assets/';
+$config['vendor_url'] = 'assets/vendor/';
+$config['vendors_url'] = 'assets/vendors/';
