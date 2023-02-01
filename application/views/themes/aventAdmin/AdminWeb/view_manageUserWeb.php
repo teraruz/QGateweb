@@ -3,30 +3,31 @@
     <div class="row">
       <h1 class="col-12" style="color:black">Manage User Web</h1>
       <div class="card-table shadow col-12"><br>
-        <div  style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#adduser><i class="fas fa-user-plus fa-sm"></i> Add User</a>
+        <div style="width:98%; text-align:right">
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal
+            data-target=#adduser><i class="fas fa-user-plus fa-sm"></i> Add User</a>
         </div>
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="ManageUserTable" width="100%" cellspacing="0">
+            <table class="table table-bordered " id="ManageUserTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>NO.</th>
-                  <th>Employee Code</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Permission</th>
-                  <th>Plant</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th style="text-align: center;">NO.</th>
+                  <th style="text-align: center;">Employee Code</th>
+                  <th style="text-align: center;">First Name</th>
+                  <th style="text-align: center;">Last Name</th>
+                  <th style="text-align: center;">Email</th>
+                  <th style="text-align: center;">Permission</th>
+                  <th style="text-align: center;">Plant</th>
+                  <th style="text-align: center;">Status</th>
+                  <th style="text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 $i = 0;
-                foreach ($reUser as $value) {
+                foreach ($tableUserWeb as $value) {
                   //$i = $value["sa_id"];
                   $i++;
                   echo "<tr>";
@@ -41,7 +42,7 @@
                   if ($value["ss_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["ss_emp_code"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["ss_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=status$i></label>
                                             </div>
                                        
@@ -49,7 +50,7 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ss_emp_code"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ss_id"] . ")'>
                                             <label class=\"custom-control-label\" for=status$i></label>
                                         </div>
                                     </td>";
@@ -57,10 +58,12 @@
 
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#edituser\"  onclick='edit(" . $value["ss_emp_code"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#edituser\"  onclick='getDataEditUserWeb(" . $value["ss_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
+
+
                   echo "</tr>";
                 }
                 ?>
@@ -69,7 +72,8 @@
 
           </div>
           <!-- Edit Modal-->
-          <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -82,28 +86,30 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Employee Code :</label>
-                    <input class="form-control" type="empcode" id="editempcode" required="" disabled>
+                    <input class="form-control" type="text" id="editempcode" required="" disabled>
                   </div>
 
                   <div class="form-group">
                     <label for="fristname">First Name :</label>
-                    <input class="form-control" type="fristname" id="editfirstname" required="" disabled>
+                    <input class="form-control" type="text" id="editfirstname" required="">
                   </div>
 
                   <div class="form-group">
                     <label for="lastname">Last Name :</label>
-                    <input class="form-control" type="lastname" required="" id="editlastname" disabled>
+                    <input class="form-control" type="text" required="" id="editlastname">
                   </div>
 
                   <div class="form-group">
                     <label for="username">Group Permission :</label>
                     <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgroup">
+                      <select class="form-select col-md-12"
+                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
+                        aria-label="Default select example" id="editgroup">
 
                         <?php
                         foreach ($groupper as $groupPer) {
-                        ?>
-                          <option><?php echo $groupPer["spg_name"]; ?></option>
+                          ?>
+                        <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -114,11 +120,18 @@
                     <input class="form-control" type="email" id="editemailaddress" required="">
                   </div>
 
-                  <div class="form-group">
-                    <label for="password">Plant :</label>
+                  <div>
+                    <label for="plant">Plant :</label>
                     <div>
-                      <input class="form-control" type="text" id="editplant" aria-label="Default select example" disabled>
-                      </input>
+                      <select class="form-select col-md-12"
+                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="editplant"
+                        aria-label="Default select example" placeholder="Enter your plant">
+                        <?php
+                        foreach ($getplant as $plant) {
+                          ?>
+                        <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
+                        <?php } ?>
+                      </select>
                     </div>
                   </div>
                 </form>
@@ -132,7 +145,8 @@
           </div>
 
           <!-- addUser Modal-->
-          <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -141,32 +155,36 @@
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Employee Code :</label>
-                    <input class="form-control" type="text" id="addempcode" required="" placeholder="Enter your employee code">
+                    <input class="form-control" type="text" id="addempcode" required=""
+                      placeholder="Enter your employee code">
                   </div>
 
                   <div class="form-group">
                     <label for="fristname">First Name :</label>
-                    <input class="form-control" type="text" id="addfirstname" required="" placeholder="Enter your frist name">
+                    <input class="form-control" type="text" id="addfirstname" required=""
+                      placeholder="Enter your frist name">
                   </div>
 
                   <div class="form-group">
                     <label for="lastname">Last Name :</label>
-                    <input class="form-control" type="text" required="" id="addlastname" placeholder="Enter your last name">
+                    <input class="form-control" type="text" required="" id="addlastname"
+                      placeholder="Enter your last name">
                   </div>
 
                   <div class="form-group">
                     <label for="username">Group Permission :</label>
                     <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your plant">
-                        <option>Please select group permission</option>
+                      <select class="form-select col-md-12"
+                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
+                        aria-label="Default select example" id="addgrouppermission" placeholder="Enter your plant">
+                        <!-- <option>Please select group permission</option> -->
                         <?php
                         foreach ($groupper as $groupPer) {
-                        ?>
-                          <option><?php echo $groupPer["spg_name"]; ?></option>
+                          ?>
+                        <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -174,22 +192,25 @@
 
                   <div class="form-group">
                     <label for="emailaddress">Email :</label>
-                    <input class="form-control" type="email" id="addemailaddress" required="" placeholder="Enter your email">
+                    <input class="form-control" type="email" id="addemail" required="" placeholder="Enter your email">
                   </div>
                   <div class="form-group">
                     <label for="password">Password :</label>
-                    <input class="form-control" type="password" id="addpassword" required="" placeholder="Enter your password">
+                    <input class="form-control" type="password" id="addpassword" required=""
+                      placeholder="Enter your password">
                   </div>
 
                   <div class="form-group">
                     <label for="password">Plant :</label>
                     <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
-                        <option>Please select plant</option>
+                      <select class="form-select col-md-12"
+                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant"
+                        aria-label="Default select example" placeholder="Enter your plant">
+                        <!-- <option>Please select plant</option> -->
                         <?php
-                        foreach ($plant as $plant) {
-                        ?>
-                          <option><?php echo $plant["mpa_name"]; ?></option>
+                        foreach ($getplant as $plant) {
+                          ?>
+                        <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>

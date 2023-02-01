@@ -77,46 +77,44 @@ class manage extends CI_Controller
 		$data["pic"] = $this->session->userdata("pic");
 		$data["plant"] = $this->session->userdata("plant");
 		$data["getplant"] = $this->backoffice_model->modelGetPhase();
-		// print_r($data["getplant"]);
-		// exit();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/view_EditProfile.php',$data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/view_EditProfile.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
-	public function ConUpdateUser(){
+	public function ConUpdateUser()
+	{
 		$empcode = $_GET["empcode"];
 		$firstname = $_GET["firstname"];
 		$lastname = $_GET["lastname"];
 		$email = $_GET["email"];
 		$plant = $_GET["plant"];
-		$convertplant = $this->backoffice_model->convert("mpa_id","mst_plant_admin_web","mpa_name = '$plant'");
-		$rs = $this->backoffice_model->modelUpdateDetailUser($empcode,$firstname,$lastname,$email,$convertplant);
+		$convertplant = $this->backoffice_model->convert("mpa_id", "mst_plant_admin_web", "mpa_name = '$plant'");
+		$rs = $this->backoffice_model->modelUpdateDetailUser($empcode, $firstname, $lastname, $email, $convertplant);
 		echo $rs;
 	}
-	public function ConChangePassword(){
+	public function ConChangePassword()
+	{
 		$empcode = $_POST["empcode"];
 		$currentpass = $_POST["currentpass"];
 		$newpass = $_POST["newpass"];
 		$confirmpass = $_POST["confirmpass"];
 		$password_encoded = base64_encode($currentpass);
-		$checkcurrentpass = $this->backoffice_model->modelCheckCurrentPass($empcode,$password_encoded);
-		
-		if($checkcurrentpass === "true"){
-			if($newpass == $confirmpass){
+		$checkcurrentpass = $this->backoffice_model->modelCheckCurrentPass($empcode, $password_encoded);
+
+		if ($checkcurrentpass === "true") {
+			if ($newpass == $confirmpass) {
 				$confirmpass_encoded =  base64_encode($confirmpass);
-				$rs = $this->backoffice_model->modelChangePass($empcode,$confirmpass_encoded);
+				$rs = $this->backoffice_model->modelChangePass($empcode, $confirmpass_encoded);
 				echo $rs;
-			}else{
+			} else {
 				echo "wow";
 			}
-		}else{
+		} else {
 			echo $checkcurrentpass;
 		}
-		
-		
 	}
 	public function ChangePassword()
 	{
@@ -143,73 +141,100 @@ class manage extends CI_Controller
 		$data["lname"] = $this->session->userdata("lname");
 		$data["pic"] = $this->session->userdata("pic");
 		$data["plant"] = $this->session->userdata("plant");
-		$data["reUser"] = $this->backoffice_model->gettableUserWeb();
-
+		$data["tableUserWeb"] = $this->backoffice_model->gettableUserWeb();
+		$data["groupper"] = $this->backoffice_model->getTableGroupPermission();
+		$data["getplant"] = $this->backoffice_model->modelGetPhase();
 		$menu["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php' , $menu);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $menu);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_manageUserWeb.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
 	public function swiftStatus()
-    {
-        $empcode = $_GET["empcode"];
-        $res = $this->backoffice_model->editStatus($empcode);
-        echo json_encode($res);
-    }
-    public function ConEditManageUser()
-    {
-			$empcode = $_GET["empcode"];
-        $res = $this->backoffice_model->modelEditUser($empcode);
-        echo json_encode($res);
-    }
-    public function saveEdit()
-    {
-        $empcode = $_POST["empcode"];
-        $groupper = $_POST["groupper"];
-        $editemail = $_POST["editemail"];
-        if ($editemail !==" ") {
-            $groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
-            $rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail);
-            echo $rs;
-        } else {
-            echo "false";
-        }
-    }
-    public function addManageUser()
-    {
-        $empcode = $_POST["empcode"];
-        $firstname = $_POST["firstname"];
-        $lastname = $_POST["lastname"];
-        $groupper = $_POST["groupper"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $plant = $_POST["plant"];
-        $rscheck = $this->backoffice_model->checkUserAdd($empcode);
-        if ($rscheck == "true") {
-            $groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
-            $plantCon = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_name='$plant'");
-            $password_md5 = md5($password);
-            $rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password_md5, $plantCon);
-            echo $rs;
-        } else if ($rscheck == "false") {
-            return "false";
-        } else {
-            return "false";
-        }
-    }
+	{
+		$staffid = $_GET["ss_id"];
+
+		$res = $this->backoffice_model->editStatus($staffid);
+		echo json_encode($res);
+	}
+	public function ConEditManageUser()
+	{
+		$empcode = $_GET["empcode"];
+		$res = $this->backoffice_model->modelEditUser($empcode);
+		echo json_encode($res);
+	}
+	public function saveEdit()
+	{
+		$empcode = $_POST["empcode"];
+		$groupper = $_POST["groupper"];
+		$editemail = $_POST["editemail"];
+		if ($editemail !== " ") {
+			$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
+			$rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail);
+			echo $rs;
+		} else {
+			echo "false";
+		}
+	}
+	public function addManageUserWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$empcode = $_POST["addempcode"];
+		$firstname = $_POST["addfirstname"];
+		$lastname = $_POST["addlastname"];
+		$groupper = $_POST["addgroupper"];
+		$email = $_POST["addemail"];
+		$password = $_POST["addpassword"];
+		$plant = $_POST["addplant"];
+		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
+		if ($rscheck === "true") {
+			$password_encoded = base64_encode($password);
+			$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
+			echo $rs;
+		} else {
+			echo $rscheck;
+		}
+	}
+	public function getDataEditManageUser()
+	{
+		$ss_id = $_GET["ss_id"];
+		$res = $this->backoffice_model->GetDataEditUser($ss_id);
+		echo json_encode($res);
+	}
+	public function saveEditUserWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$empcode = $_POST["empcode"];
+		$firstname = $_POST["editfirstname"];
+		$lastname = $_POST["editlastname"];
+		$groupper = $_POST["groupper"];
+		$email = $_POST["editemail"];
+		$plant = $_POST["editplant"];
+
+		$rs = $this->backoffice_model->UpdateUserWeb($empcode,$firstname,$lastname,$email,$groupper,$plant,$empcodeadmin);
+		echo $rs;
+	}
 
 	public function ManagePermisionWeb()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
-		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$data["tablePermissionWeb"] = $this->backoffice_model->getTableManagePermission();
+		$data["getsubmenu"] = $this->backoffice_model->modelGetSubmenu();
+		$menu["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManagePermisionWeb.php');
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $menu);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManagePermisionWeb.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+	public function AddManagePermissionWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$permissionwebname = $_GET["addPermissionwebname"];
+		$rs = $this->backoffice_model->insertPermissionWeb($permissionwebname,$empcodeadmin);
+		echo $rs;
 	}
 
 	public function ManageMenuWeb()

@@ -10308,12 +10308,12 @@ pre code {
 }
 
 .table-bordered {
-    border: 1px solid #2c2e33;
+    border: 1px solid #b4b4b4;
 }
 
 .table-bordered th,
 .table-bordered td {
-    border: 1px solid #c1c1c1;
+    border: 1px solid #b4b4b4;
 }
 
 .table-bordered thead th,

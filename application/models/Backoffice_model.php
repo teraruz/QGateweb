@@ -75,9 +75,9 @@ class Backoffice_model extends CI_Model
 	public function modelShowMenu($empcode)
 	{
 		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,spg_name,sm_name_menu,ssm_name_submenu,ssm_method,sm_name_icon,mpa_phase_plant FROM sys_staff_web 
-		INNER JOIN sys_permision_group_web ON sys_staff_web.spg_id=sys_permision_group_web.spg_id
-		INNER JOIN sys_permision_detail_web ON sys_permision_group_web.spg_id = sys_permision_detail_web.spg_id
-		INNER JOIN sys_submenu_web ON sys_permision_detail_web.ssm_id =sys_submenu_web.ssm_id
+		INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id=sys_permission_group_web.spg_id
+		INNER JOIN sys_permission_detail_web ON sys_permission_group_web.spg_id = sys_permission_detail_web.spg_id
+		INNER JOIN sys_submenu_web ON sys_permission_detail_web.ssm_id =sys_submenu_web.ssm_id
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
 		INNER JOIN mst_plant_admin_web  ON  sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id 
 		
@@ -94,7 +94,7 @@ class Backoffice_model extends CI_Model
 
 	public function modelGetPhase()
 	{
-		$sql = "select mpa_phase_plant,mpa_name from mst_plant_admin_web ";
+		$sql = "select  mpa_id,mpa_phase_plant,mpa_name from mst_plant_admin_web ";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
@@ -149,22 +149,33 @@ class Backoffice_model extends CI_Model
 		}
 	}
 	// ************************************************ MANAGE USER WEB *********************************************************
-	public function modelEditStatus($sa_id)
+	public function gettableUserWeb()
 	{
-		$sql = "EXEC [dbo].[GET_USER] @EMP_ID ='{$sa_id}'";
+		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,ss_emp_lname,ss_email,spg_name,mpa_name,ss_status from sys_staff_web
+		INNER JOIN mst_plant_admin_web ON sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id
+		INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id = sys_permission_group_web.spg_id";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		$result = $row[0]["sa_status"];
+		return $row;
+	}
+	public function editStatus($staffid)
+	{
+		$sql = "select ss_id,ss_emp_code,ss_status from sys_staff_web 
+				INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id = sys_permission_group_web.spg_id
+				WHERE ss_id = '{$staffid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["ss_status"];
 		if ($result == 1) {
-			$sql = "EXEC [dbo].[GET_EDIT_STATUS_OFF] @EMP_ID ='{$sa_id}'";
+			$sql = "UPDATE sys_staff_web SET ss_status = 0 WHERE  ss_id = '{$staffid}'";
 			$res = $this->db->query($sql);
 			if ($res) {
 				return true;
 			} else {
 				return false;
 			}
-		} elseif ($result == 0) {
-			$sql = "EXEC [dbo].[GET_EDIT_STATUS_ON] @EMP_ID ='{$sa_id}'";
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_staff_web SET ss_status = 1 WHERE  ss_id = '{$staffid}'";
 			$res = $this->db->query($sql);
 			if ($res) {
 				return true;
@@ -175,18 +186,90 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-
-	public function gettableUserWeb()
+	public function checkUserAdd($empcode)
 	{
-		$sql = "SELECT ss_id,ss_emp_code,ss_emp_fname,ss_emp_lname,ss_email,spg_name,mpa_name,ss_status from sys_staff_web
-		INNER JOIN mst_plant_admin_web ON sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id
-		INNER JOIN sys_permision_group_web ON sys_staff_web.spg_id = sys_permision_group_web.spg_id";
+		$sql = "select sys_staff_web.ss_emp_code from sys_staff_web WHERE sys_staff_web.ss_emp_code ='{$empcode}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}
+	public function getTableGroupPermission()
+	{
+		$sql = "SELECT * FROM sys_permission_group_web";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 	}
-	public function swiftStatus()
+	public function insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin)
 	{
-		
+		// echo " empcode==> ".$empcode;
+		// echo "  firstname==> ".$firstname;
+		// echo "  lastname==> ".$lastname;
+		// echo "  groupper==> ".$groupper;
+		// echo "  email==> ".$email;
+		// echo "  password==> ".$password_encoded;
+		// echo "  plant==> ".$plant;
+		// echo "  empcodeadmin==> ".$empcodeadmin;
+		$sql = "INSERT INTO sys_staff_web (ss_emp_code,ss_emp_fname,ss_emp_lname,spg_id,ss_email,ss_emp_password,mpa_id,ss_create_by,ss_create_date)
+		VALUES('{$empcode}','{$firstname}','{$lastname}','{$groupper}','{$email}','{$password_encoded}','{$plant}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if (empty($res)) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}
+	public function GetDataEditUser($ss_id)
+	{
+		$sql = "select ss_id,ss_emp_code,ss_emp_fname,ss_emp_lname,spg_name,ss_email,mpa_name,ss_status from sys_staff_web 
+		INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id = sys_permission_group_web.spg_id
+		INNER JOIN mst_plant_admin_web ON sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id
+		WHERE ss_id = '{$ss_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function UpdateUserWeb($empcode, $firstname, $lastname, $email, $groupper, $plant, $empcodeadmin)
+	{
+		$sql = "UPDATE sys_staff_web SET ss_emp_code = '{$empcode}',ss_emp_fname = '{$firstname}',ss_emp_lname = '{$lastname}',ss_email = '{$email}' 
+		,spg_id = '{$groupper}',mpa_id = '{$plant}' ,ss_create_by='{$empcodeadmin}',ss_create_date = CURRENT_TIMESTAMP
+		WHERE ss_emp_code = '{$empcode}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	// ***************************** MANAGE PERMISSION WEB *****************************************
+	public function getTableManagePermission()
+	{
+		$sql = "SELECT spg_id, spg_name, spg_status FROM  sys_permission_group_web";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function insertPermissionWeb($permissionwebname,$empcodeadmin)
+	{
+		$sql = "INSERT INTO sys_permission_group_web ( spg_name, spg_create_by, spg_create_date)
+		VALUES ('{$permissionwebname}', '{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if (empty($res)) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}
+	public function modelGetSubmenu()
+	{
+		$sql = "select  * from sys_submenu_web";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
 	}
 }

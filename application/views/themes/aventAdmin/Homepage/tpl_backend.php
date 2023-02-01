@@ -158,12 +158,12 @@
         var lastname = $("#lastname").val();
         var email = $("#email").val();
         var plant = $("#plant").val();
-        var firstnamecheck = document.getElementById('firstname'); 
-        var lastnamecheck = document.getElementById('lastname'); 
-        var emailcheck = document.getElementById('email'); 
-        var plantcheck = document.getElementById('plant'); 
+        var firstnamecheck = document.getElementById('firstname');
+        var lastnamecheck = document.getElementById('lastname');
+        var emailcheck = document.getElementById('email');
+        var plantcheck = document.getElementById('plant');
 
-        if (firstnamecheck.value == "" || lastnamecheck.value == "" || emailcheck.value == "" || plantcheck.value == "" ) {
+        if (firstnamecheck.value == "" || lastnamecheck.value == "" || emailcheck.value == "" || plantcheck.value == "") {
             setTimeout(function() {
                 swal({
                     title: "warning",
@@ -176,31 +176,31 @@
 
         } else {
             var path = $.ajax({
-            method: "GET",
-            url: "<?php echo base_url(); ?>Manage/ConUpdateUser",
-            data: {
-                empcode: empcode,
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                plant: plant
-            }
-        })
-        path.done(function(rs) {
-            if (rs === "true") {
-                setTimeout(function() {
-                    swal({
-                        title: "Success",
-                        text: "Your Profile Detail is Updated!",
-                        type: "success",
-                        confirmButtonColor: '#D80032'
-                    }, function() {
-                        window.location = "<?php echo base_url() ?>Manage/Homepage";
+                method: "GET",
+                url: "<?php echo base_url(); ?>Manage/ConUpdateUser",
+                data: {
+                    empcode: empcode,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    plant: plant
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Your Profile Detail is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/Homepage";
+                        });
                     });
-                });
-            }
-        });
-        }    
+                }
+            });
+        }
     }
 
     function ChangePass() {
@@ -208,11 +208,11 @@
         var currentpass = $("#currentpass").val();
         var newpass = $("#newpass").val();
         var confirmpass = $("#confirmpass").val();
-        var currentpasscheck = document.getElementById('currentpass'); 
-        var newpasscheck = document.getElementById('newpass'); 
-        var confirmpasscheck = document.getElementById('confirmpass'); 
+        var currentpasscheck = document.getElementById('currentpass');
+        var newpasscheck = document.getElementById('newpass');
+        var confirmpasscheck = document.getElementById('confirmpass');
 
-        if (currentpasscheck.value == "" || newpasscheck.value == "" || confirmpasscheck.value == "" ) {
+        if (currentpasscheck.value == "" || newpasscheck.value == "" || confirmpasscheck.value == "") {
             setTimeout(function() {
                 swal({
                     title: "warning",
@@ -223,20 +223,20 @@
                     window.location = "<?php echo base_url() ?>Manage/ChangePassword";
                 });
             }, 1000);
-        }else{
+        } else {
             var path = $.ajax({
-            method: "post",
-            url: "<?php echo base_url(); ?>Manage/ConChangePassword",
-            data: {
-                empcode: empcode,
-                currentpass: currentpass,
-                newpass: newpass,
-                confirmpass: confirmpass
-            }
-        })
+                method: "post",
+                url: "<?php echo base_url(); ?>Manage/ConChangePassword",
+                data: {
+                    empcode: empcode,
+                    currentpass: currentpass,
+                    newpass: newpass,
+                    confirmpass: confirmpass
+                }
+            })
 
         }
-       
+
         path.done(function(rs) {
             if (rs === "true") {
                 setTimeout(function() {
@@ -278,8 +278,202 @@
         })
     };
 </script>
+<!-- ********************************************************** Manage User Web PAGE ***************************************** -->
 <script>
-    $(document).ready( function () {
-    $('#ManageUserTable').DataTable();
-} );
+    $(document).ready(function() {
+        $('#ManageUserTable').DataTable();
+    });
+    $("#btnSaveAdd").click(function() {
+        addUserWeb()
+    });
+    $("#btnSaveEdit").click(function() {
+        saveEditUserWeb()
+    });
+
+    function status(ss_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatus?ss_id=" + ss_id,
+        })
+    };
+
+    function addUserWeb() {
+        var addempcode = $('#addempcode').val();
+        var addfirstname = $('#addfirstname').val();
+        var addlastname = $('#addlastname').val();
+        var addgroupper = $('#addgrouppermission').val();
+        var addemail = $('#addemail').val();
+        var addpassword = $('#addpassword').val();
+        var addplant = $('#addplant').val();
+
+        var checkaddempcode = document.getElementById("addempcode");
+        var checkaddfirstname = document.getElementById("addfirstname");
+        var checkaddlastname = document.getElementById("addlastname");
+        var checkaddgroup = document.getElementById("addgroupper");
+        var checkaddemailaddress = document.getElementById("addemail");
+        var checkaddpassword = document.getElementById("addpassword");
+        var checkaddplant = document.getElementById("addplant");
+
+        if (checkaddempcode.value == "" || checkaddfirstname.value == "" || checkaddlastname.value == "" ||
+            checkaddgroup.value == "" || checkaddemailaddress.value == "" || checkaddpassword.value == "" || checkaddplant.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox someone is Empty',
+                confirmButtonColor: '#F7B267',
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
+                data: {
+                    addempcode: addempcode,
+                    addfirstname: addfirstname,
+                    addlastname: addlastname,
+                    addgroupper: addgroupper,
+                    addemail: addemail,
+                    addpassword: addpassword,
+                    addplant: addplant,
+                }
+            })
+            path.done(function(rs) {
+                console.log(rs);
+                alert(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Employee.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Employee',
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataEditUserWeb(ss_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditManageUser?ss_id=" + ss_id,
+        })
+        path.done(function(rs) {
+            console.log(rs);
+            $("#editempcode").val(rs[0]["ss_emp_code"]);
+            $("#editfirstname").val(rs[0]["ss_emp_fname"]);
+            $("#editlastname").val(rs[0]["ss_emp_lname"]);
+            $("#editgroup").val(rs[0]["spg_name"]);
+            $("#editemailaddress").val(rs[0]["ss_email"]);
+            $("#editplant").val(rs[0]["mpa_name"]);
+        })
+    };
+
+    function saveEditUserWeb() {
+        var editempcode = $("#editempcode").val();
+        var editfirstname = $("#editfirstname").val();
+        var editlastname = $("#editlastname").val();
+        var editgroup = $("#editgroup").val();
+        var editemail = $("#editemailaddress").val();
+        var editplant = $("#editplant").val();
+
+        var checkeditempcode = document.getElementById("editempcode");
+        var checkeditfirstname = document.getElementById("editfirstname");
+        var checkeditlastname = document.getElementById("editlastname");
+        var checkeditgroup = document.getElementById("editgroup");
+        var checkeditemailaddress = document.getElementById("addemail");
+        var checkeditplant = document.getElementById("editplant");
+
+
+        if (checkeditempcode.value == "" || checkeditfirstname.value == "" || checkeditlastname.value == "" ||
+            checkeditgroup.value == "" || checkeditemailaddress.value == "" || checkeditplant.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox someone is Empty',
+                confirmButtonColor: '#F7B267',
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/saveEditUserWeb",
+                data: {
+                    empcode: editempcode,
+                    editfirstname: editfirstname,
+                    editlastname: editlastname,
+                    groupper: editgroup,
+                    editemail: editemail,
+                    editplant: editplant
+                }
+            })
+            path.done(function(rs) {
+                alert(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully',
+                        text: 'You have successfully Edit Employee',
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data not found',
+                        text: 'You Failed to Edit Employee',
+                    })
+                }
+            })
+        }
+    };
+    // *************************************************** Manage Permission Web ************************************************
+    $("#btnSaveAddPermissionWeb").click(function() {
+        alert('เข้าปุ่มจ้า')
+        addPermissionWeb()
+    });
+    function addPermissionWeb() {
+        var addPermissionwebname = $('#addPermissionwebname').val();
+
+        var checkaddPermissionwebname = document.getElementById("addPermissionwebname");
+
+
+        if (checkaddPermissionwebname.value == "" ) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267',
+            })
+        } else {
+            var path = $.ajax({
+                method: "GET",
+                url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
+                data: {
+                    addPermissionwebname: addPermissionwebname
+                }
+            })
+            path.done(function(rs) {
+                alert(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Permission.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Permission',
+                    })
+                }
+            })
+        }
+    };
 </script>
