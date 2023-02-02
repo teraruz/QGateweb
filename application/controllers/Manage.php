@@ -196,7 +196,7 @@ class manage extends CI_Controller
 			echo $rscheck;
 		}
 	}
-	public function getDataEditManageUser()
+	public function getDataEditManageUserWeb()
 	{
 		$ss_id = $_GET["ss_id"];
 		$res = $this->backoffice_model->GetDataEditUser($ss_id);
@@ -216,11 +216,14 @@ class manage extends CI_Controller
 		echo $rs;
 	}
 
+
+
 	public function ManagePermisionWeb()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
 		$data["tablePermissionWeb"] = $this->backoffice_model->getTableManagePermission();
+		$data["getmenu"] = $this->backoffice_model->modelGetMenu();
 		$data["getsubmenu"] = $this->backoffice_model->modelGetSubmenu();
 		$menu["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -236,6 +239,26 @@ class manage extends CI_Controller
 		$rs = $this->backoffice_model->insertPermissionWeb($permissionwebname,$empcodeadmin);
 		echo $rs;
 	}
+	public function swiftStatusPermissionWeb()
+	{
+		$Perid = $_GET["spg_id"];
+		$res = $this->backoffice_model->editStatusPermissionWeb($Perid);
+		echo json_encode($res);
+	}
+	// ดึง menu และ submenu แสดงใน EditPermissionweb
+	public function getDataEditPermissionWeb()
+	{
+		$spg_id = $_GET["spg_id"];
+		$res = $this->backoffice_model->GetDataEditPermissionweb($spg_id);
+		echo json_encode($res);
+	}
+	public function getDataEditMenuPermissionWeb()
+	{
+		$spg_id = $_GET["spg_id"];
+		$res = $this->backoffice_model->GetDataEditPermissionMenuweb($spg_id);
+		echo json_encode($res);
+	}
+
 
 	public function ManageMenuWeb()
 	{

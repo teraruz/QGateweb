@@ -9136,7 +9136,7 @@ hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #D80032;
 }
 
 small,
@@ -29424,6 +29424,42 @@ div.tagsinput span.tag a {
     width: 100%;
     -webkit-flex-grow: 1;
     flex-grow: 1;
+}
+
+
+/* Red border */
+
+hr.new1 {
+    border-top: 1px solid red;
+}
+
+
+/* Dashed red border */
+
+hr.new2 {
+    border-top: 1px dashed red;
+}
+
+
+/* Dotted red border */
+
+hr.new3 {
+    border-top: 1px dotted red;
+}
+
+
+/* Thick red border */
+
+hr.new4 {
+    border: 1px solid red;
+}
+
+
+/* Large rounded green border */
+
+hr.new5 {
+    border: 10px solid green;
+    border-radius: 5px;
 }
 
 

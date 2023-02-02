@@ -265,9 +265,56 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
+	public function modelGetMenu()
+	{
+		$sql = "select  * from sys_menu_web";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
 	public function modelGetSubmenu()
 	{
 		$sql = "select  * from sys_submenu_web";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function editStatusPermissionWeb($Perid)
+	{
+		$sql = "select * from sys_permission_group_web WHERE spg_id = '{$Perid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["spg_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_permission_group_web SET spg_status = 0 WHERE  spg_id = '{$Perid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_permission_group_web SET spg_status = 1 WHERE  spg_id = '{$Perid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+	public function GetDataEditPermissionweb($spg_id)
+	{
+		$sql = "SELECT spg_name FROM sys_permission_group_web WHERE spg_id = '{$spg_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function GetDataEditPermissionMenuweb($spg_id)
+	{
+		$sql = "";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;

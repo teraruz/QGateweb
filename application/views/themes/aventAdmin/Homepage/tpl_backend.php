@@ -361,7 +361,7 @@
         var path = $.ajax({
             method: "get",
             dataType: "json",
-            url: "<?php echo base_url(); ?>Manage/getDataEditManageUser?ss_id=" + ss_id,
+            url: "<?php echo base_url(); ?>Manage/getDataEditManageUserWeb?ss_id=" + ss_id,
         })
         path.done(function(rs) {
             console.log(rs);
@@ -436,6 +436,38 @@
         alert('เข้าปุ่มจ้า')
         addPermissionWeb()
     });
+
+    function statusPermission(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionWeb?spg_id=" + spg_id,
+        })
+    };
+
+    function getDataEditPermissionWeb(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPermissionWeb?spg_id=" + spg_id,
+        })
+        path.done(function(rs) {
+            console.log(rs);
+            $("#editPermissionwebname").val(rs[0]["spg_name"]);
+        })
+
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditMenuPermissionWeb?spg_id=" + spg_id,
+        })
+        path.done(function(rs) {
+            console.log(rs);
+            $("#editPermissionwebname").val(rs[0]["spg_name"]);
+        })
+
+
+    };
+    
     function addPermissionWeb() {
         var addPermissionwebname = $('#addPermissionwebname').val();
 
