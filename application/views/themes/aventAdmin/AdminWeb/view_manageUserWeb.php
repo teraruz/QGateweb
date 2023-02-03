@@ -28,7 +28,6 @@
                 <?php
                 $i = 0;
                 foreach ($tableUserWeb as $value) {
-                  //$i = $value["sa_id"];
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $value["ss_id"] . "</td>";
@@ -46,14 +45,14 @@
                                                 <label class=\"custom-control-label\" for=status$i></label>
                                             </div>
                                        
-                                    </td>";
+                                    </td>";//เปิด Permission
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
                                             <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ss_id"] . ")'>
                                             <label class=\"custom-control-label\" for=status$i></label>
                                         </div>
-                                    </td>";
+                                    </td>";//ปิด Permission
                   }
 
                   echo "<td>
@@ -96,7 +95,7 @@
 
                   <div class="form-group">
                     <label for="lastname">Last Name :</label>
-                    <input class="form-control" type="text" required="" id="editlastname">
+                    <input class="form-control" type="text" required="" id="editlastname" name="editlastname">
                   </div>
 
                   <div class="form-group">
@@ -117,7 +116,7 @@
 
                   <div class="form-group">
                     <label for="emailaddress">Email :</label>
-                    <input class="form-control" type="email" id="editemailaddress" required="">
+                    <input class="form-control" type="email" id="editemailaddress" name="editemailaddress" required="">
                   </div>
 
                   <div>
@@ -150,7 +149,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add User</h5>
+                  <h5 class="modal-title" id="exampleModalLabel" name="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add User</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -158,19 +157,19 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Employee Code :</label>
-                    <input class="form-control" type="text" id="addempcode" required=""
+                    <input class="form-control" type="text" id="addempcode" required="" name="addempcode"
                       placeholder="Enter your employee code">
                   </div>
 
                   <div class="form-group">
                     <label for="fristname">First Name :</label>
-                    <input class="form-control" type="text" id="addfirstname" required=""
+                    <input class="form-control" type="text" id="addfirstname" required="" name="addfirstname"
                       placeholder="Enter your frist name">
                   </div>
 
                   <div class="form-group">
                     <label for="lastname">Last Name :</label>
-                    <input class="form-control" type="text" required="" id="addlastname"
+                    <input class="form-control" type="text" required="" id="addlastname" name="addlastname"
                       placeholder="Enter your last name">
                   </div>
 
@@ -192,11 +191,11 @@
 
                   <div class="form-group">
                     <label for="emailaddress">Email :</label>
-                    <input class="form-control" type="email" id="addemail" required="" placeholder="Enter your email">
+                    <input class="form-control" type="email" id="addemail" name="addemail" required="" placeholder="Enter your email">
                   </div>
                   <div class="form-group">
                     <label for="password">Password :</label>
-                    <input class="form-control" type="password" id="addpassword" required=""
+                    <input class="form-control" type="password" id="addpassword" name="addpassword" required=""
                       placeholder="Enter your password">
                   </div>
 

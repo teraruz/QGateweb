@@ -13998,8 +13998,8 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:indeterminate~.custom-control-label::before {
-    border-color: #007bff;
-    background-color: #007bff;
+    border-color: #D80032;
+    background-color: #D80032;
 }
 
 .custom-checkbox .custom-control-input:indeterminate~.custom-control-label::after {
@@ -14007,11 +14007,11 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:disabled:checked~.custom-control-label::before {
-    background-color: rgba(0, 123, 255, 0.5);
+    background-color: #D80032;
 }
 
 .custom-checkbox .custom-control-input:disabled:indeterminate~.custom-control-label::before {
-    background-color: rgba(0, 123, 255, 0.5);
+    background-color: #D80032;
 }
 
 .custom-radio .custom-control-label::before {
@@ -29460,6 +29460,11 @@ hr.new4 {
 hr.new5 {
     border: 10px solid green;
     border-radius: 5px;
+}
+
+.checkbox input:checked {
+    border-color: red;
+    background-color: red;
 }
 
 

@@ -29,7 +29,7 @@
                 </div>
               </div>
               <div class="preview-item-content">
-                <p class="preview-subject mb-1">Edit Profile</p>
+                <p class="preview-subject mb-1">Profile</p>
               </div>
             </a>
             <div class="dropdown-divider"></div>

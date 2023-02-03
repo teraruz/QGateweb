@@ -16,6 +16,7 @@
                   <th style="text-align: center;">Permission Name</th>
                   <th style="text-align: center;">Status</th>
                   <th style="text-align: center;">Action</th>
+                  <th style="text-align: center;">ActionDemo</th>
                 </tr>
               </thead>
               <tbody>
@@ -28,13 +29,11 @@
                   echo "<td>" . $value["spg_id"] . "</td>";
                   echo "<td>" . $value["spg_name"] . "</td>";
                   if ($value["spg_status"] == "1") {
-                    echo "<td>
-                                              
+                    echo "<td>          
                                             <div class=\"custom-switch text-center\" >
                                                 <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='statusPermission(" . $value["spg_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=status$i></label>
-                                            </div>
-                                       
+                                            </div>                                      
                                     </td>";
                   } else {
                     echo "<td>
@@ -50,6 +49,12 @@
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
+                  
+                  echo "<td>
+                                  <div class=\"text-center\" >
+                                    <input type=\"checkbox\" checked data-toggle=\"toggle\" data-size=\"large\" data-onstyle=\"danger\"> 
+                                  </div>
+                                </td>";       
                   echo "</tr>";
                 }
                 ?>
@@ -99,27 +104,11 @@
                     </select>
                   </div>
 
-
-                  <!-- <div class="form-group">
-                    <label for="password">Permission :</label>
-                    <div>
-                      <?php
-                      foreach ($getsubmenu as $submenu) {
-                      ?>
-                        <label class="container">
-                          <input type="checkbox" checked="checked">
-                          <span class="checkmark"></span>
-                          <?php echo $submenu["ssm_name_submenu"]; ?>
-                        </label>
-                      <?php } ?>
-                    </div>
-                  </div> -->
-
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddPermissionWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditPermissionWeb">Save</a>
                 </div>
               </div>
             </div>
@@ -138,7 +127,7 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Permission Name :</label>
-                    <input class="form-control" type="text" id="addPermissionwebname" required="" placeholder="Enter New Permission">
+                    <input class="form-control" type="text" id="addPermissionwebname" name="addPermissionwebname" required="" placeholder="Enter New Permission">
                   </div> <br>
                   <hr class="new4">
 
@@ -156,7 +145,7 @@
                       if ($menu["sm_id"] == $submenu["sm_id"]) {
                       ?>
                         <label class="container">
-                          <input type="checkbox" checked="checked">
+                          <input type="checkbox" name="checkboxsubmenu"  id="checkboxsubmenu" value = "<?php echo $submenu["ssm_id"]; ?>" <?php echo $submenu["ssm_id"]; ?>>
                           <span class="checkmark"></span>
                           <?php echo $submenu["ssm_name_submenu"]; ?>
                         </label>

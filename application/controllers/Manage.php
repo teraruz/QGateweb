@@ -222,7 +222,7 @@ class manage extends CI_Controller
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
-		$data["tablePermissionWeb"] = $this->backoffice_model->getTableManagePermission();
+		$data["tablePermissionWeb"] = $this->backoffice_model->getTableManagePermissionWeb();
 		$data["getmenu"] = $this->backoffice_model->modelGetMenu();
 		$data["getsubmenu"] = $this->backoffice_model->modelGetSubmenu();
 		$menu["menu"] = $this->backoffice_model->modelShowMenu($empcode);
@@ -236,8 +236,22 @@ class manage extends CI_Controller
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$permissionwebname = $_GET["addPermissionwebname"];
-		$rs = $this->backoffice_model->insertPermissionWeb($permissionwebname,$empcodeadmin);
-		echo $rs;
+		$dataSubMenuId = $_GET["dataSubMenuId"];
+		$rscheckaddname = $this->backoffice_model->checkAddNamePermissionWeb($permissionwebname);
+		if ($rscheckaddname == "true") {		
+			$rsaddnameperweb = $this->backoffice_model->insertPermissionWeb($permissionwebname, $empcodeadmin);
+			$permissionwebnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_web", "spg_name = '$permissionwebname'");
+			if ($rsaddnameperweb == "true") {
+				foreach ($dataSubMenuId as $key => $value) {
+					$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailWeb($permissionwebnameconvert, $value, $empcodeadmin);
+				}
+				echo  $rsaddpermissiondetail;
+			}else {
+				echo  "false";
+			}
+		} else {
+			echo "false";
+		}
 	}
 	public function swiftStatusPermissionWeb()
 	{
@@ -265,6 +279,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$data["tableMenuWeb"] = $this->backoffice_model->getTableManageMenuweb();
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManageMenuWeb.php');

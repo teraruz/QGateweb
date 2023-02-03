@@ -15,22 +15,24 @@
                   <th style="text-align: center;" >NO.</th>
                   <th style="text-align: center;" >Menu Name</th>
                   <th style="text-align: center;" >Submenu Name</th>
+                  <th style="text-align: center;" >status</th>
                   <th style="text-align: center;" >Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 $i = 0;
-                foreach ($tablePermissionWeb as $value) {
+                foreach ($tableMenuWeb as $value) {
                   //$i = $value["sa_id"];
                   $i++;
                   echo "<tr>";
-                  echo "<td>" . $value["spg_id"] . "</td>";
-                  echo "<td>" . $value["spg_name"] . "</td>";
-                  if ($value["spg_status"] == "1") {
+                  echo "<td>" . $value["sm_id"] . "</td>";
+                  echo "<td>" . $value["sm_name_menu"] . "</td>";
+                  echo "<td>" . $value["ssm_name_submenu"] . "</td>";
+                  if ($value["ssm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["spg_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["ssm_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=status$i></label>
                                             </div>
                                        
@@ -38,21 +40,14 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["spg_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ssm_id"] . ")'>
                                             <label class=\"custom-control-label\" for=status$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#detailpermissionweb\"  onclick='getDeatailPermission(" . $value["spg_id"] . ")'><i
-                                     class=\"mdi mdi-information\"></i> Detail</button>                              
-                                    </div>
-                                </td>";
-
-                  echo "<td>
-                                    <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editPermissionWeb\"  onclick='getDataEditPermissionWeb(" . $value["spg_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editPermissionWeb\"  onclick='getDataEditPermissionWeb(" . $value["ssm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";

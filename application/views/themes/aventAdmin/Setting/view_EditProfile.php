@@ -1,7 +1,7 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-      <h1 class="col-12" style="color:black">Edit Profile</h1>
+      <h1 class="col-12" style="color:black">Profile</h1>
     </div>
     <div class="row">
       <div class="col-md-4 grid-margin stretch-card">

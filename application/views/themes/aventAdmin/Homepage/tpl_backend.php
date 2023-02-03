@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/mdi/css/materialdesignicons.min.css.map">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/mdi/css/materialdesignicons.css.map">
 <!-- <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendor/datatables/dataTables.bootstrap4.min.css"> -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <!-- endinject -->
@@ -86,6 +87,7 @@
 <!-- Datatables bootstrap -->
 <!-- <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendor/datatables/jquery.dataTables.min.css"> -->
 <script src="<?php echo base_url() . $js_url; ?>vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 
 
@@ -433,16 +435,9 @@
     };
     // *************************************************** Manage Permission Web ************************************************
     $("#btnSaveAddPermissionWeb").click(function() {
-        alert('เข้าปุ่มจ้า')
+        // alert("banana")
         addPermissionWeb()
     });
-
-    function statusPermission(spg_id) {
-        var path = $.ajax({
-            method: "get",
-            url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionWeb?spg_id=" + spg_id,
-        })
-    };
 
     function getDataEditPermissionWeb(spg_id) {
         var path = $.ajax({
@@ -467,14 +462,18 @@
 
 
     };
-    
+
     function addPermissionWeb() {
         var addPermissionwebname = $('#addPermissionwebname').val();
-
+        var dataSubMenuId = []
         var checkaddPermissionwebname = document.getElementById("addPermissionwebname");
-
-
-        if (checkaddPermissionwebname.value == "" ) {
+        var checkboxaddsubmenu = $("#checkboxsubmenu").val();
+        jQuery("input[name='checkboxsubmenu']").each(function(key ,values) {
+            if(this.checked == true ){
+                dataSubMenuId[key] = this.value
+            }
+        });
+        if (checkaddPermissionwebname.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -486,7 +485,8 @@
                 method: "GET",
                 url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
                 data: {
-                    addPermissionwebname: addPermissionwebname
+                    addPermissionwebname: addPermissionwebname ,
+                    dataSubMenuId:dataSubMenuId
                 }
             })
             path.done(function(rs) {
