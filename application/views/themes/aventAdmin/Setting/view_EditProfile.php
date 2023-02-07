@@ -17,7 +17,7 @@
             </div>
             <h4 class="card-title">IMAGE</h4>
             <div style="text-align: center;">
-              <img src="<?php echo base_url() ?>assets/images/faces/yeji.jpg" width="300" height="400" class="img-thumbnail" />
+              <img src="<?php echo base_url() ?>assets/images/faces/userman.png" width="300" height="400" class="img-thumbnail" />
             </div>
             <div class="bg-gray-dark d-flex d-md-block flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
               <h4 class="mb-1"></h4><?php echo $empcode; ?></h4>

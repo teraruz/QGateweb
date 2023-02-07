@@ -98,7 +98,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
-<!-- ************************************** AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE *************************************** -->
+<!-- --------------------------------------------------- AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE --------------------------------------------------- -->
 <script type="text/javascript">
     $("#wow1").click(function() {
         BacktoHome()
@@ -255,7 +255,7 @@
         })
     };
 </script>
-<!-- **************************************** LOGOUT AND MENUHOME *************************************** -->
+<!-- --------------------------------------------------- LOGOUT AND MENUHOME --------------------------------------------------- -->
 <script type="text/javascript">
     $("#btnLogout").click(function() {
         Logout()
@@ -280,7 +280,7 @@
         })
     };
 </script>
-<!-- ********************************************************** Manage User Web PAGE ***************************************** -->
+<!----------------------------------------------------- Manage User Web  ------------------------------------------------------------>
 <script>
     $(document).ready(function() {
         $('#ManageUserTable').DataTable();
@@ -433,44 +433,40 @@
             })
         }
     };
-    // *************************************************** Manage Permission Web ************************************************
+    // ************************************************************** Manage Permission Web **************************************************************
     $("#btnSaveAddPermissionWeb").click(function() {
-        // alert("banana")
         addPermissionWeb()
     });
+    $("#btnSaveEditPermissionWeb").click(function() {
+        alert("EditYEA")
+        SaveEditPermissionWeb()
+    })
 
-    function getDataEditPermissionWeb(spg_id) {
+    function statusPermission(spg_id) {
         var path = $.ajax({
             method: "get",
-            dataType: "json",
-            url: "<?php echo base_url(); ?>Manage/getDataEditPermissionWeb?spg_id=" + spg_id,
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionWeb?spg_id=" + spg_id,
         })
-        path.done(function(rs) {
-            console.log(rs);
-            $("#editPermissionwebname").val(rs[0]["spg_name"]);
-        })
-
-        var path = $.ajax({
-            method: "get",
-            dataType: "json",
-            url: "<?php echo base_url(); ?>Manage/getDataEditMenuPermissionWeb?spg_id=" + spg_id,
-        })
-        path.done(function(rs) {
-            console.log(rs);
-            $("#editPermissionwebname").val(rs[0]["spg_name"]);
-        })
-
-
     };
+
+
+
+
+
 
     function addPermissionWeb() {
         var addPermissionwebname = $('#addPermissionwebname').val();
         var dataSubMenuId = []
         var checkaddPermissionwebname = document.getElementById("addPermissionwebname");
-        var checkboxaddsubmenu = $("#checkboxsubmenu").val();
-        jQuery("input[name='checkboxsubmenu']").each(function(key ,values) {
-            if(this.checked == true ){
+        jQuery("input[name='checkboxsubmenu']").each(function(key, values) {
+            // setค่าให้เป็น input เพื่อมองว่า checkbox เป็น input โดย name ก็คือชื่อ  html checkbox ใน view 
+            //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
+            //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
+            if (this.checked == true) {
+                // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
                 dataSubMenuId[key] = this.value
+                // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
+
             }
         });
         if (checkaddPermissionwebname.value == "") {
@@ -485,8 +481,8 @@
                 method: "GET",
                 url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
                 data: {
-                    addPermissionwebname: addPermissionwebname ,
-                    dataSubMenuId:dataSubMenuId
+                    addPermissionwebname: addPermissionwebname,
+                    dataSubMenuId: dataSubMenuId
                 }
             })
             path.done(function(rs) {
@@ -508,4 +504,148 @@
             })
         }
     };
+
+    $(document).ready(function() {
+        $("#dropdownmenuper").change(function() {
+            load_data()
+        })
+
+    })
+
+    function getDataEditPermissionWeb(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPermissionWeb?spg_id=" + spg_id,
+        })
+        path.done(function(rs) {
+            console.log(rs);
+            $("#editPermissionwebname").val(rs[0]["spg_name"]);
+            $("#idPername").val(rs[0]["spg_id"]);
+            load_data()
+        })
+    };
+
+    // ------------------------------------------------ กด dropdown อันแรกแล้วโชว์ข้อมูลใส่ dropdown อีกอัน ------------------------------------------------
+
+    function load_data() {
+        var dropdownmenuper = $("#dropdownmenuper").val();
+        $.ajax({
+            url: "<?php echo base_url(); ?>Manage/loadSubMenu",
+            method: 'POST',
+            dataType: "json",
+            data: {
+                dropdownmenuper: dropdownmenuper
+            }
+        }).done(function(rs) {
+
+            var obj = JSON.parse(rs);
+            var data = ""
+            $.each(obj, function(key, value) {
+                data += " <option value= '" + value["ssm_id"] + "'>" + value["ssm_name_submenu"] + "</option>"
+            })
+            
+            $("#dropdowneditsubmenuper").html(data) 
+        })
+    }
+
+    function SaveEditPermissionWeb() {
+        var editPermissionwebname = $("#editPermissionwebname").val();
+        var dropdowneditsubmenuper = $("#dropdowneditsubmenuper").val();
+        var idper = $("#idPername").val();
+        var checkeditPermissionwebname = document.getElementById("editPermissionwebname");
+        var checkdropdowneditsubmenuper = document.getElementById("dropdowneditsubmenuper");
+
+        if (checkeditPermissionwebname.value == "" || checkdropdowneditsubmenuper.value == "" ) {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
+            });
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManagePermissionWeb",
+                data: {
+                    idper :idper,
+                    editPermissionwebname: editPermissionwebname,
+                    dropdowneditsubmenuper : dropdowneditsubmenuper
+                }
+            })
+            path.done(function(rs) {
+                console.log(rs)
+                alert(rs)
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Your Profile Detail is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Permission',
+                    })
+                }
+            });
+        }
+    }
+
+    // ------------------------------------------------ Ajax การโชว์ tableinfo  ------------------------------------------------
+    
+
+    function GetDetail(rs) {
+        console.log = ("data ==== > ", rs)
+        var tb = ""
+        var j = 1
+        var i = 0
+
+        $.each(rs, function(key, value1) {
+            tb += "<tr><td>" + parseInt(i + 1) + "</td>"
+            tb += "<td>" + value1["sm_name_menu"] + "</td>"
+            tb += "<td>" + value1["ssm_name_submenu"] + "</td>"
+            if (value1["ssm_status"] == "1") {
+                tb += "<td>"
+                tb += "<div class=\"custom-switch text-center\" >"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "' checked onclick='detailpermissiongroup(" + value1["spg_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
+                tb += "</div>"
+                tb += "</td>"
+            } else {
+                tb += "<td>"
+                tb += "<div class=\"custom-switch text-center\" >"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "'  onclick='detailpermissiongroup(" + value1["spg_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
+                tb += "</div>"
+                tb += "</td>"
+            }
+            tb += "</tr>"
+            j++
+            i++
+        })
+
+        $("#tbsubmenu").html(tb)      
+    }
+    function detailpermissiongroup(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDetailGroup?spg_id=" + spg_id,
+        })
+        path.done(function(rs) {
+            GetDetail(rs);
+            $("#bodyshow").show("fast")
+        })
+
+    };
+    
+    
+
 </script>

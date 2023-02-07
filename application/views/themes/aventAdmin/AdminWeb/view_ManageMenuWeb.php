@@ -4,7 +4,7 @@
       <h1 class="col-12" style="color:black">Manage Menu Web</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addpermissionweb><i class="fas fa-user-plus fa-sm"></i> Add Permission</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="fas fa-user-plus fa-sm"></i>Add Menu</a>
         </div>
 
         <div class="card-body">
@@ -127,18 +127,18 @@
           </div>
 
           <!-- addPermissionWeb Modal-->
-          <div class="modal fade" id="addpermissionweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Permission Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Menu Web</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>    
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Permission Name :</label>
+                    <label for="empcode">Menu Name :</label>
                     <input class="form-control" type="text" id="addPermissionwebname" required="" placeholder="Enter New Permission">
                   </div>
 
