@@ -82,8 +82,7 @@
                                     <th style="text-align: center;">Plant</th>
                                     <th style="text-align: center;">Zone</th>
                                     <th style="text-align: center;">Station</th>
-                                    <th style="text-align: center;">Date</th>
-                                    <th style="text-align: center;">Detail</th>
+                                    <th style="text-align: center;">Date</th>                 
                                     <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
