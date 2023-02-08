@@ -440,7 +440,6 @@
         addPermissionWeb()
     });
     $("#btnSaveEditPermissionWeb").click(function() {
-        alert("EditYEA")
         SaveEditPermissionWeb()
     })
 
@@ -451,7 +450,7 @@
         })
     };
 
- 
+
 
 
     function addPermissionWeb() {
@@ -580,7 +579,7 @@
                     setTimeout(function() {
                         swal({
                             title: "Success",
-                            text: "Your Profile Detail is Updated!",
+                            text: "Permission is Updated!",
                             type: "success",
                             confirmButtonColor: '#D80032'
                         }, function() {
@@ -630,9 +629,10 @@
             j++
             i++
         })
-      
+
         $("#tbsubmenu").html(tb)
     }
+
     function detailpermissiongroup(spg_id) {
         var path = $.ajax({
             method: "get",
@@ -646,6 +646,7 @@
         })
 
     };
+
     function statusPermissionDetail(spd_id) {
         var path = $.ajax({
             method: "get",
@@ -655,4 +656,143 @@
     };
 
     // ************************************************************** Manage Menu  Web **************************************************************
+
+    $("#btnSaveAddMenuWeb").click(function() {
+        SaveaddMenuWeb()
+    });
+    
+    $("#btnSaveEditMenuWeb").click(function() {
+        SaveEditMenuWeb()
+    });
+
+
+    function statusManageMenuWeb(ssm_id){
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusMenuWeb?ssm_id=" + ssm_id,
+        })
+    };
+
+    function getDataManageMenuWeb(ssm_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataManageMenuWeb?ssm_id=" + ssm_id,
+        })
+        path.done(function(rs) {
+            console.log(rs);
+            $("#editMenuName").val(rs[0]["sm_name_menu"]);
+            $("#editSubMenuName").val(rs[0]["ssm_name_submenu"]);
+            $("#IDeditMenuName").val(rs[0]["sm_id"]);
+            $("#IDeditSubMenuName").val(rs[0]["ssm_id"]);
+        })
+    };
+
+
+    function SaveaddMenuWeb() {
+        var addmenuwebname = $('#addmenuwebname').val();
+        var addsubmenuwebname = $('#addsubmenuwebname').val();
+        var addmenupath = $('#addmenupath').val();
+        var addmenuicon = $("#addmenuicon").val();
+
+        var checkaddmenuwebname = document.getElementById("addmenuwebname");
+        var checkaddsubmenuwebname = document.getElementById("addsubmenuwebname")
+        var checkaddmenupath = document.getElementById("addmenupath")
+        var checkaddmenuicon = document.getElementById("addmenuicon")
+
+        if (checkaddmenuwebname.value == "" || checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon =="" ) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
+                data: {
+                    addmenuwebname: addmenuwebname,
+                    addsubmenuwebname: addsubmenuwebname,
+                    addmenupath : addmenupath,
+                    addmenuicon : addmenuicon
+                }
+            })
+            path.done(function(rs) {
+                alert(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Permission.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Permission',
+                    })
+                }
+            })
+        }
+    };
+
+    function SaveEditMenuWeb() {
+
+        var editMenuName = $("#editMenuName").val();
+        var editSubMenuName = $("#editSubMenuName").val();
+        var IDeditMenuName = $("#IDeditMenuName").val();
+        var IDeditSubMenuName = $("#IDeditSubMenuName").val();
+
+        var checkeditMenuName = document.getElementById("editMenuName");
+        var checkeditSubMenuName = document.getElementById("editSubMenuName");
+
+        if (checkeditMenuName.value == "" || checkeditSubMenuName.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+            });
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
+                data: {
+                    editMenuName: editMenuName,
+                    editSubMenuName: editSubMenuName,
+                    IDeditMenuName: IDeditMenuName,
+                    IDeditSubMenuName: IDeditSubMenuName
+                }
+            })
+            path.done(function(rs) {
+                if (rs == "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Menu is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Permission',
+                    })
+                }
+            });
+        }
+    }
+    // *********************************************** Manage User Web ***********************************************
+
+    
+
+
+
+
 </script>

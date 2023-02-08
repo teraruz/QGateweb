@@ -49,15 +49,13 @@
                                      class=\"mdi mdi-information-outline\"></i> info</button>                              
                                     </div>
                                 </td>";
-                  
+
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"infotable\" data-target=\"#editpermissionweb\"  onclick='getDataEditPermissionWeb(" . $value["spg_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
-
-                  
                 }
                 ?>
               </tbody>
@@ -78,20 +76,20 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Permission Name :</label>
-                    <input class="form-control" type="text" id="editPermissionwebname" name="editPermissionwebname" >
+                    <input class="form-control" type="text" id="editPermissionwebname" name="editPermissionwebname">
                     <input class="form-control" type="text" id="idPername" name="idPername" hidden>
                   </div>
-                  
+
                   <div>
                     <h4 for="password" class="text-center">Update Permission</h4>
                     <div class="card-body col-md-12 row mb-3">
                       <label class="col-sm-6 col-form-label"> Menu :</label>
                       <div class="col-sm-6">
-                        <select class="form-control" id="dropdownmenuper" name ="dropdownmenuper" >
+                        <select class="form-control" id="dropdownmenuper" name="dropdownmenuper">
                           <?php
                           foreach ($getmenu as $value) {
                           ?>
-                            <option value="<?php echo $value["sm_name_menu"]?>"><?php echo $value["sm_name_menu"]; ?></option>
+                            <option value="<?php echo $value["sm_name_menu"] ?>"><?php echo $value["sm_name_menu"]; ?></option>
                           <?php  } ?>
                         </select>
                       </div>
@@ -99,8 +97,8 @@
                     <div class="card-body col-md-12 row mb-3">
                       <label class="col-sm-6 col-form-label"> Submenu :</label>
                       <div class="col-sm-6">
-                        <select class="form-control" id="dropdowneditsubmenuper"  name ="dropdowneditsubmenuper" >
-                      </select>
+                        <select class="form-control" id="dropdowneditsubmenuper" name="dropdowneditsubmenuper">
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -146,11 +144,11 @@
                           <?php
                           if ($menu["sm_id"] == $submenu["sm_id"]) {
                           ?>
-                            <label class="container">
-                              <input type="checkbox" name="checkboxsubmenu" id="checkboxsubmenu" value="<?php echo $submenu["ssm_id"]; ?>" <?php echo $submenu["ssm_id"]; ?>>
-                              <span class="checkmark"></span>
-                              <?php echo $submenu["ssm_name_submenu"]; ?>
-                            </label>
+                              <label class="container">
+                                <input type="checkbox" name="checkboxsubmenu" id="checkboxsubmenu" value="<?php echo $submenu["ssm_id"]; ?>" <?php echo $submenu["ssm_id"]; ?>>
+                                <span class="checkmark"></span>
+                                <?php echo $submenu["ssm_name_submenu"]; ?>
+                              </label>
                           <?php } ?>
                         <?php } ?>
                       <?php } ?>
@@ -167,58 +165,56 @@
             </div>
           </div>
 
-<!-------------------------------------------------- Table info ---------------------------------------------------------------------------- -->
+          <!-------------------------------------------------- Table info ---------------------------------------------------------------------------- -->
           <div class="card-body" id="bodyshow" style="display: none">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="Tabledetail" width="100%" cellspacing="0">
-                    <h3 class="col-12" style="color:black">Information Detail</h3>
-                    <hr class="new4">
-                        <!-- style="display: none"-->
-                        <!-- <div class="card-header py" style="width:100%; text-align:right">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="Tabledetail" width="100%" cellspacing="0">
+                <h3 class="col-12" style="color:black">Information Detail</h3>
+                <hr class="new4">
+                <!-- style="display: none"-->
+                <!-- <div class="card-header py" style="width:100%; text-align:right">
                             <a hidden href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addpermenu id="btnaddpermenu"><i class="fas fa-user-plus fa-sm"></i> Register </a>
                         </div> -->
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Menu</th>
-                                <th>Submenu</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbsubmenu">
-                            <?php
-                            $j = 0;
-                            foreach ($tabledetail as $detail) {
-                                $j++;
-                                echo "<tr>";
-                                echo "<td>" . $j. "</td>";
-                                echo "<td>" . $detail["sm_name_menu"] . "</td>";
-                                echo "<td>" . $detail["ssm_name_submenu"] . "</td>";
-                                if ($detail["spd_status"] == "1") {
-                                    echo "<td>
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Menu</th>
+                    <th>Submenu</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tbsubmenu">
+                  <?php
+                  $j = 0;
+                  foreach ($tabledetail as $detail) {
+                    $j++;
+                    echo "<tr>";
+                    echo "<td>" . $j . "</td>";
+                    echo "<td>" . $detail["sm_name_menu"] . "</td>";
+                    echo "<td>" . $detail["ssm_name_submenu"] . "</td>";
+                    if ($detail["spd_status"] == "1") {
+                      echo "<td>
                                             <div class=\"custom-switch text-center\" >
                                                 <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j checked onclick='statusPermissionDetail(" . $detail["spd_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusdetailinfo$j ></label>
                                             </div>
                                     </td>";
-                                } else {
-                                    echo "<td>
+                    } else {
+                      echo "<td>
                                         <div class=\"custom-switch text-center\" >
                                             <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j onclick='statusPermissionDetail(" . $detail["spd_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusdetailinfo$j></label>
                                         </div>
                                     </td>";
-                                }
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                    }
+                    echo "</tr>";
+                  }
+                  ?>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-
