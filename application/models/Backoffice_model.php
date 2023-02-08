@@ -340,6 +340,32 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
+	public function editStatusPermissionDetailWeb($detailid)
+	{
+		$sql = "SELECT * FROM sys_permission_detail_web WHERE spd_id = '{$detailid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["spd_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_permission_detail_web SET spd_status = 0 WHERE  spd_id = '{$detailid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_permission_detail_web SET spd_status = 1 WHERE  spd_id = '{$detailid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
 	public function GetDataEditPermissionweb($spg_id)
 	{
 		$sql = "SELECT spg_id, spg_name FROM sys_permission_group_web WHERE spg_id = '{$spg_id}'";
@@ -349,7 +375,7 @@ class Backoffice_model extends CI_Model
 	}
 	public function editPermissionDetailWeb($permissionwebeditnameconvert, $value, $empcodeadmin)
 	{
-		$sql = "select * from sys_permission_detail_web WHERE spd_id = '{$permissionwebeditnameconvert}' and ssm_id = '{$value}'";
+		$sql = "SELECT * from sys_permission_detail_web WHERE spd_id = '{$permissionwebeditnameconvert}' AND ssm_id = '{$value}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["spd_status"];
@@ -394,7 +420,7 @@ class Backoffice_model extends CI_Model
 	}
 	public function detailGroupPermission($id)
 	{
-		$sql = "SELECT DISTINCT sys_menu_web.sm_id, sys_menu_web.sm_name_menu,sys_submenu_web.ssm_id,sys_submenu_web.ssm_name_submenu,sys_submenu_web.ssm_status
+		$sql = "SELECT DISTINCT sys_menu_web.sm_id, sys_menu_web.sm_name_menu,sys_submenu_web.ssm_id,sys_submenu_web.ssm_name_submenu,sys_submenu_web.ssm_status,sys_permission_detail_web.spd_id,spd_status
 		FROM sys_permission_detail_web 
 		INNER JOIN sys_submenu_web ON sys_permission_detail_web.ssm_id = sys_submenu_web.ssm_id
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
@@ -404,6 +430,7 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+		// print_r($res);
 	}
 
 	public function getTableDetailPermission()

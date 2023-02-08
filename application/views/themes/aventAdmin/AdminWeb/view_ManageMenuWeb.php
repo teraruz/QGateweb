@@ -22,14 +22,14 @@
               <tbody>
                 <?php
                 $i = 0;
-                foreach ($tableMenuWeb as $value) {
+                foreach ($tableMenuWeb as $menuweb) {
                   //$i = $value["sa_id"];
                   $i++;
                   echo "<tr>";
-                  echo "<td>" . $value["sm_id"] . "</td>";
-                  echo "<td>" . $value["sm_name_menu"] . "</td>";
-                  echo "<td>" . $value["ssm_name_submenu"] . "</td>";
-                  if ($value["ssm_status"] == "1") {
+                  echo "<td>" . $menuweb["sm_id"] . "</td>";
+                  echo "<td>" . $menuweb["sm_name_menu"] . "</td>";
+                  echo "<td>" . $menuweb["ssm_name_submenu"] . "</td>";
+                  if ($menuweb["ssm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
                                                 <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["ssm_id"] . ")'>

@@ -369,6 +369,13 @@ class manage extends CI_Controller
 		$res = $this->backoffice_model->editStatusPermissionWeb($Perid);
 		echo json_encode($res);
 	}
+
+	public function 	swiftStatusPermissionDetailWeb()
+	{
+		$detailid = $_GET["spd_id"];
+		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid);
+		echo json_encode($res);
+	}
 	// ดึง menu และ submenu แสดงใน EditPermissionweb
 	public function getDataEditPermissionWeb()
 	{
@@ -387,7 +394,11 @@ class manage extends CI_Controller
 		// $id ="22";
 		$res = $this->backoffice_model->detailGroupPermission($id);
 		echo json_encode($res) ;
+		
+		// print_r($res);
 	}
+
+	
 
 	//  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public function ManageMenuWeb()

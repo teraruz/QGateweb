@@ -194,18 +194,18 @@
                                 echo "<td>" . $j. "</td>";
                                 echo "<td>" . $detail["sm_name_menu"] . "</td>";
                                 echo "<td>" . $detail["ssm_name_submenu"] . "</td>";
-                                if ($detail["ssm_status"] == "1") {
+                                if ($detail["spd_status"] == "1") {
                                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetil$j  id=statusdetail$j checked onclick='detailpermissiongroup(" . $detail["spg_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=statusdetail$j ></label>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j checked onclick='statusPermissionDetail(" . $detail["spd_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusdetailinfo$j ></label>
                                             </div>
                                     </td>";
                                 } else {
                                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetail$j  id=statusdetail$j onclick='detailpermissiongroup(" . $detail["spg_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=statusdetail$j></label>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j onclick='statusPermissionDetail(" . $detail["spd_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusdetailinfo$j></label>
                                         </div>
                                     </td>";
                                 }
@@ -220,3 +220,5 @@
       </div>
     </div>
   </div>
+
+

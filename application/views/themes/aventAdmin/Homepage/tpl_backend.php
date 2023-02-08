@@ -99,6 +99,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
 <!-- --------------------------------------------------- AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE --------------------------------------------------- -->
+
+
 <script type="text/javascript">
     $("#wow1").click(function() {
         BacktoHome()
@@ -449,9 +451,7 @@
         })
     };
 
-
-
-
+ 
 
 
     function addPermissionWeb() {
@@ -544,8 +544,8 @@
             $.each(obj, function(key, value) {
                 data += " <option value= '" + value["ssm_id"] + "'>" + value["ssm_name_submenu"] + "</option>"
             })
-            
-            $("#dropdowneditsubmenuper").html(data) 
+
+            $("#dropdowneditsubmenuper").html(data)
         })
     }
 
@@ -556,7 +556,7 @@
         var checkeditPermissionwebname = document.getElementById("editPermissionwebname");
         var checkdropdowneditsubmenuper = document.getElementById("dropdowneditsubmenuper");
 
-        if (checkeditPermissionwebname.value == "" || checkdropdowneditsubmenuper.value == "" ) {
+        if (checkeditPermissionwebname.value == "" || checkdropdowneditsubmenuper.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -569,13 +569,12 @@
                 method: "POST",
                 url: "<?php echo base_url(); ?>Manage/EditManagePermissionWeb",
                 data: {
-                    idper :idper,
+                    idper: idper,
                     editPermissionwebname: editPermissionwebname,
-                    dropdowneditsubmenuper : dropdowneditsubmenuper
+                    dropdowneditsubmenuper: dropdowneditsubmenuper
                 }
             })
             path.done(function(rs) {
-                console.log(rs)
                 alert(rs)
                 if (rs === "true") {
                     setTimeout(function() {
@@ -599,9 +598,10 @@
     }
 
     // ------------------------------------------------ Ajax การโชว์ tableinfo  ------------------------------------------------
-    
+
 
     function GetDetail(rs) {
+        // alert(rs)
         console.log = ("data ==== > ", rs)
         var tb = ""
         var j = 1
@@ -611,18 +611,18 @@
             tb += "<tr><td>" + parseInt(i + 1) + "</td>"
             tb += "<td>" + value1["sm_name_menu"] + "</td>"
             tb += "<td>" + value1["ssm_name_submenu"] + "</td>"
-            if (value1["ssm_status"] == "1") {
+            if (value1["spd_status"] == "1") {
                 tb += "<td>"
                 tb += "<div class=\"custom-switch text-center\" >"
-                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "' checked onclick='detailpermissiongroup(" + value1["spg_id"] + ")'>"
-                tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "' checked onclick='statusPermissionDetail(" + value1["spd_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetailinfo" + j + "' ></label>"
                 tb += "</div>"
                 tb += "</td>"
             } else {
                 tb += "<td>"
                 tb += "<div class=\"custom-switch text-center\" >"
-                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "'  onclick='detailpermissiongroup(" + value1["spg_id"] + ")'>"
-                tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "'  onclick='statusPermissionDetail(" + value1["spd_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetailinfo" + j + "' ></label>"
                 tb += "</div>"
                 tb += "</td>"
             }
@@ -630,8 +630,8 @@
             j++
             i++
         })
-
-        $("#tbsubmenu").html(tb)      
+      
+        $("#tbsubmenu").html(tb)
     }
     function detailpermissiongroup(spg_id) {
         var path = $.ajax({
@@ -640,12 +640,19 @@
             url: "<?php echo base_url(); ?>Manage/getDetailGroup?spg_id=" + spg_id,
         })
         path.done(function(rs) {
+            // alert(spd_id)
             GetDetail(rs);
             $("#bodyshow").show("fast")
         })
 
     };
-    
-    
+    function statusPermissionDetail(spd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionDetailWeb?spd_id=" + spd_id,
+        })
 
+    };
+
+    // ************************************************************** Manage Menu  Web **************************************************************
 </script>
