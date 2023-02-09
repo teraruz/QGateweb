@@ -149,7 +149,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel" name="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add User</h5>
+                  <h5 class="modal-title" id="exampleModalLabel" name="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add User Web</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -158,19 +158,19 @@
                   <div class="form-group">
                     <label for="empcode">Employee Code :</label>
                     <input class="form-control" type="text" id="addempcode" required="" name="addempcode"
-                      placeholder="Enter your employee code">
+                      placeholder="Enter employee code">
                   </div>
 
                   <div class="form-group">
                     <label for="fristname">First Name :</label>
                     <input class="form-control" type="text" id="addfirstname" required="" name="addfirstname"
-                      placeholder="Enter your frist name">
+                      placeholder="Enter first name">
                   </div>
 
                   <div class="form-group">
                     <label for="lastname">Last Name :</label>
                     <input class="form-control" type="text" required="" id="addlastname" name="addlastname"
-                      placeholder="Enter your last name">
+                      placeholder="Enter last name">
                   </div>
 
                   <div class="form-group">
@@ -178,7 +178,7 @@
                     <div>
                       <select class="form-select col-md-12"
                         style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
-                        aria-label="Default select example" id="addgrouppermission" placeholder="Enter your plant">
+                        aria-label="Default select example" id="addgrouppermission" ">
                         <!-- <option>Please select group permission</option> -->
                         <?php
                         foreach ($groupper as $groupPer) {
@@ -196,7 +196,7 @@
                   <div class="form-group">
                     <label for="password">Password :</label>
                     <input class="form-control" type="password" id="addpassword" name="addpassword" required=""
-                      placeholder="Enter your password">
+                      placeholder="Enter password">
                   </div>
 
                   <div class="form-group">

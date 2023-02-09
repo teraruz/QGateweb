@@ -4,50 +4,49 @@
       <h1 class="col-12" style="color:black">Manage Menu Web</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="fas fa-user-plus fa-sm"></i>Add Menu</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="mdi mdi-library-plus"></i>Add Menu</a>
         </div>
 
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered " id="ManageUserTable" width="100%" cellspacing="0">
               <thead>
-                <tr >
-                  <th style="text-align: center;" >NO.</th>
-                  <th style="text-align: center;" >Menu Name</th>
-                  <th style="text-align: center;" >Submenu Name</th>
-                  <th style="text-align: center;" >status</th>
-                  <th style="text-align: center;" >Action</th>
+                <tr>
+                  <th style="text-align: center;">NO.</th>
+                  <th style="text-align: center;">Menu Name</th>
+                  <th style="text-align: center;">Submenu Name</th>
+                  <th style="text-align: center;">status</th>
+                  <th style="text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 $i = 0;
-                foreach ($tableMenuWeb as $value) {
-                  //$i = $value["sa_id"];
+                foreach ($tableMenuWeb as $menuweb) {
                   $i++;
                   echo "<tr>";
-                  echo "<td>" . $value["sm_id"] . "</td>";
-                  echo "<td>" . $value["sm_name_menu"] . "</td>";
-                  echo "<td>" . $value["ssm_name_submenu"] . "</td>";
-                  if ($value["ssm_status"] == "1") {
+                  echo "<td>" . $i . "</td>";
+                  echo "<td>" . $menuweb["sm_name_menu"] . "</td>";
+                  echo "<td>" . $menuweb["ssm_name_submenu"] . "</td>";
+                  if ($menuweb["ssm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["ssm_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=status$i></label>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
                                     </td>";
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ssm_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=status$i></label>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editPermissionWeb\"  onclick='getDataEditPermissionWeb(" . $value["ssm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuweb["ssm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -58,179 +57,78 @@
             </table>
 
           </div>
-          <!-- EditPermissionWeb Modal-->
-          <div class="modal fade" id="editPermissionWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Permission Web</h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-
-                <form class="card-body" action="#">
-                  <div class="form-group">
-                    <label for="empcode">Permission Name :</label>
-                    <input class="form-control" type="text" id="editempcode" required="" disabled>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="fristname">First Name :</label>
-                    <input class="form-control" type="text" id="editfirstname" required="">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="lastname">Last Name :</label>
-                    <input class="form-control" type="text" required="" id="editlastname" >
-                  </div>
-
-                  <div class="form-group">
-                    <label for="username">Group Permission :</label>
-                    <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgroup">
-
-                        <?php
-                        foreach ($groupper as $groupPer) {
-                        ?>
-                          <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="emailaddress">Email :</label>
-                    <input class="form-control" type="email" id="editemailaddress" required="">
-                  </div>
-
-                  <div>
-                    <label for="plant">Plant :</label>
-                    <div>
-                    <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="editplant" aria-label="Default select example" placeholder="Enter your plant">
-                        <?php
-                        foreach ($getplant as $plant) {
-                        ?>
-                          <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-                </form>
-
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditPermissionWeb">Save</a>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!-- addPermissionWeb Modal-->
           <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Menu Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i> Add Menu Web</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
-                </div>    
+                </div>
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Menu Name :</label>
-                    <input class="form-control" type="text" id="addPermissionwebname" required="" placeholder="Enter New Permission">
+                    <input class="form-control" type="text" id="addmenuwebname" name="addmenuwebname" required="" placeholder="Enter New Menu">
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Permission :</label>
-                    <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
-                        <!-- <option>Please select plant</option> -->
-                        <?php
-                        foreach ($getplant as $plant) {
-                        ?>
-                          <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
+                    <label for="password">Submenu Name :</label>
+                    <input class="form-control" type="text" id="addsubmenuwebname" name="addsubmenuwebname" required="" placeholder="Enter New Submenu">
                   </div>
+
+                  <div class="form-group">
+                    <label for="password">Method :</label>
+                    <input class="form-control" type="text" id="addmenupath" name="addmenupath" required="" placeholder="Enter path of menu">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="password">icon name :</label>
+                    <input class="form-control" type="text" id="addmenuicon" name="addmenuicon" required="" placeholder="Enter icon name of menu">
+                  </div>
+
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddPermissionWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
                 </div>
               </div>
             </div>
           </div>
-          <!-- DetailPermissionWeb Modal-->
-          <div class="modal fade" id="detailpermissionweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+          <!-- EditPermissionWeb Modal-->
+          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Detail Permission Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Menu Web</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
-                </div>    
+                </div>
+
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Employee Code :</label>
-                    <input class="form-control" type="text" id="addempcode" required="" placeholder="Enter your employee code">
+                    <label for="NameMenuWeb">Menu Name :</label>
+                    <input class="form-control" type="text" id="editMenuName" name="editMenuName" >
+                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
                   </div>
 
                   <div class="form-group">
-                    <label for="fristname">First Name :</label>
-                    <input class="form-control" type="text" id="addfirstname" required="" placeholder="Enter your frist name">
+                    <label for="NameSubMenuWeb">Submenu Name :</label>
+                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
+                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
                   </div>
 
-                  <div class="form-group">
-                    <label for="lastname">Last Name :</label>
-                    <input class="form-control" type="text" required="" id="addlastname" placeholder="Enter your last name">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="username">Group Permission :</label>
-                    <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgrouppermission" placeholder="Enter your plant">
-                        <!-- <option>Please select group permission</option> -->
-                        <?php
-                        foreach ($groupper as $groupPer) {
-                        ?>
-                          <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="emailaddress">Email :</label>
-                    <input class="form-control" type="email" id="addemail" required="" placeholder="Enter your email">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Password :</label>
-                    <input class="form-control" type="password" id="addpassword" required="" placeholder="Enter your password">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password">Plant :</label>
-                    <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
-                        <!-- <option>Please select plant</option> -->
-                        <?php
-                        foreach ($getplant as $plant) {
-                        ?>
-                          <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAdd">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
                 </div>
               </div>
             </div>

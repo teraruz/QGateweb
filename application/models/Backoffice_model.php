@@ -340,6 +340,32 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
+	public function editStatusPermissionDetailWeb($detailid)
+	{
+		$sql = "SELECT * FROM sys_permission_detail_web WHERE spd_id = '{$detailid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["spd_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_permission_detail_web SET spd_status = 0 WHERE  spd_id = '{$detailid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_permission_detail_web SET spd_status = 1 WHERE  spd_id = '{$detailid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
 	public function GetDataEditPermissionweb($spg_id)
 	{
 		$sql = "SELECT spg_id, spg_name FROM sys_permission_group_web WHERE spg_id = '{$spg_id}'";
@@ -349,7 +375,7 @@ class Backoffice_model extends CI_Model
 	}
 	public function editPermissionDetailWeb($permissionwebeditnameconvert, $value, $empcodeadmin)
 	{
-		$sql = "select * from sys_permission_detail_web WHERE spd_id = '{$permissionwebeditnameconvert}' and ssm_id = '{$value}'";
+		$sql = "SELECT * from sys_permission_detail_web WHERE spd_id = '{$permissionwebeditnameconvert}' AND ssm_id = '{$value}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["spd_status"];
@@ -394,7 +420,7 @@ class Backoffice_model extends CI_Model
 	}
 	public function detailGroupPermission($id)
 	{
-		$sql = "SELECT DISTINCT sys_menu_web.sm_id, sys_menu_web.sm_name_menu,sys_submenu_web.ssm_id,sys_submenu_web.ssm_name_submenu,sys_submenu_web.ssm_status
+		$sql = "SELECT DISTINCT sys_menu_web.sm_id, sys_menu_web.sm_name_menu,sys_submenu_web.ssm_id,sys_submenu_web.ssm_name_submenu,sys_submenu_web.ssm_status,sys_permission_detail_web.spd_id,spd_status
 		FROM sys_permission_detail_web 
 		INNER JOIN sys_submenu_web ON sys_permission_detail_web.ssm_id = sys_submenu_web.ssm_id
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
@@ -404,6 +430,7 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+		// print_r($res);
 	}
 
 	public function getTableDetailPermission()
@@ -434,9 +461,9 @@ class Backoffice_model extends CI_Model
 		$sql = "SELECT * FROM sys_permission_detail_web WHERE spg_id = '{$id}' AND ssm_id = '{$dropdowneditsubmenu}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		if($row){
+		if ($row) {
 			return "false";
-		}else{
+		} else {
 			return "true";
 		}
 	}
@@ -447,9 +474,9 @@ class Backoffice_model extends CI_Model
 		(spg_id,ssm_id,create_by,create_date)
 		VALUES('{$id}','{$dropdowneditsubmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
 	}
@@ -458,14 +485,161 @@ class Backoffice_model extends CI_Model
 	// ***************************** MANAGE MENU WEB *****************************************
 	public function getTableManageMenuweb()
 	{
-		$sql = "SELECT * FROM sys_submenu_web
+		$sql = "SELECT ssm_id , sys_menu_web.sm_id , sm_name_menu , ssm_name_submenu ,ssm_status
+		FROM sys_submenu_web
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		if ($row) {
-			return "false";
-		} else {
+		return $row;
+	}
+
+	public function checkMenu($menuname)
+	{
+		$sql = "SELECT * FROM sys_menu_web WHERE sm_name_menu = '{$menuname}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if($row){
 			return "true";
+		}else{
+			return "false";
 		}
 	}
+
+	public function addMenuWeb($menuname,$empcodeadmin,$icon)
+	{
+		$sql = "INSERT INTO sys_menu_web 
+		(sm_name_menu,sm_create_by,sm_create_date,sm_name_icon)
+		VALUES ('{$menuname}','{$empcodeadmin}',CURRENT_TIMESTAMP, '{$icon}')";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else{
+			return "false";
+		}
+
+	}
+
+	public function addSubMenuWeb($menunameconvertID,$submenuname,$empcodeadmin,$path)
+	{
+		$sql = "INSERT INTO sys_submenu_web 
+		(sm_id,ssm_name_submenu,ssm_create_by,ssm_create_date,ssm_method)
+		VALUES ('{$menunameconvertID}','{$submenuname}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$path}')";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else{
+			return "false";
+		}
+
+	}
+
+	public function editStatusMenuWeb($submenuid)
+	{
+		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_id = '{$submenuid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["ssm_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_submenu_web SET ssm_status = 0 WHERE  ssm_id = '{$submenuid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_submenu_web SET ssm_status = 1 WHERE  ssm_id = '{$submenuid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function GetDataEditMenuWeb($id)
+	{
+		$sql = "SELECT sm_name_menu , ssm_name_submenu ,sys_menu_web.sm_id ,sys_submenu_web.ssm_id
+		FROM sys_submenu_web 
+		INNER JOIN sys_menu_web ON sys_menu_web.sm_id = sys_submenu_web.sm_id
+		WHERE ssm_id = '{$id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin)
+	{
+		$sql = "UPDATE sys_menu_web 
+		SET sm_name_menu = '{$menuname}' ssm_update_by = '{$empcodeadmin}' ssm_update_date = CURRENT_TIMESTAMP
+		WHERE sm_id = '{$IDeditMenuName}'";
+		$res =  $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+
+	}
+	public function editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin)
+	{
+		$sql = "UPDATE sys_submenu_web
+		SET ssm_name_submenu = '{$submenuname}' sm_update_by = '{$empcodeadmin}' sm_update_date = CURRENT_TIMESTAMP
+		WHERE ssm_id = '{$IDeditSubMenuName}'";
+		$res =  $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+
+	}
+// *************************************************** Manage User App ***************************************************
+	public function getTableManageUserApp()
+	{
+		$sql = "SELECT * FROM sys_staff_app 
+		INNER JOIN sys_permission_group_app ON sys_permission_group_app.spg_id =  sys_staff_app.spg_id";
+		$res =  $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function getTableGroupPermissionApp()
+	{
+		$sql = "SELECT * FROM sys_permission_group_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusUserApp($userappid)
+	{
+		$sql = "SELECT * FROM sys_staff_web  WHERE ssm_id = '{$userappid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["ss_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_staff_web SET ss_status = 0 WHERE  ss_id = '{$userappid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_staff_web SET ss_status = 1 WHERE  ss_id = '{$userappid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+	
+	
 }

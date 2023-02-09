@@ -46,9 +46,7 @@ class manage extends CI_Controller
 	// ************************* Homepage *************************************
 	public function Homepage()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		// $empcode = $this->session->userdata("empcode");
+		$setTitle = "QG | Homepage";
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -61,7 +59,7 @@ class manage extends CI_Controller
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
-		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write('page_title', $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Homepage/view_home.php');
@@ -79,23 +77,9 @@ class manage extends CI_Controller
 	public function EditProFile()
 	{
 
+		$setTitle = "QG | Profile";
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
-
-
-
-
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
-		// $data["id"] = $this->session->userdata("id");
-		// $data["empcode"] = $this->session->userdata("empcode");
-		// $data["email"] = $this->session->userdata("email");
-		// $data["fname"] = $this->session->userdata("fname");
-		// $data["lname"] = $this->session->userdata("lname");
-		// $data["pic"] = $this->session->userdata("pic");
-		// $data["plant"] = $this->session->userdata("plant");
-		// $data["getplant"] = $this->backoffice_model->modelGetPhase();
-		// $data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
@@ -110,10 +94,7 @@ class manage extends CI_Controller
 		$data["plant"] = $data["mpa_name"];
 		$data["getplant"] = $this->backoffice_model->modelGetPhase();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
-
-
-
-
+		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/view_EditProfile.php', $data);
@@ -154,9 +135,7 @@ class manage extends CI_Controller
 	}
 	public function ChangePassword()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $data["empcode"] = $this->session->userdata("empcode");
-		// $empcode = $this->session->userdata("empcode");
+		$setTitle = "QG | Change Password";
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -169,6 +148,7 @@ class manage extends CI_Controller
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Setting/view_ChangePassword.php');
@@ -179,16 +159,7 @@ class manage extends CI_Controller
 	// ************************* Administartor WEB *************************************
 	public function ManageUserWeb()
 	{
-		$setTitle = "Quality System | Management User Web";
-		// $empcode = $this->session->userdata("empcode");
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $data["id"] = $this->session->userdata("id");
-		// $data["empcode"] = $this->session->userdata("empcode");
-		// $data["email"] = $this->session->userdata("email");
-		// $data["fname"] = $this->session->userdata("fname");
-		// $data["lname"] = $this->session->userdata("lname");
-		// $data["pic"] = $this->session->userdata("pic");
-		// $data["plant"] = $this->session->userdata("plant");
+		$setTitle = "QG | Management User Web";
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -280,7 +251,7 @@ class manage extends CI_Controller
 	//  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public function ManagePermisionWeb()
 	{
-		$setTitle = "Quality System | Management Group Permission";
+		$setTitle = "QG | Management Group Permission";
 		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
@@ -303,7 +274,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $menu);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManagePermisionWeb.php',$data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManagePermisionWeb.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -339,22 +310,19 @@ class manage extends CI_Controller
 		$editnameper = $_POST["editPermissionwebname"];
 		$dropdowneditsubmenu = $_POST["dropdowneditsubmenuper"];
 
-		$updatenameper =  $this->backoffice_model->modelUpdateNamePermission($editnameper,$id);
+		$updatenameper =  $this->backoffice_model->modelUpdateNamePermission($editnameper, $id);
 
-		if($updatenameper == "true"){
-			$checkInsertEditsubper = $this->backoffice_model->modelcheckInsertdataEditPer($id,$dropdowneditsubmenu);
+		if ($updatenameper == "true") {
+			$checkInsertEditsubper = $this->backoffice_model->modelcheckInsertdataEditPer($id, $dropdowneditsubmenu);
 
-			if($checkInsertEditsubper == "true"){
+			if ($checkInsertEditsubper == "true") {
 
-				$InsertSubPer =   $this->backoffice_model->modelInsertdataEditper($id,$dropdowneditsubmenu,$empcodeadmin);
+				$InsertSubPer =   $this->backoffice_model->modelInsertdataEditper($id, $dropdowneditsubmenu, $empcodeadmin);
 				echo $InsertSubPer;
-			}else{
+			} else {
 				return "false";
 			}
-			
-
 		}
-
 	}
 	public function loadSubMenu()
 	{
@@ -367,6 +335,13 @@ class manage extends CI_Controller
 	{
 		$Perid = $_GET["spg_id"];
 		$res = $this->backoffice_model->editStatusPermissionWeb($Perid);
+		echo json_encode($res);
+	}
+
+	public function 	swiftStatusPermissionDetailWeb()
+	{
+		$detailid = $_GET["spd_id"];
+		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid);
 		echo json_encode($res);
 	}
 	// ดึง menu และ submenu แสดงใน EditPermissionweb
@@ -382,18 +357,22 @@ class manage extends CI_Controller
 		$result = $this->backoffice_model->GetIDMenuEditPermissionweb($datadropdownmenuID);
 		echo $result;
 	}
-	public function getDetailGroup(){
+	public function getDetailGroup()
+	{
 		$id = $_GET["spg_id"];
 		// $id ="22";
 		$res = $this->backoffice_model->detailGroupPermission($id);
-		echo json_encode($res) ;
+		echo json_encode($res);
+
+		// print_r($res);
 	}
 
-	//  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+	//  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ MANAGE MENU WEB ++++++++++++++++++++++++++++++++++++
 	public function ManageMenuWeb()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
+		$setTitle = "QG | Management Menu Web";
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -407,18 +386,86 @@ class manage extends CI_Controller
 		$data["plant"] = $data["mpa_name"];
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$data["tableMenuWeb"] = $this->backoffice_model->getTableManageMenuweb();
+		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManageMenuWeb.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminWeb/view_ManageMenuWeb.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+
+	public function AddManageMenuWeb()
+	{
+
+		$menuname = $_POST["addmenuwebname"];
+		$submenuname = $_POST["addsubmenuwebname"];
+		$path = $_POST["addmenupath"];
+		$icon = $_POST["addmenuicon"];
+		$empcodeadmin = $this->session->userdata("empcode");
+
+
+
+		$checkmenu = $this->backoffice_model->checkMenu($menuname);
+
+		if ($checkmenu == "false") {
+			$addmenuweb =  $this->backoffice_model->addMenuWeb($menuname, $empcodeadmin, $icon);
+
+			$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
+
+			if ($addmenuweb == "true") {
+				$addsubmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
+				echo $addsubmenu;
+
+			} else {
+				echo "false";
+			}
+		} else if ($checkmenu == "true") {
+
+			$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
+			$addSubmenuwitholdmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
+			echo $addSubmenuwitholdmenu;
+
+		} else {
+			echo "false";
+		}
+	}
+
+	public function swiftStatusMenuWeb()
+	{
+		$submenuid = $_GET["ssm_id"];
+		$res = $this->backoffice_model->editStatusMenuWeb($submenuid);
+		echo json_encode($res);
+	}
+
+	public function getDataManageMenuWeb()
+	{
+		$id = $_GET["ssm_id"];
+		$res = $this->backoffice_model->GetDataEditMenuWeb($id);
+		echo json_encode($res);
+	}
+
+	public function EditManageMenuWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$menuname = $_POST["editMenuName"];
+		$submenuname = $_POST["editSubMenuName"];
+		$IDeditMenuName = $_POST["IDeditMenuName"];
+		$IDeditSubMenuName = $_POST["IDeditSubMenuName"];
+
+		$reseditmenuname = $this->backoffice_model->editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin);		
+		if($reseditmenuname == "true"){
+			$reseditsubmenuname = $this->backoffice_model->editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin);
+			echo $reseditsubmenuname;
+		}	else{
+			echo "false";
+		}
+	}
+
+
 	// ************************* Administartor APP *************************************
 
 	public function ManageUserApp()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -430,12 +477,21 @@ class manage extends CI_Controller
 		$data["lname"] = $data["ss_emp_lname"];
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
+		$data["tableUserApp"] = $this->backoffice_model->getTableManageUserApp();
+		$data["groupperapp"] = $this->backoffice_model->getTableGroupPermissionApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageUserApp.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusUserApp()
+	{
+		$userappid = $_GET["ss_id"];
+		$res = $this->backoffice_model->editStatusUserApp($userappid);
+		echo json_encode($res);
 	}
 	public function ManagePermisionApp()
 	{
