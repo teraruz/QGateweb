@@ -585,6 +585,140 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	// ************************* Control Check Type *************************************
+	public function CheckType()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlCheckType.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control Check Status *************************************
+	public function CheckStatus()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlCheckStatus.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control Inspection Type *************************************
+	public function InspectionType()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlInspectionType.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control DMC Data *************************************
+	public function  DMCData()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDMCData.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control DMC Type *************************************
+	public function  DMCType()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDMCType.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control FA Code *************************************
+	public function  FACode()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlFACode.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control Work Shift *************************************
+	public function  WorkShift()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlWorkShift.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control Defect *************************************
+	public function  Defect()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDefect.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control Detail *************************************
+	public function Detail()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDetail.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
 
 	// ************************* Management  *************************************
 	public function QgateCheckData()
