@@ -14,7 +14,6 @@
                 <tr>
                   <th style="text-align: center;">NO.</th>
                   <th style="text-align: center;">Menu Name</th>
-                  <th style="text-align: center;">Submenu Name</th>
                   <th style="text-align: center;">status</th>
                   <th style="text-align: center;">Action</th>
                 </tr>
