@@ -700,7 +700,7 @@
         var checkaddmenupath = document.getElementById("addmenupath")
         var checkaddmenuicon = document.getElementById("addmenuicon")
 
-        if (checkaddmenuwebname.value == "" || checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon =="" ) {
+        if (checkaddmenuwebname.value == "" || checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon.value =="" ) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -803,6 +803,55 @@
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusUserApp?ss_id=" + ss_id,
         })
+    };
+
+    function SaveAddUserApp() {
+        var addempcodeapp = $('#addempcodeapp').val();
+        var addnameapp = $('#addnameapp').val();
+        var addgrouppermissionapp = $('#addgrouppermissionapp').val();
+        var addpathpicapp = $("#addpathpicapp").val();
+
+        var checkaddempcodeapp = document.getElementById("addempcodeapp");
+        var checkaddnameapp = document.getElementById("addnameapp")
+        var checkaddgrouppermissionapp = document.getElementById("addgrouppermissionapp")
+        var checkaddpathpicapp = document.getElementById("addpathpicapp")
+
+        if (checkaddempcodeapp.value == "" || checkaddnameapp.value == "" || checkaddgrouppermissionapp.value == "" || checkaddpathpicapp.value =="" ) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddManageUserApp",
+                data: {
+                    addempcodeapp: addempcodeapp,
+                    addnameapp: addnameapp, 
+                    addgrouppermissionapp : addgrouppermissionapp,
+                    addpathpicapp : addpathpicapp
+                }
+            })
+            path.done(function(rs) {
+                alert(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add User App.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add User App',
+                    })
+                }
+            })
+        }
     };
 
 

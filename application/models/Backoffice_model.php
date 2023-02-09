@@ -498,39 +498,37 @@ class Backoffice_model extends CI_Model
 		$sql = "SELECT * FROM sys_menu_web WHERE sm_name_menu = '{$menuname}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		if($row){
+		if ($row) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
 	}
 
-	public function addMenuWeb($menuname,$empcodeadmin,$icon)
+	public function addMenuWeb($menuname, $empcodeadmin, $icon)
 	{
 		$sql = "INSERT INTO sys_menu_web 
 		(sm_name_menu,sm_create_by,sm_create_date,sm_name_icon)
 		VALUES ('{$menuname}','{$empcodeadmin}',CURRENT_TIMESTAMP, '{$icon}')";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
-
 	}
 
-	public function addSubMenuWeb($menunameconvertID,$submenuname,$empcodeadmin,$path)
+	public function addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path)
 	{
 		$sql = "INSERT INTO sys_submenu_web 
 		(sm_id,ssm_name_submenu,ssm_create_by,ssm_create_date,ssm_method)
 		VALUES ('{$menunameconvertID}','{$submenuname}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$path}')";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
-
 	}
 
 	public function editStatusMenuWeb($submenuid)
@@ -582,7 +580,6 @@ class Backoffice_model extends CI_Model
 		} else {
 			return "false";
 		}
-
 	}
 	public function editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin)
 	{
@@ -595,9 +592,8 @@ class Backoffice_model extends CI_Model
 		} else {
 			return "false";
 		}
-
 	}
-// *************************************************** Manage User App ***************************************************
+	// *************************************************** Manage User App ***************************************************
 	public function getTableManageUserApp()
 	{
 		$sql = "SELECT * FROM sys_staff_app 
@@ -616,12 +612,12 @@ class Backoffice_model extends CI_Model
 
 	public function editStatusUserApp($userappid)
 	{
-		$sql = "SELECT * FROM sys_staff_web  WHERE ssm_id = '{$userappid}'";
+		$sql = "SELECT * FROM sys_staff_app  WHERE ss_id = '{$userappid}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["ss_status"];
 		if ($result == 1) {
-			$sql = "UPDATE sys_staff_web SET ss_status = 0 WHERE  ss_id = '{$userappid}'";
+			$sql = "UPDATE sys_staff_app SET ss_status = 0 WHERE  ss_id = '{$userappid}'";
 			$res = $this->db->query($sql);
 			if ($res) {
 				return true;
@@ -629,7 +625,7 @@ class Backoffice_model extends CI_Model
 				return false;
 			}
 		} else if ($result == 0) {
-			$sql = "UPDATE sys_staff_web SET ss_status = 1 WHERE  ss_id = '{$userappid}'";
+			$sql = "UPDATE sys_staff_app SET ss_status = 1 WHERE  ss_id = '{$userappid}'";
 			$res = $this->db->query($sql);
 			if ($res) {
 				return true;
@@ -640,6 +636,16 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-	
-	
+
+	public function addManageUserApp($addempcodeapp,$addnameapp,$addgrouppermissionapp,$addpathpicapp,$empcodeadmin){
+		$sql = "INSERT INTO sys_staff_app 
+		(ss_emp_code,ss_emp_name,spg_id,ss_pic,ss_create_by,ss_create_date)
+		VALUES ('{$addempcodeapp}','{$addnameapp}','{$addgrouppermissionapp}','{$addpathpicapp}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
 }
