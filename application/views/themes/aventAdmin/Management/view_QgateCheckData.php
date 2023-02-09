@@ -11,11 +11,11 @@
                                 <img src="<?php echo base_url() ?>assets/images/dashboard/Group126@2x.png"
                                     class="gradient-corona-img img-fluid" alt="">
                             </div>
+                            
                             <div class="row col-sm-5 col-xl-8 p-0  align-items-center">
-
                                 <div class="mb row col-md-4">
                                     <h4 class="mb-1 mb-sm-0">Plant :</h4>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-3" style="border-radius:6px">
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Select Plant...</option>
                                             <option value="1">TBKK Thailand Phase 8</option>
