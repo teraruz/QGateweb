@@ -446,14 +446,15 @@ class manage extends CI_Controller
 
 	public function EditManageMenuWeb()
 	{
+		$empcodeadmin = $this->session->userdata("empcode");
 		$menuname = $_POST["editMenuName"];
 		$submenuname = $_POST["editSubMenuName"];
 		$IDeditMenuName = $_POST["IDeditMenuName"];
 		$IDeditSubMenuName = $_POST["IDeditSubMenuName"];
 
-		$reseditmenuname = $this->backoffice_model->editNameMenuWeb($IDeditMenuName,	$menuname);		
+		$reseditmenuname = $this->backoffice_model->editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin);		
 		if($reseditmenuname == "true"){
-			$reseditsubmenuname = $this->backoffice_model->editNameSubMenuWeb($IDeditSubMenuName,	$submenuname);
+			$reseditsubmenuname = $this->backoffice_model->editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin);
 			echo $reseditsubmenuname;
 		}	else{
 			echo "false";
@@ -465,8 +466,6 @@ class manage extends CI_Controller
 
 	public function ManageUserApp()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -478,12 +477,21 @@ class manage extends CI_Controller
 		$data["lname"] = $data["ss_emp_lname"];
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
+		$data["tableUserApp"] = $this->backoffice_model->getTableManageUserApp();
+		$data["groupperapp"] = $this->backoffice_model->getTableGroupPermissionApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageUserApp.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusUserApp()
+	{
+		$userappid = $_GET["ss_id"];
+		$res = $this->backoffice_model->editStatusUserApp($userappid);
+		echo json_encode($res);
 	}
 	public function ManagePermisionApp()
 	{

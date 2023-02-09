@@ -790,7 +790,22 @@
     }
     // *********************************************** Manage User Web ***********************************************
 
+    $("#btnSaveAddUserApp").click(function() {
+        SaveAddUserApp()
+    });
     
+    $("#btnSaveEditUserApp").click(function() {
+        SaveEditUserApp()
+    });
+
+    function statusManageUserApp(ss_id){
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusUserApp?ss_id=" + ss_id,
+        })
+    };
+
+
 
 
 

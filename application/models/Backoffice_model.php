@@ -571,10 +571,10 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editNameMenuWeb($IDeditMenuName,	$menuname)
+	public function editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_menu_web 
-		SET sm_name_menu = '{$menuname}' 
+		SET sm_name_menu = '{$menuname}' ssm_update_by = '{$empcodeadmin}' ssm_update_date = CURRENT_TIMESTAMP
 		WHERE sm_id = '{$IDeditMenuName}'";
 		$res =  $this->db->query($sql);
 		if ($res) {
@@ -584,10 +584,10 @@ class Backoffice_model extends CI_Model
 		}
 
 	}
-	public function editNameSubMenuWeb($IDeditSubMenuName,	$submenuname)
+	public function editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_submenu_web
-		SET ssm_name_submenu = '{$submenuname}' 
+		SET ssm_name_submenu = '{$submenuname}' sm_update_by = '{$empcodeadmin}' sm_update_date = CURRENT_TIMESTAMP
 		WHERE ssm_id = '{$IDeditSubMenuName}'";
 		$res =  $this->db->query($sql);
 		if ($res) {
@@ -597,4 +597,49 @@ class Backoffice_model extends CI_Model
 		}
 
 	}
+// *************************************************** Manage User App ***************************************************
+	public function getTableManageUserApp()
+	{
+		$sql = "SELECT * FROM sys_staff_app 
+		INNER JOIN sys_permission_group_app ON sys_permission_group_app.spg_id =  sys_staff_app.spg_id";
+		$res =  $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function getTableGroupPermissionApp()
+	{
+		$sql = "SELECT * FROM sys_permission_group_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusUserApp($userappid)
+	{
+		$sql = "SELECT * FROM sys_staff_web  WHERE ssm_id = '{$userappid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["ss_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_staff_web SET ss_status = 0 WHERE  ss_id = '{$userappid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_staff_web SET ss_status = 1 WHERE  ss_id = '{$userappid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+	
+	
 }
