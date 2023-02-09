@@ -5,7 +5,7 @@
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
           <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal
-            data-target=#adduser><i class="fas fa-user-plus fa-sm"></i> Add User</a>
+            data-target=#adduserapp><i class="fas fa-user-plus fa-sm"></i> Add User</a>
         </div>
 
         <div class="card-body">
@@ -51,7 +51,7 @@
 
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#edituser\"  onclick='getDataEditUserWeb(" . $UserApp["ss_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#edituserapp\"  onclick='getDataManageUserApp(" . $UserApp["ss_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -65,12 +65,12 @@
 
           </div>
           <!---------------------------- Edit Modal------------------------------------>
-          <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          <div class="modal fade" id="edituserapp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit User</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit User App</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -79,12 +79,12 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Employee Code :</label>
-                    <input class="form-control" type="text" id="editempcode" required="" disabled>
+                    <input class="form-control" type="text" id="editempcodeuserapp" name="editempcodeuserapp" required="" disabled>
                   </div>
 
                   <div class="form-group">
                     <label for="fristname">Name :</label>
-                    <input class="form-control" type="text" id="editfirstname" required="">
+                    <input class="form-control" type="text" id="editnameuserapp" name="editnameuserapp" required="">
                   </div>
 
                   <div class="form-group">
@@ -92,7 +92,7 @@
                     <div>
                       <select class="form-select col-md-12"
                         style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
-                        aria-label="Default select example" id="editgroup">
+                        aria-label="Default select example" id="editgrouppermissionuserapp" name="">
 
                         <?php
                         foreach ($groupper as $groupPer) {
@@ -103,32 +103,24 @@
                     </div>
                   </div>
 
-                  <div>
-                    <label for="plant">Plant :</label>
-                    <div>
-                      <select class="form-select col-md-12"
-                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="editplant"
-                        aria-label="Default select example" placeholder="Enter your plant">
-                        <?php
-                        foreach ($getplant as $plant) {
-                          ?>
-                        <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
+                  <div class="form-group">
+                    <label for="pathpic">Path Picture :</label>
+                    <input class="form-control" type="text" id="editpathpicapp" name="editpathpicapp" required="" placeholder="Enter picture path">
                   </div>
+                </form>
+
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEdit">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditUserApp">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
           <!------------------------- addUser Modal ------------------------------------------->
-          <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          <div class="modal fade" id="adduserapp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -157,7 +149,6 @@
                       <select class="form-select col-md-12"
                         style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
                         aria-label="Default select example" id="addgrouppermissionapp" name ="addgrouppermissionapp">
-                        <!-- <option>Please select group permission</option> -->
                         <?php
                         foreach ($groupperapp as $groupperapp) {
                           ?>

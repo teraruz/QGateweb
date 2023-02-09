@@ -660,13 +660,13 @@
     $("#btnSaveAddMenuWeb").click(function() {
         SaveaddMenuWeb()
     });
-    
+
     $("#btnSaveEditMenuWeb").click(function() {
         SaveEditMenuWeb()
     });
 
 
-    function statusManageMenuWeb(ssm_id){
+    function statusManageMenuWeb(ssm_id) {
         var path = $.ajax({
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusMenuWeb?ssm_id=" + ssm_id,
@@ -700,7 +700,7 @@
         var checkaddmenupath = document.getElementById("addmenupath")
         var checkaddmenuicon = document.getElementById("addmenuicon")
 
-        if (checkaddmenuwebname.value == "" || checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon.value =="" ) {
+        if (checkaddmenuwebname.value == "" || checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -714,8 +714,8 @@
                 data: {
                     addmenuwebname: addmenuwebname,
                     addsubmenuwebname: addsubmenuwebname,
-                    addmenupath : addmenupath,
-                    addmenuicon : addmenuicon
+                    addmenupath: addmenupath,
+                    addmenuicon: addmenuicon
                 }
             })
             path.done(function(rs) {
@@ -788,20 +788,46 @@
             });
         }
     }
-    // *********************************************** Manage User Web ***********************************************
+    // *********************************************** Manage User App **************************************************
 
     $("#btnSaveAddUserApp").click(function() {
         SaveAddUserApp()
     });
-    
+
     $("#btnSaveEditUserApp").click(function() {
         SaveEditUserApp()
     });
 
-    function statusManageUserApp(ss_id){
+    function statusManageUserApp(ss_id) {
         var path = $.ajax({
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusUserApp?ss_id=" + ss_id,
+        })
+    };
+
+    function getDataManageUserApp(ss_id) {
+
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/getDataManageUserAppUser?ss_id=" + ss_id
+        })
+        path.done(function(rs) {
+            var data = JSON.parse(rs)
+            var tb = ""
+            var checked = ""
+            $("#editempcodeuserapp").val(data.getdataEdit[0]["ss_emp_code"]);
+            $("#editnameuserapp").val(data.getdataEdit[0]["ss_emp_name"]);
+            $("#editpathpicapp").val(data.getdataEdit[0]["ss_pic"]);
+            $.each( data.PermissionAll, function(key, value) {
+                alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
+            if(value["spg_name"] == data.getdataEdit[0]["spg_name"]){
+                checked = "selected"
+            }else{
+                checked = ""
+            }
+                tb += "<option value='"+ value["spg_id"] +"' " + checked +">"+ value["spg_name"] +"</option>"
+            })
+            $("#editgrouppermissionuserapp").html(tb);
         })
     };
 
@@ -816,7 +842,7 @@
         var checkaddgrouppermissionapp = document.getElementById("addgrouppermissionapp")
         var checkaddpathpicapp = document.getElementById("addpathpicapp")
 
-        if (checkaddempcodeapp.value == "" || checkaddnameapp.value == "" || checkaddgrouppermissionapp.value == "" || checkaddpathpicapp.value =="" ) {
+        if (checkaddempcodeapp.value == "" || checkaddnameapp.value == "" || checkaddgrouppermissionapp.value == "" || checkaddpathpicapp.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -829,9 +855,9 @@
                 url: "<?php echo base_url(); ?>Manage/AddManageUserApp",
                 data: {
                     addempcodeapp: addempcodeapp,
-                    addnameapp: addnameapp, 
-                    addgrouppermissionapp : addgrouppermissionapp,
-                    addpathpicapp : addpathpicapp
+                    addnameapp: addnameapp,
+                    addgrouppermissionapp: addgrouppermissionapp,
+                    addpathpicapp: addpathpicapp
                 }
             })
             path.done(function(rs) {
@@ -854,9 +880,54 @@
         }
     };
 
+    function SaveEditUserApp() {
 
+        var editMenuName = $("#editMenuName").val();
+        var editSubMenuName = $("#editSubMenuName").val();
+        var IDeditMenuName = $("#IDeditMenuName").val();
+        var IDeditSubMenuName = $("#IDeditSubMenuName").val();
 
+        var checkeditMenuName = document.getElementById("editMenuName");
+        var checkeditSubMenuName = document.getElementById("editSubMenuName");
 
-
-
+        if (checkeditMenuName.value == "" || checkeditSubMenuName.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+            });
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
+                data: {
+                    editMenuName: editMenuName,
+                    editSubMenuName: editSubMenuName,
+                    IDeditMenuName: IDeditMenuName,
+                    IDeditSubMenuName: IDeditSubMenuName
+                }
+            })
+            path.done(function(rs) {
+                if (rs == "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Menu is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Permission',
+                    })
+                }
+            });
+        }
+    }
 </script>

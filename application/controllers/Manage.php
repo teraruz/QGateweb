@@ -462,7 +462,8 @@ class manage extends CI_Controller
 	}
 
 
-	// ************************* Administartor APP *************************************
+	// ******************************** Administartor APP *******************************************
+	// ------------------------------- Manage User App -----------------------------------------
 
 	public function ManageUserApp()
 	{
@@ -503,7 +504,13 @@ class manage extends CI_Controller
 		echo $rsadduserapp;
 	}
 
-
+	public function getDataManageUserAppUser()
+	{
+		$ss_id = $_GET["ss_id"];
+		$res["getdataEdit"] = $this->backoffice_model->GetDataEditUserApp($ss_id);
+		$res["PermissionAll"] = $this->backoffice_model->getTableGroupPermissionApp();
+		 echo json_encode($res);
+	}
 
 	// ---------------------------------- Manage Permission App ----------------------------------------
 	public function ManagePermisionApp()

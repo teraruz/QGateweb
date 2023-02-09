@@ -637,15 +637,27 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function addManageUserApp($addempcodeapp,$addnameapp,$addgrouppermissionapp,$addpathpicapp,$empcodeadmin){
+	public function addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin)
+	{
 		$sql = "INSERT INTO sys_staff_app 
 		(ss_emp_code,ss_emp_name,spg_id,ss_pic,ss_create_by,ss_create_date)
 		VALUES ('{$addempcodeapp}','{$addnameapp}','{$addgrouppermissionapp}','{$addpathpicapp}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else {
+		} else {
 			return "false";
 		}
+	}
+
+	public function GetDataEditUserApp($ss_id)
+	{
+		$sql = "SELECT ss_emp_code, ss_emp_name, spg_name, ss_pic
+		FROM sys_staff_app
+		INNER JOIN sys_permission_group_app ON sys_staff_app.spg_id = sys_permission_group_app.spg_id
+		WHERE ss_id ='{$ss_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
 	}
 }
