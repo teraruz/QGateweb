@@ -462,6 +462,7 @@
             //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
             //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
             if (this.checked == true) {
+                console.log("sssssssssssssssss==>" , this.value)
                 // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
                 dataSubMenuId[key] = this.value
                 // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
@@ -476,6 +477,7 @@
                 confirmButtonColor: '#F7B267',
             })
         } else {
+            console.log("==>" , dataSubMenuId)
             var path = $.ajax({
                 method: "GET",
                 url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
@@ -936,4 +938,200 @@
             });
         }
     }
+
+
+    // ******************************************* PERMISSION APP **********************************************
+    
+    $("#btnSaveAddPermissionApp").click(function() {
+        addPermissionApp()
+    });
+    $("#btnSaveEditPermissionApp").click(function() {
+        SaveEditPermissionApp()
+    })
+
+
+
+    function statusPermissionApp(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionApp?spg_id=" + spg_id,
+        })
+    };
+
+
+    function addPermissionApp() {
+        var addPermissionappname = $('#addPermissionappname').val();
+        var dataMenuAppId = []
+        var checkaddPermissionappname = document.getElementById("addPermissionappname");
+        jQuery("input[name='checkboxmenuapp']").each(function(key, values) {
+            // setค่าให้เป็น input เพื่อมองว่า checkbox เป็น input โดย name ก็คือชื่อ  html checkbox ใน view 
+            //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
+            //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
+            if (this.checked == true) {
+                console.log("sssssssssssssssss==>" , this.value)
+                // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
+                dataMenuAppId[key] = this.value
+                // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
+
+            }
+        });
+        if (addPermissionappname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267',
+            })
+        } else {
+            console.log("==>" , dataMenuAppId)
+            var path = $.ajax({
+                method: "GET",
+                url: "<?php echo base_url(); ?>Manage/AddManagePermissionApp",
+                data: {
+                    addPermissionappname: addPermissionappname,
+                    dataMenuAppId: dataMenuAppId
+                }
+            })
+            path.done(function(rs) {
+                alert(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Permission.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Permission',
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataEditPermissionApp(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPermissionApp?spg_id=" + spg_id,
+        })
+        path.done(function(rs) {
+            $("#editPermissionappname").val(rs[0]["spg_name"]);
+            $("#idPerApp").val(rs[0]["spg_id"]);
+        })
+    };
+
+    function SaveEditPermissionApp() {
+        var idper = $("#idPerApp").val();
+        var editPermissionappname = $("#editPermissionappname").val();
+        var dropdowneditmenu = $("#dropdowneditmenu").val();
+        
+        var checkeditPermissionappname = document.getElementById("editPermissionappname");
+        var checkdropdowneditmenu = document.getElementById("dropdowneditmenu");
+
+        if (checkeditPermissionappname.value == "" || checkdropdowneditmenu.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+            });
+        } else {
+            alert(dropdowneditmenu)
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManagePermissionApp",
+                data: {
+                    idper: idper,
+                    editPermissionappname: editPermissionappname,
+                    dropdowneditmenu: dropdowneditmenu
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                console.log(rs)
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Permission is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Permission',
+                    })
+                }
+            });
+        }
+    }
+
+// ---------------------------------------------- Ajax การโชว์ tableinfo App ------------------------------------
+
+    function GetDetailApp(rs) {
+        // alert(rs)
+        console.log = ("data ==== > ", rs)
+        var tb = ""
+        var j = 1
+        var i = 0
+
+        $.each(rs, function(key, value2) {
+            tb += "<tr><td>" + parseInt(i + 1) + "</td>"
+            tb += "<td>" + value2["sm_menu"] + "</td>"
+            if (value2["spd_status"] == "1") {
+                tb += "<td>"
+                tb += "<div class=\"custom-switch text-center\" >"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "' checked onclick='statusPermissionDetailApp(" + value2["spd_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetailinfo" + j + "' ></label>"
+                tb += "</div>"
+                tb += "</td>"
+            } else {
+                tb += "<td>"
+                tb += "<div class=\"custom-switch text-center\" >"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfo" + j + "'  id='statusdetailinfo" + j + "'  onclick='statusPermissionDetailApp(" + value2["spd_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetailinfo" + j + "' ></label>"
+                tb += "</div>"
+                tb += "</td>"
+            }
+            tb += "</tr>"
+            j++
+            i++
+        })
+
+        $("#tbmenuapp").html(tb)
+    }
+
+    function detailpergroupapp(spg_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDetailGroupApp?spg_id=" + spg_id,
+        })
+        path.done(function(rs) {
+            GetDetailApp(rs);
+            $("#bodyappshow").show("fast")
+        })
+
+    };
+
+    function statusPermissionDetailApp(spd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionDetailApp?spd_id=" + spd_id,
+        })
+       
+    };
+
+
+
+    
 </script>

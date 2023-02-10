@@ -289,13 +289,14 @@ class manage extends CI_Controller
 			$permissionwebnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_web", "spg_name = '$permissionwebname'");
 			if ($rsaddnameperweb == "true") {
 				foreach ($dataSubMenuId as $key => $value) {
-					if ($value == '0') {
-						return false;
+					if ($value == " " || empty($value)) {
+						// return "false";
 					} else {
 						$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailWeb($permissionwebnameconvert, $value, $empcodeadmin);
-						echo $rsaddpermissiondetail;
+					
 					}
 				}
+				echo $rsaddpermissiondetail;
 			} else {
 				echo  "false";
 			}
@@ -526,8 +527,6 @@ class manage extends CI_Controller
 	// ---------------------------------- Manage Permission App ----------------------------------------
 	public function ManagePermisionApp()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -539,6 +538,9 @@ class manage extends CI_Controller
 		$data["lname"] = $data["ss_emp_lname"];
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
+		$data["getmenu"] = $this->backoffice_model->modelGetMenuApp();
+		$data["tabledetail"] = $this->backoffice_model->getTableDetailPermissionApp();
+		$data["tablePermissionApp"] = $this->backoffice_model->getTableManagePermissionApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
@@ -546,6 +548,88 @@ class manage extends CI_Controller
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+	public function swiftStatusPermissionApp()
+	{
+		$PeridApp = $_GET["spg_id"];
+		$res = $this->backoffice_model->editStatusPermissionApp($PeridApp);
+		echo json_encode($res);
+	}
+
+	public function AddManagePermissionApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addPermissionappname = $_GET["addPermissionappname"];
+		$dataMenuAppId = $_GET["dataMenuAppId"];
+		$rscheckaddnameapp = $this->backoffice_model->checkAddNamePermissionApp($addPermissionappname);
+		if ($rscheckaddnameapp == "true") {
+			$rsaddnameperapp = $this->backoffice_model->insertPermissionApp($addPermissionappname, $empcodeadmin);
+			$permissionappnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_app", "spg_name = '$addPermissionappname'");
+			if ($rsaddnameperapp == "true") {
+				foreach ($dataMenuAppId as $key => $value) {
+					if ($value == " " || empty($value)) {
+						// return "false";
+					} else {
+						$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailApp($permissionappnameconvert, $value, $empcodeadmin);
+					
+					}
+				}
+				echo $rsaddpermissiondetail;
+			} else {
+				echo  "false";
+			}
+		} else {
+			echo "false";
+		}
+	}
+	public function getDetailGroupApp()
+	{
+		$id = $_GET["spg_id"];
+		$res = $this->backoffice_model->detailGroupPermissionApp($id);
+		echo json_encode($res);
+
+	}
+
+	public function 	swiftStatusPermissionDetailApp()
+	{
+		$detailid = $_GET["spd_id"];
+		$res = $this->backoffice_model->editStatusPermissionDetailApp($detailid);
+		echo json_encode($res);
+	}
+
+	public function getDataEditPermissionApp()
+	{
+		$spg_id = $_GET["spg_id"];
+		$res = $this->backoffice_model->GetDataEditPermissionApp($spg_id);
+		echo json_encode($res);
+	}
+
+	public function EditManagePermissionApp()
+	{
+
+		$id = $_REQUEST["idper"];
+		$editnameper = $_REQUEST["editPermissionappname"];
+		$dropdowneditmenu = $_REQUEST["dropdowneditmenu"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		// echo $dropdowneditmenu;
+
+		$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper,$id);
+
+		if ($updatenameper == "true") {
+			
+			$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id,$dropdowneditmenu);
+			// echo $checkInsertEditper;
+			if ($checkInsertEditper == "true") {
+				$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
+				echo $InsertPer;
+			} else {
+				echo "false";
+			}
+		} else {
+			echo "false";
+		}
+	}
+
+		// --------------------------------------------- Manage Menu App ------------------------------------------
 
 	public function ManageMenuApp()
 	{

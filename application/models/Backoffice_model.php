@@ -675,4 +675,185 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+
+
+	// *************************************************** Manage Permission App ***************************************************
+
+	public function getTableManagePermissionApp()
+	{
+		$sql = "SELECT spg_id, spg_name, spg_status FROM  sys_permission_group_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function modelGetMenuApp()
+	{
+		$sql = "SELECT * FROM  sys_menu_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusPermissionApp($PeridApp)
+	{
+		$sql = "select * from sys_permission_group_app WHERE spg_id = '{$PeridApp}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["spg_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_permission_group_app SET spg_status = 0 WHERE  spg_id = '{$PeridApp}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_permission_group_app SET spg_status = 1 WHERE  spg_id = '{$PeridApp}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function checkAddNamePermissionApp($addPermissionappname)
+	{ //ถ้าquery แล้วมีอยู่ใน DB Return false ไม่ให้Add
+		$sql = "SELECT * FROM sys_permission_group_app WHERE spg_name = '{$addPermissionappname}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if (empty($row)) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function insertPermissionApp($addPermissionappname, $empcodeadmin)
+	{
+		$sql = "INSERT INTO sys_permission_group_app(spg_name, spg_create_by, spg_create_date)
+		VALUES ('{$addPermissionappname}', '{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function insertPermissionDetailApp($permissionwebnameconvert, $value, $empcodeadmin)
+	{
+		$sql = "INSERT INTO sys_permission_detail_app (spg_id,sm_id,spd_create_by,spd_create_date)
+		VALUES ('{$permissionwebnameconvert}','{$value}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function detailGroupPermissionApp($id)
+	{
+		$sql = "SELECT DISTINCT sys_permission_detail_app.sm_id,sys_menu_app.sm_menu, spd_id, spd_status
+		FROM sys_permission_detail_app
+		INNER JOIN sys_menu_app ON sys_permission_detail_app.sm_id = sys_menu_app.sm_id
+		INNER JOIN sys_permission_group_app ON sys_permission_group_app.spg_id = sys_permission_detail_app.spg_id
+		WHERE sys_permission_group_app.spg_id = '{$id}'
+		ORDER BY sys_permission_detail_app.spd_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function getTableDetailPermissionApp(){
+		$sql = "SELECT DISTINCT *
+		FROM sys_permission_detail_app 
+		INNER JOIN sys_menu_app ON sys_menu_app.sm_id = sys_permission_detail_app.sm_id
+		INNER JOIN sys_permission_group_app ON sys_permission_detail_app.spg_id = sys_permission_group_app.spg_id
+		ORDER BY sys_menu_app.sm_id ASC";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusPermissionDetailApp($detailid)
+	{
+		$sql = "SELECT * FROM sys_permission_detail_app WHERE spd_id = '{$detailid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["spd_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_permission_detail_app SET spd_status = 0 WHERE  spd_id = '{$detailid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_permission_detail_app SET spd_status = 1 WHERE  spd_id = '{$detailid}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function GetDataEditPermissionApp($spg_id)
+	{
+		$sql = "SELECT spg_id, spg_name FROM sys_permission_group_app WHERE spg_id = '{$spg_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelUpdateNamePermissionApp($editnameper, $id)
+	{
+		$sql = "UPDATE sys_permission_group_app SET spg_name = '{$editnameper}' WHERE spg_id = '{$id}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function modelcheckInsertdataEditPerApp($id,$dropdowneditsubmenu)
+	{
+		$sql = "SELECT * FROM sys_permission_detail_app WHERE spg_id = '{$id}' AND sm_id ='{$dropdowneditsubmenu}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		// if (empty($row)) {
+		// 	return "true";
+		// } else {
+		// 	return "false";
+		// }
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin)
+	{
+		$sql = "INSERT INTO sys_permission_detail_app 
+		(spg_id,sm_id,spd_create_by,spd_create_date,spd_update_by,spd_update_date)
+		VALUES('{$id}','{$dropdowneditmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
 }

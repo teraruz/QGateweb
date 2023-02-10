@@ -177,10 +177,10 @@
                         </div> -->
                 <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Menu</th>
-                    <th>Submenu</th>
-                    <th>Status</th>
+                    <th style="text-align: center;">No.</th>
+                    <th style="text-align: center;">Menu</th>
+                    <th style="text-align: center;">Submenu</th>
+                    <th style="text-align: center;">Status</th>
                   </tr>
                 </thead>
                 <tbody id="tbsubmenu">
