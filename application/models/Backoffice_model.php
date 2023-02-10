@@ -856,4 +856,15 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+
+	// **************************************** Manage Menu App **********************************************
+
+	public function getTableManageMenuApp()
+	{
+		$sql = "SELECT sm_id, sm_menu ,sm_status
+		FROM sys_menu_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
 }

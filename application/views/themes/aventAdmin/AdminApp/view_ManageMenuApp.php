@@ -9,7 +9,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="ManageUserTable" width="100%" cellspacing="0">
+            <table class="table table-bordered " id="ManageMenuApp" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
@@ -19,18 +19,17 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <?php
+                <?php
                 $i = 0;
-                foreach ($tableMenuWeb as $menuweb) {
+                foreach ($tableMenuApp as $menuapp) {
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
-                  echo "<td>" . $menuweb["sm_name_menu"] . "</td>";
-                  echo "<td>" . $menuweb["ssm_name_submenu"] . "</td>";
-                  if ($menuweb["ssm_status"] == "1") {
+                  echo "<td>" . $menuapp["sm_menu"] . "</td>";
+                  if ($menuapp["sm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuapp["sm_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -38,20 +37,20 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuapp["sm_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuweb["ssm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuapp["sm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
                   echo "</tr>";
                 }
-                ?> -->
+                ?>
               </tbody>
             </table>
 

@@ -252,8 +252,6 @@ class manage extends CI_Controller
 	public function ManagePermisionWeb()
 	{
 		$setTitle = "QG | Management Group Permission";
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -646,10 +644,11 @@ class manage extends CI_Controller
 		$data["lname"] = $data["ss_emp_lname"];
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
+		$data["tableMenuApp"] = $this->backoffice_model->getTableManageMenuApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageMenuApp.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageMenuApp.php',$data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
