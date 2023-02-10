@@ -652,12 +652,27 @@ class Backoffice_model extends CI_Model
 
 	public function GetDataEditUserApp($ss_id)
 	{
-		$sql = "SELECT ss_emp_code, ss_emp_name, spg_name, ss_pic
+		$sql = "SELECT ss_id ,ss_emp_code, ss_emp_name, spg_name, ss_pic
 		FROM sys_staff_app
 		INNER JOIN sys_permission_group_app ON sys_staff_app.spg_id = sys_permission_group_app.spg_id
 		WHERE ss_id ='{$ss_id}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+	}
+
+	public function editManageUserApp($IDedituserapp,$editempcodeuserapp,$editnameapp,$editgrouppermissionuserapp,$editpathpicapp,$empcodeadmin)
+	{
+		$sql = "UPDATE sys_staff_app
+		SET ss_emp_code= '{$editempcodeuserapp}', ss_emp_name= '{$editnameapp}'
+		,spg_id = '{$editgrouppermissionuserapp}',ss_pic = '{$editpathpicapp}'
+		,ss_update_by = '{$empcodeadmin}',ss_update_date = CURRENT_TIMESTAMP 
+		WHERE ss_id = '{$IDedituserapp}'";
+		$res = $this->db->query($sql);
+		if ($res){
+			return "true";
+		} else {
+			return "false";
+		}
 	}
 }

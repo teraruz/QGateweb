@@ -511,6 +511,17 @@ class manage extends CI_Controller
 		$res["PermissionAll"] = $this->backoffice_model->getTableGroupPermissionApp();
 		 echo json_encode($res);
 	}
+	public function EditManageUserApp(){
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDedituserapp = $_GET["IDedituserapp"];
+		$editempcodeuserapp = $_GET["editempcodeuserapp"];
+		$editnameapp = $_GET["editnameapp"];
+		$editgrouppermissionuserapp = $_GET["editgrouppermissionuserapp"];
+		$editpathpicapp = $_GET["editpathpicapp"];		
+
+		$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp,$editempcodeuserapp,$editnameapp,$editgrouppermissionuserapp,$editpathpicapp,$empcodeadmin);
+		echo $resedituserapp;
+	}
 
 	// ---------------------------------- Manage Permission App ----------------------------------------
 	public function ManagePermisionApp()

@@ -815,8 +815,9 @@
             var data = JSON.parse(rs)
             var tb = ""
             var checked = ""
+            $("#IDedituserapp").val(data.getdataEdit[0]["ss_id"]);
             $("#editempcodeuserapp").val(data.getdataEdit[0]["ss_emp_code"]);
-            $("#editnameuserapp").val(data.getdataEdit[0]["ss_emp_name"]);
+            $("#editnameapp").val(data.getdataEdit[0]["ss_emp_name"]);
             $("#editpathpicapp").val(data.getdataEdit[0]["ss_pic"]);
             $.each( data.PermissionAll, function(key, value) {
                 alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
@@ -861,7 +862,6 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs);
                 if (rs === "true") {
                     Swal.fire({
                         icon: 'success',
@@ -881,40 +881,46 @@
     };
 
     function SaveEditUserApp() {
+        var IDedituserapp =$("#IDedituserapp").val();
+        var editempcodeuserapp = $("#editempcodeuserapp").val();
+        var editnameapp = $("#editnameapp").val();
+        var editgrouppermissionuserapp = $("#editgrouppermissionuserapp").val();
+        var editpathpicapp = $("#editpathpicapp").val();
 
-        var editMenuName = $("#editMenuName").val();
-        var editSubMenuName = $("#editSubMenuName").val();
-        var IDeditMenuName = $("#IDeditMenuName").val();
-        var IDeditSubMenuName = $("#IDeditSubMenuName").val();
+        var checkeditempcodeuserapp= document.getElementById("editempcodeuserapp");
+        var checkeditnameapp= document.getElementById("editnameapp");
+        var checkeditgrouppermissionuserapp = document.getElementById("editgrouppermissionuserapp");
+        var checkeditpathpicapp = document.getElementById("editpathpicapp");
 
-        var checkeditMenuName = document.getElementById("editMenuName");
-        var checkeditSubMenuName = document.getElementById("editSubMenuName");
 
-        if (checkeditMenuName.value == "" || checkeditSubMenuName.value == "") {
+        if (checkeditempcodeuserapp.value == "" || checkeditnameapp.value == "" 
+        || checkeditgrouppermissionuserapp == "" || checkeditpathpicapp == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
                 type: "warning"
             }, function() {
-                window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                window.location = "<?php echo base_url() ?>Manage/ManageUserApp";
             });
         } else {
             var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
+                method: "GET",
+                url: "<?php echo base_url(); ?>Manage/EditManageUserApp",
                 data: {
-                    editMenuName: editMenuName,
-                    editSubMenuName: editSubMenuName,
-                    IDeditMenuName: IDeditMenuName,
-                    IDeditSubMenuName: IDeditSubMenuName
+                    IDedituserapp : IDedituserapp,
+                    editempcodeuserapp: editempcodeuserapp,
+                    editnameapp: editnameapp,
+                    editgrouppermissionuserapp: editgrouppermissionuserapp,
+                    editpathpicapp: editpathpicapp
                 }
             })
             path.done(function(rs) {
+                alert(rs)
                 if (rs == "true") {
                     setTimeout(function() {
                         swal({
                             title: "Success",
-                            text: "Menu is Updated!",
+                            text: "User App is Updated!",
                             type: "success",
                             confirmButtonColor: '#D80032'
                         }, function() {
@@ -924,7 +930,7 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Edit Permission',
+                        title: 'You Failed to Edit User App',
                     })
                 }
             });
