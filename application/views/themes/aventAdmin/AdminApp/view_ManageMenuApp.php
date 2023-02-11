@@ -29,7 +29,7 @@
                   if ($menuapp["sm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuapp["sm_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusMenuApp(" . $menuapp["sm_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -37,14 +37,14 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuapp["sm_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusMenuApp(" . $menuapp["sm_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuapp["sm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataEditMenuApp(" . $menuapp["sm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -56,7 +56,7 @@
 
           </div>
 
-          <!-- addPermissionWeb Modal-->
+          <!-------------------------------------- addPermissionWeb Modal ---------------------------------------------------->
           <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -69,36 +69,31 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Menu Name :</label>
-                    <input class="form-control" type="text" id="addmenuwebname" name="addmenuwebname" required="" placeholder="Enter New Menu">
+                    <input class="form-control" type="text" id="addmenuappname" name="addmenuappname" required="" placeholder="Enter New Menu">
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Submenu Name :</label>
-                    <input class="form-control" type="text" id="addsubmenuwebname" name="addsubmenuwebname" required="" placeholder="Enter New Submenu">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password">Method :</label>
-                    <input class="form-control" type="text" id="addmenupath" name="addmenupath" required="" placeholder="Enter path of menu">
+                    <label for="password">Method path :</label>
+                    <input class="form-control" type="text" id="addmenupathapp" name="addmenupathapp" required="" placeholder="Enter path menu">
                   </div>
 
 
                   <div class="form-group">
-                    <label for="password">icon name :</label>
-                    <input class="form-control" type="text" id="addmenuicon" name="addmenuicon" required="" placeholder="Enter icon name of menu">
+                    <label for="password">Picture file name :</label>
+                    <input class="form-control" type="text" id="addmenupicapp" name="addmenupicapp" required="" placeholder="Enter file name menu">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuApp">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- EditPermissionWeb Modal-->
+          <!-------------------------------------------- EditPermissionWeb Modal --------------------------------------------->
           <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -110,23 +105,29 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
-                    <label for="NameMenuWeb">Menu Name :</label>
-                    <input class="form-control" type="text" id="editMenuName" name="editMenuName" >
-                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
+                  
+                <div class="form-group">
+                    <label for="empcode">Menu Name :</label>
+                    <input class="form-control" type="text" id="editmenuappid" name="editmenuappid" hidden>
+                    <input class="form-control" type="text" id="editmenuappname" name="editmenuappname" required="" placeholder="Enter New Menu">
                   </div>
 
                   <div class="form-group">
-                    <label for="NameSubMenuWeb">Submenu Name :</label>
-                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
-                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
+                    <label for="password">Method path :</label>
+                    <input class="form-control" type="text" id="editmenupathapp" name="editmenupathapp" required="" placeholder="Enter path menu">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="password">Picture file name :</label>
+                    <input class="form-control" type="text" id="editmenupicapp" name="editmenupicapp" required="" placeholder="Enter file name menu">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuApp">Save</a>
                 </div>
               </div>
             </div>

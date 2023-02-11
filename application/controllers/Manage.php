@@ -653,6 +653,45 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function AddManageMenuApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addmenuappname = $_POST["addmenuappname"];
+		$addmenupathapp = $_POST["addmenupathapp"];
+		$addmenupicapp = $_POST["addmenupicapp"];
+
+		$rsaddmenuapp =  $this->backoffice_model->modelAddMenuApp($addmenuappname,$addmenupathapp,$addmenupicapp,$empcodeadmin);
+		echo $rsaddmenuapp;
+
+	}
+
+	public function swiftStatusMenuApp()
+	{
+		$MenuappId = $_GET["sm_id"];
+		$res = $this->backoffice_model->editStatusMenuApp($MenuappId);
+		echo json_encode($res);
+	}
+
+	public function getDataEditMenuApp()
+	{
+		$sm_id = $_GET["sm_id"];
+		$res = $this->backoffice_model->GetDataEditMenuApp($sm_id);
+		echo json_encode($res);
+	}
+	public function EditManageMenuApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$editmenuappid = $_POST["editmenuappid"];
+		$editmenuappname = $_POST["editmenuappname"];
+		$editmenupathapp = $_POST["editmenupathapp"];
+		$editmenupicapp = $_POST["editmenupicapp"];
+
+		$rseditmenuapp = $this->backoffice_model->modelEditMenuApp($editmenuappid,$editmenuappname,$editmenupathapp,$editmenupicapp,$empcodeadmin);
+
+		echo $rseditmenuapp;
+
+	}
+
 	// ************************* Master Control *************************************
 	public function MasterControl()
 	{

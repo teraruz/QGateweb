@@ -1131,7 +1131,141 @@
        
     };
 
+    // ******************************************************* Manage Menu App ***************************************************
 
 
+    $("#btnSaveAddMenuApp").click(function() {
+        SaveAddMenuApp()
+    });
+    $("#btnSaveEditMenuApp").click(function() {
+        SaveEditMenuApp()
+    })
+
+
+
+    function SaveAddMenuApp() {
+        var addmenuappname = $('#addmenuappname').val()
+        var addmenupathapp = $('#addmenupathapp').val()
+        var addmenupicapp = $('#addmenupicapp').val()
+
+        var checkaddmenuappname = document.getElementById("addmenuappname")
+        var checkaddmenupathapp = document.getElementById("addmenupathapp")
+        var checkaddmenupicapp = document.getElementById("addmenupicapp")
+
+        if (checkaddmenuappname.value == "" || checkaddmenupathapp.value == "" || checkaddmenupicapp.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddManageMenuApp",
+                data: {
+                    addmenuappname: addmenuappname,
+                    addmenupathapp: addmenupathapp,
+                    addmenupicapp: addmenupicapp,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Menu App.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuApp";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Menu App',
+                    })
+                }
+            })
+        }
+    };
+
+    function statusMenuApp(sm_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusMenuApp?sm_id=" + sm_id,
+        })
+    };
+
+
+    function getDataEditMenuApp(sm_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditMenuApp?sm_id=" + sm_id,
+        })
+        path.done(function(rs) {
+            $("#editmenuappid").val(rs[0]["sm_id"]);
+            $("#editmenuappname").val(rs[0]["sm_menu"]);
+            $("#editmenupathapp").val(rs[0]["sm_path"]);
+            $("#editmenupicapp").val(rs[0]["sm_pic"]);
+        })
+    };
+
+
+    function SaveEditMenuApp() {
+        var editmenuappid = $('#editmenuappid').val()
+        var editmenuappname = $('#editmenuappname').val()
+        var editmenupathapp = $('#editmenupathapp').val()
+        var editmenupicapp = $('#editmenupicapp').val()
+        
+        var checkeditmenuappid = document.getElementById("editmenuappid");
+        var checkeditmenuappname = document.getElementById("editmenuappname");
+        var checkeditmenupathapp = document.getElementById("editmenupathapp");
+        var checkeditmenupicapp = document.getElementById("editmenupicapp");
+
+
+        if (checkeditmenuappid.value == "" || checkeditmenuappname.value == "" 
+        || checkeditmenupathapp.value == "" || checkeditmenupicapp == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ManageMenuApp";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManageMenuApp",
+                data: {
+                    editmenuappid: editmenuappid,
+                    editmenuappname: editmenuappname,
+                    editmenupathapp: editmenupathapp,
+                    editmenupicapp: editmenupicapp
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Menu App is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ManageMenuApp";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Menu App',
+                    })
+                }
+            });
+        }
+    }
+
+// *********************************************** Mst Control Check Type ************************************************** 
     
 </script>

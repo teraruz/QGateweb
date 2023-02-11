@@ -835,7 +835,7 @@ class Backoffice_model extends CI_Model
 		// if (empty($row)) {
 		// 	return "true";
 		// } else {
-		// 	return "false";
+		// 	retur "false";
 		// }
 		if ($res) {
 			return "true";
@@ -866,5 +866,68 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+	}
+
+	public function modelAddMenuApp($addmenuappname,$addmenupathapp,$addmenupicapp,$empcodeadmin)
+	{
+		$sql = "INSERT INTO sys_menu_app (sm_menu, sm_path,sm_pic, sm_craete_by, sm_create_date)
+		VALUES ('{$addmenuappname}', '{$addmenupathapp}', '{$addmenupicapp}', '{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else {
+			return "false";
+		}
+
+	}
+
+	public function editStatusMenuApp($MenuappId)
+	{
+		$sql = "select * from sys_menu_app WHERE sm_id = '{$MenuappId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["sm_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_menu_app SET sm_status = 0 WHERE  sm_id = '{$MenuappId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_menu_app SET sm_status = 1 WHERE  sm_id = '{$MenuappId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+	public function GetDataEditMenuApp($sm_id)
+	{
+		$sql = "SELECT sm_id, sm_menu , sm_path ,sm_pic 
+		FROM sys_menu_app
+		WHERE sm_id = '{$sm_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditMenuApp($editmenuappid,$editmenuappname,$editmenupathapp,$editmenupicapp,$empcodeadmin)
+	{
+		$sql = "UPDATE sys_menu_app 
+		SET sm_menu = '{$editmenuappname}',sm_path = '{$editmenupathapp}', sm_pic = '{$editmenupicapp}' 
+		,sm_update_by = '{$empcodeadmin}',sm_update_date = CURRENT_TIMESTAMP
+		WHERE sm_id = '{$editmenuappid}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
 	}
 }
