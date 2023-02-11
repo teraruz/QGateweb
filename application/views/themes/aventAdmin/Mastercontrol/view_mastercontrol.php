@@ -8,10 +8,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/geometry.png"
-                                style="width=:50; height:50;"></image>
+                            <image src="<?php echo base_url() ?>assets/images/geometry.png" style="width=:50; height:50;"></image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control Check Type</button>
+                        <a type="submit" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/CheckType" >Control Check Type</a>
                     </div>
                 </div>
             </div>
@@ -19,10 +18,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/status.png" style="width=:50; height:50;">
+                            <image src="<?php echo base_url() ?>assets/images/status.png" style="width=:50; height:50;">
                             </image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control Check Status</button>
+                        <a type="submit" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/CheckStatus" >Control Check Status</a>
                     </div>
                 </div>
             </div>
@@ -30,10 +29,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/inspection.png"
-                                style="width=:50; height:50;"></image>
+                            <image src="<?php echo base_url() ?>assets/images/inspection.png" style="width=:50; height:50;"></image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control Inspection Type</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block"  href="<?php echo base_url() ?>Manage/InspectionType">Control Inspection Type</a>
                     </div>
                 </div>
             </div>
@@ -43,10 +41,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/DMC.png" style="width=:50; height:50;">
+                            <image src="<?php echo base_url() ?>assets/images/DMC.png" style="width=:50; height:50;">
                             </image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control DMC Data</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/DMCData">Control DMC Data</a>
                     </div>
                 </div>
             </div>
@@ -54,10 +52,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/scanner.png" style="width=:50; height:50;">
+                            <image src="<?php echo base_url() ?>assets/images/scanner.png" style="width=:50; height:50;">
                             </image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control DMC Type</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block"href="<?php echo base_url() ?>Manage/DMCType" >Control DMC Type</a>
                     </div>
                 </div>
             </div>
@@ -65,10 +63,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/codesys.png" style="width=:50; height:50;">
+                            <image src="<?php echo base_url() ?>assets/images/codesys.png" style="width=:50; height:50;">
                             </image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control FA Code</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/FACode">Control FA Code</a>
                     </div>
                 </div>
             </div>
@@ -78,10 +76,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/workshift.png"
-                                style="width=:50; height:50;"></image>
+                            <image src="<?php echo base_url() ?>assets/images/workshift.png" style="width=:50; height:50;"></image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control Work Shift</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/WorkShift">Control Work Shift</a>
                     </div>
                 </div>
             </div>
@@ -89,10 +86,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/defect.png" style="width=:50; height:50;">
+                            <image src="<?php echo base_url() ?>assets/images/defect.png" style="width=:50; height:50;">
                             </image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control Defect</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/Defect">Control Defect</a>
                     </div>
                 </div>
             </div>
@@ -100,10 +97,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                            <image src="<?php echo base_url()?>assets/images/detail.png" style="width=:50; height:50;">
+                            <image src="<?php echo base_url() ?>assets/images/detail.png" style="width=:50; height:50;">
                             </image>
                         </div>
-                        <button type="button" class="btn btn-inverse-danger btn-block">Control Detail</button>
+                        <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/Detail">Control Detail</a>
                     </div>
                 </div>
             </div>
