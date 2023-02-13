@@ -635,6 +635,7 @@ class manage extends CI_Controller
 		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 
 		$data["fullname"] = $data["ss_emp_fname"] . " " . $data["ss_emp_lname"];
 		$data["id"] = $data["ss_id"];
@@ -646,6 +647,7 @@ class manage extends CI_Controller
 		$data["plant"] = $data["mpa_name"];
 		$data["tableMenuApp"] = $this->backoffice_model->getTableManageMenuApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageMenuApp.php',$data);
@@ -724,6 +726,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableChecktype"] = $this->backoffice_model->getTableCheckType();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -732,6 +735,37 @@ class manage extends CI_Controller
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+	public function AddCheckType()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addparttypename = $_POST["addparttypename"];
+		$rsaddchecktype = $this->backoffice_model->modelAddCheckType($addparttypename,$empcodeadmin);
+		echo $rsaddchecktype;
+	}
+	public function swiftStatusChecktype()
+	{
+		$CheckTypeId = $_GET["mct_id"];
+		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId);
+		echo json_encode($res);
+	}
+
+	public function getDataEditCheckType()
+	{
+		$mct_id = $_GET["mct_id"];
+		$res = $this->backoffice_model->GetDataEditCheckType($mct_id);
+		echo json_encode($res);
+	}
+	public function EditCheckType()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditparttype = $_POST["IDeditparttype"];
+		$editparttypeName = $_POST["editparttypeName"];
+
+		$rseditchecktype = $this->backoffice_model->modelEditCheckType($IDeditparttype,$editparttypeName,$empcodeadmin);
+
+		echo $rseditchecktype;
+
+	}
 
 	// ************************* Control Check Status *************************************
 	public function CheckStatus()
@@ -739,6 +773,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableCheckStatus"] = $this->backoffice_model->getTableCheckStatus();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -746,6 +781,21 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlCheckStatus.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusCheckStatus()
+	{
+		$StatusId = $_GET["mcs_id"];
+		$res = $this->backoffice_model->editStatusCheckStatus($StatusId);
+		echo json_encode($res);
+	}
+
+	public function AddStatus()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addstatusname = $_POST["addstatusname"];
+		$rsaddstatus = $this->backoffice_model->modelAddStatus($addstatusname,$empcodeadmin);
+		echo $rsaddstatus;
 	}
 
 	// ************************* Control Inspection Type *************************************

@@ -930,4 +930,122 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+
+
+	// ********************************************* Mst Check type *******************************************
+	public function getTableCheckType()
+	{
+		$sql = "SELECT mct_id, mct_name , mct_status
+		FROM mst_check_type_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function modelAddCheckType($addparttypename,$empcodeadmin){
+		$sql = "INSERT INTO mst_check_type_app (mct_name, mct_create_by , mct_create_date)
+		VALUES ('{$addparttypename}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	
+	public function editStatusCheckType($CheckTypeId)
+	{
+		$sql = "select * from mst_check_type_app WHERE mct_id = '{$CheckTypeId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mct_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_check_type_app SET mct_status = 0 WHERE  mct_id = '{$CheckTypeId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_check_type_app SET mct_status = 1 WHERE  mct_id = '{$CheckTypeId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function GetDataEditCheckType($mct_id)
+	{
+		$sql = "SELECT mct_id, mct_name 
+		FROM mst_check_type_app
+		WHERE mct_id = '{$mct_id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditCheckType($IDeditparttype,$editparttypeName,$empcodeadmin){
+		$sql = "UPDATE mst_check_type_app 
+		SET mct_name = '{$editparttypeName}', mct_update_by = '{$empcodeadmin}',mct_update_date = CURRENT_TIMESTAMP
+		WHERE mct_id = '{$IDeditparttype}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+	// ****************************** mst check status ***********************************************
+
+	public function getTableCheckStatus()
+	{
+		$sql = "SELECT mcs_id, mcs_name , mcs_status
+		FROM mst_check_status_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusCheckStatus($StatusId)
+	{
+		$sql = "select * from mst_check_status_app WHERE mcs_id = '{$StatusId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mcs_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_check_status_app SET mcs_status = 0 WHERE  mcs_id = '{$StatusId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_check_status_app SET mcs_status = 1 WHERE  mcs_id = '{$StatusId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddStatus($addstatusname,$empcodeadmin){
+		$sql = "INSERT INTO mst_check_status_app (mcs_name, mcs_create_by , mcs_create_date)
+		VALUES ('{$addstatusname}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
 }

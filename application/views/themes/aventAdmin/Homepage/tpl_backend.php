@@ -462,7 +462,7 @@
             //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
             //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
             if (this.checked == true) {
-                console.log("sssssssssssssssss==>" , this.value)
+                console.log("sssssssssssssssss==>", this.value)
                 // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
                 dataSubMenuId[key] = this.value
                 // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
@@ -477,7 +477,7 @@
                 confirmButtonColor: '#F7B267',
             })
         } else {
-            console.log("==>" , dataSubMenuId)
+            console.log("==>", dataSubMenuId)
             var path = $.ajax({
                 method: "GET",
                 url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
@@ -821,14 +821,14 @@
             $("#editempcodeuserapp").val(data.getdataEdit[0]["ss_emp_code"]);
             $("#editnameapp").val(data.getdataEdit[0]["ss_emp_name"]);
             $("#editpathpicapp").val(data.getdataEdit[0]["ss_pic"]);
-            $.each( data.PermissionAll, function(key, value) {
+            $.each(data.PermissionAll, function(key, value) {
                 alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
-            if(value["spg_name"] == data.getdataEdit[0]["spg_name"]){
-                checked = "selected"
-            }else{
-                checked = ""
-            }
-                tb += "<option value='"+ value["spg_id"] +"' " + checked +">"+ value["spg_name"] +"</option>"
+                if (value["spg_name"] == data.getdataEdit[0]["spg_name"]) {
+                    checked = "selected"
+                } else {
+                    checked = ""
+                }
+                tb += "<option value='" + value["spg_id"] + "' " + checked + ">" + value["spg_name"] + "</option>"
             })
             $("#editgrouppermissionuserapp").html(tb);
         })
@@ -883,20 +883,20 @@
     };
 
     function SaveEditUserApp() {
-        var IDedituserapp =$("#IDedituserapp").val();
+        var IDedituserapp = $("#IDedituserapp").val();
         var editempcodeuserapp = $("#editempcodeuserapp").val();
         var editnameapp = $("#editnameapp").val();
         var editgrouppermissionuserapp = $("#editgrouppermissionuserapp").val();
         var editpathpicapp = $("#editpathpicapp").val();
 
-        var checkeditempcodeuserapp= document.getElementById("editempcodeuserapp");
-        var checkeditnameapp= document.getElementById("editnameapp");
+        var checkeditempcodeuserapp = document.getElementById("editempcodeuserapp");
+        var checkeditnameapp = document.getElementById("editnameapp");
         var checkeditgrouppermissionuserapp = document.getElementById("editgrouppermissionuserapp");
         var checkeditpathpicapp = document.getElementById("editpathpicapp");
 
 
-        if (checkeditempcodeuserapp.value == "" || checkeditnameapp.value == "" 
-        || checkeditgrouppermissionuserapp == "" || checkeditpathpicapp == "") {
+        if (checkeditempcodeuserapp.value == "" || checkeditnameapp.value == "" ||
+            checkeditgrouppermissionuserapp == "" || checkeditpathpicapp == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -909,7 +909,7 @@
                 method: "GET",
                 url: "<?php echo base_url(); ?>Manage/EditManageUserApp",
                 data: {
-                    IDedituserapp : IDedituserapp,
+                    IDedituserapp: IDedituserapp,
                     editempcodeuserapp: editempcodeuserapp,
                     editnameapp: editnameapp,
                     editgrouppermissionuserapp: editgrouppermissionuserapp,
@@ -941,7 +941,7 @@
 
 
     // ******************************************* PERMISSION APP **********************************************
-    
+
     $("#btnSaveAddPermissionApp").click(function() {
         addPermissionApp()
     });
@@ -968,7 +968,7 @@
             //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
             //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
             if (this.checked == true) {
-                console.log("sssssssssssssssss==>" , this.value)
+                console.log("sssssssssssssssss==>", this.value)
                 // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
                 dataMenuAppId[key] = this.value
                 // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
@@ -983,7 +983,7 @@
                 confirmButtonColor: '#F7B267',
             })
         } else {
-            console.log("==>" , dataMenuAppId)
+            console.log("==>", dataMenuAppId)
             var path = $.ajax({
                 method: "GET",
                 url: "<?php echo base_url(); ?>Manage/AddManagePermissionApp",
@@ -1028,7 +1028,7 @@
         var idper = $("#idPerApp").val();
         var editPermissionappname = $("#editPermissionappname").val();
         var dropdowneditmenu = $("#dropdowneditmenu").val();
-        
+
         var checkeditPermissionappname = document.getElementById("editPermissionappname");
         var checkdropdowneditmenu = document.getElementById("dropdowneditmenu");
 
@@ -1075,7 +1075,7 @@
         }
     }
 
-// ---------------------------------------------- Ajax การโชว์ tableinfo App ------------------------------------
+    // ---------------------------------------------- Ajax การโชว์ tableinfo App ------------------------------------
 
     function GetDetailApp(rs) {
         // alert(rs)
@@ -1128,7 +1128,7 @@
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionDetailApp?spd_id=" + spd_id,
         })
-       
+
     };
 
     // ******************************************************* Manage Menu App ***************************************************
@@ -1216,15 +1216,15 @@
         var editmenuappname = $('#editmenuappname').val()
         var editmenupathapp = $('#editmenupathapp').val()
         var editmenupicapp = $('#editmenupicapp').val()
-        
+
         var checkeditmenuappid = document.getElementById("editmenuappid");
         var checkeditmenuappname = document.getElementById("editmenuappname");
         var checkeditmenupathapp = document.getElementById("editmenupathapp");
         var checkeditmenupicapp = document.getElementById("editmenupicapp");
 
 
-        if (checkeditmenuappid.value == "" || checkeditmenuappname.value == "" 
-        || checkeditmenupathapp.value == "" || checkeditmenupicapp == "") {
+        if (checkeditmenuappid.value == "" || checkeditmenuappname.value == "" ||
+            checkeditmenupathapp.value == "" || checkeditmenupicapp == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -1266,6 +1266,183 @@
         }
     }
 
-// *********************************************** Mst Control Check Type ************************************************** 
-    
+    // *********************************************** Mst Control Check Type ************************************************** 
+
+
+
+
+    $("#btnSaveAddCheckType").click(function() {
+        SaveAddCheckType()
+    });
+    $("#btnSaveEditCheckType").click(function() {
+        SaveEditCheckType()
+    })
+
+
+    function statusCheckType(mct_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusChecktype?mct_id=" + mct_id,
+        })
+    };
+
+
+    function SaveAddCheckType() {
+        var addparttypename = $('#addparttypename').val()
+
+        var checkaddparttypename = document.getElementById("addparttypename")
+
+        if (checkaddparttypename.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddCheckType",
+                data: {
+                    addparttypename: addparttypename,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Type Part.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/CheckType";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  Type Part',
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataCheckType(mct_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditCheckType?mct_id=" + mct_id,
+        })
+        path.done(function(rs) {
+
+            $("#editparttypeName").val(rs[0]["mct_name"]);
+            $("#IDeditparttype").val(rs[0]["mct_id"]);
+        })
+    };
+
+
+    function SaveEditCheckType() {
+        var IDeditparttype = $('#IDeditparttype').val()
+        var editparttypeName = $('#editparttypeName').val()
+
+        var checkIDeditparttype = document.getElementById("IDeditparttype");
+        var checkeditparttypeName = document.getElementById("editparttypeName");
+
+
+        if (checkIDeditparttype.value == "" || checkeditparttypeName.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/CheckType";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditCheckType",
+                data: {
+                    IDeditparttype: IDeditparttype,
+                    editparttypeName: editparttypeName
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Type is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/CheckType";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Type',
+                    })
+                }
+            });
+        }
+    }
+
+    // *********************************************** Mst Control Check Type ************************************************** 
+    $("#btnSaveAddStatus").click(function() {
+        SaveAddStatus()
+    });
+    $("#btnSaveEditStatus").click(function() {
+        SaveEditStatus()
+    })
+
+
+    function statusCheckStatus(mcs_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusCheckStatus?mcs_id=" + mcs_id,
+        })
+    };
+
+
+    function SaveAddStatus() {
+        var addstatusname = $('#addstatusname').val()
+
+        var checkaddstatusname = document.getElementById("addstatusname")
+
+        if (checkaddstatusname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddStatus",
+                data: {
+                    addstatusname: addstatusname,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Status.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/CheckStatus";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  Type Part',
+                    })
+                }
+            })
+        }
+    };
+
+
 </script>

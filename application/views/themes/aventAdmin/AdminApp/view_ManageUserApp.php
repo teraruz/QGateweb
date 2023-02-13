@@ -63,7 +63,7 @@
             </table>
 
           </div>
-          <!---------------------------- Edit Modal------------------------------------>
+          <!---------------------------- Edituserapp Modal------------------------------------>
           <div class="modal fade" id="edituserapp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -116,7 +116,7 @@
             </div>
           </div>
 
-          <!------------------------- addUser Modal ------------------------------------------->
+          <!------------------------- addUserapp Modal ------------------------------------------->
           <div class="modal fade" id="adduserapp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
