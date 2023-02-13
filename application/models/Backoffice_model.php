@@ -661,7 +661,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editManageUserApp($IDedituserapp,$editempcodeuserapp,$editnameapp,$editgrouppermissionuserapp,$editpathpicapp,$empcodeadmin)
+	public function editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $editpathpicapp, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_staff_app
 		SET ss_emp_code= '{$editempcodeuserapp}', ss_emp_name= '{$editnameapp}'
@@ -669,7 +669,7 @@ class Backoffice_model extends CI_Model
 		,ss_update_by = '{$empcodeadmin}',ss_update_date = CURRENT_TIMESTAMP 
 		WHERE ss_id = '{$IDedituserapp}'";
 		$res = $this->db->query($sql);
-		if ($res){
+		if ($res) {
 			return "true";
 		} else {
 			return "false";
@@ -770,7 +770,8 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function getTableDetailPermissionApp(){
+	public function getTableDetailPermissionApp()
+	{
 		$sql = "SELECT DISTINCT *
 		FROM sys_permission_detail_app 
 		INNER JOIN sys_menu_app ON sys_menu_app.sm_id = sys_permission_detail_app.sm_id
@@ -827,7 +828,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function modelcheckInsertdataEditPerApp($id,$dropdowneditsubmenu)
+	public function modelcheckInsertdataEditPerApp($id, $dropdowneditsubmenu)
 	{
 		$sql = "SELECT * FROM sys_permission_detail_app WHERE spg_id = '{$id}' AND sm_id ='{$dropdowneditsubmenu}'";
 		$res = $this->db->query($sql);
@@ -868,17 +869,16 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelAddMenuApp($addmenuappname,$addmenupathapp,$addmenupicapp,$empcodeadmin)
+	public function modelAddMenuApp($addmenuappname, $addmenupathapp, $addmenupicapp, $empcodeadmin)
 	{
 		$sql = "INSERT INTO sys_menu_app (sm_menu, sm_path,sm_pic, sm_craete_by, sm_create_date)
 		VALUES ('{$addmenuappname}', '{$addmenupathapp}', '{$addmenupicapp}', '{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else {
+		} else {
 			return "false";
 		}
-
 	}
 
 	public function editStatusMenuApp($MenuappId)
@@ -917,7 +917,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditMenuApp($editmenuappid,$editmenuappname,$editmenupathapp,$editmenupicapp,$empcodeadmin)
+	public function modelEditMenuApp($editmenuappid, $editmenuappname, $editmenupathapp, $editmenupicapp, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_menu_app 
 		SET sm_menu = '{$editmenuappname}',sm_path = '{$editmenupathapp}', sm_pic = '{$editmenupicapp}' 
@@ -941,17 +941,18 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
-	public function modelAddCheckType($addparttypename,$empcodeadmin){
+	public function modelAddCheckType($addparttypename, $empcodeadmin)
+	{
 		$sql = "INSERT INTO mst_check_type_app (mct_name, mct_create_by , mct_create_date)
 		VALUES ('{$addparttypename}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else {
+		} else {
 			return "false";
 		}
 	}
-	
+
 	public function editStatusCheckType($CheckTypeId)
 	{
 		$sql = "select * from mst_check_type_app WHERE mct_id = '{$CheckTypeId}'";
@@ -989,7 +990,8 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditCheckType($IDeditparttype,$editparttypeName,$empcodeadmin){
+	public function modelEditCheckType($IDeditparttype, $editparttypeName, $empcodeadmin)
+	{
 		$sql = "UPDATE mst_check_type_app 
 		SET mct_name = '{$editparttypeName}', mct_update_by = '{$empcodeadmin}',mct_update_date = CURRENT_TIMESTAMP
 		WHERE mct_id = '{$IDeditparttype}'";
@@ -1038,13 +1040,14 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function modelAddStatus($addstatusname,$empcodeadmin){
+	public function modelAddStatus($addstatusname, $empcodeadmin)
+	{
 		$sql = "INSERT INTO mst_check_status_app (mcs_name, mcs_create_by , mcs_create_date)
 		VALUES ('{$addstatusname}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else {
+		} else {
 			return "false";
 		}
 	}
@@ -1058,10 +1061,84 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditCheckStatus($IDeditStatusName,$editStatusName,$empcodeadmin){
+	public function modelEditCheckStatus($IDeditStatusName, $editStatusName, $empcodeadmin)
+	{
 		$sql = "UPDATE mst_check_status_app 
 		SET mcs_name = '{$editStatusName}', mcs_update_by = '{$empcodeadmin}',mcs_update_date = CURRENT_TIMESTAMP
 		WHERE mcs_id = '{$IDeditStatusName}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	// ****************************** mst Inspection Type ***********************************************
+
+	public function getTableInspection()
+	{
+		$sql = "SELECT mit_id, mit_name , mit_status
+		FROM mst_inspection_type_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusInspection($InspectionId)
+	{
+		$sql = "select * from mst_inspection_type_app WHERE mit_id = '{$InspectionId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mit_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_inspection_type_app SET mit_status = 0 WHERE  mit_id = '{$InspectionId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_inspection_type_app SET mit_status = 1 WHERE  mit_id = '{$InspectionId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddInspection($addinspectiontype, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_inspection_type_app (mit_name, mit_create_by , mit_create_date)
+		VALUES ('{$addinspectiontype}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditInspection($inspectionid)
+	{
+		$sql = "SELECT mit_id, mit_name 
+		FROM mst_inspection_type_app
+		WHERE mit_id = '{$inspectionid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditInspection($IDeditInspectionName,$editInspectionName,$empcodeadmin)
+	{
+		$sql = "UPDATE mst_inspection_type_app 
+		SET mit_name = '{$editInspectionName}', mit_update_by = '{$empcodeadmin}',mit_update_date = CURRENT_TIMESTAMP
+		WHERE mit_id = '{$IDeditInspectionName}'";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";

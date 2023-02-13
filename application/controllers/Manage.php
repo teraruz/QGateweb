@@ -823,6 +823,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableInspection"] = $this->backoffice_model->getTableInspection();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -830,6 +831,40 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlInspectionType.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusInspection()
+	{
+		$InspectionId = $_GET["mit_id"];
+		$res = $this->backoffice_model->editStatusInspection($InspectionId);
+		echo json_encode($res);
+	}
+
+	public function AddInspection()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addinspectiontype = $_POST["addinspectiontype"];
+		$rsinspection = $this->backoffice_model->modelAddInspection($addinspectiontype,$empcodeadmin);
+		echo $rsinspection;
+	}
+
+	public function getDataEditInspection()
+	{
+		$inspectionid = $_GET["mit_id"];
+		$res = $this->backoffice_model->getDataEditInspection($inspectionid);
+		echo json_encode($res);
+	}
+
+	public function EditInspection()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditInspectionName = $_POST["IDeditInspectionName"];
+		$editInspectionName = $_POST["editInspectionName"];
+
+		$rseditinspection = $this->backoffice_model->modelEditInspection($IDeditInspectionName,$editInspectionName,$empcodeadmin);
+
+		echo $rseditinspection;
+
 	}
 
 	// ************************* Control DMC Data *************************************

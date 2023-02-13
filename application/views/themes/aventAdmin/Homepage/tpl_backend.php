@@ -1506,4 +1506,123 @@
         }
     }
 
+// ********************************************************* mst Inspection ********************************************
+
+    $("#btnSaveAddInspection").click(function() {
+        SaveAddInspection()
+    });
+    $("#btnSaveEditInspection").click(function() {
+        SaveEditInspection()
+    })
+
+
+    function statusInspection(mit_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusInspection?mit_id=" + mit_id,
+        })
+    };
+
+    function SaveAddInspection() {
+        var addinspectiontype = $('#addinspectiontype').val()
+
+        var checkinspection = document.getElementById("addinspectiontype")
+
+        if (checkinspection.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddInspection",
+                data: {
+                    addinspectiontype: addinspectiontype,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Inspection.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/InspectionType";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  Inspection',
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataInspection(mit_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditInspection?mit_id=" + mit_id,
+        })
+        path.done(function(rs) {
+
+            $("#editInspectionName").val(rs[0]["mit_name"]);
+            $("#IDeditInspectionName").val(rs[0]["mit_id"]);
+        })
+    };
+
+
+    function SaveEditInspection() {
+        var IDeditInspectionName = $('#IDeditInspectionName').val()
+        var editInspectionName = $('#editInspectionName').val()
+
+        var checkIDeditInspectionName = document.getElementById("IDeditInspectionName");
+        var checkeditInspectionName = document.getElementById("editInspectionName");
+
+
+        if (checkIDeditInspectionName.value == "" || checkeditInspectionName.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/InspectionType";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditInspection",
+                data: {
+                    IDeditInspectionName: IDeditInspectionName,
+                    editInspectionName: editInspectionName
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Inspection Name is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/InspectionType";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Inspection Name',
+                    })
+                }
+            });
+        }
+    }
+
+
 </script>

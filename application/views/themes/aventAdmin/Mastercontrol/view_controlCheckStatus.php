@@ -69,7 +69,7 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="statusname">Status Name :</label>
-                    <input class="form-control" type="text" id="addstatusname" name="addstatusname" required="" placeholder="Enter New Menu">
+                    <input class="form-control" type="text" id="addstatusname" name="addstatusname" required="" placeholder="Enter New Status">
                   </div>
 
                 </form>
