@@ -1,10 +1,10 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-      <h1 class="col-12" style="color:black">Control Check Status</h1>
+      <h1 class="col-12" style="color:black">Check Status</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addstatus><i class="mdi mdi-database-plus"></i>Add Status</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="mdi mdi-library-plus"></i>Add Menu</a>
         </div>
 
         <div class="card-body">
@@ -13,13 +13,14 @@
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Status Name</th>
+                  <th style="text-align: center;">Menu Name</th>
+                  <th style="text-align: center;">Submenu Name</th>
                   <th style="text-align: center;">status</th>
                   <th style="text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <?php
+                <!-- <?php
                 $i = 0;
                 foreach ($tableCheckStatus as $status) {
                   $i++;
@@ -50,18 +51,18 @@
                                 </td>";
                   echo "</tr>";
                 }
-                ?>
+                ?> -->
               </tbody>
             </table>
 
           </div>
 
           <!-- addPermissionWeb Modal-->
-          <div class="modal fade" id="addstatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-database-plus"></i> Add Status</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i> Add Menu Web</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -83,11 +84,11 @@
           </div>
 
           <!-- EditPermissionWeb Modal-->
-          <div class="modal fade" id="editStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Menu Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Status</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
