@@ -9,7 +9,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="ManageUserTable" width="100%" cellspacing="0">
+            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
@@ -29,7 +29,7 @@
                   if ($Checktype["mct_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusCheckType(" . $Checktype["mct_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusCheckStatus(" . $Checktype["mct_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -37,7 +37,7 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusCheckType(" . $Checktype["mct_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusCheckStatus(" . $Checktype["mct_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
@@ -96,7 +96,7 @@
 
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="NameMenuWeb">Menu Name :</label>
+                    <label for="NameMenuWeb">Type Name :</label>
                     <input class="form-control" type="text" id="editparttypeName" name="editparttypeName" >
                     <input class="form-control" type="text" id="IDeditparttype" name="IDeditparttype" hidden>
                   </div>

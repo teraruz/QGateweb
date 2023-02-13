@@ -1146,4 +1146,79 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+
+
+	// ______________________________________________ mst DMC DATA_________________________________
+
+
+	public function getTableDMC()
+	{
+		$sql = "SELECT mdd_id, mdd_name , mdd_status
+		FROM mst_dmc_data_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusDMC($dmcId)
+	{
+		$sql = "select * from mst_dmc_data_app WHERE mdd_id = '{$dmcId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mdd_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_dmc_data_app SET mdd_status = 0 WHERE  mdd_id = '{$dmcId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_dmc_data_app SET mdd_status = 1 WHERE  mdd_id = '{$dmcId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddDMC($adddmcname, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_dmc_data_app (mdd_name, mdd_create_by , mdd_create_date)
+		VALUES ('{$adddmcname}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditDMC($dmcid)
+	{
+		$sql = "SELECT mdd_id, mdd_name 
+		FROM mst_dmc_data_app
+		WHERE mdd_id = '{$dmcid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditDMC($IDeditdmcname,$editdmcname,$empcodeadmin)
+	{
+		$sql = "UPDATE mst_dmc_data_app 
+		SET mdd_name = '{$editdmcname}', mdd_update_by = '{$empcodeadmin}',mdd_update_date = CURRENT_TIMESTAMP
+		WHERE mdd_id = '{$IDeditdmcname}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
 }

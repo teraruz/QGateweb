@@ -98,7 +98,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
-<!-- --------------------------------------------------- AJAX CHANGEPASSWORDPAGE AND EDITPROFILEPAGE --------------------------------------------------- -->
+
+
+<!-- --------------------------------------------------- CHANGEPASSWORDPAGE AND EDITPROFILEPAGE --------------------------------------------------- -->
 
 
 <script type="text/javascript">
@@ -257,13 +259,10 @@
         })
     };
 </script>
-<!-- --------------------------------------------------- LOGOUT AND MENUHOME --------------------------------------------------- -->
+<!-- --------------------------------------------------- LOGOUT  --------------------------------------------------- -->
 <script type="text/javascript">
     $("#btnLogout").click(function() {
         Logout()
-    });
-    $("#menuhomepage").click(function() {
-        Menuhomepage()
     });
 
     function Logout() {
@@ -285,7 +284,7 @@
 <!----------------------------------------------------- Manage User Web  ------------------------------------------------------------>
 <script>
     $(document).ready(function() {
-        $('#ManageUserTable').DataTable();
+        $('#DataTable').DataTable();
     });
     $("#btnSaveAdd").click(function() {
         addUserWeb()
@@ -1623,6 +1622,126 @@
             });
         }
     }
+
+    // __________________________________________ mst DMC DATA_________________________________________
+    
+    $("#btnSaveAddDmc").click(function() {
+        SaveAddDMC()
+    });
+    $("#btnSaveEditDmc").click(function() {
+        SaveEditDMC()
+    })
+
+
+    function statusDMC(mdd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDMC?mdd_id=" + mdd_id
+        })
+    };
+
+
+    function SaveAddDMC() {
+        var adddmcname = $('#adddmcname').val()
+
+        var checkadddmcname = document.getElementById("adddmcname")
+
+        if (checkadddmcname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddDMCData",
+                data: {
+                    adddmcname: adddmcname,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add DMC Data.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/DMCData";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  DMC Data',
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataDMC(mdd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDMC?mdd_id=" + mdd_id,
+        })
+        path.done(function(rs) {
+
+            $("#editdmcname").val(rs[0]["mdd_name"]);
+            $("#IDeditdmcname").val(rs[0]["mdd_id"]);
+        })
+    };
+
+    function SaveEditDMC() {
+        var IDeditdmcname = $('#IDeditdmcname').val()
+        var editdmcname = $('#editdmcname').val()
+
+        var checkIDeditdmcname = document.getElementById("IDeditdmcname");
+        var checkeditdmcname = document.getElementById("editdmcname");
+
+
+        if (checkIDeditdmcname.value == "" || checkeditdmcname.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/DMCData";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditDMC",
+                data: {
+                    IDeditdmcname: IDeditdmcname,
+                    editdmcname: editdmcname
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "DMC Data  is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/DMCData";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit DMC Data',
+                    })
+                }
+            });
+        }
+    }
+
 
 
 </script>

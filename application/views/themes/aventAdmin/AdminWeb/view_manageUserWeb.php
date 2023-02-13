@@ -10,7 +10,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="ManageUserTable" width="100%" cellspacing="0">
+            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
@@ -70,7 +70,7 @@
             </table>
 
           </div>
-          <!-- Edit Modal-->
+          <!--------------------------------------- Edit Modal ---------------------------------------------------------------->
           <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -143,7 +143,7 @@
             </div>
           </div>
 
-          <!-- addUser Modal-->
+          <!---------------------------- addUser Modal ---------------------------->
           <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">

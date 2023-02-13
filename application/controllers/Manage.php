@@ -291,7 +291,6 @@ class manage extends CI_Controller
 						// return "false";
 					} else {
 						$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailWeb($permissionwebnameconvert, $value, $empcodeadmin);
-					
 					}
 				}
 				echo $rsaddpermissiondetail;
@@ -414,7 +413,6 @@ class manage extends CI_Controller
 			if ($addmenuweb == "true") {
 				$addsubmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
 				echo $addsubmenu;
-
 			} else {
 				echo "false";
 			}
@@ -423,7 +421,6 @@ class manage extends CI_Controller
 			$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
 			$addSubmenuwitholdmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
 			echo $addSubmenuwitholdmenu;
-
 		} else {
 			echo "false";
 		}
@@ -451,11 +448,11 @@ class manage extends CI_Controller
 		$IDeditMenuName = $_POST["IDeditMenuName"];
 		$IDeditSubMenuName = $_POST["IDeditSubMenuName"];
 
-		$reseditmenuname = $this->backoffice_model->editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin);		
-		if($reseditmenuname == "true"){
+		$reseditmenuname = $this->backoffice_model->editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin);
+		if ($reseditmenuname == "true") {
 			$reseditsubmenuname = $this->backoffice_model->editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin);
 			echo $reseditsubmenuname;
-		}	else{
+		} else {
 			echo "false";
 		}
 	}
@@ -493,13 +490,14 @@ class manage extends CI_Controller
 		$res = $this->backoffice_model->editStatusUserApp($userappid);
 		echo json_encode($res);
 	}
-	public function AddManageUserApp (){
+	public function AddManageUserApp()
+	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addempcodeapp = $_POST["addempcodeapp"];
 		$addnameapp = $_POST["addnameapp"];
 		$addgrouppermissionapp = $_POST["addgrouppermissionapp"];
 		$addpathpicapp = $_POST["addpathpicapp"];
-		$rsadduserapp = $this->backoffice_model->addManageUserApp($addempcodeapp,$addnameapp,$addgrouppermissionapp,$addpathpicapp,$empcodeadmin);
+		$rsadduserapp = $this->backoffice_model->addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin);
 		echo $rsadduserapp;
 	}
 
@@ -508,17 +506,18 @@ class manage extends CI_Controller
 		$ss_id = $_GET["ss_id"];
 		$res["getdataEdit"] = $this->backoffice_model->GetDataEditUserApp($ss_id);
 		$res["PermissionAll"] = $this->backoffice_model->getTableGroupPermissionApp();
-		 echo json_encode($res);
+		echo json_encode($res);
 	}
-	public function EditManageUserApp(){
+	public function EditManageUserApp()
+	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$IDedituserapp = $_GET["IDedituserapp"];
 		$editempcodeuserapp = $_GET["editempcodeuserapp"];
 		$editnameapp = $_GET["editnameapp"];
 		$editgrouppermissionuserapp = $_GET["editgrouppermissionuserapp"];
-		$editpathpicapp = $_GET["editpathpicapp"];		
+		$editpathpicapp = $_GET["editpathpicapp"];
 
-		$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp,$editempcodeuserapp,$editnameapp,$editgrouppermissionuserapp,$editpathpicapp,$empcodeadmin);
+		$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $editpathpicapp, $empcodeadmin);
 		echo $resedituserapp;
 	}
 
@@ -568,7 +567,6 @@ class manage extends CI_Controller
 						// return "false";
 					} else {
 						$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailApp($permissionappnameconvert, $value, $empcodeadmin);
-					
 					}
 				}
 				echo $rsaddpermissiondetail;
@@ -584,7 +582,6 @@ class manage extends CI_Controller
 		$id = $_GET["spg_id"];
 		$res = $this->backoffice_model->detailGroupPermissionApp($id);
 		echo json_encode($res);
-
 	}
 
 	public function 	swiftStatusPermissionDetailApp()
@@ -610,11 +607,11 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		// echo $dropdowneditmenu;
 
-		$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper,$id);
+		$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id);
 
 		if ($updatenameper == "true") {
-			
-			$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id,$dropdowneditmenu);
+
+			$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
 			// echo $checkInsertEditper;
 			if ($checkInsertEditper == "true") {
 				$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
@@ -627,7 +624,7 @@ class manage extends CI_Controller
 		}
 	}
 
-		// --------------------------------------------- Manage Menu App ------------------------------------------
+	// --------------------------------------------- Manage Menu App ------------------------------------------
 
 	public function ManageMenuApp()
 	{
@@ -650,7 +647,7 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageMenuApp.php',$data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/AdminApp/view_ManageMenuApp.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
@@ -662,9 +659,8 @@ class manage extends CI_Controller
 		$addmenupathapp = $_POST["addmenupathapp"];
 		$addmenupicapp = $_POST["addmenupicapp"];
 
-		$rsaddmenuapp =  $this->backoffice_model->modelAddMenuApp($addmenuappname,$addmenupathapp,$addmenupicapp,$empcodeadmin);
+		$rsaddmenuapp =  $this->backoffice_model->modelAddMenuApp($addmenuappname, $addmenupathapp, $addmenupicapp, $empcodeadmin);
 		echo $rsaddmenuapp;
-
 	}
 
 	public function swiftStatusMenuApp()
@@ -688,10 +684,9 @@ class manage extends CI_Controller
 		$editmenupathapp = $_POST["editmenupathapp"];
 		$editmenupicapp = $_POST["editmenupicapp"];
 
-		$rseditmenuapp = $this->backoffice_model->modelEditMenuApp($editmenuappid,$editmenuappname,$editmenupathapp,$editmenupicapp,$empcodeadmin);
+		$rseditmenuapp = $this->backoffice_model->modelEditMenuApp($editmenuappid, $editmenuappname, $editmenupathapp, $editmenupicapp, $empcodeadmin);
 
 		echo $rseditmenuapp;
-
 	}
 
 	// ************************* Master Control *************************************
@@ -739,7 +734,7 @@ class manage extends CI_Controller
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addparttypename = $_POST["addparttypename"];
-		$rsaddchecktype = $this->backoffice_model->modelAddCheckType($addparttypename,$empcodeadmin);
+		$rsaddchecktype = $this->backoffice_model->modelAddCheckType($addparttypename, $empcodeadmin);
 		echo $rsaddchecktype;
 	}
 	public function swiftStatusChecktype()
@@ -761,10 +756,9 @@ class manage extends CI_Controller
 		$IDeditparttype = $_POST["IDeditparttype"];
 		$editparttypeName = $_POST["editparttypeName"];
 
-		$rseditchecktype = $this->backoffice_model->modelEditCheckType($IDeditparttype,$editparttypeName,$empcodeadmin);
+		$rseditchecktype = $this->backoffice_model->modelEditCheckType($IDeditparttype, $editparttypeName, $empcodeadmin);
 
 		echo $rseditchecktype;
-
 	}
 
 	// ************************* Control Check Status *************************************
@@ -794,7 +788,7 @@ class manage extends CI_Controller
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addstatusname = $_POST["addstatusname"];
-		$rsaddstatus = $this->backoffice_model->modelAddStatus($addstatusname,$empcodeadmin);
+		$rsaddstatus = $this->backoffice_model->modelAddStatus($addstatusname, $empcodeadmin);
 		echo $rsaddstatus;
 	}
 
@@ -811,10 +805,9 @@ class manage extends CI_Controller
 		$IDeditStatusName = $_POST["IDeditStatusName"];
 		$editStatusName = $_POST["editStatusName"];
 
-		$rseditcheckStatus = $this->backoffice_model->modelEditCheckStatus($IDeditStatusName,$editStatusName,$empcodeadmin);
+		$rseditcheckStatus = $this->backoffice_model->modelEditCheckStatus($IDeditStatusName, $editStatusName, $empcodeadmin);
 
 		echo $rseditcheckStatus;
-
 	}
 
 	// ************************* Control Inspection Type *************************************
@@ -844,7 +837,7 @@ class manage extends CI_Controller
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addinspectiontype = $_POST["addinspectiontype"];
-		$rsinspection = $this->backoffice_model->modelAddInspection($addinspectiontype,$empcodeadmin);
+		$rsinspection = $this->backoffice_model->modelAddInspection($addinspectiontype, $empcodeadmin);
 		echo $rsinspection;
 	}
 
@@ -861,10 +854,9 @@ class manage extends CI_Controller
 		$IDeditInspectionName = $_POST["IDeditInspectionName"];
 		$editInspectionName = $_POST["editInspectionName"];
 
-		$rseditinspection = $this->backoffice_model->modelEditInspection($IDeditInspectionName,$editInspectionName,$empcodeadmin);
+		$rseditinspection = $this->backoffice_model->modelEditInspection($IDeditInspectionName, $editInspectionName, $empcodeadmin);
 
 		echo $rseditinspection;
-
 	}
 
 	// ************************* Control DMC Data *************************************
@@ -873,6 +865,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableDMC"] = $this->backoffice_model->getTableDMC();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -882,6 +875,38 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function swiftStatusDMC()
+	{
+		$dmcId = $_GET["mdd_id"];
+		$res = $this->backoffice_model->editStatusDMC($dmcId);
+		echo json_encode($res);
+	}
+
+	public function AddDMCData()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$adddmcname = $_POST["adddmcname"];
+		$rsinspection = $this->backoffice_model->modelAddDMC($adddmcname, $empcodeadmin);
+		echo $rsinspection;
+	}
+	
+	public function getDataEditDMC()
+	{
+		$dmcid = $_GET["mdd_id"];
+		$res = $this->backoffice_model->getDataEditDMC($dmcid);
+		echo json_encode($res);
+	}
+
+	public function EditDMC()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditdmcname = $_POST["IDeditdmcname"];
+		$editdmcname = $_POST["editdmcname"];
+
+		$rseditdmc = $this->backoffice_model->modelEditDMC($IDeditdmcname, $editdmcname , $empcodeadmin);
+
+		echo $rseditdmc;
+	}
 	// ************************* Control DMC Type *************************************
 	public function  DMCType()
 	{

@@ -9,10 +9,10 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="CheckStatusTable" width="100%" cellspacing="0">
+            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="text-align: center;">NO.</th>
+                <th style="text-align: center;">NO.</th>
                   <th style="text-align: center;">Status Name</th>
                   <th style="text-align: center;">status</th>
                   <th style="text-align: center;">Action</th>
@@ -29,7 +29,7 @@
                   if ($status["mcs_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusCheckStatus(" . $status["mcs_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusCheckType(" . $status["mcs_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -37,7 +37,7 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusCheckStatus(" . $status["mcs_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusCheckType(" . $status["mcs_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
@@ -56,7 +56,7 @@
 
           </div>
 
-          <!-- addPermissionWeb Modal-->
+          <!------------------------ addCheckStatus Modal------------------------------------>
           <div class="modal fade" id="addstatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -82,7 +82,7 @@
             </div>
           </div>
 
-          <!-- EditPermissionWeb Modal-->
+          <!----------------------------------- editCheckStatus Modal----------------------------------------->
           <div class="modal fade" id="editstatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

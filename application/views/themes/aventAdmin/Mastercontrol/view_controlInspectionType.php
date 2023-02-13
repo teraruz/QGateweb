@@ -9,7 +9,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="InspectionTable" width="100%" cellspacing="0">
+            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
