@@ -1048,4 +1048,25 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+	public function GetDataEditCheckStatus($statusid)
+	{
+		$sql = "SELECT mcs_id, mcs_name 
+		FROM mst_check_status_app
+		WHERE mcs_id = '{$statusid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditCheckStatus($IDeditStatusName,$editStatusName,$empcodeadmin){
+		$sql = "UPDATE mst_check_status_app 
+		SET mcs_name = '{$editStatusName}', mcs_update_by = '{$empcodeadmin}',mcs_update_date = CURRENT_TIMESTAMP
+		WHERE mcs_id = '{$IDeditStatusName}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
 }

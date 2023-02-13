@@ -1388,12 +1388,12 @@
         }
     }
 
-    // *********************************************** Mst Control Check Type ************************************************** 
+    // *********************************************** Mst Control Check Status ************************************************** 
     $("#btnSaveAddStatus").click(function() {
         SaveAddStatus()
     });
     $("#btnSaveEditStatus").click(function() {
-        SaveEditStatus()
+        SaveEditCheckStatus()
     })
 
 
@@ -1437,12 +1437,73 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add  Type Part',
+                        title: 'You Failed to Add  Status',
                     })
                 }
             })
         }
     };
 
+    function getDataCheckStatus(mcs_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditCheckStatus?mcs_id=" + mcs_id,
+        })
+        path.done(function(rs) {
+
+            $("#editStatusName").val(rs[0]["mcs_name"]);
+            $("#IDeditStatusName").val(rs[0]["mcs_id"]);
+        })
+    };
+
+
+    function SaveEditCheckStatus() {
+        var IDeditStatusName = $('#IDeditStatusName').val()
+        var editStatusName = $('#editStatusName').val()
+
+        var checkIDeditStatusName = document.getElementById("IDeditStatusName");
+        var checkeditStatusName = document.getElementById("editStatusName");
+
+
+        if (checkIDeditStatusName.value == "" || checkeditStatusName.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/CheckStatus";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditCheckStatus",
+                data: {
+                    IDeditStatusName: IDeditStatusName,
+                    editStatusName: editStatusName
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Status Name is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/CheckStatus";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Status Name',
+                    })
+                }
+            });
+        }
+    }
 
 </script>

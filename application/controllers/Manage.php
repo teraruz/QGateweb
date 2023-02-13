@@ -798,6 +798,25 @@ class manage extends CI_Controller
 		echo $rsaddstatus;
 	}
 
+	public function getDataEditCheckStatus()
+	{
+		$statusid = $_GET["mcs_id"];
+		$res = $this->backoffice_model->GetDataEditCheckStatus($statusid);
+		echo json_encode($res);
+	}
+
+	public function EditCheckStatus()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditStatusName = $_POST["IDeditStatusName"];
+		$editStatusName = $_POST["editStatusName"];
+
+		$rseditcheckStatus = $this->backoffice_model->modelEditCheckStatus($IDeditStatusName,$editStatusName,$empcodeadmin);
+
+		echo $rseditcheckStatus;
+
+	}
+
 	// ************************* Control Inspection Type *************************************
 	public function InspectionType()
 	{
