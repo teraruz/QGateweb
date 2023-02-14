@@ -4,7 +4,7 @@
       <h1 class="col-12" style="color:black">FA Code</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="mdi mdi-plus-circle"></i>Add FA Code</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addfacode><i class="mdi mdi-database-plus"></i>Add FA Code</a>
         </div>
 
         <div class="card-body">
@@ -20,88 +20,77 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <?php
+                <?php
                 $i = 0;
-                foreach ($tableMenuWeb as $menuweb) {
+                foreach ($tableFACode as $facode) {
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
-                  echo "<td>" . $menuweb["sm_name_menu"] . "</td>";
-                  echo "<td>" . $menuweb["ssm_name_submenu"] . "</td>";
-                  if ($menuweb["ssm_status"] == "1") {
+                  echo "<td>" . $facode["mfcm_line_code"] . "</td>";
+                  echo "<td>" . $facode["mfcm_name_code"] . "</td>";
+                  if ($facode["mfcm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusFACode$i checked onclick='statusFACode(" . $facode["mfcm_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusFACode$i></label>
                                             </div>
                                        
                                     </td>";
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusFACode$i onclick='statusFACode(" . $facode["mfcm_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusFACode$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuweb["ssm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editfacode\"  onclick='getDataFACode(" . $facode["mfcm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
                   echo "</tr>";
                 }
-                ?> -->
+                ?>
               </tbody>
             </table>
 
           </div>
 
-          <!-- add FA Code-->
-          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!---------------------------------------------------- add FA Code------------------------------------------------>
+          <div class="modal fade" id="addfacode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-plus-circle"></i> Add FA Code</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-database-plus"></i> Add FA Code</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Menu Name :</label>
-                    <input class="form-control" type="text" id="addmenuwebname" name="addmenuwebname" required="" placeholder="Enter New Menu">
+                    <label for="empcode">Line :</label>
+                    <input class="form-control" type="text" id="addfaline" name="addfaline" required="" placeholder="Enter New Line">
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Submenu Name :</label>
-                    <input class="form-control" type="text" id="addsubmenuwebname" name="addsubmenuwebname" required="" placeholder="Enter New Submenu">
+                    <label for="password">Name :</label>
+                    <input class="form-control" type="text" id="addfaname" name="addfaname"  placeholder="Enter New Name">
                   </div>
-
-                  <div class="form-group">
-                    <label for="password">Method :</label>
-                    <input class="form-control" type="text" id="addmenupath" name="addmenupath" required="" placeholder="Enter path of menu">
-                  </div>
-
-
-                  <div class="form-group">
-                    <label for="password">icon name :</label>
-                    <input class="form-control" type="text" id="addmenuicon" name="addmenuicon" required="" placeholder="Enter icon name of menu">
-                  </div>
-
+                 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddFaCode">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Edit FA Code-->
-          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!------------------------------------- Edit FA Code----------------------------------------------->
+          <div class="modal fade" id="editfacode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -113,22 +102,22 @@
 
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="NameMenuWeb">Menu Name :</label>
-                    <input class="form-control" type="text" id="editMenuName" name="editMenuName" >
-                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
+                    <label for="NameMenuWeb">Line :</label>
+                    <input class="form-control" type="text" id="IDeditfacode" name="IDeditfacode" hidden>
+                    <input class="form-control" type="text" id="editfaline" name="editfaline" >
+                  
                   </div>
 
                   <div class="form-group">
-                    <label for="NameSubMenuWeb">Submenu Name :</label>
-                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
-                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
+                    <label for="NameSubMenuWeb">Name :</label>
+                    <input class="form-control" type="text" id="editfaname" name="editfaname">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditFaCode">Save</a>
                 </div>
               </div>
             </div>

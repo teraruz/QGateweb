@@ -1221,4 +1221,219 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+
+
+	// ************************************** mst DMC TYPE *******************************
+
+
+	public function getTableDMCType()
+	{
+		$sql = "SELECT *
+		FROM mst_dmc_type_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function editStatusDMCType($dmctypeId)
+	{
+		$sql = "select * from mst_dmc_type_app WHERE mdt_id = '{$dmctypeId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mdt_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_dmc_type_app SET mdt_status = 0 WHERE  mdt_id = '{$dmctypeId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_dmc_type_app SET mdt_status = 1 WHERE  mdt_id = '{$dmctypeId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+
+	public function modelAddDMCType($adddmctypename,$adddmcdigit, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_dmc_type_app (mdt_name, mdt_digit, mdt_create_by , mdt_create_date)
+		VALUES ('{$adddmctypename}','{$adddmcdigit}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditDMCType($dmctypeid)
+	{
+		$sql = "SELECT mdt_id , mdt_name , mdt_digit
+		FROM mst_dmc_type_app
+		WHERE mdt_id = '{$dmctypeid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+
+	}
+
+	public function modelEditDMCType($IDeditdmctype, $editdmctypename ,$editdmcdigit, $empcodeadmin)
+	{
+		$sql = "UPDATE mst_dmc_type_app 
+		SET mdt_name = '{$editdmctypename}', mdt_digit = '{$editdmcdigit}', mdt_update_by = '{$empcodeadmin}', mdt_update_date = CURRENT_TIMESTAMP
+		WHERE mdt_id = '{$IDeditdmctype}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+
+// ************************************* mst FA Code ***************************
+
+public function getTableFACode()
+	{
+		$sql = "SELECT *
+		FROM mst_fa_code_master_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusFACode($facodeId)
+	{
+		$sql = "select * from mst_fa_code_master_app WHERE mfcm_id = '{$facodeId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mfcm_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_fa_code_master_app SET mfcm_status = 0 WHERE  mfcm_id = '{$facodeId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_fa_code_master_app SET mfcm_status = 1 WHERE  mfcm_id = '{$facodeId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddFACode($addfaline,$addfaname, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_fa_code_master_app (mfcm_line_code, mfcm_name_code, mfcm_create_by , mfcm_create_date)
+		VALUES ('{$addfaline}','{$addfaname}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+
+	public function getDataEditFACode($facodeid)
+	{
+		$sql = "SELECT mfcm_id , mfcm_line_code , mfcm_name_code
+		FROM mst_fa_code_master_app
+		WHERE mfcm_id = '{$facodeid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+
+	}
+
+	public function modelEditFACode($IDeditfacode, $editfaline ,$editfaname, $empcodeadmin)
+	{
+		$sql = "UPDATE mst_fa_code_master_app 
+		SET mfcm_line_code = '{$editfaline}', mfcm_name_code = '{$editfaname}', mfcm_update_by = '{$empcodeadmin}', mfcm_update_date = CURRENT_TIMESTAMP
+		WHERE mfcm_id = '{$IDeditfacode}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+
+	// ******************************************* mst WORK SHIFT *****************************************
+
+	public function getTableWorkShift()
+	{
+		$sql = "SELECT *
+		FROM mst_work_shift_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	
+
+	public function editStatusWorkShift($workshiftId)
+	{
+		$sql = "select * from mst_work_shift_app WHERE mws_id = '{$workshiftId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mws_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_work_shift_app SET mws_status = 0 WHERE  mws_id = '{$workshiftId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_work_shift_app SET mws_status = 1 WHERE  mws_id = '{$workshiftId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddWorkShift($addshift ,$addstarttime, $addendtime , $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_work_shift_app (mws_shift, mws_time_start, mws_time_end , mws_create_by , mws_create_date)
+		VALUES ('{$addshift}','{$addstarttime}', '{$addendtime}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+
+
 }
+
+
+
+
+

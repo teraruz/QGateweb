@@ -1505,7 +1505,7 @@
         }
     }
 
-// ********************************************************* mst Inspection ********************************************
+    // ********************************************************* mst Inspection ********************************************
 
     $("#btnSaveAddInspection").click(function() {
         SaveAddInspection()
@@ -1624,7 +1624,7 @@
     }
 
     // __________________________________________ mst DMC DATA_________________________________________
-    
+
     $("#btnSaveAddDmc").click(function() {
         SaveAddDMC()
     });
@@ -1743,5 +1743,332 @@
     }
 
 
+    // **************************************************** mst  DMC TYPE **********************************
 
+
+
+    $("#btnSaveAddDmcType").click(function() {
+        SaveAddDMCType()
+    });
+    $("#btnSaveEditDmcType").click(function() {
+        SaveEditDMCType()
+    })
+
+
+    function statusDMCType(mdt_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDMCType?mdt_id=" + mdt_id
+        })
+    };
+
+    function SaveAddDMCType() {
+        var adddmctypename = $('#adddmctypename').val()
+        var adddmcdigit = $('#adddmcdigit').val()
+
+        var checkadddmctypename = document.getElementById("adddmctypename")
+        var checkadddmcdigit = document.getElementById("adddmcdigit")
+
+        if (checkadddmctypename.value == "", checkadddmcdigit.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddDMCType",
+                data: {
+                    adddmctypename: adddmctypename,
+                    adddmcdigit: adddmcdigit
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add DMC Type.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/DMCType";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  DMC Data Type',
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataDMCType(mdt_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDMCType?mdt_id=" + mdt_id,
+        })
+        path.done(function(rs) {
+            $("#editdmctypename").val(rs[0]["mdt_name"]);
+            $("#IDeditdmctype").val(rs[0]["mdt_id"]);
+            $("#editdmcdigit").val(rs[0]["mdt_digit"]);
+
+        })
+    };
+
+    function SaveEditDMCType(mdt_id)
+    {
+        var IDeditdmctype = $('#IDeditdmctype').val()
+        var editdmctypename = $('#editdmctypename').val()
+        var  editdmcdigit = $("#editdmcdigit").val()
+
+        var checkIDeditdmctype = document.getElementById("IDeditdmctype");
+        var checkeditdmctypename = document.getElementById("editdmctypename");
+        var checkeditdmcdigit = document.getElementById("editdmcdigit");
+
+
+        if (checkeditdmctypename.value == "" || checkeditdmcdigit.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/DMCType";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditDMCType",
+                data: {
+                    IDeditdmctype: IDeditdmctype,
+                    editdmctypename: editdmctypename,
+                    editdmcdigit:editdmcdigit 
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "DMC Type  is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/DMCType";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit DMC Type',
+                    })
+                }
+            });
+        }
+
+    }
+
+
+    // **************************************************** mst  FA CODE  **********************************
+
+
+    $("#btnSaveAddFaCode").click(function() {
+        SaveAddFACode()
+    });
+    $("#btnSaveEditFaCode").click(function() {
+        SaveEditFACode()
+    })
+
+
+    function statusFACode(mfcm_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusFACode?mfcm_id=" + mfcm_id
+        })
+    };
+
+
+
+    function SaveAddFACode() {
+        var addfaline = $('#addfaline').val()
+        var addfaname = $('#addfaname').val()
+
+        var checkaddfaline = document.getElementById("addfaline")
+        var checkaddfaname = document.getElementById("addfaname")
+
+        if (checkaddfaline.value == "", checkaddfaname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddFACode",
+                data: {
+                    addfaline: addfaline,
+                    addfaname: addfaname
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add FA Code.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/FACode";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  FA Code',
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataFACode(mfcm_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditFACode?mfcm_id=" + mfcm_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditfacode").val(rs[0]["mfcm_id"]);
+            $("#editfaline").val(rs[0]["mfcm_line_code"]);
+            $("#editfaname").val(rs[0]["mfcm_name_code"]);
+
+        })
+    };
+
+    function SaveEditFACode(mfcm_id)
+    {
+        var IDeditfacode = $('#IDeditfacode').val()
+        var editfaline = $('#editfaline').val()
+        var editfaname = $('#editfaname').val()
+
+        var checkIDeditfacode = document.getElementById("IDeditfacode");
+        var checkeditfaline = document.getElementById("editfaline");
+        var checkeditfaname = document.getElementById("editfaname");
+
+
+        if (checkIDeditfacode.value == "" || checkeditfaline.value == "" || checkeditfaname.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/FACode";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditFACode",
+                data: {
+                    IDeditfacode: IDeditfacode,
+                    editfaline: editfaline,
+                    editfaname: editfaname 
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "FA Code is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/FACode";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit FA Code',
+                    })
+                }
+            });
+        }
+    }
+
+    // ********************************************************* mst WORK SHIFT **************************************************************
+
+
+
+    $("#btnSaveAddWorkShift").click(function() {
+        SaveAddWorkShift()
+    });
+    $("#btnSaveEditWorkShift").click(function() {
+        SaveEditWorkShift()
+    })
+
+
+    function statusWorkShift(mws_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusWorkShift?mws_id=" + mws_id
+        })
+    };
+
+
+    function SaveAddWorkShift() {
+        var addshift = $('#addshift').val()
+        var addstarttime = $('#addstarttime').val()
+        var addendtime = $('#addendtime').val()
+
+        var checkaddshift = document.getElementById("addshift")
+        var checkaddstarttime = document.getElementById("addstarttime")
+        var checkaddendtime = document.getElementById("addendtime")
+
+        if (checkaddshift.value == "", checkaddstarttime.value == "" || checkaddendtime == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddWorkShift",
+                data: {
+                    addshift : addshift,
+                    addstarttime: addstarttime,
+                    addendtime: addendtime
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                console.log("rs=====>",rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Work Shift.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/WorkShift";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Work Shift',
+                    })
+                }
+            })
+            function WorkShift(mws_id){
+
+            }
+        }
+    };
 </script>

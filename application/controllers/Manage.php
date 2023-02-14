@@ -913,6 +913,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableDMCType"] = $this->backoffice_model->getTableDMCType();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -922,12 +923,47 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function swiftStatusDMCType()
+	{
+		$dmctypeId = $_GET["mdt_id"];
+		$res = $this->backoffice_model->editStatusDMCType($dmctypeId);
+		echo json_encode($res);
+	}
+
+	public function AddDMCType()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$adddmctypename = $_POST["adddmctypename"];
+		$adddmcdigit = $_POST["adddmcdigit"];
+		$rsadddmctype = $this->backoffice_model->modelAddDMCType($adddmctypename,$adddmcdigit, $empcodeadmin);
+		echo $rsadddmctype;
+	}
+
+	public function getDataEditDMCType()
+	{
+		$dmctypeid = $_GET["mdt_id"];
+		$res = $this->backoffice_model->getDataEditDMCType($dmctypeid);
+		echo json_encode($res);
+	}
+	public function EditDMCType()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditdmctype = $_POST["IDeditdmctype"];
+		$editdmctypename = $_POST["editdmctypename"];
+		$editdmcdigit = $_POST["editdmcdigit"];
+
+		$rseditdmctype = $this->backoffice_model->modelEditDMCType($IDeditdmctype, $editdmctypename ,$editdmcdigit, $empcodeadmin);
+
+		echo $rseditdmctype;
+	}
+
 	// ************************* Control FA Code *************************************
 	public function  FACode()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableFACode"] = $this->backoffice_model->getTableFACode();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -937,12 +973,47 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function swiftStatusFACode()
+	{
+		$facodeId = $_GET["mfcm_id"];
+		$res = $this->backoffice_model->editStatusFACode($facodeId);
+		echo json_encode($res);
+	}
+
+	public function AddFACode()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addfaline = $_POST["addfaline"];
+		$addfaname = $_POST["addfaname"];
+		$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline,$addfaname, $empcodeadmin);
+		echo $rsaddFACode;
+	}
+	public function getDataEditFACode()
+	{
+		$facodeid = $_GET["mfcm_id"];
+		$res = $this->backoffice_model->getDataEditFACode($facodeid);
+		echo json_encode($res);
+	}
+
+	public function EditFACode()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditfacode = $_POST["IDeditfacode"];
+		$editfaline = $_POST["editfaline"];
+		$editfaname = $_POST["editfaname"];
+
+		$rseditfacode = $this->backoffice_model->modelEditFACode($IDeditfacode, $editfaline ,$editfaname, $empcodeadmin);
+
+		echo $rseditfacode;
+	}
+
 	// ************************* Control Work Shift *************************************
 	public function  WorkShift()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableWorkShift"] = $this->backoffice_model->getTableWorkShift();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -950,6 +1021,26 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlWorkShift.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusWorkShift()
+	{
+		$workshiftId = $_GET["mws_id"];
+		$res = $this->backoffice_model->editStatusWorkShift($workshiftId);
+		echo json_encode($res);
+	}
+	public function AddWorkShift()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addshift = $_POST["addshift"];
+		$addstarttime = $_POST["addstarttime"];
+		$addendtime = $_POST["addendtime"];
+		// echo $addshift;
+		// echo $addstarttime;
+		// echo $addendtime;
+
+		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift ,$addstarttime, $addendtime , $empcodeadmin);
+		echo $rsaddWorkShift;
 	}
 
 	// ************************* Control Defect *************************************
