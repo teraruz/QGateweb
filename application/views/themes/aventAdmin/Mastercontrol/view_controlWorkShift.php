@@ -110,6 +110,7 @@
                 <form class="card-body" action="#">
                 <div class="form-group">
                     <label for="empcode">Shift :</label>
+                    <input class="form-control" type="text" id="IDeditworkshift" name="IDeditworkshift" hidden>
                     <input class="form-control" type="text" id="editshift" name="editshift">
                   </div>
 

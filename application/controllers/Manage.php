@@ -1035,13 +1035,32 @@ class manage extends CI_Controller
 		$addshift = $_POST["addshift"];
 		$addstarttime = $_POST["addstarttime"];
 		$addendtime = $_POST["addendtime"];
-		// echo $addshift;
-		// echo $addstarttime;
-		// echo $addendtime;
 
 		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift ,$addstarttime, $addendtime , $empcodeadmin);
 		echo $rsaddWorkShift;
 	}
+
+	public function getDataEditWorkShift()
+	{
+		$workshiftId = $_GET["mws_id"];
+		$res = $this->backoffice_model->getDataEditWorkShift($workshiftId);
+		echo json_encode($res);
+	}
+
+
+	public function EditWorkShift()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditworkshift = $_POST["IDeditworkshift"];
+		$editshift = $_POST["editshift"];
+		$editstarttime = $_POST["editstarttime"];
+		$editendtime = $_POST["editendtime"];
+
+		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift ,$editstarttime , $editendtime, $empcodeadmin);
+		echo $rseditworkshift;
+	}
+
+
 
 	// ************************* Control Defect *************************************
 	public function  Defect()
@@ -1049,6 +1068,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableDefect"] = $this->backoffice_model->getTableDefect();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1056,6 +1076,45 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDefect.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusDefect()
+	{
+		$defectId = $_GET["md_id"];
+		$res = $this->backoffice_model->editStatusDefect($defectId);
+		echo json_encode($res);
+	}
+
+	public function AddDefect()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$adddefectcode = $_POST["adddefectcode"];
+		$adddefectnameth = $_POST["adddefectnameth"];
+		$adddefectnameen = $_POST["adddefectnameen"];
+
+		$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode ,$adddefectnameth, $adddefectnameen , $empcodeadmin);
+		echo $rsaddDefect;
+	}
+
+
+	public function getDataEditDefect()
+	{
+		$defectId = $_GET["md_id"];
+		$res = $this->backoffice_model->getDataEditDefect($defectId);
+		echo json_encode($res);
+	}
+
+
+	public function EditDefect()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditdefect = $_POST["IDeditdefect"];
+		$editdefectcode = $_POST["editdefectcode"];
+		$editdefectnameth = $_POST["editdefectnameth"];
+		$editdefectnameen = $_POST["editdefectnameen"];
+
+		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode ,$editdefectnameth , $editdefectnameen, $empcodeadmin);
+		echo $rseditdefect;
 	}
 
 	// ************************* Control Detail *************************************

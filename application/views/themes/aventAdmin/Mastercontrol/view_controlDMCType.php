@@ -104,7 +104,7 @@
                   <div class="form-group">
                     <label for="NameMenuWeb">Dmc Type Name :</label>
                     <input class="form-control" type="text" id="editdmctypename" name="editdmctypename" >
-                    <input class="form-control" type="text" id="IDeditdmctype" name="IDeditdmctype" >
+                    <input class="form-control" type="text" id="IDeditdmctype" name="IDeditdmctype" hidden >
                   </div>
 
                   <div class="form-group">

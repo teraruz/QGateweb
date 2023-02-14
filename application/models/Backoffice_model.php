@@ -1430,6 +1430,111 @@ public function getTableFACode()
 	}
 
 
+	public function getDataEditWorkShift($workshiftId)
+	{
+		$sql = "SELECT mws_id , mws_shift , mws_time_start , mws_time_end
+		FROM mst_work_shift_app
+		WHERE mws_id = '{$workshiftId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+
+	}
+
+
+	public function modelEditWorkShift($IDeditworkshift, $editshift ,$editstarttime , $editendtime, $empcodeadmin)
+	{
+		$sql = "UPDATE mst_work_shift_app 
+		SET mws_shift = '{$editshift}', mws_time_start = '{$editstarttime}', mws_time_end = '{$editendtime}',mws_create_by = '{$empcodeadmin}', mws_create_date = CURRENT_TIMESTAMP
+		WHERE  mws_id = '{$IDeditworkshift}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+
+	// *************************************************** mst DEFECT ****************************************************
+
+
+	public function getTableDefect()
+	{
+		$sql = "SELECT *
+		FROM mst_defect_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	
+
+
+
+	public function editStatusDefect($defectId)
+	{
+		$sql = "select * from mst_defect_app WHERE md_id = '{$defectId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["md_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_defect_app SET md_status = 0 WHERE  md_id = '{$defectId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_defect_app SET md_status = 1 WHERE  md_id = '{$defectId}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddDefect($adddefectcode ,$adddefectnameth, $adddefectnameen , $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_defect_app (md_defect_code, md_defect_th_name , md_defect_en_name , md_create_by , md_create_date)
+		VALUES ('{$adddefectcode}','{$adddefectnameth}', '{$adddefectnameen}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditDefect($defectId)
+	{
+		$sql = "SELECT md_id,md_defect_code,md_defect_th_name,md_defect_en_name
+		FROM mst_defect_app
+		WHERE md_id = '{$defectId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function modelEditDefect($IDeditdefect, $editdefectcode ,$editdefectnameth , $editdefectnameen, $empcodeadmin)
+	{
+		{
+			$sql = "UPDATE mst_defect_app 
+			SET md_defect_code = '{$editdefectcode}', md_defect_th_name = '{$editdefectnameth}', md_defect_en_name = '{$editdefectnameen}',md_update_by = '{$empcodeadmin}', md_update_date = CURRENT_TIMESTAMP
+			WHERE  md_id = '{$IDeditdefect}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+	}
 
 }
 

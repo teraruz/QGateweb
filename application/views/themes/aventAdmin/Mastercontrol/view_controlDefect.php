@@ -4,7 +4,7 @@
       <h1 class="col-12" style="color:black">Defect</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="mdi mdi-plus-circle"></i>Add Defect</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#adddefect><i class="mdi mdi-database-plus"></i>Add Defect</a>
         </div>
 
         <div class="card-body">
@@ -21,88 +21,86 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <?php
+                <?php
                 $i = 0;
-                foreach ($tableMenuWeb as $menuweb) {
+                foreach ($tableDefect as $defect) {
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
-                  echo "<td>" . $menuweb["sm_name_menu"] . "</td>";
-                  echo "<td>" . $menuweb["ssm_name_submenu"] . "</td>";
-                  if ($menuweb["ssm_status"] == "1") {
+                  echo "<td>" . $defect["md_defect_code"] . "</td>";
+                  echo "<td>" . $defect["md_defect_th_name"] . "</td>";
+                  echo "<td>" . $defect["md_defect_en_name"] . "</td>";
+                  if ($defect["md_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusDefect$i checked onclick='statusDefect(" . $defect["md_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusDefect$i></label>
                                             </div>
                                        
                                     </td>";
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusDefect$i onclick='statusDefect(" . $defect["md_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusDefect$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuweb["ssm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editdefectmodal\"  onclick='getDataDefect(" . $defect["md_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
                   echo "</tr>";
                 }
-                ?> -->
+                ?>
               </tbody>
             </table>
 
           </div>
 
           <!-- add Defect-->
-          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="adddefect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-plus-circle"></i> Add Defect</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-database-plus"></i> Add Defect</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Menu Name :</label>
-                    <input class="form-control" type="text" id="addmenuwebname" name="addmenuwebname" required="" placeholder="Enter New Menu">
+                    <label for="empcode">Defect Code :</label>
+                    <input class="form-control" type="text" id="adddefectcode" name="adddefectcode"  placeholder="Enter New  Defect Code">
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Submenu Name :</label>
-                    <input class="form-control" type="text" id="addsubmenuwebname" name="addsubmenuwebname" required="" placeholder="Enter New Submenu">
+                    <label for="password">Defect Name TH :</label>
+                    <input class="form-control" type="text" id="adddefectnameth" name="adddefectnameth"  placeholder="Enter New Defect name TH">
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Method :</label>
-                    <input class="form-control" type="text" id="addmenupath" name="addmenupath" required="" placeholder="Enter path of menu">
+                    <label for="password">Defect Name EN :</label>
+                    <input class="form-control" type="text" id="adddefectnameen" name="adddefectnameen"  placeholder="Enter New Defect name EN">
                   </div>
 
 
-                  <div class="form-group">
-                    <label for="password">icon name :</label>
-                    <input class="form-control" type="text" id="addmenuicon" name="addmenuicon" required="" placeholder="Enter icon name of menu">
-                  </div>
+        
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddDefect">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Edit Defect-->
-          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="editdefectmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -113,23 +111,28 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
-                    <label for="NameMenuWeb">Menu Name :</label>
-                    <input class="form-control" type="text" id="editMenuName" name="editMenuName" >
-                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
+                <div class="form-group">
+                    <label for="empcode">Defect Code :</label>
+                    <input class="form-control" type="text" id="IDeditdefect" name="IDeditdefect" required="" >
+                    <input class="form-control" type="text" id="editdefectcode" name="editdefectcode" required="" placeholder="Enter New  Defect Code">
                   </div>
 
                   <div class="form-group">
-                    <label for="NameSubMenuWeb">Submenu Name :</label>
-                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
-                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
+                    <label for="password">Defect Name TH :</label>
+                    <input class="form-control" type="text" id="editdefectnameth" name="editdefectnameth" required="" placeholder="Enter New Defect name TH">
                   </div>
+
+                  <div class="form-group">
+                    <label for="password">Defect Name EN :</label>
+                    <input class="form-control" type="text" id="editdefectnameen" name="editdefectnameen" required="" placeholder="Enter New Defect name EN">
+                  </div>
+
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditDefect">Save</a>
                 </div>
               </div>
             </div>

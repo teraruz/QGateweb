@@ -1819,11 +1819,10 @@
         })
     };
 
-    function SaveEditDMCType(mdt_id)
-    {
+    function SaveEditDMCType(mdt_id) {
         var IDeditdmctype = $('#IDeditdmctype').val()
         var editdmctypename = $('#editdmctypename').val()
-        var  editdmcdigit = $("#editdmcdigit").val()
+        var editdmcdigit = $("#editdmcdigit").val()
 
         var checkIDeditdmctype = document.getElementById("IDeditdmctype");
         var checkeditdmctypename = document.getElementById("editdmctypename");
@@ -1846,7 +1845,7 @@
                 data: {
                     IDeditdmctype: IDeditdmctype,
                     editdmctypename: editdmctypename,
-                    editdmcdigit:editdmcdigit 
+                    editdmcdigit: editdmcdigit
                 }
             })
             path.done(function(rs) {
@@ -1950,8 +1949,7 @@
         })
     };
 
-    function SaveEditFACode(mfcm_id)
-    {
+    function SaveEditFACode(mfcm_id) {
         var IDeditfacode = $('#IDeditfacode').val()
         var editfaline = $('#editfaline').val()
         var editfaname = $('#editfaname').val()
@@ -1977,7 +1975,7 @@
                 data: {
                     IDeditfacode: IDeditfacode,
                     editfaline: editfaline,
-                    editfaname: editfaname 
+                    editfaname: editfaname
                 }
             })
             path.done(function(rs) {
@@ -2031,7 +2029,7 @@
         var checkaddstarttime = document.getElementById("addstarttime")
         var checkaddendtime = document.getElementById("addendtime")
 
-        if (checkaddshift.value == "", checkaddstarttime.value == "" || checkaddendtime == "") {
+        if (checkaddshift.value == ""|| checkaddstarttime.value == "" || checkaddendtime == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -2043,14 +2041,13 @@
                 method: "POST",
                 url: "<?php echo base_url(); ?>Manage/AddWorkShift",
                 data: {
-                    addshift : addshift,
+                    addshift: addshift,
                     addstarttime: addstarttime,
                     addendtime: addendtime
                 }
             })
             path.done(function(rs) {
-                alert(rs)
-                console.log("rs=====>",rs)
+                // console.log("rs=====>", rs)
                 if (rs === "true") {
                     Swal.fire({
                         icon: 'success',
@@ -2066,9 +2063,220 @@
                     })
                 }
             })
-            function WorkShift(mws_id){
-
-            }
         }
     };
+
+
+    function getDataWorkShift(mws_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditWorkShift?mws_id=" + mws_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditworkshift").val(rs[0]["mws_id"]);
+            $("#editshift").val(rs[0]["mws_shift"]);
+            $("#editstarttime").val(rs[0]["mws_time_start"]);
+            $("#editendtime").val(rs[0]["mws_time_end"]);
+
+        })
+    };
+
+
+    function SaveEditWorkShift(mws_id) {
+        var IDeditworkshift = $('#IDeditworkshift').val()
+        var editshift = $('#editshift').val()
+        var editstarttime = $('#editstarttime').val()
+        var editendtime = $('#editendtime').val()
+
+        var checkIDeditworkshift = document.getElementById("IDeditworkshift");
+        var checkeditshift = document.getElementById("editshift");
+        var checkeditstarttime = document.getElementById("editstarttime");
+        var checkeditendtime = document.getElementById("editendtime");
+
+
+        if (checkIDeditworkshift.value == "" || checkeditshift.value == "" 
+        || checkeditstarttime.value == "" || checkeditendtime.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/WorkShift";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditWorkShift",
+                data: {
+                    IDeditworkshift: IDeditworkshift,
+                    editshift: editshift,
+                    editstarttime: editstarttime,
+                    editendtime : editendtime
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Work Shift is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/WorkShift";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Work Shift',
+                    })
+                }
+            });
+        }
+    }
+
+
+     // ********************************************************* mst DEFECT **************************************************************
+
+
+     $("#btnSaveAddDefect").click(function() {
+        SaveAddDefect()
+    });
+    $("#btnSaveEditDefect").click(function() {
+        SaveEditDefect()
+    })
+
+
+    function statusDefect(md_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDefect?md_id=" + md_id
+        })
+    };
+
+
+    function SaveAddDefect() {
+        var adddefectcode = $('#adddefectcode').val()
+        var adddefectnameth = $('#adddefectnameth').val()
+        var adddefectnameen = $('#adddefectnameen').val()
+
+        var checkadddefectcode = document.getElementById("adddefectcode");
+        var checkadddefectnameth  = document.getElementById("adddefectnameth");
+        var checkadddefectnameen = document.getElementById("adddefectnameen");
+
+        if (checkadddefectcode.value == "" || checkadddefectnameth.value == "" || checkadddefectnameen.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddDefect",
+                data: {
+                    adddefectcode: adddefectcode,
+                    adddefectnameth: adddefectnameth,
+                    adddefectnameen: adddefectnameen
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                // console.log("rs=====>", rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Defect.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/Defect";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Defect'
+                    })
+                }
+            })
+        }
+    };
+
+    
+    function getDataDefect(md_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDefect?md_id=" + md_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditdefect").val(rs[0]["md_id"]);
+            $("#editdefectcode").val(rs[0]["md_defect_code"]);
+            $("#editdefectnameth").val(rs[0]["md_defect_th_name"]);
+            $("#editdefectnameen").val(rs[0]["md_defect_en_name"]);
+
+        })
+    };
+
+
+    function SaveEditDefect(md_id) {
+        var IDeditdefect = $('#IDeditdefect').val()
+        var editdefectcode = $('#editdefectcode').val()
+        var editdefectnameth = $('#editdefectnameth').val()
+        var editdefectnameen = $('#editdefectnameen').val()
+
+        var checkIDeditdefect = document.getElementById("IDeditdefect");
+        var checkeditdefectcode = document.getElementById("editdefectcode");
+        var checkeditdefectnameth = document.getElementById("editdefectnameth");
+        var checkeditdefectnameen = document.getElementById("editdefectnameen");
+
+
+        if (checkIDeditdefect.value == "" || checkeditdefectcode.value == "" 
+        || checkeditdefectnameth.value == "" || checkeditdefectnameen.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/Defect";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditDefect",
+                data: {
+                    IDeditdefect: IDeditdefect,
+                    editdefectcode: editdefectcode,
+                    editdefectnameth: editdefectnameth,
+                    editdefectnameen : editdefectnameen
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Defect is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/Defect";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Defect',
+                    })
+                }
+            });
+        }
+    }
+
+
+
 </script>
