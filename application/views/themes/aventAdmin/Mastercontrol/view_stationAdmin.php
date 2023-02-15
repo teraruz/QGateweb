@@ -4,7 +4,7 @@
       <h1 class="col-12" style="color:black">Station Admin</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="mdi mdi-database-plus"></i>Add Work Shift</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addzone><i class="mdi mdi-database-plus"></i>Add Station</a>
         </div>
 
         <div class="card-body">
@@ -13,9 +13,7 @@
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Shift</th>
-                  <th style="text-align: center;">Start Time</th>
-                  <th style="text-align: center;">End Time</th>
+                  <th style="text-align: center;">Station</th>
                   <th style="text-align: center;">Status</th>
                   <th style="text-align: center;">Action</th>
                 </tr>
@@ -23,17 +21,16 @@
               <tbody>
                 <?php
                 $i = 0;
-                foreach ($tableWorkShift as $workshift) {
+                foreach ($tableZone as $zone) {
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
-                  echo "<td>" . $workshift["mws_shift"] . "</td>";
-                  echo "<td>" . $workshift["mws_time_start"] . "</td>";
-                  echo "<td>" . $workshift["mws_time_end"] . "</td>";
-                  if ($workshift["mws_status"] == "1") {
+                  echo "<td>" . $zone["mza_name"] . "</td>";
+                  echo "<td>" . $zone["mfcm_line_code"] . "</td>";
+                  if ($zone["mza_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusWorkShift(" . $workshift["mws_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusZone(" . $zone["mza_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -41,14 +38,14 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusWorkShift(" . $workshift["mws_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusZone(" . $zone["mza_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataWorkShift(" . $workshift["mws_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editzone\"  onclick='getDataZone(" . $zone["mza_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -60,44 +57,61 @@
 
           </div>
 
-          <!---------------------------- add Work Shift ------------------------------------------------>
-          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!---------------------------- add Zone ------------------------------------------------>
+          <div class="modal fade" id="addzone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-database-plus"></i> Add Work Shift</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-database-plus"></i> Add Zone</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Shift :</label>
-                    <input class="form-control" type="text" id="addshift" name="addshift"  placeholder="Enter New Shift">
+                    <label for="empcode">Zone Name :</label>
+                    <input class="form-control" type="text" id="addnamezone" name="addnamezone"  placeholder="Enter New Zone Name">
                   </div>
+<!-- 
+                  <div class="card-body col-md-12 row mb-3">
+                      <label class="col-sm-6 col-form-label">Line :</label>
+                      <div class="col-sm-6">
+                        <select class="form-control" id="dropdownzone" name="dropdownzone">
+                          <?php
+                          foreach ($getzone as $zone) {
+                          ?>
+                          <option id="addlinezone" name="addlinezone" value="<?php echo $zone["mfcm_id"] ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
+                          <?php  } ?>
+                        </select>
+                      </div>
+                    </div> -->
 
-                  <div class="form-group">
-                    <label for="password">Start Time :</label>
-                    <input class="form-control" type="time" id="addstarttime" name="addstarttime"  step="2">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password">End Time :</label>
-                    <input class="form-control" type="time" id="addendtime" name="addendtime"  step="2" >
+                    <div class="form-group">
+                    <label for="username">Line :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addlinezone" name="addlinezone">
+                        <option selected>Select Zone</option>
+                        <?php
+                        foreach ($getzone as $zone) {
+                        ?>                     
+                          <option  value="<?php echo $zone["mfcm_id"]; ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddWorkShift">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddZone">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <!------------------------------------------------- Edit Work Shift ------------------------------------------------->
-          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!------------------------------------------------- Edit Zone ------------------------------------------------->
+          <div class="modal fade" id="editzone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -109,26 +123,30 @@
 
                 <form class="card-body" action="#">
                 <div class="form-group">
-                    <label for="empcode">Shift :</label>
-                    <input class="form-control" type="text" id="IDeditworkshift" name="IDeditworkshift" hidden>
-                    <input class="form-control" type="text" id="editshift" name="editshift">
+                    <label for="empcode">Zone Name :</label>
+                    <input class="form-control" type="text" id="IDeditzone" name="IDeditzone">
+                    <input class="form-control" type="text" id="editnamezone" name="editnamezone">
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Start Time :</label>
-                    <input class="form-control" type="time" id="editstarttime" name="editstarttime"  step="2">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password">End Time :</label>
-                    <input class="form-control" type="time" id="editendtime" name="editendtime"  step="2" >
+                    <label for="username">Line :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editlinezone" name="editlinezone">
+                        <option selected>Select Zone</option>
+                        <?php
+                        foreach ($getzone as $zone) {
+                        ?>                     
+                          <option  value="<?php echo $zone["mfcm_id"]; ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditWorkShift">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditZone">Save</a>
                 </div>
               </div>
             </div>

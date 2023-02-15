@@ -1276,6 +1276,24 @@ class manage extends CI_Controller
 		echo $rsaddPlantapp;
 	}
 
+	public function getDataEditPlantAdminApp()
+	{
+		$plantappId = $_GET["mpa_id"];
+		$res = $this->backoffice_model->getDataEditPlantApp($plantappId);
+		echo json_encode($res);
+	}
+
+	public function EditPlantAdminApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditplantapp = $_POST["IDeditplantapp"];
+		$editplantappphase = $_POST["editplantappphase"];
+		$editplantappname = $_POST["editplantappname"];
+
+		$rseditplantapp = $this->backoffice_model->modelEditPlantAdminApp($IDeditplantapp,$editplantappphase,$editplantappname,$empcodeadmin);
+		echo $rseditplantapp;
+	}
+
 
 	// ************************* Control ZoneAdmin *************************************
 	public function ZoneAdmin()
@@ -1283,6 +1301,8 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["getzone"] = $this->backoffice_model->getZone();
+		$data["tableZone"] = $this->backoffice_model->getTableZone();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1292,6 +1312,41 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function swiftStatusZone()
+	{
+		$zoneId = $_GET["mza_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusZone($zoneId,$empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddZone()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addnamezone = $_POST["addnamezone"];
+		$addlinezone = $_POST["addlinezone"];
+		
+		$rsaddzone = $this->backoffice_model->modelAddZone($addnamezone, $addlinezone, $empcodeadmin);
+		echo $rsaddzone;
+	}
+
+	public function getDataEditZone()
+	{
+		$zoneId = $_GET["mza_id"];
+		$res = $this->backoffice_model->getDataEditZone($zoneId);
+		echo json_encode($res);
+	}
+
+	public function EditZone()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditzone = $_POST["IDeditzone"];
+		$editnamezone = $_POST["editnamezone"];
+		$editlinezone = $_POST["editlinezone"];
+
+		$rseditplantapp = $this->backoffice_model->modelEditZone($IDeditzone,$editnamezone,$editlinezone,$empcodeadmin);
+		echo $rseditplantapp;
+	}
 
 	
 	// ************************* Control stationAdmin *************************************
@@ -1299,6 +1354,7 @@ class manage extends CI_Controller
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$data["tableStation"] = $this->backoffice_model->getTableStation();
 		$empcode = $this->session->userdata("empcode");
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');

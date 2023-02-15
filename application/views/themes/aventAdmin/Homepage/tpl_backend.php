@@ -371,9 +371,10 @@
             $("#editempcode").val(rs[0]["ss_emp_code"]);
             $("#editfirstname").val(rs[0]["ss_emp_fname"]);
             $("#editlastname").val(rs[0]["ss_emp_lname"]);
-            $("#editgroup").val(rs[0]["spg_name"]);
+            $("#editgrouppermissionuserweb").val(rs[0]["spg_name"]);
             $("#editemailaddress").val(rs[0]["ss_email"]);
             $("#editplant").val(rs[0]["mpa_name"]);
+            
         })
     };
 
@@ -381,7 +382,7 @@
         var editempcode = $("#editempcode").val();
         var editfirstname = $("#editfirstname").val();
         var editlastname = $("#editlastname").val();
-        var editgroup = $("#editgroup").val();
+        var editgroup = $("#editgrouppermissionuserweb").val();
         var editemail = $("#editemailaddress").val();
         var editplant = $("#editplant").val();
 
@@ -821,7 +822,7 @@
             $("#editnameapp").val(data.getdataEdit[0]["ss_emp_name"]);
             $("#editpathpicapp").val(data.getdataEdit[0]["ss_pic"]);
             $.each(data.PermissionAll, function(key, value) {
-                alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
+                // alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
                 if (value["spg_name"] == data.getdataEdit[0]["spg_name"]) {
                     checked = "selected"
                 } else {
@@ -1040,7 +1041,6 @@
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
             });
         } else {
-            alert(dropdowneditmenu)
             var path = $.ajax({
                 method: "POST",
                 url: "<?php echo base_url(); ?>Manage/EditManagePermissionApp",
@@ -2628,4 +2628,184 @@
 
         })
     };
+
+
+    
+    function SaveEditPlantAdminApp(mpa_id) {
+        var IDeditplantapp = $('#IDeditplantapp').val()
+        var editplantappphase = $('#editplantappphase').val()
+        var editplantappname = $('#editplantappname').val()
+
+        var checkIDeditplantapp = document.getElementById("IDeditplantapp");
+        var checkeditplantappphase = document.getElementById("editplantappphase");
+        var checkeditplantappname = document.getElementById("editplantappname");
+
+        if (checkIDeditplantapp.value == "" || checkeditplantappphase.value == "" ||
+        checkeditplantappname.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/PlantAdminApp";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditPlantAdminApp",
+                data: {
+                    IDeditplantapp: IDeditplantapp,
+                    editplantappphase: editplantappphase,
+                    editplantappname: editplantappname,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Plant App is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/PlantAdminApp";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Plant App',
+                    })
+                }
+            });
+        }
+    };
+
+    // ----------------------------------------- mst Zone admin --------------------------------------
+
+    $("#btnSaveAddZone").click(function() {
+        SaveAddZone()
+    });
+    $("#btnSaveEditZone").click(function() {
+        SaveEditZone()
+    })
+
+
+    function statusZone(mza_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusZone?mza_id=" + mza_id
+        })
+    };
+
+
+    function SaveAddZone() {
+        var addnamezone = $('#addnamezone').val()
+        var addlinezone = $('#addlinezone').val()
+
+        var checkaddnamezone = document.getElementById("addnamezone");
+        var checkaddlinezone = document.getElementById("addlinezone");
+
+        if (checkaddnamezone.value == "" || checkaddlinezone.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddZone",
+                data: {
+                    addnamezone: addnamezone,
+                    addlinezone: addlinezone
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataZone(mza_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditZone?mza_id=" + mza_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditzone").val(rs[0]["mza_id"]);
+            $("#editnamezone").val(rs[0]["mza_name"]);
+            $("#editlinezone").val(rs[0]["mfcm_id"]);
+
+        })
+    };
+
+    function SaveEditZone(mza_id) {
+        var IDeditzone = $('#IDeditzone').val()
+        var editnamezone = $('#editnamezone').val()
+        var editlinezone = $('#editlinezone').val()
+
+        var checkIDeditzone = document.getElementById("IDeditzone");
+        var checkeditnamezone = document.getElementById("editnamezone");
+        var checkeditlinezone = document.getElementById("editlinezone");
+
+        if (checkIDeditzone.value == "" || checkeditnamezone.value == "" ||
+        checkeditlinezone.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ZoneAdmin";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditZone",
+                data: {
+                    IDeditzone: IDeditzone,
+                    editnamezone: editnamezone,
+                    editlinezone: editlinezone,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Zone is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ZoneAdmin";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Zone',
+                    })
+                }
+            });
+        }
+    };
+
 </script>

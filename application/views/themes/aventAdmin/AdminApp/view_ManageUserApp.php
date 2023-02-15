@@ -89,8 +89,7 @@
                   <div class="form-group">
                     <label for="username">Group Permission :</label>
                     <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgrouppermissionuserapp" name="">
-
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgrouppermissionuserapp" name="editgrouppermissionuserapp">
                         <?php
                         foreach ($groupper as $groupPer) {
                         ?>
@@ -140,7 +139,7 @@
                   <div class="form-group">
                     <label for="username">Group Permission :</label>
                     <div>
-                      <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgrouppermissionapp" name="addgrouppermissionapp">
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgrouppermissionapp" name="addgrouppermissionapp">
                         <option selected>Select group permission</option>
                         <?php
                         foreach ($groupperapp as $groupperapp) {

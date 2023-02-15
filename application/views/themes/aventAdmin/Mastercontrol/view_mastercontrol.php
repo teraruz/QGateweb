@@ -219,10 +219,10 @@
                         </div>
                     </div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -233,8 +233,8 @@
 
 
 
-<!-------------------------------------  ------------------------------------->
-<div class="content-wrapper">
+    <!-------------------------------------  ------------------------------------->
+    <!-- <div class="content-wrapper">
     <div class="row">
         <h1 class="col-12" style="color:black">Master Control</h1>
     </div>
@@ -399,11 +399,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-<!------------------------------------- Detail of Master Table ------------------------------------->
+    <!------------------------------------- Detail of Master Table ------------------------------------->
 
-<div class="content-wrapper">
+    <!-- <div class="content-wrapper">
     <hr class="new">
     <div class="row">
         <h1 class="col-12" style="color:black">Detail of Master Table</h1>
@@ -442,7 +442,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- <div class="row">
         <div class="col-sm-4 grid-margin">
             <div class="card">
@@ -455,5 +455,5 @@
                 </div>
             </div>
         </div>
-    </div> -->
-</div>
+    </div> 
+</div> -->

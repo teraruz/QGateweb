@@ -1755,4 +1755,137 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+
+	public function getDataEditPlantApp($plantappId)
+	{
+		$sql = "SELECT mpa_id, mpa_phase_plant, mpa_name
+		FROM mst_plant_admin_app
+		WHERE mpa_id = '{$plantappId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function modelEditPlantAdminApp($IDeditplantapp,$editplantappphase,$editplantappname,$empcodeadmin)
+	{ {
+			$sql = "UPDATE mst_plant_admin_app
+			SET mpa_phase_plant = '{$editplantappphase}', mpa_name = '{$editplantappname}',
+			mpa_update_by = '{$empcodeadmin}', mpa_update_date = CURRENT_TIMESTAMP
+			WHERE  mpa_id = '{$IDeditplantapp}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+	}
+	// ****************************************** mst Zone Admin ********************************************************************
+
+	public function getTableZone()
+	{
+		$sql = "SELECT mza_id,mza_name,mst_zone_admin_app.mfcm_id,mfcm_line_code,mza_status
+		FROM mst_zone_admin_app
+		INNER JOIN mst_fa_code_master_app ON mst_zone_admin_app.mfcm_id = mst_fa_code_master_app.mfcm_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function getZone()
+	{
+		$sql = "SELECT *
+		FROM mst_fa_code_master_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function editStatusZone($zoneId,$empcodeadmin)
+	{
+		$sql = "select * from mst_zone_admin_app WHERE mza_id = '{$zoneId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mza_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_zone_admin_app SET mza_status = 0 WHERE  mza_id = '{$zoneId}'";
+			$sqlupdate = "UPDATE mst_zone_admin_app SET mza_update_by = '{$empcodeadmin}' , mza_update_date = CURRENT_TIMESTAMP
+			WHERE  mza_id = '{$zoneId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_zone_admin_app SET mza_status = 1 WHERE  mza_id = '{$zoneId}'";
+			$sqlupdate = "UPDATE mst_zone_admin_app SET mza_update_by = '{$empcodeadmin}' , mza_update_date = CURRENT_TIMESTAMP
+			WHERE  mza_id = '{$zoneId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddZone($addnamezone, $addlinezone, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_zone_admin_app (mza_name, mfcm_id , mza_create_by , mza_create_date)
+		VALUES ('{$addnamezone}','{$addlinezone}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditZone($zoneId)
+	{
+		$sql = "SELECT mza_id, mza_name, mfcm_id
+		FROM mst_zone_admin_app
+		WHERE mza_id = '{$zoneId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditZone($IDeditzone,$editnamezone,$editlinezone,$empcodeadmin)
+	{ 
+			$sql = "UPDATE mst_zone_admin_app
+			SET mza_name = '{$editnamezone}', mfcm_id = '{$editlinezone}',
+			mza_update_by = '{$empcodeadmin}', mza_update_date = CURRENT_TIMESTAMP
+			WHERE  mza_id = '{$IDeditzone}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		
+	}
+
+// ****************************************** mst Station Admin ********************************************************************
+
+	public function getTableStation()
+	{
+		$sql = "SELECT *
+		FROM mst_station_admin_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+
+	}
+
+
+
+	
 }

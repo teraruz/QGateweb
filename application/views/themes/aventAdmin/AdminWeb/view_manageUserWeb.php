@@ -101,10 +101,10 @@
                   <div class="form-group">
                     <label for="username">Group Permission :</label>
                     <div>
-                      <select class="form-select col-md-12"
-                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
+                      <select class="form-control"
+                        style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="editgrouppermissionuserweb" name="editgrouppermissionuserweb"
                         aria-label="Default select example" id="editgroup">
-
+                        <option selected>Select Group Permission </option>
                         <?php
                         foreach ($groupper as $groupPer) {
                           ?>
@@ -122,9 +122,10 @@
                   <div>
                     <label for="plant">Plant :</label>
                     <div>
-                      <select class="form-select col-md-12"
+                      <select class="form-control"
                         style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="editplant"
                         aria-label="Default select example" placeholder="Enter your plant">
+                        <option selected>Select Plant </option>
                         <?php
                         foreach ($getplant as $plant) {
                           ?>
@@ -176,7 +177,7 @@
                   <div class="form-group">
                     <label for="username">Group Permission :</label>
                     <div>
-                      <select class="form-select col-md-12"
+                      <select class="form-control"
                         style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
                         aria-label="Default select example" id="addgrouppermission">
                         <option>Select group permission</option>
@@ -202,7 +203,7 @@
                   <div class="form-group">
                     <label for="password">Plant :</label>
                     <div>
-                      <select class="form-select col-md-12"
+                      <select class="form-control"
                         style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant"
                         aria-label="Default select example" placeholder="Enter your plant">
                         <option>Select plant</option>
