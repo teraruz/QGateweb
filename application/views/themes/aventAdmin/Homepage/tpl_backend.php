@@ -2278,5 +2278,153 @@
     }
 
 
+    // ****************************************************** mst Part Number ******************************************************
+
+
+    $("#btnSaveAddPartNo").click(function() {
+        SaveAddPartNo()
+    });
+    $("#btnSaveEditPartNo").click(function() {
+        SaveEditPartNo()
+    })
+
+
+    function statusPartNo(mpn_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPartNo?mpn_id=" + mpn_id
+        })
+    };
+
+
+
+    function SaveAddPartNo() {
+        var addpartnumber = $('#addpartnumber').val()
+        var addcuspartno = $('#addcuspartno').val()
+        var addlocationpart = $('#addlocationpart').val()
+        var adddmccheckpart = $('#adddmccheckpart').val()
+
+        var checkaddpartnumber = document.getElementById("addpartnumber");
+        var checkaddcuspartno  = document.getElementById("addcuspartno");
+        var checkaddlocationpart = document.getElementById("addlocationpart");
+        var checkadddmccheckpart = document.getElementById("adddmccheckpart");
+
+        if (checkaddpartnumber.value == "" || checkaddcuspartno.value == "" 
+        || checkaddlocationpart.value == "" || checkadddmccheckpart.value == "" ) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddPartNo",
+                data: {
+                    addpartnumber: addpartnumber,
+                    addcuspartno: addcuspartno,
+                    addlocationpart: addlocationpart,
+                    adddmccheckpart:adddmccheckpart
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Part Number.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/PartNumber";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Part Number'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataPartNo(mpn_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPartNo?mpn_id=" + mpn_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditpartno").val(rs[0]["mpn_id"]);
+            $("#editpartnumber").val(rs[0]["mpn_part_no"]);
+            $("#editcuspartno").val(rs[0]["mpn_cus_part_no"]);
+            $("#editlocationpart").val(rs[0]["mpn_location"]);
+            $("#editdmccheckpart").val(rs[0]["mpn_dmc_check"]);
+
+        })
+    };
+
+
+    function SaveEditPartNo(mpn_id) {
+        var IDeditpartno = $('#IDeditpartno').val()
+        var editpartnumber = $('#editpartnumber').val()
+        var editcuspartno = $('#editcuspartno').val()
+        var editlocationpart = $('#editlocationpart').val()
+        var editdmccheckpart = $('#editdmccheckpart').val()
+
+        var checkIDeditpartno = document.getElementById("IDeditpartno");
+        var checkeditpartnumber = document.getElementById("editpartnumber");
+        var checkeditcuspartno = document.getElementById("editcuspartno");
+        var checkeditlocationpart = document.getElementById("editlocationpart");
+        var checkeditdmccheckpart = document.getElementById("editdmccheckpart");
+
+        if (checkIDeditpartno.value == "" || checkeditpartnumber.value == "" 
+        || checkeditcuspartno.value == "" || checkeditlocationpart.value == ""
+        || checkeditdmccheckpart.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/PartNumber";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditPartNumber",
+                data: {
+                    IDeditpartno: IDeditpartno,
+                    editpartnumber: editpartnumber,
+                    editcuspartno: editcuspartno,
+                    editlocationpart : editlocationpart,
+                    editdmccheckpart : editdmccheckpart
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Part Number is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/PartNumber";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Part Number',
+                    })
+                }
+            });
+        }
+    }
+    
+
+
+
 
 </script>

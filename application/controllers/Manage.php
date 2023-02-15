@@ -889,7 +889,7 @@ class manage extends CI_Controller
 		$rsinspection = $this->backoffice_model->modelAddDMC($adddmcname, $empcodeadmin);
 		echo $rsinspection;
 	}
-	
+
 	public function getDataEditDMC()
 	{
 		$dmcid = $_GET["mdd_id"];
@@ -903,7 +903,7 @@ class manage extends CI_Controller
 		$IDeditdmcname = $_POST["IDeditdmcname"];
 		$editdmcname = $_POST["editdmcname"];
 
-		$rseditdmc = $this->backoffice_model->modelEditDMC($IDeditdmcname, $editdmcname , $empcodeadmin);
+		$rseditdmc = $this->backoffice_model->modelEditDMC($IDeditdmcname, $editdmcname, $empcodeadmin);
 
 		echo $rseditdmc;
 	}
@@ -935,7 +935,7 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		$adddmctypename = $_POST["adddmctypename"];
 		$adddmcdigit = $_POST["adddmcdigit"];
-		$rsadddmctype = $this->backoffice_model->modelAddDMCType($adddmctypename,$adddmcdigit, $empcodeadmin);
+		$rsadddmctype = $this->backoffice_model->modelAddDMCType($adddmctypename, $adddmcdigit, $empcodeadmin);
 		echo $rsadddmctype;
 	}
 
@@ -952,7 +952,7 @@ class manage extends CI_Controller
 		$editdmctypename = $_POST["editdmctypename"];
 		$editdmcdigit = $_POST["editdmcdigit"];
 
-		$rseditdmctype = $this->backoffice_model->modelEditDMCType($IDeditdmctype, $editdmctypename ,$editdmcdigit, $empcodeadmin);
+		$rseditdmctype = $this->backoffice_model->modelEditDMCType($IDeditdmctype, $editdmctypename, $editdmcdigit, $empcodeadmin);
 
 		echo $rseditdmctype;
 	}
@@ -985,7 +985,7 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addfaline = $_POST["addfaline"];
 		$addfaname = $_POST["addfaname"];
-		$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline,$addfaname, $empcodeadmin);
+		$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline, $addfaname, $empcodeadmin);
 		echo $rsaddFACode;
 	}
 	public function getDataEditFACode()
@@ -1002,7 +1002,7 @@ class manage extends CI_Controller
 		$editfaline = $_POST["editfaline"];
 		$editfaname = $_POST["editfaname"];
 
-		$rseditfacode = $this->backoffice_model->modelEditFACode($IDeditfacode, $editfaline ,$editfaname, $empcodeadmin);
+		$rseditfacode = $this->backoffice_model->modelEditFACode($IDeditfacode, $editfaline, $editfaname, $empcodeadmin);
 
 		echo $rseditfacode;
 	}
@@ -1036,7 +1036,7 @@ class manage extends CI_Controller
 		$addstarttime = $_POST["addstarttime"];
 		$addendtime = $_POST["addendtime"];
 
-		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift ,$addstarttime, $addendtime , $empcodeadmin);
+		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin);
 		echo $rsaddWorkShift;
 	}
 
@@ -1056,7 +1056,7 @@ class manage extends CI_Controller
 		$editstarttime = $_POST["editstarttime"];
 		$editendtime = $_POST["editendtime"];
 
-		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift ,$editstarttime , $editendtime, $empcodeadmin);
+		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
 		echo $rseditworkshift;
 	}
 
@@ -1092,7 +1092,7 @@ class manage extends CI_Controller
 		$adddefectnameth = $_POST["adddefectnameth"];
 		$adddefectnameen = $_POST["adddefectnameen"];
 
-		$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode ,$adddefectnameth, $adddefectnameen , $empcodeadmin);
+		$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode, $adddefectnameth, $adddefectnameen, $empcodeadmin);
 		echo $rsaddDefect;
 	}
 
@@ -1113,12 +1113,150 @@ class manage extends CI_Controller
 		$editdefectnameth = $_POST["editdefectnameth"];
 		$editdefectnameen = $_POST["editdefectnameen"];
 
-		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode ,$editdefectnameth , $editdefectnameen, $empcodeadmin);
+		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
 		echo $rseditdefect;
 	}
 
-	// ************************* Control Detail *************************************
-	public function Detail()
+	// ************************* Control PartNumber *************************************
+	public function PartNumber()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["tablePartNo"] = $this->backoffice_model->getTablePartNo();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_partNumber.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+	public function swiftStatusPartNo()
+	{
+		$partnoId = $_GET["mpn_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPartNo($partnoId,$empcodeadmin);
+		echo json_encode($res);
+	}
+
+
+	public function AddPartNo()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addpartnumber = $_POST["addpartnumber"];
+		$addcuspartno = $_POST["addcuspartno"];
+		$addlocationpart = $_POST["addlocationpart"];
+		$adddmccheckpart = $_POST["adddmccheckpart"];
+
+		$rsaddPartNo = $this->backoffice_model->modelAddPartNo($addpartnumber, $addcuspartno, $addlocationpart, $adddmccheckpart,$empcodeadmin);
+		echo $rsaddPartNo;
+	}
+
+	public function getDataEditPartNo()
+	{
+		$partnoId = $_GET["mpn_id"];
+		$res = $this->backoffice_model->getDataEditPartNo($partnoId);
+		echo json_encode($res);
+	}
+
+	public function EditPartNumber()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditpartno = $_POST["IDeditpartno"];
+		$editpartnumber = $_POST["editpartnumber"];
+		$editcuspartno = $_POST["editcuspartno"];
+		$editlocationpart = $_POST["editlocationpart"];
+		$editdmccheckpart = $_POST["editdmccheckpart"];
+
+		$rseditpartno = $this->backoffice_model->modelEditPartNo($IDeditpartno, $editpartnumber, $editcuspartno, $editlocationpart, $editdmccheckpart, $empcodeadmin);
+		echo $rseditpartno;
+	}
+
+	// ************************* Control SelectPart *************************************
+	public function SelectPart()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_selectPart.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Control PlantAdminWeb *************************************
+	public function PlantAdminWeb()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_plantAdminWeb.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+
+	// ************************* Control PlantAdminApp *************************************
+	public function PlantAdminApp()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_plantAdminApp.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+	// ************************* Control ZoneAdmin *************************************
+	public function ZoneAdmin()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_zoneAdmin.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+	
+	// ************************* Control stationAdmin *************************************
+	public function stationAdmin()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_stationAdmin.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Defect Group *************************************
+	public function DefectGroup()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
@@ -1127,7 +1265,38 @@ class manage extends CI_Controller
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDetail.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_defectGroup.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	// ************************* Config Detail *************************************
+	public function ConfigDetail()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_configDetail.php',$data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+	// ************************* DMC Type Detail *************************************
+	public function dmcTypeDetail()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php',$data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_dmcTypeDetail.php',$data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}

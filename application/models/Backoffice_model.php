@@ -1134,7 +1134,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditInspection($IDeditInspectionName,$editInspectionName,$empcodeadmin)
+	public function modelEditInspection($IDeditInspectionName, $editInspectionName, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_inspection_type_app 
 		SET mit_name = '{$editInspectionName}', mit_update_by = '{$empcodeadmin}',mit_update_date = CURRENT_TIMESTAMP
@@ -1209,7 +1209,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditDMC($IDeditdmcname,$editdmcname,$empcodeadmin)
+	public function modelEditDMC($IDeditdmcname, $editdmcname, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_dmc_data_app 
 		SET mdd_name = '{$editdmcname}', mdd_update_by = '{$empcodeadmin}',mdd_update_date = CURRENT_TIMESTAMP
@@ -1264,7 +1264,7 @@ class Backoffice_model extends CI_Model
 	}
 
 
-	public function modelAddDMCType($adddmctypename,$adddmcdigit, $empcodeadmin)
+	public function modelAddDMCType($adddmctypename, $adddmcdigit, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_dmc_type_app (mdt_name, mdt_digit, mdt_create_by , mdt_create_date)
 		VALUES ('{$adddmctypename}','{$adddmcdigit}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
@@ -1284,10 +1284,9 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-
 	}
 
-	public function modelEditDMCType($IDeditdmctype, $editdmctypename ,$editdmcdigit, $empcodeadmin)
+	public function modelEditDMCType($IDeditdmctype, $editdmctypename, $editdmcdigit, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_dmc_type_app 
 		SET mdt_name = '{$editdmctypename}', mdt_digit = '{$editdmcdigit}', mdt_update_by = '{$empcodeadmin}', mdt_update_date = CURRENT_TIMESTAMP
@@ -1301,9 +1300,9 @@ class Backoffice_model extends CI_Model
 	}
 
 
-// ************************************* mst FA Code ***************************
+	// ************************************* mst FA Code ***************************
 
-public function getTableFACode()
+	public function getTableFACode()
 	{
 		$sql = "SELECT *
 		FROM mst_fa_code_master_app";
@@ -1339,7 +1338,7 @@ public function getTableFACode()
 		}
 	}
 
-	public function modelAddFACode($addfaline,$addfaname, $empcodeadmin)
+	public function modelAddFACode($addfaline, $addfaname, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_fa_code_master_app (mfcm_line_code, mfcm_name_code, mfcm_create_by , mfcm_create_date)
 		VALUES ('{$addfaline}','{$addfaname}', '{$empcodeadmin}', CURRENT_TIMESTAMP)";
@@ -1360,10 +1359,9 @@ public function getTableFACode()
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-
 	}
 
-	public function modelEditFACode($IDeditfacode, $editfaline ,$editfaname, $empcodeadmin)
+	public function modelEditFACode($IDeditfacode, $editfaline, $editfaname, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_fa_code_master_app 
 		SET mfcm_line_code = '{$editfaline}', mfcm_name_code = '{$editfaname}', mfcm_update_by = '{$empcodeadmin}', mfcm_update_date = CURRENT_TIMESTAMP
@@ -1388,7 +1386,7 @@ public function getTableFACode()
 		return $row;
 	}
 
-	
+
 
 	public function editStatusWorkShift($workshiftId)
 	{
@@ -1417,7 +1415,7 @@ public function getTableFACode()
 		}
 	}
 
-	public function modelAddWorkShift($addshift ,$addstarttime, $addendtime , $empcodeadmin)
+	public function modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_work_shift_app (mws_shift, mws_time_start, mws_time_end , mws_create_by , mws_create_date)
 		VALUES ('{$addshift}','{$addstarttime}', '{$addendtime}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
@@ -1438,11 +1436,10 @@ public function getTableFACode()
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-
 	}
 
 
-	public function modelEditWorkShift($IDeditworkshift, $editshift ,$editstarttime , $editendtime, $empcodeadmin)
+	public function modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_work_shift_app 
 		SET mws_shift = '{$editshift}', mws_time_start = '{$editstarttime}', mws_time_end = '{$editendtime}',mws_create_by = '{$empcodeadmin}', mws_create_date = CURRENT_TIMESTAMP
@@ -1467,7 +1464,7 @@ public function getTableFACode()
 		$row = $res->result_array();
 		return $row;
 	}
-	
+
 
 
 
@@ -1498,7 +1495,7 @@ public function getTableFACode()
 		}
 	}
 
-	public function modelAddDefect($adddefectcode ,$adddefectnameth, $adddefectnameen , $empcodeadmin)
+	public function modelAddDefect($adddefectcode, $adddefectnameth, $adddefectnameen, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_defect_app (md_defect_code, md_defect_th_name , md_defect_en_name , md_create_by , md_create_date)
 		VALUES ('{$adddefectcode}','{$adddefectnameth}', '{$adddefectnameen}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
@@ -1521,9 +1518,8 @@ public function getTableFACode()
 	}
 
 
-	public function modelEditDefect($IDeditdefect, $editdefectcode ,$editdefectnameth , $editdefectnameen, $empcodeadmin)
-	{
-		{
+	public function modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin)
+	{ {
 			$sql = "UPDATE mst_defect_app 
 			SET md_defect_code = '{$editdefectcode}', md_defect_th_name = '{$editdefectnameth}', md_defect_en_name = '{$editdefectnameen}',md_update_by = '{$empcodeadmin}', md_update_date = CURRENT_TIMESTAMP
 			WHERE  md_id = '{$IDeditdefect}'";
@@ -1536,9 +1532,88 @@ public function getTableFACode()
 		}
 	}
 
+
+	// ****************************************************** Part Number ******************************************************
+
+	public function getTablePartNo()
+	{
+		$sql = "SELECT *
+		FROM mst_part_no";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function editStatusPartNo($partnoId, $empcodeadmin)
+	{
+		$sql = "select * from mst_part_no WHERE mpn_id = '{$partnoId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mpn_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_part_no SET mpn_status = 0 WHERE  mpn_id = '{$partnoId}'";
+			$sqlupdate = "UPDATE mst_part_no SET mpn_update_by = '{$empcodeadmin}' , mpn_update_date = CURRENT_TIMESTAMP
+			WHERE  mpn_id = '{$partnoId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_part_no SET mpn_status = 1 WHERE  mpn_id = '{$partnoId}'";
+			$sqlupdate = "UPDATE mst_part_no SET mpn_update_by = '{$empcodeadmin}' , mpn_update_date = CURRENT_TIMESTAMP
+			WHERE  mpn_id = '{$partnoId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddPartNo($addpartnumber, $addcuspartno, $addlocationpart, $adddmccheckpart, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_part_no (mpn_part_no, mpn_cus_part_no , mpn_location, mpn_dmc_check , mpn_create_by , mpn_create_date)
+		VALUES ('{$addpartnumber}','{$addcuspartno}', '{$addlocationpart}','{$adddmccheckpart}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditPartNo($partnoId)
+	{
+		$sql = "SELECT mpn_id, mpn_part_no, mpn_cus_part_no, mpn_location, mpn_dmc_check
+		FROM mst_part_no
+		WHERE mpn_id = '{$partnoId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	
+
+	public function modelEditPartNo($IDeditpartno, $editpartnumber, $editcuspartno, $editlocationpart, $editdmccheckpart, $empcodeadmin)
+	{ {
+			$sql = "UPDATE mst_part_no 
+			SET mpn_part_no = '{$editpartnumber}', mpn_cus_part_no = '{$editcuspartno}', mpn_location = '{$editlocationpart}',
+			mpn_dmc_check = '{$editdmccheckpart}',mpn_update_by = '{$empcodeadmin}', mpn_update_date = CURRENT_TIMESTAMP
+			WHERE  mpn_id = '{$IDeditpartno}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+	}
 }
-
-
-
-
-
