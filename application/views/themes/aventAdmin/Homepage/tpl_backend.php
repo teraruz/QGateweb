@@ -2029,7 +2029,7 @@
         var checkaddstarttime = document.getElementById("addstarttime")
         var checkaddendtime = document.getElementById("addendtime")
 
-        if (checkaddshift.value == ""|| checkaddstarttime.value == "" || checkaddendtime == "") {
+        if (checkaddshift.value == "" || checkaddstarttime.value == "" || checkaddendtime == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -2095,8 +2095,8 @@
         var checkeditendtime = document.getElementById("editendtime");
 
 
-        if (checkIDeditworkshift.value == "" || checkeditshift.value == "" 
-        || checkeditstarttime.value == "" || checkeditendtime.value == "") {
+        if (checkIDeditworkshift.value == "" || checkeditshift.value == "" ||
+            checkeditstarttime.value == "" || checkeditendtime.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2113,7 +2113,7 @@
                     IDeditworkshift: IDeditworkshift,
                     editshift: editshift,
                     editstarttime: editstarttime,
-                    editendtime : editendtime
+                    editendtime: editendtime
                 }
             })
             path.done(function(rs) {
@@ -2139,10 +2139,10 @@
     }
 
 
-     // ********************************************************* mst DEFECT **************************************************************
+    // ********************************************************* mst DEFECT **************************************************************
 
 
-     $("#btnSaveAddDefect").click(function() {
+    $("#btnSaveAddDefect").click(function() {
         SaveAddDefect()
     });
     $("#btnSaveEditDefect").click(function() {
@@ -2164,7 +2164,7 @@
         var adddefectnameen = $('#adddefectnameen').val()
 
         var checkadddefectcode = document.getElementById("adddefectcode");
-        var checkadddefectnameth  = document.getElementById("adddefectnameth");
+        var checkadddefectnameth = document.getElementById("adddefectnameth");
         var checkadddefectnameen = document.getElementById("adddefectnameen");
 
         if (checkadddefectcode.value == "" || checkadddefectnameth.value == "" || checkadddefectnameen.value == "") {
@@ -2205,7 +2205,7 @@
         }
     };
 
-    
+
     function getDataDefect(md_id) {
         var path = $.ajax({
             method: "get",
@@ -2234,8 +2234,8 @@
         var checkeditdefectnameen = document.getElementById("editdefectnameen");
 
 
-        if (checkIDeditdefect.value == "" || checkeditdefectcode.value == "" 
-        || checkeditdefectnameth.value == "" || checkeditdefectnameen.value == "") {
+        if (checkIDeditdefect.value == "" || checkeditdefectcode.value == "" ||
+            checkeditdefectnameth.value == "" || checkeditdefectnameen.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2252,7 +2252,7 @@
                     IDeditdefect: IDeditdefect,
                     editdefectcode: editdefectcode,
                     editdefectnameth: editdefectnameth,
-                    editdefectnameen : editdefectnameen
+                    editdefectnameen: editdefectnameen
                 }
             })
             path.done(function(rs) {
@@ -2305,12 +2305,12 @@
         var adddmccheckpart = $('#adddmccheckpart').val()
 
         var checkaddpartnumber = document.getElementById("addpartnumber");
-        var checkaddcuspartno  = document.getElementById("addcuspartno");
+        var checkaddcuspartno = document.getElementById("addcuspartno");
         var checkaddlocationpart = document.getElementById("addlocationpart");
         var checkadddmccheckpart = document.getElementById("adddmccheckpart");
 
-        if (checkaddpartnumber.value == "" || checkaddcuspartno.value == "" 
-        || checkaddlocationpart.value == "" || checkadddmccheckpart.value == "" ) {
+        if (checkaddpartnumber.value == "" || checkaddcuspartno.value == "" ||
+            checkaddlocationpart.value == "" || checkadddmccheckpart.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -2325,7 +2325,7 @@
                     addpartnumber: addpartnumber,
                     addcuspartno: addcuspartno,
                     addlocationpart: addlocationpart,
-                    adddmccheckpart:adddmccheckpart
+                    adddmccheckpart: adddmccheckpart
                 }
             })
             path.done(function(rs) {
@@ -2378,9 +2378,9 @@
         var checkeditlocationpart = document.getElementById("editlocationpart");
         var checkeditdmccheckpart = document.getElementById("editdmccheckpart");
 
-        if (checkIDeditpartno.value == "" || checkeditpartnumber.value == "" 
-        || checkeditcuspartno.value == "" || checkeditlocationpart.value == ""
-        || checkeditdmccheckpart.value == "") {
+        if (checkIDeditpartno.value == "" || checkeditpartnumber.value == "" ||
+            checkeditcuspartno.value == "" || checkeditlocationpart.value == "" ||
+            checkeditdmccheckpart.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2397,8 +2397,8 @@
                     IDeditpartno: IDeditpartno,
                     editpartnumber: editpartnumber,
                     editcuspartno: editcuspartno,
-                    editlocationpart : editlocationpart,
-                    editdmccheckpart : editdmccheckpart
+                    editlocationpart: editlocationpart,
+                    editdmccheckpart: editdmccheckpart
                 }
             })
             path.done(function(rs) {
@@ -2422,9 +2422,210 @@
             });
         }
     }
-    
+    // ---------------------------------ข้าม Select Part ไปก่อน --------------------------
+
+
+    // ****************************************************** mst Plant Admin Web  ******************************************************
+
+
+    $("#btnSaveAddPlantAdminWeb").click(function() {
+        SaveAddPlantAdminWeb()
+    });
+    $("#btnSaveEditPlantAdminWeb").click(function() {
+        SaveEditPlantAdminWeb()
+    })
+
+
+    function statusPlantAdminWeb(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPlantAdminWeb?mpa_id=" + mpa_id
+        })
+    };
+
+
+    function SaveAddPlantAdminWeb() {
+        var addplantwebphase = $('#addplantwebphase').val()
+        var addplantwebname = $('#addplantwebname').val()
+
+        var checkaddplantwebphase = document.getElementById("addplantwebphase");
+        var checkplantwebname = document.getElementById("addplantwebname");
+
+        if (checkaddplantwebphase.value == "" || checkplantwebname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddPlantAdminWeb",
+                data: {
+                    addplantwebphase: addplantwebphase,
+                    addplantwebname: addplantwebname
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Plant Web.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/PlantAdminWeb";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Plant Web'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataPlantAdminWeb(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPlantAdminWeb?mpa_id=" + mpa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditplantweb").val(rs[0]["mpa_id"]);
+            $("#editplantwebphase").val(rs[0]["mpa_phase_plant"]);
+            $("#editplantwebname").val(rs[0]["mpa_name"]);
+
+        })
+    };
 
 
 
+    function SaveEditPlantAdminWeb(mpa_id) {
+        var IDeditplantweb = $('#IDeditplantweb').val()
+        var editplantwebphase = $('#editplantwebphase').val()
+        var editplantwebname = $('#editplantwebname').val()
 
+        var checkIDeditplantweb = document.getElementById("IDeditplantweb");
+        var checkeditplantwebphase = document.getElementById("editplantwebphase");
+        var checkeditplantwebname = document.getElementById("editplantwebname");
+
+        if (checkIDeditplantweb.value == "" || checkeditplantwebphase.value == "" ||
+            checkeditplantwebname.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/PlantAdminWeb";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditPlantAdminWeb",
+                data: {
+                    IDeditplantweb: IDeditplantweb,
+                    editplantwebphase: editplantwebphase,
+                    editplantwebname: editplantwebname,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Plant Web is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/PlantAdminWeb";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Plant Web',
+                    })
+                }
+            });
+        }
+    };
+
+    // / ***************************************************** MST Plant Admin App *******************************************************
+
+
+    $("#btnSaveAddPlantAdminApp").click(function() {
+        SaveAddPlantAdminApp()
+    });
+    $("#btnSaveEditPlantAdminApp").click(function() {
+        SaveEditPlantAdminApp()
+    })
+
+
+    function statusPlantAdminApp(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPlantAdminApp?mpa_id=" + mpa_id
+        })
+    };
+
+
+    function SaveAddPlantAdminApp() {
+        var addplantadminappphase = $('#addplantadminappphase').val()
+        var addplantadminappname = $('#addplantadminappname').val()
+
+        var checkaddplantappphase = document.getElementById("addplantadminappphase");
+        var checkplantappname = document.getElementById("addplantadminappname");
+
+        if (checkaddplantappphase.value == "" || checkplantappname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddPlantAdminApp",
+                data: {
+                    addplantadminappphase: addplantadminappphase,
+                    addplantadminappname: addplantadminappname
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Plant App.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/PlantAdminApp";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Plant App'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataPlantAdminApp(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPlantAdminApp?mpa_id=" + mpa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditplantapp").val(rs[0]["mpa_id"]);
+            $("#editplantappphase").val(rs[0]["mpa_phase_plant"]);
+            $("#editplantappname").val(rs[0]["mpa_name"]);
+
+        })
+    };
 </script>

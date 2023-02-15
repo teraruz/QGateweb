@@ -1616,4 +1616,143 @@ class Backoffice_model extends CI_Model
 			}
 		}
 	}
+	// ****************************************************** mst Plant Admin Web ******************************************************
+
+	public function getTablePlantAdminWeb()
+	{
+		$sql = "SELECT *
+		FROM mst_plant_admin_web";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function editStatusPlantAdminWeb($plantwebId,$empcodeadmin)
+	{
+		$sql = "select * from mst_plant_admin_web WHERE mpa_id = '{$plantwebId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mpa_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_plant_admin_web SET mpa_status = 0 WHERE  mpa_id = '{$plantwebId}'";
+			$sqlupdate = "UPDATE mst_plant_admin_web SET mpa_update_by = '{$empcodeadmin}' , mpa_update_date = CURRENT_TIMESTAMP
+			WHERE  mpa_id = '{$plantwebId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_plant_admin_web SET mpa_status = 1 WHERE  mpa_id = '{$plantwebId}'";
+			$sqlupdate = "UPDATE mst_plant_admin_web SET mpa_update_by = '{$empcodeadmin}' , mpa_update_date = CURRENT_TIMESTAMP
+			WHERE  mpa_id = '{$plantwebId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+
+	public function modelAddPlantAdminWeb($addplantwebphase, $addplantwebname, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_plant_admin_web (mpa_phase_plant, mpa_name, mpa_create_by , mpa_create_date)
+		VALUES ('{$addplantwebphase}','{$addplantwebname}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditPlantWeb($plantwebId)
+	{
+		$sql = "SELECT mpa_id, mpa_phase_plant, mpa_name
+		FROM mst_plant_admin_web
+		WHERE mpa_id = '{$plantwebId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function modelEditPlantAdminWeb($IDeditplantweb,$editplantwebphase,$editplantwebname,$empcodeadmin)
+	{ {
+			$sql = "UPDATE mst_plant_admin_web 
+			SET mpa_phase_plant = '{$editplantwebphase}', mpa_name = '{$editplantwebname}',
+			mpa_update_by = '{$empcodeadmin}', mpa_update_date = CURRENT_TIMESTAMP
+			WHERE  mpa_id = '{$IDeditplantweb}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+	}
+
+// ***************************************************** MST Plant Admin App *******************************************************
+
+	public function getTablePlantAdminApp()
+	{
+		$sql = "SELECT *
+		FROM mst_plant_admin_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+	public function editStatusPlantAdminApp($plantappId,$empcodeadmin)
+	{
+		$sql = "select * from mst_plant_admin_app WHERE mpa_id = '{$plantappId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mpa_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_plant_admin_app SET mpa_status = 0 WHERE  mpa_id = '{$plantappId}'";
+			$sqlupdate = "UPDATE mst_plant_admin_app SET mpa_update_by = '{$empcodeadmin}' , mpa_update_date = CURRENT_TIMESTAMP
+			WHERE  mpa_id = '{$plantappId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_plant_admin_app SET mpa_status = 1 WHERE  mpa_id = '{$plantappId}'";
+			$sqlupdate = "UPDATE mst_plant_admin_app SET mpa_update_by = '{$empcodeadmin}' , mpa_update_date = CURRENT_TIMESTAMP
+			WHERE  mpa_id = '{$plantappId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddPlantAdminApp($addplantadminappphase, $addplantadminappname, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_plant_admin_app (mpa_phase_plant, mpa_name, mpa_create_by , mpa_create_date)
+		VALUES ('{$addplantadminappphase}','{$addplantadminappname}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
 }

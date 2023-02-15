@@ -1196,6 +1196,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tablePlantAdminWeb"] = $this->backoffice_model->getTablePlantAdminWeb();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1203,6 +1204,41 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_plantAdminWeb.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusPlantAdminWeb()
+	{
+		$plantwebId = $_GET["mpa_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPlantAdminWeb($plantwebId,$empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddPlantAdminWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addplantwebphase = $_POST["addplantwebphase"];
+		$addplantwebname = $_POST["addplantwebname"];
+		$rsaddPlantweb = $this->backoffice_model->modelAddPlantAdminWeb($addplantwebphase, $addplantwebname, $empcodeadmin);
+		echo $rsaddPlantweb;
+	}
+
+	public function getDataEditPlantAdminWeb()
+	{
+		$plantwebId = $_GET["mpa_id"];
+		$res = $this->backoffice_model->getDataEditPlantWeb($plantwebId);
+		echo json_encode($res);
+	}
+
+	public function EditPlantAdminWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditplantweb = $_POST["IDeditplantweb"];
+		$editplantwebphase = $_POST["editplantwebphase"];
+		$editplantwebname = $_POST["editplantwebname"];
+
+		$rseditplantweb = $this->backoffice_model->modelEditPlantAdminWeb($IDeditplantweb,$editplantwebphase,$editplantwebname,$empcodeadmin);
+		echo $rseditplantweb;
 	}
 
 
@@ -1213,6 +1249,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tablePlantAdminApp"] = $this->backoffice_model->getTablePlantAdminApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1220,6 +1257,23 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_plantAdminApp.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusPlantAdminApp()
+	{
+		$plantappId = $_GET["mpa_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPlantAdminApp($plantappId,$empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddPlantAdminApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addplantadminappphase = $_POST["addplantadminappphase"];
+		$addplantadminappname = $_POST["addplantadminappname"];
+		$rsaddPlantapp = $this->backoffice_model->modelAddPlantAdminApp($addplantadminappphase, $addplantadminappname, $empcodeadmin);
+		echo $rsaddPlantapp;
 	}
 
 
