@@ -1410,7 +1410,18 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+
+
+		$data["getplantapp"] = $this->backoffice_model->modelGetPlantApp();
+		$data["getzoneapp"] = $this->backoffice_model->modelgetZoneApp();
+		$data["getstationapp"] = $this->backoffice_model->modelgetStationApp();
+		$data["gettypeapp"] = $this->backoffice_model->modelgetCheckTypenApp();
+		$data["getstatusapp"] = $this->backoffice_model->modelgetCheckStatusApp();
+		$data["getinspectionapp"] = $this->backoffice_model->modelgetInspectionApp();
+
+		$data["tabelDetails"] = $this->backoffice_model->getTableConfigDetails();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);

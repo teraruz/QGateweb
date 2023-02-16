@@ -1941,5 +1941,79 @@ class Backoffice_model extends CI_Model
 	}
 
 
+
+
+
+	// ---------------------------------------------- mst Config Detail ---------------------------------------------------------
+
+
+	public function getTableConfigDetails()
+	{
+	  $sql = "SELECT mcd_id , mcd_inspection_time , mcd_mac_address , mcd_status ,
+		mst_plant_admin_app.mpa_id , mpa_name , 
+		mst_zone_admin_app.mza_id , mza_name ,
+		mst_station_admin_app.msa_id , msa_station ,
+		mst_check_type_app.mct_id , mct_name ,
+		mst_check_status_app.mcs_id , mcs_name , 
+		mst_inspection_type_app.mit_id , mit_name
+		FROM mst_config_details_app
+		INNER JOIN mst_plant_admin_app ON mst_config_details_app.mpa_id = mst_plant_admin_app.mpa_id
+		INNER JOIN mst_zone_admin_app ON mst_config_details_app.mza_id = mst_zone_admin_app.mza_id
+		INNER JOIN mst_station_admin_app ON mst_config_details_app.msa_id = mst_station_admin_app.msa_id
+		INNER JOIN mst_check_type_app ON mst_config_details_app.mct_id = mst_check_type_app.mct_id
+		INNER JOIN mst_check_status_app ON mst_config_details_app.mcs_id = mst_check_status_app.mcs_id
+		INNER JOIN mst_inspection_type_app ON mst_config_details_app.mit_id = mst_inspection_type_app.mit_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelGetPlantApp()
+	{
+		$sql = "SELECT  * FROM mst_plant_admin_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelgetZoneApp()
+	{
+		$sql = "SELECT * FROM mst_zone_admin_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelgetStationApp()
+	{
+		$sql = "SELECT * FROM mst_station_admin_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+public function modelgetCheckTypenApp()
+	{
+		$sql = "SELECT * FROM mst_check_type_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelgetCheckStatusApp()
+	{
+		$sql = "SELECT * FROM mst_check_status_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelgetInspectionApp()
+	{
+		$sql = "SELECT * FROM mst_inspection_type_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
 	
 }

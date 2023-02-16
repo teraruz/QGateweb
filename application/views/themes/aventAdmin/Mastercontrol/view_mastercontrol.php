@@ -416,7 +416,7 @@
                         <image src="<?php echo base_url() ?>assets/images/defect_group.png" style="width=:50; height:50;">
                         </image>
                     </div>
-                    <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/Detail">Defect Group</a>
+                    <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/DefectGroup">Defect Group</a>
                 </div>
             </div>
         </div>
@@ -427,7 +427,7 @@
                         <image src="<?php echo base_url() ?>assets/images/config_detail.png" style="width=:50; height:50;">
                         </image>
                     </div>
-                    <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/Detail">Config Detail</a>
+                    <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/ConfigDetail">Config Detail</a>
                 </div>
             </div>
         </div>
@@ -437,7 +437,7 @@
                     <div class="col-6 col-sm-11 col-xl-12 text-center ">                        <image src="<?php echo base_url() ?>assets/images/detail.png" style="width=:50; height:50;">
                         </image>
                     </div>
-                    <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/Detail">DMC Type Detail</a>
+                    <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/dmcTypeDetail">DMC Type Detail</a>
                 </div>
             </div>
         </div>

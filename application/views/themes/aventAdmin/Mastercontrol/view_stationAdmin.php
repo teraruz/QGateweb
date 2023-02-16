@@ -95,9 +95,9 @@
 
                 <form class="card-body" action="#">
                 <div class="form-group">
-                    <label for="empcode">Zone Name :</label>
-                    <input class="form-control" type="text" id="IDeditStation" name="IDeditStation">
-                    <input class="form-control" type="text" id="editStation" name="editStation">
+                    <label for="empcode">Station :</label>
+                    <input class="form-control" type="text" id="IDeditStation" name="IDeditStation" hidden>
+                    <input class="form-control" type="number" id="editStation" name="editStation">
                   </div>
 
                 </form>

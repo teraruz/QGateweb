@@ -73,19 +73,6 @@
                     <label for="empcode">Zone Name :</label>
                     <input class="form-control" type="text" id="addnamezone" name="addnamezone"  placeholder="Enter New Zone Name">
                   </div>
-<!-- 
-                  <div class="card-body col-md-12 row mb-3">
-                      <label class="col-sm-6 col-form-label">Line :</label>
-                      <div class="col-sm-6">
-                        <select class="form-control" id="dropdownzone" name="dropdownzone">
-                          <?php
-                          foreach ($getzone as $zone) {
-                          ?>
-                          <option id="addlinezone" name="addlinezone" value="<?php echo $zone["mfcm_id"] ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
-                          <?php  } ?>
-                        </select>
-                      </div>
-                    </div> -->
 
                     <div class="form-group">
                     <label for="username">Line :</label>

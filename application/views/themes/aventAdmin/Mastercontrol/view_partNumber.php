@@ -4,7 +4,7 @@
       <h1 class="col-12" style="color:black">Part Number</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addpartno><i class="mdi mdi-database-plus"></i>Add Work Shift</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addpartno><i class="mdi mdi-database-plus"></i>Add Part Number</a>
         </div>
 
         <div class="card-body">
