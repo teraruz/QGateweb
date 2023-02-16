@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </div>
-            <!------------------------------------- Detail of Master Table ------------------------------------->
+            <!-- <------------------------------------- Detail of Master Table -------------------------------------> 
             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 <div class="content-wrapper">
                     <div class="row">
@@ -234,7 +234,7 @@
 
 
     <!-------------------------------------  ------------------------------------->
-    <!-- <div class="content-wrapper">
+    <div class="content-wrapper">
     <div class="row">
         <h1 class="col-12" style="color:black">Master Control</h1>
     </div>
@@ -399,11 +399,11 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
     <!------------------------------------- Detail of Master Table ------------------------------------->
 
-    <!-- <div class="content-wrapper">
+<div class="content-wrapper">
     <hr class="new">
     <div class="row">
         <h1 class="col-12" style="color:black">Detail of Master Table</h1>
@@ -434,8 +434,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <div class="col-6 col-sm-11 col-xl-12 text-center ">
-                        <image src="<?php echo base_url() ?>assets/images/detail.png" style="width=:50; height:50;">
+                    <div class="col-6 col-sm-11 col-xl-12 text-center ">                        <image src="<?php echo base_url() ?>assets/images/detail.png" style="width=:50; height:50;">
                         </image>
                     </div>
                     <a type="button" class="btn btn-inverse-danger btn-block" href="<?php echo base_url() ?>Manage/Detail">DMC Type Detail</a>
@@ -443,7 +442,7 @@
             </div>
         </div>
     </div> -->
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-sm-4 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -456,4 +455,4 @@
             </div>
         </div>
     </div> 
-</div> -->
+</div>

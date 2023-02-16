@@ -1885,6 +1885,60 @@ class Backoffice_model extends CI_Model
 
 	}
 
+	public function editStatusStation($stationId,$empcodeadmin)
+	{
+		$sql = "select * from mst_station_admin_app WHERE msa_id = '{$stationId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["msa_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_station_admin_app SET msa_status = 0 WHERE  msa_id = '{$stationId}'";
+			$sqlupdate = "UPDATE mst_station_admin_app SET msa_update_by = '{$empcodeadmin}' , msa_update_date = CURRENT_TIMESTAMP
+			WHERE  msa_id = '{$stationId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_station_admin_app SET msa_status = 1 WHERE  msa_id = '{$stationId}'";
+			$sqlupdate = "UPDATE mst_station_admin_app SET msa_update_by = '{$empcodeadmin}' , msa_update_date = CURRENT_TIMESTAMP
+			WHERE  msa_id = '{$stationId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+
+	public function modelAddStation($addtablestation, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_station_admin_app (msa_station,msa_create_by,msa_create_date)
+		VALUES ('{$addtablestation}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+	public function getDataEditStation($stationId)
+	{
+		$sql = "SELECT msa_id, msa_station
+		FROM mst_station_admin_app
+		WHERE msa_id = '{$stationId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
 
 
 	

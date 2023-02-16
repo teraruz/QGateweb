@@ -1365,6 +1365,30 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function swiftStatusStation()
+	{
+		$stationId = $_GET["msa_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusStation($stationId,$empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddStation()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addtablestation = $_POST["addtablestation"];
+		
+		$rsaddstation = $this->backoffice_model->modelAddStation($addtablestation, $empcodeadmin);
+		echo $rsaddstation;
+	}
+
+	public function getDataEditStation()
+	{
+		$stationId = $_GET["msa_id"];
+		$res = $this->backoffice_model->getDataEditStation($stationId);
+		echo json_encode($res);
+	}
+
 	// ************************* Defect Group *************************************
 	public function DefectGroup()
 	{

@@ -10,6 +10,7 @@
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.45.0/theme/dracula.min.css">
 <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/jvectormap/jquery-jvectormap.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/flag-icon-css/css/flag-icon.min.css">
@@ -104,6 +105,15 @@
 
 
 <script type="text/javascript">
+    const triggerTabList = document.querySelectorAll('#myTab button')
+triggerTabList.forEach(triggerEl => {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', event => {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
     $("#wow1").click(function() {
         BacktoHome()
     });
@@ -140,8 +150,6 @@
         password3.setAttribute('type', type3);
         this.classList.togglePassword3('mdi mdi-eye-off');
     });
-
-
     function BacktoHome() {
         Swal.fire({
             title: 'Cancel',
@@ -208,7 +216,6 @@
             });
         }
     }
-
     function ChangePass() {
         var empcode = $("#empcode2").val();
         var currentpass = $("#currentpass").val();
@@ -2807,5 +2814,82 @@
             });
         }
     };
+
+
+    // +++++++++++++++++++++++++++++++++++++ mst Station Admin +++++++++++++++++++++++++++++++++++++++++++++++++
+
+    $("#btnSaveAddStation").click(function() {
+        SaveAddStation()
+    });
+    $("#btnSaveEditStation").click(function() {
+        SaveEditStation()
+    })
+
+
+    function statusStation(msa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusStation?msa_id=" + msa_id
+        })
+    };
+
+    
+    function SaveAddStation() {
+        var addtablestation = $('#addtablestation').val()
+
+        var checkaddtablestation = document.getElementById("addtablestation");
+
+        if (checkaddtablestation.value == "" ) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddStation",
+                data: {
+                    addtablestation: addtablestation,
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone'
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataStation(msa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditStation?msa_id=" + msa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditStation").val(rs[0]["msa_id"]);
+            $("#editStation").val(rs[0]["msa_station"]);
+
+        })
+    };
+
+
+
+
 
 </script>
