@@ -1940,9 +1940,20 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-
-
-
+	public function modelEditStation($IDeditStation,$editStation,$empcodeadmin)
+	{ 
+			$sql = "UPDATE mst_station_admin_app
+			SET msa_station = '{$editStation}',
+			msa_update_by = '{$empcodeadmin}', msa_update_date = CURRENT_TIMESTAMP
+			WHERE  msa_id = '{$IDeditStation}'";
+			$res = $this->db->query($sql);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		
+	}
 
 	// ---------------------------------------------- mst Config Detail ---------------------------------------------------------
 
@@ -2015,5 +2026,119 @@ public function modelgetCheckTypenApp()
 		$row = $res->result_array();
 		return $row;
 	}
+
+
+	public function editStatusConfigDetail($configId, $empcodeadmin)
+	{
+		$sql = "select * from mst_config_details_app WHERE mcd_id = '{$configId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mcd_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_config_details_app SET mcd_status = 0 WHERE  mcd_id = '{$configId}'";
+			$sqlupdate = "UPDATE mst_config_details_app SET mcd_update_by = '{$empcodeadmin}' , mcd_update_date = CURRENT_TIMESTAMP
+			WHERE  mcd_id = '{$configId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_config_details_app SET mcd_status = 1 WHERE  mcd_id = '{$configId}'";
+			$sqlupdate = "UPDATE mst_config_details_app SET mcd_update_by = '{$empcodeadmin}' , mcd_update_date = CURRENT_TIMESTAMP
+			WHERE  mcd_d = '{$configId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddConfigDetails($addplantconfig , $addzoneconfig , $addstationconfig , $addtypeconfig 
+	, $addstatusconfig , $addinspectionconfig , $addTimeconfig , 	$addMacaddress , $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_config_details_app 
+		(mpa_id , mza_id , msa_id , mct_id , mcs_id , mit_id , mcd_inspection_time , mcd_mac_address , mcd_create_by , mcd_create_date)
+		VALUES('{$addplantconfig}','{$addzoneconfig}','{$addstationconfig}','{$addtypeconfig}','{$addstatusconfig}',
+		'{$addinspectionconfig}','{$addTimeconfig}','{$addMacaddress}' , '{$empcodeadmin}' , CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+	
+	public function getDataEditConfigDetails($configdetailId)
+	{
+		$sql = "SELECT mcd_id , mpa_id , mza_id ,  msa_id , mct_id , mcs_id ,  mit_id , mcd_inspection_time , mcd_mac_address
+		FROM mst_config_details_app
+		WHERE mcd_id = '{$configdetailId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function checklogin_id($id)
+    {
+
+        $sql = "SELECT * FROM log_staff_active_web WHERE ss_id = '{$id}' AND lsa_status = 0 ";
+        $res = $this->db->query($sql);
+        if ($res->num_rows() != 0) {
+            $result = $res->result_array();
+            return $result[0];
+        } else {
+            return false;
+        }
+    }
+    public function insertlogin($id)
+    {
+        $sql = "INSERT INTO log_staff_active_web(ss_id,lsa_login_date ) VALUES ('{$id}',CURRENT_TIMESTAMP)";
+        $res = $this->db->query($sql);
+
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    public function maxlogId($id)
+    {
+        $sql = "SELECT MAX(lsa_id) AS re_max from log_staff_active_web WHERE ss_id = '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $ss = $row["0"]["re_max"];
+        return $ss;
+    }
+    public function insertloginaddUpdate($id,$checkMaxid)
+    {
+
+        $sql = "INSERT INTO log_staff_active_web(ss_id,lsa_login_date ) VALUES ('{$id}',CURRENT_TIMESTAMP)
+        UPDATE log_staff_active_web SET lsa_logout_date = CURRENT_TIMESTAMP , lsa_status = 1 WHERE lsa_id ='{$checkMaxid}'" ;
+        $res = $this->db->query($sql);
+
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    public function loglogout($chmax){
+        $sql = "UPDATE log_staff_active_web SET lsa_logout_date = CURRENT_TIMESTAMP , lsa_status = 1 WHERE lsa_id ='{$chmax}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 	
 }

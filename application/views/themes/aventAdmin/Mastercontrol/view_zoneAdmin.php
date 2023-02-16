@@ -112,7 +112,7 @@
                 <form class="card-body" action="#">
                 <div class="form-group">
                     <label for="empcode">Zone Name :</label>
-                    <input class="form-control" type="text" id="IDeditzone" name="IDeditzone">
+                    <input class="form-control" type="text" id="IDeditzone" name="IDeditzone" hidden>
                     <input class="form-control" type="text" id="editnamezone" name="editnamezone">
                   </div>
 

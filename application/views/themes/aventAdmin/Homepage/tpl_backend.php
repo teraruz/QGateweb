@@ -106,14 +106,14 @@
 
 <script type="text/javascript">
     const triggerTabList = document.querySelectorAll('#myTab button')
-triggerTabList.forEach(triggerEl => {
-  const tabTrigger = new bootstrap.Tab(triggerEl)
+    triggerTabList.forEach(triggerEl => {
+        const tabTrigger = new bootstrap.Tab(triggerEl)
 
-  triggerEl.addEventListener('click', event => {
-    event.preventDefault()
-    tabTrigger.show()
-  })
-})
+        triggerEl.addEventListener('click', event => {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
     $("#wow1").click(function() {
         BacktoHome()
     });
@@ -150,6 +150,7 @@ triggerTabList.forEach(triggerEl => {
         password3.setAttribute('type', type3);
         this.classList.togglePassword3('mdi mdi-eye-off');
     });
+
     function BacktoHome() {
         Swal.fire({
             title: 'Cancel',
@@ -216,6 +217,7 @@ triggerTabList.forEach(triggerEl => {
             });
         }
     }
+
     function ChangePass() {
         var empcode = $("#empcode2").val();
         var currentpass = $("#currentpass").val();
@@ -268,11 +270,11 @@ triggerTabList.forEach(triggerEl => {
 </script>
 <!-- --------------------------------------------------- LOGOUT  --------------------------------------------------- -->
 <script type="text/javascript">
-    $("#btnLogout").click(function() {
-        Logout()
-    });
+    // $("#btnLogout").click(function() {
+    //     Logout()
+    // });
 
-    function Logout() {
+    function btnLogout($id) {
         Swal.fire({
             title: 'Logout',
             text: "Are you sure?",
@@ -280,10 +282,16 @@ triggerTabList.forEach(triggerEl => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Logout'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '<?php echo base_url() ?>Login/Account'
+                var path = $.ajax({
+                    method: "get",
+                    dataType: "json",
+                    url: "<?php echo base_url(); ?>Login/logout?id=" + $id,
+                })
+           
+                window.location.href = "<?php echo base_url() ?>Login/Account";
+
             }
         })
     };
@@ -381,7 +389,7 @@ triggerTabList.forEach(triggerEl => {
             $("#editgrouppermissionuserweb").val(rs[0]["spg_name"]);
             $("#editemailaddress").val(rs[0]["ss_email"]);
             $("#editplant").val(rs[0]["mpa_name"]);
-            
+
         })
     };
 
@@ -2637,7 +2645,7 @@ triggerTabList.forEach(triggerEl => {
     };
 
 
-    
+
     function SaveEditPlantAdminApp(mpa_id) {
         var IDeditplantapp = $('#IDeditplantapp').val()
         var editplantappphase = $('#editplantappphase').val()
@@ -2648,7 +2656,7 @@ triggerTabList.forEach(triggerEl => {
         var checkeditplantappname = document.getElementById("editplantappname");
 
         if (checkIDeditplantapp.value == "" || checkeditplantappphase.value == "" ||
-        checkeditplantappname.value == "") {
+            checkeditplantappname.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2774,7 +2782,7 @@ triggerTabList.forEach(triggerEl => {
         var checkeditlinezone = document.getElementById("editlinezone");
 
         if (checkIDeditzone.value == "" || checkeditnamezone.value == "" ||
-        checkeditlinezone.value == "") {
+            checkeditlinezone.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2833,13 +2841,13 @@ triggerTabList.forEach(triggerEl => {
         })
     };
 
-    
+
     function SaveAddStation() {
         var addtablestation = $('#addtablestation').val()
 
         var checkaddtablestation = document.getElementById("addtablestation");
 
-        if (checkaddtablestation.value == "" ) {
+        if (checkaddtablestation.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -2889,7 +2897,214 @@ triggerTabList.forEach(triggerEl => {
     };
 
 
+    function SaveEditStation(msa_id) {
+        var IDeditStation = $('#IDeditStation').val()
+        var editStation = $('#editStation').val()
+
+        var checkIDeditStation = document.getElementById("IDeditStation");
+        var checkeditStation = document.getElementById("editStation");
+
+        if (checkIDeditStation.value == "" || checkeditStation.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/StationAdmin";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditStation",
+                data: {
+                    IDeditStation: IDeditStation,
+                    editStation: editStation,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Station is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/StationAdmin";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Station',
+                    })
+                }
+            });
+        }
+    };
 
 
 
+    // ---------------------------------------------------------------  mst config Details -----------------------------------------------------------
+
+    $("#btnSaveAddConfigDetails").click(function() {
+        SaveAddConfigDetails()
+    });
+    $("#btnSaveEditConfigDetails").click(function() {
+        SaveEdiConfigDetails()
+    })
+
+
+    function statusConfigDetails(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusConfigDetails?mcd_id=" + mcd_id
+        })
+    };
+
+    function SaveAddConfigDetails() {
+        var addplantconfig = $('#addplantconfig').val()
+        var addzoneconfig = $('#addzoneconfig').val()
+        var addstationconfig = $('#addstationconfig').val()
+        var addtypeconfig = $('#addtypeconfig').val()
+        var addstatusconfig = $('#addstatusconfig').val()
+        var addinspectionconfig = $('#addinspectionconfig').val()
+        var addTimeconfig = $('#addTimeconfig').val()
+        var addMacaddress = $('#addMacaddress').val()
+
+        var checkaddplantconfig = document.getElementById("addplantconfig");
+        var checkaddzoneconfig = document.getElementById("addzoneconfig");
+        var checkaddstationconfig = document.getElementById("addstationconfig");
+        var checkaddtypeconfig = document.getElementById("addtypeconfig");
+        var checkaddstatusconfig = document.getElementById("addstatusconfig");
+        var checkaddinspectionconfig = document.getElementById("addinspectionconfig");
+        var checkaddTimeconfig = document.getElementById("addTimeconfig");
+        var checkaddMacaddress = document.getElementById("addMacaddress");
+
+        if (checkaddplantconfig.value == "" || checkaddzoneconfig.value == "" || checkaddstationconfig.value == "" ||
+            checkaddtypeconfig.value == "" || checkaddstatusconfig.value == "" || checkaddinspectionconfig.value == "" ||
+            checkaddTimeconfig.value == "" || checkaddMacaddress == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddConfigDetails",
+                data: {
+                    addplantconfig: addplantconfig,
+                    addzoneconfig: addzoneconfig,
+                    addstationconfig: addstationconfig,
+                    addtypeconfig: addtypeconfig,
+                    addstatusconfig: addstatusconfig,
+                    addinspectionconfig: addinspectionconfig,
+                    addTimeconfig: addTimeconfig,
+                    addMacaddress: addMacaddress,
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ConfigDetail";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone'
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataConfigDetails(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditConfigDetails?mcd_id=" + mcd_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditconfig").val(rs[0]["mcd_id"]);
+            $("#editplantconfig").val(rs[0]["mpa_id"]);
+            $("#editzoneconfig").val(rs[0]["mza_id"]);
+            $("#editstationconfig").val(rs[0]["msa_id"]);
+            $("#edittypeconfig").val(rs[0]["mct_id"]);
+            $("#editstatusconfig").val(rs[0]["mcs_id"]);
+            $("#editinspectionconfig").val(rs[0]["mit_id"]);
+            $("#edittimeconfig").val(rs[0]["mcd_inspection_time"]);
+            $("#editMacaddressconfig").val(rs[0]["mcd_mac_address"]);
+        })
+    };
+
+
+    function SaveEditConfigDetails(mcd_id) {
+        var IDeditconfig = $('#IDeditconfig').val()
+        var editplantconfig = $('#editplantconfig').val()
+        var editzoneconfig = $('#editzoneconfig').val()
+        var editstationconfig = $('#editstationconfig').val()
+        var edittypeconfig = $('#edittypeconfig').val()
+        var editstatusconfig = $('#editstatusconfig').val()
+        var editinspectionconfig = $('#editinspectionconfig').val()
+        var edittimeconfig = $('#edittimeconfig').val()
+        var editMacaddressconfig = $('#editMacaddressconfig').val()
+
+        var checkIDeditStation = document.getElementById("IDeditStation");
+        var checkeditStation = document.getElementById("editStation");
+
+        if (checkIDeditStation.value == "" || checkeditStation.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditConfigDetail",
+                data: {
+                    IDeditconfig: IDeditconfig,
+                    editplantconfig: editplantconfig,
+                    editzoneconfig: editzoneconfig,
+                    editstationconfig: editstationconfig,
+                    edittypeconfig: edittypeconfig,
+                    editstatusconfig: editstatusconfig,
+                    editinspectionconfig: editinspectionconfig,
+                    edittimeconfig: edittimeconfig,
+                    editMacaddressconfig: editMacaddressconfig
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Station is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/StationAdmin";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Station',
+                    })
+                }
+            });
+        }
+    };
 </script>

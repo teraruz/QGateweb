@@ -43,7 +43,7 @@
                   if ($details["mcd_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $details["mcd_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusConfigDetails(" . $details["mcd_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -51,14 +51,14 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $details["mcd_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusConfigDetails(" . $details["mcd_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editdetails\"  onclick='getDataManageMenuWeb(" . $details["mcd_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editdetails\"  onclick='getDataConfigDetails(" . $details["mcd_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -173,48 +173,133 @@
 
                   <div class="form-group">
                     <label for="empcode">Mac Address :</label>
-                    <input class="form-control" type="number" id="addMacaddress" name="addMacaddressconfig">
+                    <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddConfigDetails">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
           <!---------------------- Editconfigdetails Modal ---------------------->
+
           <div class="modal fade" id="editdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Menu Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Config Details</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
-                    <label for="NameMenuWeb">Menu Name :</label>
-                    <input class="form-control" type="text" id="editMenuName" name="editMenuName" >
-                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
+                <div class="form-group">
+                    <label for="username">Plant :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editplantconfig" name="editplantconfig">
+                        <option selected>Select Plant</option>
+                        <?php
+                        foreach ($getplantapp as $plant) {
+                        ?>                     
+                          <option  value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="NameSubMenuWeb">Submenu Name :</label>
-                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
-                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
+                    <label for="username">Zone :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editzoneconfig" name="editzoneconfig">
+                        <option selected>Select Zone</option>
+                        <?php
+                        foreach ($getzoneapp as $zone) {
+                        ?>                     
+                          <option  value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="username">Station :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editstationconfig" name="editstationconfig">
+                        <option selected>Select Station</option>
+                        <?php
+                        foreach ($getstationapp as $station) {
+                        ?>                     
+                          <option  value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="username">Type :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="edittypeconfig" name="edittypeconfig">
+                        <option selected>Select Type</option>
+                        <?php
+                        foreach ($gettypeapp as $type) {
+                        ?>                     
+                          <option  value="<?php echo $type["mct_id"]; ?>"><?php echo $type["mct_name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="username">Status :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editstatusconfig" name="editstatusconfig">
+                        <option selected>Select Status</option>
+                        <?php
+                        foreach ($getstatusapp as $status) {
+                        ?>                     
+                          <option  value="<?php echo $status["mcs_id"]; ?>"><?php echo $status["mcs_name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="username">Inspection :</label>
+                    <div>
+                      <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editinspectionconfig" name="editinspectionconfig">
+                        <option selected>Select Inspection</option>
+                        <?php
+                        foreach ($getinspectionapp as $inspection) {
+                        ?>                     
+                          <option  value="<?php echo $inspection["mit_id"]; ?>"><?php echo $inspection["mit_name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  
+
+                  <div class="form-group">
+                    <label for="empcode">Time :</label>
+                    <input class="form-control" type="text" id="IDeditconfig" name="IDeditconfig" hidden>
+                    <input class="form-control" type="number" id="edittimeconfig" name="edittimeconfig" placeholder="-">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="empcode">Mac Address :</label>
+                    <input class="form-control" type="text" id="editMacaddressconfig" name="editMacaddressconfig" placeholder="-">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditConfigDetails">Save</a>
                 </div>
               </div>
             </div>

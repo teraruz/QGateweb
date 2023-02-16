@@ -78,6 +78,21 @@ class Login extends CI_Controller {
 			$this->session->set_userdata($session_data);
 		}
 		echo $resultCheckLogin;
+		$id = $data['ss_id'];
+
+        $checklog  = $this->backoffice_model->checklogin_id($id);
+        if ($checklog == false) {
+            $loginlog = $this->backoffice_model->insertlogin($id);
+        } else {
+            $null_logout = $checklog['lsa_logout_date'];
+
+            if ($null_logout == null) {
+                $checkMaxid = $this->backoffice_model->maxlogId($id);
+                $insertlog = $this->backoffice_model->insertloginaddUpdate($id, $checkMaxid);
+            } else {
+                $loginlog = $this->backoffice_model->insertlogin($id);
+            }
+        }
 	}
 	public function Home(){
 		$this->template->set_master_template('themes/'. $this->theme .'/Login/view_Homepage.php');
@@ -95,7 +110,20 @@ class Login extends CI_Controller {
 		$res = $this->backoffice_model->modelSetPassword($email,$password_encoded);
 		echo $res;
 	}
+	public function logout()
+    {
+        $ss_id = $_GET["id"];
+        $checklog  = $this->backoffice_model->checklogin_id($ss_id);
+
+        // echo json_encode($checklog);
+        $data_status = $checklog["lsa_status"];
+
+        $chmax = $this->backoffice_model->maxlogid($ss_id);
+        // echo json_encode($data_status);
+        if ($data_status == "0") {
+            $res = $this->backoffice_model->loglogout($chmax);
+            // echo $res;
+        }
 
 }
-
-?>
+}
