@@ -9,7 +9,7 @@
         <span class="mdi mdi-menu"></span>
       </button>
       <ul class="navbar-nav navbar-nav-right ">
-      <p class="mb-0 d-none d-sm-block navbar-profile-name">TBKK THAILAND CO.LTD</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p class="mb-0 d-none d-sm-block navbar-profile-name">TBKK THAILAND CO.LTD</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
             <div class="navbar-profile">
@@ -44,7 +44,8 @@
               </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item" onclick="btnLogout(<?php echo $id; ?>)" >
+            <a class="dropdown-item preview-item" >
+              <!-- onclick="btnLogout(<?php echo $id; ?>)" -->
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>

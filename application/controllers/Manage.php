@@ -1181,6 +1181,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableSelectPart"] = $this->backoffice_model->getTableSelectPart();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1461,8 +1462,17 @@ class manage extends CI_Controller
 		$addTimeconfig = $_POST["addTimeconfig"];
 		$addMacaddress = $_POST["addMacaddress"];
 
-		$rsaddconfig = $this->backoffice_model->modelAddConfigDetails($addplantconfig , $addzoneconfig , $addstationconfig , $addtypeconfig 
-		, $addstatusconfig , $addinspectionconfig , $addTimeconfig , 	$addMacaddress , $empcodeadmin);
+		$rsaddconfig = $this->backoffice_model->modelAddConfigDetails(
+			$addplantconfig,
+			$addzoneconfig,
+			$addstationconfig,
+			$addtypeconfig,
+			$addstatusconfig,
+			$addinspectionconfig,
+			$addTimeconfig,
+			$addMacaddress,
+			$empcodeadmin
+		);
 		echo $rsaddconfig;
 	}
 
@@ -1473,22 +1483,37 @@ class manage extends CI_Controller
 		echo json_encode($res);
 	}
 
-	public function modelEditConfigDetails()
+	public function EditConfigDetail()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$IDeditconfig = $_POST["IDeditconfig"];
-		$editStation = $_POST["editStation"];
-		$editStation = $_POST["editStation"];
-		$editStation = $_POST["editStation"];
-		$editStation = $_POST["editStation"];
-		$editStation = $_POST["editStation"];
-		$editStation = $_POST["editStation"];
-		$editStation = $_POST["editStation"];
+		$editplantconfig = $_POST["editplantconfig"];
+		$editzoneconfig = $_POST["editzoneconfig"];
+		$editstationconfig = $_POST["editstationconfig"];
+		$edittypeconfig = $_POST["edittypeconfig"];
+		$editstatusconfig = $_POST["editstatusconfig"];
+		$editinspectionconfig = $_POST["editinspectionconfig"];
+		$edittimeconfig = $_POST["edittimeconfig"];
+		$editMacaddressconfig = $_POST["editMacaddressconfig"];
 
-		$rseditstationapp = $this->backoffice_model->modelEditStation($IDeditStation, $editStation, $empcodeadmin);
-		echo $rseditstationapp;
+
+
+		$rseditconfigdetails = $this->backoffice_model->modelEditConfigDetails(
+			$IDeditconfig,
+			$editplantconfig,
+			$editzoneconfig,
+			$editstationconfig,
+			$edittypeconfig,
+			$editstatusconfig,
+			$editinspectionconfig,
+			$edittimeconfig,
+			$editMacaddressconfig,
+			$empcodeadmin
+		);
+		echo $rseditconfigdetails;
+		// echo $edittimeconfig;
 	}
-	
+
 
 
 	// ************************* DMC Type Detail *************************************

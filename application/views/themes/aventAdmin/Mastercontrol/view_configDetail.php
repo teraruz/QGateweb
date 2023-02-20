@@ -21,6 +21,7 @@
                   <th style="text-align: center;">Inspection</th>
                   <th style="text-align: center;">Time</th>
                   <th style="text-align: center;">Mac Address</th>
+                  <th style="text-align: center;">Select Part</th>
                   <th style="text-align: center;">Status Config</th>
                   <th style="text-align: center;">Action</th>
                 </tr>
@@ -32,7 +33,7 @@
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
-                  echo "<td>" . $details["mpa_name"] . "</td>";  
+                  echo "<td>" . $details["mpa_name"] . "</td>";
                   echo "<td>" . $details["mza_name"] . "</td>";
                   echo "<td>" . $details["msa_station"] . "</td>";
                   echo "<td>" . $details["mct_name"] . "</td>";
@@ -40,6 +41,7 @@
                   echo "<td>" . $details["mit_name"] . "</td>";
                   echo "<td>" . $details["mcd_inspection_time"] . "</td>";
                   echo "<td>" . $details["mcd_mac_address"] . "</td>";
+                  echo "<td>" . $details["mcd_select_part"] . "</td>";
                   if ($details["mcd_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
@@ -82,15 +84,15 @@
                 </div>
                 <form class="card-body" action="#">
 
-                <div class="form-group">
+                  <div class="form-group">
                     <label for="username">Plant :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addplantconfig" name="addplantconfig">
                         <option selected>Select Plant</option>
                         <?php
                         foreach ($getplantapp as $plant) {
-                        ?>                     
-                          <option  value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -103,8 +105,8 @@
                         <option selected>Select Zone</option>
                         <?php
                         foreach ($getzoneapp as $zone) {
-                        ?>                     
-                          <option  value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -117,8 +119,8 @@
                         <option selected>Select Station</option>
                         <?php
                         foreach ($getstationapp as $station) {
-                        ?>                     
-                          <option  value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
+                        ?>
+                          <option value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -131,13 +133,13 @@
                         <option selected>Select Type</option>
                         <?php
                         foreach ($gettypeapp as $type) {
-                        ?>                     
-                          <option  value="<?php echo $type["mct_id"]; ?>"><?php echo $type["mct_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $type["mct_id"]; ?>"><?php echo $type["mct_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <label for="username">Status :</label>
                     <div>
@@ -145,8 +147,8 @@
                         <option selected>Select Status</option>
                         <?php
                         foreach ($getstatusapp as $status) {
-                        ?>                     
-                          <option  value="<?php echo $status["mcs_id"]; ?>"><?php echo $status["mcs_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $status["mcs_id"]; ?>"><?php echo $status["mcs_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -159,8 +161,8 @@
                         <option selected>Select Inspection</option>
                         <?php
                         foreach ($getinspectionapp as $inspection) {
-                        ?>                     
-                          <option  value="<?php echo $inspection["mit_id"]; ?>"><?php echo $inspection["mit_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $inspection["mit_id"]; ?>"><?php echo $inspection["mit_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -173,6 +175,11 @@
 
                   <div class="form-group">
                     <label for="empcode">Mac Address :</label>
+                    <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="empcode">Select Part :</label>
                     <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
                   </div>
 
@@ -199,15 +206,15 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
+                  <div class="form-group">
                     <label for="username">Plant :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editplantconfig" name="editplantconfig">
                         <option selected>Select Plant</option>
                         <?php
                         foreach ($getplantapp as $plant) {
-                        ?>                     
-                          <option  value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -220,8 +227,8 @@
                         <option selected>Select Zone</option>
                         <?php
                         foreach ($getzoneapp as $zone) {
-                        ?>                     
-                          <option  value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -234,8 +241,8 @@
                         <option selected>Select Station</option>
                         <?php
                         foreach ($getstationapp as $station) {
-                        ?>                     
-                          <option  value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
+                        ?>
+                          <option value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -248,13 +255,13 @@
                         <option selected>Select Type</option>
                         <?php
                         foreach ($gettypeapp as $type) {
-                        ?>                     
-                          <option  value="<?php echo $type["mct_id"]; ?>"><?php echo $type["mct_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $type["mct_id"]; ?>"><?php echo $type["mct_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <label for="username">Status :</label>
                     <div>
@@ -262,8 +269,8 @@
                         <option selected>Select Status</option>
                         <?php
                         foreach ($getstatusapp as $status) {
-                        ?>                     
-                          <option  value="<?php echo $status["mcs_id"]; ?>"><?php echo $status["mcs_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $status["mcs_id"]; ?>"><?php echo $status["mcs_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -276,13 +283,13 @@
                         <option selected>Select Inspection</option>
                         <?php
                         foreach ($getinspectionapp as $inspection) {
-                        ?>                     
-                          <option  value="<?php echo $inspection["mit_id"]; ?>"><?php echo $inspection["mit_name"]; ?></option>
+                        ?>
+                          <option value="<?php echo $inspection["mit_id"]; ?>"><?php echo $inspection["mit_name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
                   </div>
-                  
+
 
                   <div class="form-group">
                     <label for="empcode">Time :</label>
@@ -292,7 +299,12 @@
 
                   <div class="form-group">
                     <label for="empcode">Mac Address :</label>
-                    <input class="form-control" type="text" id="editMacaddressconfig" name="editMacaddressconfig" placeholder="-">
+                    <input class="form-control" type="text" id="editmacaddressconfig" name="editmacaddressconfig" placeholder="-">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="empcode">Select Part :</label>
+                    <input class="form-control" type="text" id="editselectpartconfig" name="editselectpartconfig" placeholder="-">
                   </div>
 
                 </form>

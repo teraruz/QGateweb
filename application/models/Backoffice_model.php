@@ -32,6 +32,62 @@ class Backoffice_model extends CI_Model
 		// }
 	}
 
+	public function checklogin_id($id)
+	{
+
+		$sql = "SELECT * FROM log_staff_active_web WHERE ss_id = '{$id}' AND lsa_status = 0 ";
+		$res = $this->db->query($sql);
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0];
+		} else {
+			return false;
+		}
+	}
+	public function insertlogin($id)
+	{
+		$sql = "INSERT INTO log_staff_active_web(ss_id,lsa_login_date ) VALUES ('{$id}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function maxlogId($id)
+	{
+		$sql = "SELECT MAX(lsa_id) AS re_max from log_staff_active_web WHERE ss_id = '{$id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$ss = $row["0"]["re_max"];
+		return $ss;
+	}
+	public function insertloginaddUpdate($id, $checkMaxid)
+	{
+
+		$sql = "INSERT INTO log_staff_active_web(ss_id,lsa_login_date ) VALUES ('{$id}',CURRENT_TIMESTAMP)
+        UPDATE log_staff_active_web SET lsa_logout_date = CURRENT_TIMESTAMP , lsa_status = 1 WHERE lsa_id ='{$checkMaxid}'";
+		$res = $this->db->query($sql);
+
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+	public function loglogout($chmax)
+	{
+		$sql = "UPDATE log_staff_active_web SET lsa_logout_date = CURRENT_TIMESTAMP , lsa_status = 1 WHERE lsa_id ='{$chmax}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	// ******************** FORGOTPASSWORD *********************************************************
 	public function modelCheckEmail($email)
 	{
@@ -1600,7 +1656,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	
+
 
 	public function modelEditPartNo($IDeditpartno, $editpartnumber, $editcuspartno, $editlocationpart, $editdmccheckpart, $empcodeadmin)
 	{ {
@@ -1616,6 +1672,20 @@ class Backoffice_model extends CI_Model
 			}
 		}
 	}
+
+	// ****************************************************** mst Select Part******************************************************
+
+	public function getTableSelectPart()
+	{
+		$sql = "SELECT *
+		FROM mst_select_part_app";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+
+
 	// ****************************************************** mst Plant Admin Web ******************************************************
 
 	public function getTablePlantAdminWeb()
@@ -1627,7 +1697,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusPlantAdminWeb($plantwebId,$empcodeadmin)
+	public function editStatusPlantAdminWeb($plantwebId, $empcodeadmin)
 	{
 		$sql = "select * from mst_plant_admin_web WHERE mpa_id = '{$plantwebId}'";
 		$res = $this->db->query($sql);
@@ -1684,7 +1754,7 @@ class Backoffice_model extends CI_Model
 	}
 
 
-	public function modelEditPlantAdminWeb($IDeditplantweb,$editplantwebphase,$editplantwebname,$empcodeadmin)
+	public function modelEditPlantAdminWeb($IDeditplantweb, $editplantwebphase, $editplantwebname, $empcodeadmin)
 	{ {
 			$sql = "UPDATE mst_plant_admin_web 
 			SET mpa_phase_plant = '{$editplantwebphase}', mpa_name = '{$editplantwebname}',
@@ -1699,7 +1769,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-// ***************************************************** MST Plant Admin App *******************************************************
+	// ***************************************************** MST Plant Admin App *******************************************************
 
 	public function getTablePlantAdminApp()
 	{
@@ -1711,7 +1781,7 @@ class Backoffice_model extends CI_Model
 	}
 
 
-	public function editStatusPlantAdminApp($plantappId,$empcodeadmin)
+	public function editStatusPlantAdminApp($plantappId, $empcodeadmin)
 	{
 		$sql = "select * from mst_plant_admin_app WHERE mpa_id = '{$plantappId}'";
 		$res = $this->db->query($sql);
@@ -1767,7 +1837,7 @@ class Backoffice_model extends CI_Model
 	}
 
 
-	public function modelEditPlantAdminApp($IDeditplantapp,$editplantappphase,$editplantappname,$empcodeadmin)
+	public function modelEditPlantAdminApp($IDeditplantapp, $editplantappphase, $editplantappname, $empcodeadmin)
 	{ {
 			$sql = "UPDATE mst_plant_admin_app
 			SET mpa_phase_plant = '{$editplantappphase}', mpa_name = '{$editplantappname}',
@@ -1803,7 +1873,7 @@ class Backoffice_model extends CI_Model
 	}
 
 
-	public function editStatusZone($zoneId,$empcodeadmin)
+	public function editStatusZone($zoneId, $empcodeadmin)
 	{
 		$sql = "select * from mst_zone_admin_app WHERE mza_id = '{$zoneId}'";
 		$res = $this->db->query($sql);
@@ -1858,22 +1928,21 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditZone($IDeditzone,$editnamezone,$editlinezone,$empcodeadmin)
-	{ 
-			$sql = "UPDATE mst_zone_admin_app
+	public function modelEditZone($IDeditzone, $editnamezone, $editlinezone, $empcodeadmin)
+	{
+		$sql = "UPDATE mst_zone_admin_app
 			SET mza_name = '{$editnamezone}', mfcm_id = '{$editlinezone}',
 			mza_update_by = '{$empcodeadmin}', mza_update_date = CURRENT_TIMESTAMP
 			WHERE  mza_id = '{$IDeditzone}'";
-			$res = $this->db->query($sql);
-			if ($res) {
-				return "true";
-			} else {
-				return "false";
-			}
-		
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
 	}
 
-// ****************************************** mst Station Admin ********************************************************************
+	// ****************************************** mst Station Admin ********************************************************************
 
 	public function getTableStation()
 	{
@@ -1882,10 +1951,9 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-
 	}
 
-	public function editStatusStation($stationId,$empcodeadmin)
+	public function editStatusStation($stationId, $empcodeadmin)
 	{
 		$sql = "select * from mst_station_admin_app WHERE msa_id = '{$stationId}'";
 		$res = $this->db->query($sql);
@@ -1940,19 +2008,18 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditStation($IDeditStation,$editStation,$empcodeadmin)
-	{ 
-			$sql = "UPDATE mst_station_admin_app
+	public function modelEditStation($IDeditStation, $editStation, $empcodeadmin)
+	{
+		$sql = "UPDATE mst_station_admin_app
 			SET msa_station = '{$editStation}',
 			msa_update_by = '{$empcodeadmin}', msa_update_date = CURRENT_TIMESTAMP
 			WHERE  msa_id = '{$IDeditStation}'";
-			$res = $this->db->query($sql);
-			if ($res) {
-				return "true";
-			} else {
-				return "false";
-			}
-		
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
 	}
 
 	// ---------------------------------------------- mst Config Detail ---------------------------------------------------------
@@ -1960,7 +2027,7 @@ class Backoffice_model extends CI_Model
 
 	public function getTableConfigDetails()
 	{
-	  $sql = "SELECT mcd_id , mcd_inspection_time , mcd_mac_address , mcd_status ,
+		$sql = "SELECT mcd_id , mcd_inspection_time , mcd_mac_address , mcd_status , mcd_select_part , 
 		mst_plant_admin_app.mpa_id , mpa_name , 
 		mst_zone_admin_app.mza_id , mza_name ,
 		mst_station_admin_app.msa_id , msa_station ,
@@ -2003,7 +2070,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-public function modelgetCheckTypenApp()
+	public function modelgetCheckTypenApp()
 	{
 		$sql = "SELECT * FROM mst_check_type_app ";
 		$res = $this->db->query($sql);
@@ -2061,9 +2128,17 @@ public function modelgetCheckTypenApp()
 		}
 	}
 
-	public function modelAddConfigDetails($addplantconfig , $addzoneconfig , $addstationconfig , $addtypeconfig 
-	, $addstatusconfig , $addinspectionconfig , $addTimeconfig , 	$addMacaddress , $empcodeadmin)
-	{
+	public function modelAddConfigDetails(
+		$addplantconfig,
+		$addzoneconfig,
+		$addstationconfig,
+		$addtypeconfig,
+		$addstatusconfig,
+		$addinspectionconfig,
+		$addTimeconfig,
+		$addMacaddress,
+		$empcodeadmin
+	) {
 		$sql = "INSERT INTO mst_config_details_app 
 		(mpa_id , mza_id , msa_id , mct_id , mcs_id , mit_id , mcd_inspection_time , mcd_mac_address , mcd_create_by , mcd_create_date)
 		VALUES('{$addplantconfig}','{$addzoneconfig}','{$addstationconfig}','{$addtypeconfig}','{$addstatusconfig}',
@@ -2075,70 +2150,49 @@ public function modelgetCheckTypenApp()
 			return "false";
 		}
 	}
-	
+
 	public function getDataEditConfigDetails($configdetailId)
 	{
-		$sql = "SELECT mcd_id , mpa_id , mza_id ,  msa_id , mct_id , mcs_id ,  mit_id , mcd_inspection_time , mcd_mac_address
+		$sql = "SELECT mcd_id , mpa_id , mza_id ,  msa_id , mct_id , mcs_id ,  mit_id , mcd_inspection_time , mcd_mac_address ,  mcd_select_part 
 		FROM mst_config_details_app
 		WHERE mcd_id = '{$configdetailId}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 	}
-	public function checklogin_id($id)
-    {
 
-        $sql = "SELECT * FROM log_staff_active_web WHERE ss_id = '{$id}' AND lsa_status = 0 ";
-        $res = $this->db->query($sql);
-        if ($res->num_rows() != 0) {
-            $result = $res->result_array();
-            return $result[0];
-        } else {
-            return false;
-        }
-    }
-    public function insertlogin($id)
-    {
-        $sql = "INSERT INTO log_staff_active_web(ss_id,lsa_login_date ) VALUES ('{$id}',CURRENT_TIMESTAMP)";
-        $res = $this->db->query($sql);
+	public function modelEditConfigDetails(
+		$IDeditconfig,
+		$editplantconfig,
+		$editzoneconfig,
+		$editstationconfig,
+		$edittypeconfig,
+		$editstatusconfig,
+		$editinspectionconfig,
+		$edittimeconfig,
+		$editMacaddressconfig,
+		$empcodeadmin
+	) {
 
-        if ($res) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-
-    public function maxlogId($id)
-    {
-        $sql = "SELECT MAX(lsa_id) AS re_max from log_staff_active_web WHERE ss_id = '{$id}'";
-        $res = $this->db->query($sql);
-        $row = $res->result_array();
-        $ss = $row["0"]["re_max"];
-        return $ss;
-    }
-    public function insertloginaddUpdate($id,$checkMaxid)
-    {
-
-        $sql = "INSERT INTO log_staff_active_web(ss_id,lsa_login_date ) VALUES ('{$id}',CURRENT_TIMESTAMP)
-        UPDATE log_staff_active_web SET lsa_logout_date = CURRENT_TIMESTAMP , lsa_status = 1 WHERE lsa_id ='{$checkMaxid}'" ;
-        $res = $this->db->query($sql);
-
-        if ($res) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-    public function loglogout($chmax){
-        $sql = "UPDATE log_staff_active_web SET lsa_logout_date = CURRENT_TIMESTAMP , lsa_status = 1 WHERE lsa_id ='{$chmax}'";
-        $res = $this->db->query($sql);
-        if ($res) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-	
+		$sql = "UPDATE mst_config_details_app
+		SET mpa_id = '{$editplantconfig}' ,
+		mza_id = '{$editzoneconfig}',
+		msa_id = '{$editstationconfig}', 
+		mct_id = '{$edittypeconfig}',
+		mcs_id = '{$editstatusconfig}' ,
+		mit_id = '{$editinspectionconfig}',
+		mcd_inspection_time ='{$edittimeconfig}',
+		mcd_mac_address = '{$editMacaddressconfig}',
+		mcd_update_by = '{$empcodeadmin}', 
+		mcd_update_date = CURRENT_TIMESTAMP
+		WHERE mcd_id = '{$IDeditconfig}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+	// return $res;
+	// }
 }

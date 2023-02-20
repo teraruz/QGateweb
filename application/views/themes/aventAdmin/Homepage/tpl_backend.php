@@ -2437,7 +2437,9 @@
             });
         }
     }
-    // ---------------------------------ข้าม Select Part ไปก่อน --------------------------
+    // ******************************************************mst  Select Part ******************************************************
+
+    
 
 
     // ****************************************************** mst Plant Admin Web  ******************************************************
@@ -2952,7 +2954,7 @@
         SaveAddConfigDetails()
     });
     $("#btnSaveEditConfigDetails").click(function() {
-        SaveEdiConfigDetails()
+        SaveEditConfigDetails()
     })
 
 
@@ -3042,7 +3044,8 @@
             $("#editstatusconfig").val(rs[0]["mcs_id"]);
             $("#editinspectionconfig").val(rs[0]["mit_id"]);
             $("#edittimeconfig").val(rs[0]["mcd_inspection_time"]);
-            $("#editMacaddressconfig").val(rs[0]["mcd_mac_address"]);
+            $("#editmacaddressconfig").val(rs[0]["mcd_mac_address"]);
+            $("#editselectpartconfig").val(rs[0]["mcd_select_part"]);
         })
     };
 
@@ -3058,17 +3061,24 @@
         var edittimeconfig = $('#edittimeconfig').val()
         var editMacaddressconfig = $('#editMacaddressconfig').val()
 
-        var checkIDeditStation = document.getElementById("IDeditStation");
-        var checkeditStation = document.getElementById("editStation");
+        var checkIDeditconfig = document.getElementById("IDeditconfig");
+        var checkeditplantconfig = document.getElementById("editplantconfig");
+        var checkeditzoneconfig = document.getElementById("editzoneconfig");
+        var checkeditstationconfig = document.getElementById("editstationconfig");
+        var checkedittypeconfig = document.getElementById("edittypeconfig");
+        var checkeditstatusconfig = document.getElementById("editstatusconfig");
+        var checkedittimeconfig = document.getElementById("edittimeconfig");
+        var checkeditMacaddressconfig = document.getElementById("editMacaddressconfig");
 
-        if (checkIDeditStation.value == "" || checkeditStation.value == "") {
+        if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
+        checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" || 
+        checkedittypeconfig.value == "" || checkeditstatusconfig.value =="" ||
+        checkedittimeconfig.value == "" || checkeditMacaddressconfig.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
                 type: "warning"
-            }, function() {
-                window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
-            });
+            })
         } else {
 
             var path = $.ajax({
@@ -3087,21 +3097,23 @@
                 }
             })
             path.done(function(rs) {
+                alert(rs)
+                console.log(rs)
                 if (rs === "true") {
                     setTimeout(function() {
                         swal({
                             title: "Success",
-                            text: "Station is Updated!",
+                            text: "Config Detail is Updated!",
                             type: "success",
                             confirmButtonColor: '#D80032'
                         }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/StationAdmin";
+                            window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
                         });
                     });
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Edit Station',
+                        title: 'You Failed to Edit Config Details',
                     })
                 }
             });
