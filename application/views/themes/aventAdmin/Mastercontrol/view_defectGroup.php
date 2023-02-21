@@ -111,16 +111,19 @@
                   <div class="form-group">
                     <label for="empcode">Plant : </label>
                     <input class="form-control" type="text" id="IDeditdefectgroup" name="IDeditdefectgroup" hidden>
+                    <input class="form-control" type="text" id="IDeditplantdefectgroup" name="IDeditplantdefectgroup" hidden>
                     <input class="form-control" type="text" id="editplantdefectgroup" name="editplantdefectgroup" disabled>
                   </div>
 
                   <div class="form-group">
                     <label for="password">Zone : </label>
+                    <input class="form-control" type="text" id="IDeditzonedefectgroup" name="IDeditzonedefectgroup" hidden>
                     <input class="form-control" type="text" id="editzonedefectgroup" name="editzonedefectgroup" disabled>
                   </div>
 
                   <div class="form-group">
                     <label for="password">Station : </label>
+                    <input class="form-control" type="text" id="IDeditstationdefectgroup" name="IDeditstationdefectgroup" disabled>
                     <input class="form-control" type="text" id="editstationdefectgroup" name="editstationdefectgroup" disabled>
                   </div>
 
@@ -137,7 +140,7 @@
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditdefect">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditdefectGroup">Save</a>
                 </div>
               </div>
             </div>

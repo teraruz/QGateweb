@@ -270,9 +270,9 @@
 </script>
 <!-- --------------------------------------------------- LOGOUT  --------------------------------------------------- -->
 <script type="text/javascript">
-    // $("#btnLogout").click(function() {
-    //     Logout()
-    // });
+    $("#btnLogout").click(function() {
+        Logout()
+    });
 
     function btnLogout($id) {
         Swal.fire({
@@ -3278,9 +3278,11 @@
 
 
     // ********************************************************************* mst Defect Group ******************************************************************
-    $("#btnSaveEditdefect").click(function() {
-        SaveEditDefect()
+    $("#btnSaveEditdefectGroup").click(function() {
+        SaveEditDefectGroup()
     })
+
+
 
 
     function statusDefectGroup(mdg_id) {
@@ -3308,49 +3310,59 @@
             $("#editplantdefectgroup").val(rs[0]["mpa_phase_plant"]);
             $("#editzonedefectgroup").val(rs[0]["mza_name"]);
             $("#editstationdefectgroup").val(rs[0]["msa_station"]);
+            $("#IDeditplantdefectgroup").val(rs[0]["mpa_id"]);
+            $("#IDeditzonedefectgroup").val(rs[0]["mza_id"]);
+            $("#IDeditstationdefectgroup").val(rs[0]["msa_id"]);
             $checkbox = "";
-
+            var G_check = ""
             pathnaja.done(function(rsnaja) {
-                $.each(rsnaja, function(key, value) {
-                    $check = "";
-                    $.each(rs, function(key, value1) {
-
-                        if (value1.md_id === value.md_id) {
-                            $check = "checked";
-                        } else {
-                            $check = "";
-                        }
-                    })
-                    $checkbox += '<input type="checkbox" name="checkboxdefectcode" id="checkboxdefectcode" value="' + value.md_id + '" ' + $check + ' >' + value.md_defect_en_name + '<span class="checkmark"></span><br><br>'
+                console.log("rs===>", rs)
+                console.log("rsnaja===>", rsnaja)
+                var checkbox = "";
+                var check = "checked";
+                $.each(rsnaja, function(keyCheck, value) {
+                    G_check = ""
+                    checkData(rs, value.md_id)
+                    checkbox += '<input type="checkbox" class="checkboxdefectcode" name="checkboxdefectcode" id="checkboxdefectcode"  value="' + value.md_id + '" ' + G_check + ' >' + value.md_defect_en_name + '<span class="checkmark"></span><br><br>'
                 })
-
-                $("#checkBoxDefect").html($checkbox);
-
+                $("#checkBoxDefect").html(checkbox);
             })
 
+            function checkData(ResultSelect, md_id) {
+                $status = true
+                $.each(ResultSelect, function(keyData, valueData) { //2 or 3
+                    if (md_id == valueData.md_id) {
+                        G_check = "checked"
+                        return false;
+                    }
+                })
+
+            }
         })
     }
 
-    function SaveEditDefect() {
+    function SaveEditDefectGroup() {
         var IDeditdefectgroup = $('#IDeditdefectgroup').val()
-        var editplantdefectgroup = $('#editplantdefectgroup').val()
-        var editzonedefectgroup = $('#editzonedefectgroup').val()
-        var editstationdefectgroup = $('#editstationdefectgroup').val()
+        var editplantdefectgroup = $('#IDeditplantdefectgroup').val()
+        var editzonedefectgroup = $('#IDeditzonedefectgroup').val()
+        var editstationdefectgroup = $('#IDeditstationdefectgroup').val()
 
         var dataDefectGroupcheckId = []
         jQuery("input[name='checkboxdefectcode']").each(function(key, values) {
             if (this.checked == true) {
                 console.log("sssssssssssssssss==>", this.value)
                 dataDefectGroupcheckId[key] = this.value
+                // alert("this.value===>"+this.value)
 
             }
+
         });
         console.log("==>", dataDefectGroupcheckId)
         var path = $.ajax({
             method: "GET",
             url: "<?php echo base_url(); ?>Manage/EditDefectGroup",
             data: {
-                IDeditdefectgroup: IDeditdefectgroup,
+                // IDeditdefectgroup: IDeditdefectgroup,
                 editplantdefectgroup: editplantdefectgroup,
                 editzonedefectgroup: editzonedefectgroup,
                 editstationdefectgroup: editstationdefectgroup,
@@ -3359,20 +3371,21 @@
         })
         path.done(function(rs) {
             alert(rs);
-            if (rs === "true") {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'You have Successfully Edit Defect Group.',
+            console.log("wwwwwwwwwwwwwwwww==>", this.value)
+            // if (rs === "true") {
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'You have Successfully Edit Defect Group.',
 
-                }).then(function() {
-                    window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'You Failed to Edit Defect Group',
-                })
-            }
+            //     }).then(function() {
+            //         window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'You Failed to Edit Defect Group',
+            //     })
+            // }
         })
     }
 </script>

@@ -102,16 +102,14 @@ class Backoffice_model extends CI_Model
 	}
 	public function modelSetPassword($email, $password_encoded)
 	{
-		// if($email =! ""){
 		$sql = "select * from sys_staff_web where ss_email ='{$email}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		// var_dump();
-		// exit();
 		if ($row == null) {
 			return 'false';
 		} else {
-			$sql = "update sys_staff_web set ss_emp_password = '{$password_encoded}' where ss_email = '{$email}'";
+			$sql = "UPDATE sys_staff_web SET ss_emp_password = '{$password_encoded}' , ss_update_by = 'staff' ,  ss_update_date = CURRENT_TIMESTAMP
+			WHERE ss_email = '{$email}'";
 			$res = $this->db->query($sql);
 			return 'true';
 		}
@@ -137,14 +135,12 @@ class Backoffice_model extends CI_Model
 		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id
 		INNER JOIN mst_plant_admin_web  ON  sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id 
 		
-		WHERE  ss_emp_code = '{$empcode}' and  ssm_status = '1' and spd_status = '1' ORDER BY ss_id";
+		WHERE  ss_emp_code = '{$empcode}' and  ssm_status = '1' and spd_status = '1' 
+		ORDER BY sm_order_no , ssm_order_no";
 
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-		// echo "<pre>";
-		//  print_r($row);
-		// echo "</pre>";
 	}
 	// *********************** getphasetoEditProfile ***********************************************************************
 
@@ -2443,8 +2439,11 @@ class Backoffice_model extends CI_Model
 		$sql = "SELECT
 		DISTINCT
 		mcda.mcd_id ,
+		mpaa.mpa_id,
 		mpaa.mpa_phase_plant ,
+		mzaa.mza_id ,
 		mzaa.mza_name  ,
+		msaa.msa_id,
 		msaa.msa_station ,
 		mdga.md_id ,
 		mda.md_defect_en_name
@@ -2459,25 +2458,39 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-
-	} 
+	}
 	public function getDefectCode()
 	{
 		$sql = "SELECT * FROM mst_defect_app  where md_status ='1'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
-	} 
-
-	public function modelEditDefectGroup($IDeditdefectgroup, $value, $empcodeadmin)
-	{
-		$sql = "";
-		$res = $this->db->query($sql);
-		if($res){
-			return "true";
-		}else{
-			return "false";
-		}
 	}
 
+	public function modelEditDefectGroup($resdetailId,$value,$empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_defect_group_app(mcd_id,md_id,mdg_create_by,mdg_create_date,mdg_update_by,mdg_update_date) VALUES ('{$resdetailId}','{$value}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+			
+	}
+	public function checkConfId($editzonedefectgroup,$editplantdefectgroup,$editstationdefectgroup)
+	{
+		$sql = "SELECT
+		mcd_id 
+		FROM
+			mst_config_details_app mcd
+		WHERE mcd.mpa_id ='{$editplantdefectgroup}'AND
+			mcd.mza_id ='{$editzonedefectgroup}' AND
+			mcd.msa_id ='{$editstationdefectgroup}' AND
+			mcd.mcd_status ='1'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return 	$row[0]["mcd_id"];
+
+	}
 }

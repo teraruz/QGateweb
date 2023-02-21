@@ -42,16 +42,8 @@ class Login extends CI_Controller
 		$this->template->set_master_template('themes/' . $this->theme . '/Login/view_login.php');
 		$this->template->render();
 
-
-		// $resLogin = $this->backoffice_model->modelCheckUser();
-		// echo json_encode($resLogin);
 	}
-	// public function checkUser() {
 
-	// 	$resLogin = $this->backoffice_model->modelCheckUser();
-	// 	echo json_encode($resLogin);
-
-	// }
 	public function forgotpassword()
 	{
 		$this->load->library('session');

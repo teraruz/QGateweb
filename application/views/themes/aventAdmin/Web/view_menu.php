@@ -44,8 +44,8 @@
               </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item" >
-              <!-- onclick="btnLogout(<?php echo $id; ?>)" -->
+            <a class="dropdown-item preview-item" onclick="btnLogout(<?php echo $id; ?>)">
+              
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>

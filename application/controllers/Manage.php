@@ -1517,16 +1517,27 @@ class manage extends CI_Controller
 	public function EditDefectGroup()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
-		$IDeditdefectgroup = $_GET["IDeditdefectgroup"];
-		$dataDefectGroupcheckId = $_GET["dataDefectGroupcheckId"];
-		echo $IDeditdefectgroup;
+		// $IDeditdefectgroup = $_GET["IDeditdefectgroup"]; //mdg_id
+		$editzonedefectgroup = $_GET["editzonedefectgroup"];//mza_id
+		$editplantdefectgroup = $_GET["editplantdefectgroup"];//mpa_id
+		$editstationdefectgroup = $_GET["editstationdefectgroup"];//msa_id
+		$dataDefectGroupcheckId = $_GET["dataDefectGroupcheckId"]; //checkbox
+		// echo $dataDefectGroupcheckId[0];
+		// echo $editplantdefectgroup;
+		// echo $editstationdefectgroup;
+
+		$resdetailId =$this->backoffice_model->checkConfId($editzonedefectgroup,$editplantdefectgroup,$editstationdefectgroup);
+		// echo "resdetailId >> ",$resdetailId;
+		// $status =  "false";
 		foreach ($dataDefectGroupcheckId as $key => $value) {
 			if ($value == " " || empty($value)) {
-				return "false";
+				echo "false";				
 			} else {
-				$rseditdefect = $this->backoffice_model->modelEditDefectGroup($IDeditdefectgroup, $value, $empcodeadmin);
-				return $rseditdefect;
+				 $rseditdefect = $this->backoffice_model->modelEditDefectGroup($resdetailId,$value,$empcodeadmin);
+				echo $rseditdefect;
+				// $status = $rseditdefect;
 			}
+			// echo $status;
 		}
 	}
 
