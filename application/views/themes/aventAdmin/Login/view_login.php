@@ -66,15 +66,14 @@
               </div>
               <h1 class="card-title text-center ">QUALITY SYSTEM</h1>
 
-              <div class="form-group" action="<?php $_SERVER['PHP_SELF']?>"
-                <label>Employee Code :</label>
-                <input type="text" class="form-control" id="empcode" name="empcode" >
+              <div class="form-group" action="<?php $_SERVER['PHP_SELF'] ?>" <label>Employee Code :</label>
+                <input type="text" class="form-control" id="empcode" name="empcode">
               </div>
               <div class="form-group">
                 <label>Password :</label>
                 <input type="password" class="form-control" id="password" name="password">
               </div><br>
-            
+
               <div class="text-center ">
                 <button type="submit" class="btn colorbtnLogin btn-block enter-btn " id="btnLogin">LOGIN</button>
                 <hr style="background-color:aliceblue">
@@ -105,23 +104,26 @@
   <!-- endinject -->
 </body>
 <template id="my-template">
-	<swal-title>
-		Login Success !
-	</swal-title>
-	<swal-icon type="success" color="green"></swal-icon>
-	<swal-button type="confirm">
-		OK
-	</swal-button>
-	<swal-param name="allowEscapeKey" value="false" />
-	<swal-param name="customClass" value='{ "popup": "my-popup" }' />
-	<swal-function-param name="didOpen" value="popup => console.log(popup)" />
+  <swal-title>
+    Login Success !
+  </swal-title>
+  <swal-icon type="success" color="green"></swal-icon>
+  <swal-button type="confirm">
+    OK
+  </swal-button>
+  <swal-param name="allowEscapeKey" value="false" />
+  <swal-param name="customClass" value='{ "popup": "my-popup" }' />
+  <swal-function-param name="didOpen" value="popup => console.log(popup)" />
 </template>
+
 </html>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.all.min.js"></script>
-<script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 <script src="<?php echo base_url() . $jquery_url; ?>jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
   $("#btnLogin").click(function() {
@@ -153,21 +155,22 @@
         Swal.fire({
           template: '#my-template',
           icon: 'success',
-          title :'Login Success',
+          title: 'Login Success',
           text: 'Welcome to Q-Gate Website',
           showConfirmButton: false,
-          footer: '<a href="<?php echo base_url() ?>Manage/Homepage?empcode='+empcode+'">GO TO WEBSITE</a>',
+          footer: '<a href="<?php echo base_url() ?>Manage/Homepage?empcode=' + empcode + '">GO TO WEBSITE</a>',
         })
       } else {
         Swal.fire({
           icon: 'error',
-          title :'Oops!!',
+          title: 'Oops!!',
           text: 'Employee Code or Password is Incorrect!',
         })
       }
     })
   }
-  function getName(){
+
+  function getName() {
     var empcode = $("#empcode").val();
     var path = $.ajax({
       method: "GET",

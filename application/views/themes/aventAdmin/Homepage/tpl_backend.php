@@ -10,6 +10,7 @@
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.45.0/theme/dracula.min.css">
 <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/jvectormap/jquery-jvectormap.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/flag-icon-css/css/flag-icon.min.css">
@@ -104,6 +105,15 @@
 
 
 <script type="text/javascript">
+    const triggerTabList = document.querySelectorAll('#myTab button')
+    triggerTabList.forEach(triggerEl => {
+        const tabTrigger = new bootstrap.Tab(triggerEl)
+
+        triggerEl.addEventListener('click', event => {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
     $("#wow1").click(function() {
         BacktoHome()
     });
@@ -140,7 +150,6 @@
         password3.setAttribute('type', type3);
         this.classList.togglePassword3('mdi mdi-eye-off');
     });
-
 
     function BacktoHome() {
         Swal.fire({
@@ -261,11 +270,11 @@
 </script>
 <!-- --------------------------------------------------- LOGOUT  --------------------------------------------------- -->
 <script type="text/javascript">
-    $("#btnLogout").click(function() {
-        Logout()
-    });
+    // $("#btnLogout").click(function() {
+    //     Logout()
+    // });
 
-    function Logout() {
+    function btnLogout($id) {
         Swal.fire({
             title: 'Logout',
             text: "Are you sure?",
@@ -273,10 +282,16 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Logout'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '<?php echo base_url() ?>Login/Account'
+                var path = $.ajax({
+                    method: "get",
+                    dataType: "json",
+                    url: "<?php echo base_url(); ?>Login/logout?id=" + $id,
+                })
+
+                window.location.href = "<?php echo base_url() ?>Login/Account";
+
             }
         })
     };
@@ -371,9 +386,10 @@
             $("#editempcode").val(rs[0]["ss_emp_code"]);
             $("#editfirstname").val(rs[0]["ss_emp_fname"]);
             $("#editlastname").val(rs[0]["ss_emp_lname"]);
-            $("#editgroup").val(rs[0]["spg_name"]);
+            $("#editgrouppermissionuserweb").val(rs[0]["spg_name"]);
             $("#editemailaddress").val(rs[0]["ss_email"]);
             $("#editplant").val(rs[0]["mpa_name"]);
+
         })
     };
 
@@ -381,7 +397,7 @@
         var editempcode = $("#editempcode").val();
         var editfirstname = $("#editfirstname").val();
         var editlastname = $("#editlastname").val();
-        var editgroup = $("#editgroup").val();
+        var editgroup = $("#editgrouppermissionuserweb").val();
         var editemail = $("#editemailaddress").val();
         var editplant = $("#editplant").val();
 
@@ -821,7 +837,7 @@
             $("#editnameapp").val(data.getdataEdit[0]["ss_emp_name"]);
             $("#editpathpicapp").val(data.getdataEdit[0]["ss_pic"]);
             $.each(data.PermissionAll, function(key, value) {
-                alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
+                // alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
                 if (value["spg_name"] == data.getdataEdit[0]["spg_name"]) {
                     checked = "selected"
                 } else {
@@ -1040,7 +1056,6 @@
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
             });
         } else {
-            alert(dropdowneditmenu)
             var path = $.ajax({
                 method: "POST",
                 url: "<?php echo base_url(); ?>Manage/EditManagePermissionApp",
@@ -2029,7 +2044,7 @@
         var checkaddstarttime = document.getElementById("addstarttime")
         var checkaddendtime = document.getElementById("addendtime")
 
-        if (checkaddshift.value == ""|| checkaddstarttime.value == "" || checkaddendtime == "") {
+        if (checkaddshift.value == "" || checkaddstarttime.value == "" || checkaddendtime == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -2095,8 +2110,8 @@
         var checkeditendtime = document.getElementById("editendtime");
 
 
-        if (checkIDeditworkshift.value == "" || checkeditshift.value == "" 
-        || checkeditstarttime.value == "" || checkeditendtime.value == "") {
+        if (checkIDeditworkshift.value == "" || checkeditshift.value == "" ||
+            checkeditstarttime.value == "" || checkeditendtime.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2113,7 +2128,7 @@
                     IDeditworkshift: IDeditworkshift,
                     editshift: editshift,
                     editstarttime: editstarttime,
-                    editendtime : editendtime
+                    editendtime: editendtime
                 }
             })
             path.done(function(rs) {
@@ -2139,10 +2154,10 @@
     }
 
 
-     // ********************************************************* mst DEFECT **************************************************************
+    // ********************************************************* mst DEFECT **************************************************************
 
 
-     $("#btnSaveAddDefect").click(function() {
+    $("#btnSaveAddDefect").click(function() {
         SaveAddDefect()
     });
     $("#btnSaveEditDefect").click(function() {
@@ -2164,7 +2179,7 @@
         var adddefectnameen = $('#adddefectnameen').val()
 
         var checkadddefectcode = document.getElementById("adddefectcode");
-        var checkadddefectnameth  = document.getElementById("adddefectnameth");
+        var checkadddefectnameth = document.getElementById("adddefectnameth");
         var checkadddefectnameen = document.getElementById("adddefectnameen");
 
         if (checkadddefectcode.value == "" || checkadddefectnameth.value == "" || checkadddefectnameen.value == "") {
@@ -2205,7 +2220,7 @@
         }
     };
 
-    
+
     function getDataDefect(md_id) {
         var path = $.ajax({
             method: "get",
@@ -2234,8 +2249,8 @@
         var checkeditdefectnameen = document.getElementById("editdefectnameen");
 
 
-        if (checkIDeditdefect.value == "" || checkeditdefectcode.value == "" 
-        || checkeditdefectnameth.value == "" || checkeditdefectnameen.value == "") {
+        if (checkIDeditdefect.value == "" || checkeditdefectcode.value == "" ||
+            checkeditdefectnameth.value == "" || checkeditdefectnameen.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -2252,7 +2267,7 @@
                     IDeditdefect: IDeditdefect,
                     editdefectcode: editdefectcode,
                     editdefectnameth: editdefectnameth,
-                    editdefectnameen : editdefectnameen
+                    editdefectnameen: editdefectnameen
                 }
             })
             path.done(function(rs) {
@@ -2278,5 +2293,1070 @@
     }
 
 
+    // ****************************************************** mst Part Number ******************************************************
 
+
+    $("#btnSaveAddPartNo").click(function() {
+        SaveAddPartNo()
+    });
+    $("#btnSaveEditPartNo").click(function() {
+        SaveEditPartNo()
+    })
+
+
+    function statusPartNo(mpn_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPartNo?mpn_id=" + mpn_id
+        })
+    };
+
+
+
+    function SaveAddPartNo() {
+        var addpartnumber = $('#addpartnumber').val()
+        var addcuspartno = $('#addcuspartno').val()
+        var addlocationpart = $('#addlocationpart').val()
+        var adddmccheckpart = $('#adddmccheckpart').val()
+
+        var checkaddpartnumber = document.getElementById("addpartnumber");
+        var checkaddcuspartno = document.getElementById("addcuspartno");
+        var checkaddlocationpart = document.getElementById("addlocationpart");
+        var checkadddmccheckpart = document.getElementById("adddmccheckpart");
+
+        if (checkaddpartnumber.value == "" || checkaddcuspartno.value == "" ||
+            checkaddlocationpart.value == "" || checkadddmccheckpart.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddPartNo",
+                data: {
+                    addpartnumber: addpartnumber,
+                    addcuspartno: addcuspartno,
+                    addlocationpart: addlocationpart,
+                    adddmccheckpart: adddmccheckpart
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Part Number.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/PartNumber";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Part Number'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataPartNo(mpn_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPartNo?mpn_id=" + mpn_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditpartno").val(rs[0]["mpn_id"]);
+            $("#editpartnumber").val(rs[0]["mpn_part_no"]);
+            $("#editcuspartno").val(rs[0]["mpn_cus_part_no"]);
+            $("#editlocationpart").val(rs[0]["mpn_location"]);
+            $("#editdmccheckpart").val(rs[0]["mpn_dmc_check"]);
+
+        })
+    };
+
+
+    function SaveEditPartNo(mpn_id) {
+        var IDeditpartno = $('#IDeditpartno').val()
+        var editpartnumber = $('#editpartnumber').val()
+        var editcuspartno = $('#editcuspartno').val()
+        var editlocationpart = $('#editlocationpart').val()
+        var editdmccheckpart = $('#editdmccheckpart').val()
+
+        var checkIDeditpartno = document.getElementById("IDeditpartno");
+        var checkeditpartnumber = document.getElementById("editpartnumber");
+        var checkeditcuspartno = document.getElementById("editcuspartno");
+        var checkeditlocationpart = document.getElementById("editlocationpart");
+        var checkeditdmccheckpart = document.getElementById("editdmccheckpart");
+
+        if (checkIDeditpartno.value == "" || checkeditpartnumber.value == "" ||
+            checkeditcuspartno.value == "" || checkeditlocationpart.value == "" ||
+            checkeditdmccheckpart.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/PartNumber";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditPartNumber",
+                data: {
+                    IDeditpartno: IDeditpartno,
+                    editpartnumber: editpartnumber,
+                    editcuspartno: editcuspartno,
+                    editlocationpart: editlocationpart,
+                    editdmccheckpart: editdmccheckpart
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Part Number is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/PartNumber";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Part Number',
+                    })
+                }
+            });
+        }
+    }
+    // ******************************************************mst  Select Part ******************************************************
+
+    $("#btnSaveAddSelectPart").click(function() {
+        SaveAddSelectPart()
+    });
+    $("#btnSaveEditSelectPart").click(function() {
+        SaveEditSelectPart()
+    })
+
+
+    function statusSelectPart(msp_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusSelectPart?msp_id=" + msp_id
+        })
+    };
+
+
+    function SaveAddSelectPart() {
+        var addselectpCon = $('#addselectpCon').val()
+        var addselectpdmc = $('#addselectpdmc').val()
+        var addselectpno = $('#addselectpno').val()
+        var addselectpname = $('#addselectpname').val()
+        var addselectptime = $('#addselectptime').val()
+
+
+        var checkaddselectpCon = document.getElementById("addselectpCon");
+        var checkaddselectpdmc = document.getElementById("addselectpdmc");
+        var checkaddselectpno = document.getElementById("addselectpno");
+        var checkaddselectpname = document.getElementById("addselectpname");
+        var checkaddselectptime = document.getElementById("addselectptime");
+
+        if (checkaddselectpCon.value == "" || checkaddselectpdmc.value == "" ||
+            checkaddselectpno.value == "" || checkaddselectpname.value == "" || checkaddselectptime.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddSelectPart",
+                data: {
+                    addselectpCon: addselectpCon,
+                    addselectpdmc: addselectpdmc,
+                    addselectpno: addselectpno,
+                    addselectpname: addselectpname,
+                    addselectptime: addselectptime
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Select Part.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/SelectPart";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Select Part'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataSelectPart(msp_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditSelectpart?msp_id=" + msp_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditselectp").val(rs[0]["msp_id"]);
+            $("#editselectpCon").val(rs[0]["mcd_id"]);
+            $("#editselectpdmc").val(rs[0]["mdtd_id"]);
+            $("#editselectpno").val(rs[0]["msp_part_no"]);
+            $("#editselectpname").val(rs[0]["msp_part_name"]);
+            $("#editselectptime").val(rs[0]["msp_inspection_time"]);
+
+        })
+    };
+
+    function SaveEditSelectPart(mpn_id) {
+        var IDeditselectp = $('#IDeditselectp').val()
+        var editselectpCon = $('#editselectpCon').val()
+        var editselectpdmc = $('#editselectpdmc').val()
+        var editselectpno = $('#editselectpno').val()
+        var editselectpname = $('#editselectpname').val()
+        var editselectptime = $('#editselectptime').val()
+
+
+        var checkIDeditselectp = document.getElementById("IDeditselectp");
+        var checkeditselectpCon = document.getElementById("editselectpCon");
+        var checkeditselectpdmc = document.getElementById("editselectpdmc");
+        var checkeditselectpno = document.getElementById("editselectpno");
+        var checkeditselectpname = document.getElementById("editselectpname");
+        var checkeditselectptime = document.getElementById("editselectptime");
+
+        if (checkeditselectpCon.value == "" || checkeditselectpdmc.value == "" ||
+            checkeditselectpno.value == "" || checkeditselectpname.value == "" || checkeditselectptime.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/SelectPart";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditSelectPart",
+                data: {
+                    IDeditselectp: IDeditselectp,
+                    editselectpCon: editselectpCon,
+                    editselectpdmc: editselectpdmc,
+                    editselectpno: editselectpno,
+                    editselectpname: editselectpname,
+                    editselectptime: editselectptime
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Select Part is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/SelectPart";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Select Part',
+                    })
+                }
+            });
+        }
+    }
+
+
+    // ****************************************************** mst Plant Admin Web  ******************************************************
+
+
+    $("#btnSaveAddPlantAdminWeb").click(function() {
+        SaveAddPlantAdminWeb()
+    });
+    $("#btnSaveEditPlantAdminWeb").click(function() {
+        SaveEditPlantAdminWeb()
+    })
+
+
+    function statusPlantAdminWeb(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPlantAdminWeb?mpa_id=" + mpa_id
+        })
+    };
+
+
+    function SaveAddPlantAdminWeb() {
+        var addplantwebphase = $('#addplantwebphase').val()
+        var addplantwebname = $('#addplantwebname').val()
+
+        var checkaddplantwebphase = document.getElementById("addplantwebphase");
+        var checkplantwebname = document.getElementById("addplantwebname");
+
+        if (checkaddplantwebphase.value == "" || checkplantwebname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddPlantAdminWeb",
+                data: {
+                    addplantwebphase: addplantwebphase,
+                    addplantwebname: addplantwebname
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Plant Web.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/PlantAdminWeb";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Plant Web'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataPlantAdminWeb(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPlantAdminWeb?mpa_id=" + mpa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditplantweb").val(rs[0]["mpa_id"]);
+            $("#editplantwebphase").val(rs[0]["mpa_phase_plant"]);
+            $("#editplantwebname").val(rs[0]["mpa_name"]);
+
+        })
+    };
+
+
+
+    function SaveEditPlantAdminWeb(mpa_id) {
+        var IDeditplantweb = $('#IDeditplantweb').val()
+        var editplantwebphase = $('#editplantwebphase').val()
+        var editplantwebname = $('#editplantwebname').val()
+
+        var checkIDeditplantweb = document.getElementById("IDeditplantweb");
+        var checkeditplantwebphase = document.getElementById("editplantwebphase");
+        var checkeditplantwebname = document.getElementById("editplantwebname");
+
+        if (checkIDeditplantweb.value == "" || checkeditplantwebphase.value == "" ||
+            checkeditplantwebname.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/PlantAdminWeb";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditPlantAdminWeb",
+                data: {
+                    IDeditplantweb: IDeditplantweb,
+                    editplantwebphase: editplantwebphase,
+                    editplantwebname: editplantwebname,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Plant Web is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/PlantAdminWeb";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Plant Web',
+                    })
+                }
+            });
+        }
+    };
+
+    // / ***************************************************** MST Plant Admin App *******************************************************
+
+
+    $("#btnSaveAddPlantAdminApp").click(function() {
+        SaveAddPlantAdminApp()
+    });
+    $("#btnSaveEditPlantAdminApp").click(function() {
+        SaveEditPlantAdminApp()
+    })
+
+
+    function statusPlantAdminApp(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusPlantAdminApp?mpa_id=" + mpa_id
+        })
+    };
+
+
+    function SaveAddPlantAdminApp() {
+        var addplantadminappphase = $('#addplantadminappphase').val()
+        var addplantadminappname = $('#addplantadminappname').val()
+
+        var checkaddplantappphase = document.getElementById("addplantadminappphase");
+        var checkplantappname = document.getElementById("addplantadminappname");
+
+        if (checkaddplantappphase.value == "" || checkplantappname.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddPlantAdminApp",
+                data: {
+                    addplantadminappphase: addplantadminappphase,
+                    addplantadminappname: addplantadminappname
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Plant App.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/PlantAdminApp";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Plant App'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataPlantAdminApp(mpa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditPlantAdminApp?mpa_id=" + mpa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditplantapp").val(rs[0]["mpa_id"]);
+            $("#editplantappphase").val(rs[0]["mpa_phase_plant"]);
+            $("#editplantappname").val(rs[0]["mpa_name"]);
+
+        })
+    };
+
+
+
+    function SaveEditPlantAdminApp(mpa_id) {
+        var IDeditplantapp = $('#IDeditplantapp').val()
+        var editplantappphase = $('#editplantappphase').val()
+        var editplantappname = $('#editplantappname').val()
+
+        var checkIDeditplantapp = document.getElementById("IDeditplantapp");
+        var checkeditplantappphase = document.getElementById("editplantappphase");
+        var checkeditplantappname = document.getElementById("editplantappname");
+
+        if (checkIDeditplantapp.value == "" || checkeditplantappphase.value == "" ||
+            checkeditplantappname.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/PlantAdminApp";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditPlantAdminApp",
+                data: {
+                    IDeditplantapp: IDeditplantapp,
+                    editplantappphase: editplantappphase,
+                    editplantappname: editplantappname,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Plant App is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/PlantAdminApp";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Plant App',
+                    })
+                }
+            });
+        }
+    };
+
+    // ----------------------------------------- mst Zone admin --------------------------------------
+
+    $("#btnSaveAddZone").click(function() {
+        SaveAddZone()
+    });
+    $("#btnSaveEditZone").click(function() {
+        SaveEditZone()
+    })
+
+
+    function statusZone(mza_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusZone?mza_id=" + mza_id
+        })
+    };
+
+
+    function SaveAddZone() {
+        var addnamezone = $('#addnamezone').val()
+        var addlinezone = $('#addlinezone').val()
+
+        var checkaddnamezone = document.getElementById("addnamezone");
+        var checkaddlinezone = document.getElementById("addlinezone");
+
+        if (checkaddnamezone.value == "" || checkaddlinezone.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddZone",
+                data: {
+                    addnamezone: addnamezone,
+                    addlinezone: addlinezone
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataZone(mza_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditZone?mza_id=" + mza_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditzone").val(rs[0]["mza_id"]);
+            $("#editnamezone").val(rs[0]["mza_name"]);
+            $("#editlinezone").val(rs[0]["mfcm_id"]);
+
+        })
+    };
+
+    function SaveEditZone(mza_id) {
+        var IDeditzone = $('#IDeditzone').val()
+        var editnamezone = $('#editnamezone').val()
+        var editlinezone = $('#editlinezone').val()
+
+        var checkIDeditzone = document.getElementById("IDeditzone");
+        var checkeditnamezone = document.getElementById("editnamezone");
+        var checkeditlinezone = document.getElementById("editlinezone");
+
+        if (checkIDeditzone.value == "" || checkeditnamezone.value == "" ||
+            checkeditlinezone.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ZoneAdmin";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditZone",
+                data: {
+                    IDeditzone: IDeditzone,
+                    editnamezone: editnamezone,
+                    editlinezone: editlinezone,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Zone is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ZoneAdmin";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Zone',
+                    })
+                }
+            });
+        }
+    };
+
+
+    // +++++++++++++++++++++++++++++++++++++ mst Station Admin +++++++++++++++++++++++++++++++++++++++++++++++++
+
+    $("#btnSaveAddStation").click(function() {
+        SaveAddStation()
+    });
+    $("#btnSaveEditStation").click(function() {
+        SaveEditStation()
+    })
+
+
+    function statusStation(msa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusStation?msa_id=" + msa_id
+        })
+    };
+
+
+    function SaveAddStation() {
+        var addtablestation = $('#addtablestation').val()
+
+        var checkaddtablestation = document.getElementById("addtablestation");
+
+        if (checkaddtablestation.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddStation",
+                data: {
+                    addtablestation: addtablestation,
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone'
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataStation(msa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditStation?msa_id=" + msa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditStation").val(rs[0]["msa_id"]);
+            $("#editStation").val(rs[0]["msa_station"]);
+
+        })
+    };
+
+
+    function SaveEditStation(msa_id) {
+        var IDeditStation = $('#IDeditStation').val()
+        var editStation = $('#editStation').val()
+
+        var checkIDeditStation = document.getElementById("IDeditStation");
+        var checkeditStation = document.getElementById("editStation");
+
+        if (checkIDeditStation.value == "" || checkeditStation.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/StationAdmin";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditStation",
+                data: {
+                    IDeditStation: IDeditStation,
+                    editStation: editStation,
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Station is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/StationAdmin";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Station',
+                    })
+                }
+            });
+        }
+    };
+
+
+
+    // ---------------------------------------------------------------  mst config Details -----------------------------------------------------------
+
+    $("#btnSaveAddConfigDetails").click(function() {
+        SaveAddConfigDetails()
+    });
+    $("#btnSaveEditConfigDetails").click(function() {
+        SaveEditConfigDetails()
+    })
+
+
+    function statusConfigDetails(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusConfigDetails?mcd_id=" + mcd_id
+        })
+    };
+
+    function SaveAddConfigDetails() {
+        var addplantconfig = $('#addplantconfig').val()
+        var addzoneconfig = $('#addzoneconfig').val()
+        var addstationconfig = $('#addstationconfig').val()
+        var addtypeconfig = $('#addtypeconfig').val()
+        var addstatusconfig = $('#addstatusconfig').val()
+        var addinspectionconfig = $('#addinspectionconfig').val()
+        var addTimeconfig = $('#addTimeconfig').val()
+        var addMacaddress = $('#addMacaddress').val()
+
+        var checkaddplantconfig = document.getElementById("addplantconfig");
+        var checkaddzoneconfig = document.getElementById("addzoneconfig");
+        var checkaddstationconfig = document.getElementById("addstationconfig");
+        var checkaddtypeconfig = document.getElementById("addtypeconfig");
+        var checkaddstatusconfig = document.getElementById("addstatusconfig");
+        var checkaddinspectionconfig = document.getElementById("addinspectionconfig");
+        var checkaddTimeconfig = document.getElementById("addTimeconfig");
+        var checkaddMacaddress = document.getElementById("addMacaddress");
+
+        if (checkaddplantconfig.value == "" || checkaddzoneconfig.value == "" || checkaddstationconfig.value == "" ||
+            checkaddtypeconfig.value == "" || checkaddstatusconfig.value == "" || checkaddinspectionconfig.value == "" ||
+            checkaddTimeconfig.value == "" || checkaddMacaddress == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddConfigDetails",
+                data: {
+                    addplantconfig: addplantconfig,
+                    addzoneconfig: addzoneconfig,
+                    addstationconfig: addstationconfig,
+                    addtypeconfig: addtypeconfig,
+                    addstatusconfig: addstatusconfig,
+                    addinspectionconfig: addinspectionconfig,
+                    addTimeconfig: addTimeconfig,
+                    addMacaddress: addMacaddress,
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ConfigDetail";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone'
+                    })
+                }
+            })
+        }
+    };
+
+
+    function getDataConfigDetails(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditConfigDetails?mcd_id=" + mcd_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditconfig").val(rs[0]["mcd_id"]);
+            $("#editplantconfig").val(rs[0]["mpa_id"]);
+            $("#editzoneconfig").val(rs[0]["mza_id"]);
+            $("#editstationconfig").val(rs[0]["msa_id"]);
+            $("#edittypeconfig").val(rs[0]["mct_id"]);
+            $("#editstatusconfig").val(rs[0]["mcs_id"]);
+            $("#editinspectionconfig").val(rs[0]["mit_id"]);
+            $("#edittimeconfig").val(rs[0]["mcd_inspection_time"]);
+            $("#editmacaddressconfig").val(rs[0]["mcd_mac_address"]);
+            $("#editselectpartconfig").val(rs[0]["mcd_select_part"]);
+        })
+    };
+
+
+    function SaveEditConfigDetails(mcd_id) {
+        var IDeditconfig = $('#IDeditconfig').val()
+        var editplantconfig = $('#editplantconfig').val()
+        var editzoneconfig = $('#editzoneconfig').val()
+        var editstationconfig = $('#editstationconfig').val()
+        var edittypeconfig = $('#edittypeconfig').val()
+        var editstatusconfig = $('#editstatusconfig').val()
+        var editinspectionconfig = $('#editinspectionconfig').val()
+        var edittimeconfig = $('#edittimeconfig').val()
+        var editMacaddressconfig = $('#editMacaddressconfig').val()
+
+        var checkIDeditconfig = document.getElementById("IDeditconfig");
+        var checkeditplantconfig = document.getElementById("editplantconfig");
+        var checkeditzoneconfig = document.getElementById("editzoneconfig");
+        var checkeditstationconfig = document.getElementById("editstationconfig");
+        var checkedittypeconfig = document.getElementById("edittypeconfig");
+        var checkeditstatusconfig = document.getElementById("editstatusconfig");
+        var checkedittimeconfig = document.getElementById("edittimeconfig");
+        var checkeditMacaddressconfig = document.getElementById("editMacaddressconfig");
+
+        if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
+            checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" ||
+            checkedittypeconfig.value == "" || checkeditstatusconfig.value == "" ||
+            checkedittimeconfig.value == "" || checkeditMacaddressconfig.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            })
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditConfigDetail",
+                data: {
+                    IDeditconfig: IDeditconfig,
+                    editplantconfig: editplantconfig,
+                    editzoneconfig: editzoneconfig,
+                    editstationconfig: editstationconfig,
+                    edittypeconfig: edittypeconfig,
+                    editstatusconfig: editstatusconfig,
+                    editinspectionconfig: editinspectionconfig,
+                    edittimeconfig: edittimeconfig,
+                    editMacaddressconfig: editMacaddressconfig
+                }
+            })
+            path.done(function(rs) {
+                alert(rs)
+                console.log(rs)
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Config Detail is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Config Details',
+                    })
+                }
+            });
+        }
+    };
+
+
+    // ********************************************************************* mst Defect Group ******************************************************************
+    $("#btnSaveEditdefect").click(function() {
+        SaveEditDefect()
+    })
+
+
+    function statusDefectGroup(mdg_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDefectGroup?mdg_id=" + mdg_id
+        })
+    };
+
+
+    function getDataEditDefectGroup(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDefectGroup?mcd_id=" + mcd_id,
+        })
+        var pathnaja = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataCheckBoxDefect"
+        })
+        path.done(function(rs) {
+
+            $("#IDeditdefectgroup").val(rs[0]["mcd_id"]);
+            $("#editplantdefectgroup").val(rs[0]["mpa_phase_plant"]);
+            $("#editzonedefectgroup").val(rs[0]["mza_name"]);
+            $("#editstationdefectgroup").val(rs[0]["msa_station"]);
+            $checkbox = "";
+
+            pathnaja.done(function(rsnaja) {
+                $.each(rsnaja, function(key, value) {
+                    $check = "";
+                    $.each(rs, function(key, value1) {
+
+                        if (value1.md_id === value.md_id) {
+                            $check = "checked";
+                        } else {
+                            $check = "";
+                        }
+                    })
+                    $checkbox += '<input type="checkbox" name="checkboxdefectcode" id="checkboxdefectcode" value="' + value.md_id + '" ' + $check + ' >' + value.md_defect_en_name + '<span class="checkmark"></span><br><br>'
+                })
+
+                $("#checkBoxDefect").html($checkbox);
+
+
+                // <span class="checkmark"></span>
+
+            })
+
+        })
+    }
+
+    function SaveEditDefect() {
+        var IDeditdefectgroup = $('#IDeditdefectgroup').val()
+        var dataDefectGroupcheckId = []
+        jQuery("input[name='checkboxdefectcode']").each(function(key, values) {
+            if (this.checked == true) {
+                console.log("sssssssssssssssss==>", this.value)
+                dataDefectGroupcheckId[key] = this.value
+
+            }
+        });
+        var path = $.ajax({
+            method: "GET",
+            url: "<?php echo base_url(); ?>Manage/EditDefectGroup",
+            data: {
+                IDeditdefectgroup: IDeditdefectgroup,
+                dataDefectGroupcheckId: dataDefectGroupcheckId
+            }
+        })
+        path.done(function(rs) {
+            alert(rs);
+            if (rs === "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'You have Successfully Add Permission.',
+
+                }).then(function() {
+                    window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You Failed to Add Permission',
+                })
+            }
+        })
+    }
 </script>

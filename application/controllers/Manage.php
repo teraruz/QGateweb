@@ -185,8 +185,9 @@ class manage extends CI_Controller
 	public function swiftStatus()
 	{
 		$staffid = $_GET["ss_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
 
-		$res = $this->backoffice_model->editStatus($staffid);
+		$res = $this->backoffice_model->editStatusUserWeb($staffid , $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function ConEditManageUser()
@@ -332,14 +333,16 @@ class manage extends CI_Controller
 	public function swiftStatusPermissionWeb()
 	{
 		$Perid = $_GET["spg_id"];
-		$res = $this->backoffice_model->editStatusPermissionWeb($Perid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionWeb($Perid , $empcodeadmin);
 		echo json_encode($res);
 	}
 
 	public function 	swiftStatusPermissionDetailWeb()
 	{
 		$detailid = $_GET["spd_id"];
-		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid , $empcodeadmin );
 		echo json_encode($res);
 	}
 	// ดึง menu และ submenu แสดงใน EditPermissionweb
@@ -429,7 +432,8 @@ class manage extends CI_Controller
 	public function swiftStatusMenuWeb()
 	{
 		$submenuid = $_GET["ssm_id"];
-		$res = $this->backoffice_model->editStatusMenuWeb($submenuid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusMenuWeb($submenuid , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -487,7 +491,8 @@ class manage extends CI_Controller
 	public function swiftStatusUserApp()
 	{
 		$userappid = $_GET["ss_id"];
-		$res = $this->backoffice_model->editStatusUserApp($userappid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusUserApp($userappid , $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function AddManageUserApp()
@@ -548,7 +553,8 @@ class manage extends CI_Controller
 	public function swiftStatusPermissionApp()
 	{
 		$PeridApp = $_GET["spg_id"];
-		$res = $this->backoffice_model->editStatusPermissionApp($PeridApp);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionApp($PeridApp, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -587,7 +593,8 @@ class manage extends CI_Controller
 	public function 	swiftStatusPermissionDetailApp()
 	{
 		$detailid = $_GET["spd_id"];
-		$res = $this->backoffice_model->editStatusPermissionDetailApp($detailid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionDetailApp($detailid, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -666,7 +673,8 @@ class manage extends CI_Controller
 	public function swiftStatusMenuApp()
 	{
 		$MenuappId = $_GET["sm_id"];
-		$res = $this->backoffice_model->editStatusMenuApp($MenuappId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusMenuApp($MenuappId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -740,7 +748,8 @@ class manage extends CI_Controller
 	public function swiftStatusChecktype()
 	{
 		$CheckTypeId = $_GET["mct_id"];
-		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -780,7 +789,8 @@ class manage extends CI_Controller
 	public function swiftStatusCheckStatus()
 	{
 		$StatusId = $_GET["mcs_id"];
-		$res = $this->backoffice_model->editStatusCheckStatus($StatusId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusCheckStatus($StatusId ,  $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -829,7 +839,8 @@ class manage extends CI_Controller
 	public function swiftStatusInspection()
 	{
 		$InspectionId = $_GET["mit_id"];
-		$res = $this->backoffice_model->editStatusInspection($InspectionId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusInspection($InspectionId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -878,7 +889,8 @@ class manage extends CI_Controller
 	public function swiftStatusDMC()
 	{
 		$dmcId = $_GET["mdd_id"];
-		$res = $this->backoffice_model->editStatusDMC($dmcId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDMC($dmcId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -889,7 +901,7 @@ class manage extends CI_Controller
 		$rsinspection = $this->backoffice_model->modelAddDMC($adddmcname, $empcodeadmin);
 		echo $rsinspection;
 	}
-	
+
 	public function getDataEditDMC()
 	{
 		$dmcid = $_GET["mdd_id"];
@@ -903,7 +915,7 @@ class manage extends CI_Controller
 		$IDeditdmcname = $_POST["IDeditdmcname"];
 		$editdmcname = $_POST["editdmcname"];
 
-		$rseditdmc = $this->backoffice_model->modelEditDMC($IDeditdmcname, $editdmcname , $empcodeadmin);
+		$rseditdmc = $this->backoffice_model->modelEditDMC($IDeditdmcname, $editdmcname, $empcodeadmin);
 
 		echo $rseditdmc;
 	}
@@ -926,7 +938,8 @@ class manage extends CI_Controller
 	public function swiftStatusDMCType()
 	{
 		$dmctypeId = $_GET["mdt_id"];
-		$res = $this->backoffice_model->editStatusDMCType($dmctypeId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDMCType($dmctypeId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -935,7 +948,7 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		$adddmctypename = $_POST["adddmctypename"];
 		$adddmcdigit = $_POST["adddmcdigit"];
-		$rsadddmctype = $this->backoffice_model->modelAddDMCType($adddmctypename,$adddmcdigit, $empcodeadmin);
+		$rsadddmctype = $this->backoffice_model->modelAddDMCType($adddmctypename, $adddmcdigit, $empcodeadmin);
 		echo $rsadddmctype;
 	}
 
@@ -952,7 +965,7 @@ class manage extends CI_Controller
 		$editdmctypename = $_POST["editdmctypename"];
 		$editdmcdigit = $_POST["editdmcdigit"];
 
-		$rseditdmctype = $this->backoffice_model->modelEditDMCType($IDeditdmctype, $editdmctypename ,$editdmcdigit, $empcodeadmin);
+		$rseditdmctype = $this->backoffice_model->modelEditDMCType($IDeditdmctype, $editdmctypename, $editdmcdigit, $empcodeadmin);
 
 		echo $rseditdmctype;
 	}
@@ -976,7 +989,8 @@ class manage extends CI_Controller
 	public function swiftStatusFACode()
 	{
 		$facodeId = $_GET["mfcm_id"];
-		$res = $this->backoffice_model->editStatusFACode($facodeId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusFACode($facodeId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -985,7 +999,7 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addfaline = $_POST["addfaline"];
 		$addfaname = $_POST["addfaname"];
-		$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline,$addfaname, $empcodeadmin);
+		$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline, $addfaname, $empcodeadmin);
 		echo $rsaddFACode;
 	}
 	public function getDataEditFACode()
@@ -1002,7 +1016,7 @@ class manage extends CI_Controller
 		$editfaline = $_POST["editfaline"];
 		$editfaname = $_POST["editfaname"];
 
-		$rseditfacode = $this->backoffice_model->modelEditFACode($IDeditfacode, $editfaline ,$editfaname, $empcodeadmin);
+		$rseditfacode = $this->backoffice_model->modelEditFACode($IDeditfacode, $editfaline, $editfaname, $empcodeadmin);
 
 		echo $rseditfacode;
 	}
@@ -1026,7 +1040,8 @@ class manage extends CI_Controller
 	public function swiftStatusWorkShift()
 	{
 		$workshiftId = $_GET["mws_id"];
-		$res = $this->backoffice_model->editStatusWorkShift($workshiftId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusWorkShift($workshiftId , $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function AddWorkShift()
@@ -1036,7 +1051,7 @@ class manage extends CI_Controller
 		$addstarttime = $_POST["addstarttime"];
 		$addendtime = $_POST["addendtime"];
 
-		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift ,$addstarttime, $addendtime , $empcodeadmin);
+		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin);
 		echo $rsaddWorkShift;
 	}
 
@@ -1056,7 +1071,7 @@ class manage extends CI_Controller
 		$editstarttime = $_POST["editstarttime"];
 		$editendtime = $_POST["editendtime"];
 
-		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift ,$editstarttime , $editendtime, $empcodeadmin);
+		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
 		echo $rseditworkshift;
 	}
 
@@ -1081,7 +1096,8 @@ class manage extends CI_Controller
 	public function swiftStatusDefect()
 	{
 		$defectId = $_GET["md_id"];
-		$res = $this->backoffice_model->editStatusDefect($defectId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDefect($defectId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -1092,7 +1108,7 @@ class manage extends CI_Controller
 		$adddefectnameth = $_POST["adddefectnameth"];
 		$adddefectnameen = $_POST["adddefectnameen"];
 
-		$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode ,$adddefectnameth, $adddefectnameen , $empcodeadmin);
+		$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode, $adddefectnameth, $adddefectnameen, $empcodeadmin);
 		echo $rsaddDefect;
 	}
 
@@ -1113,12 +1129,490 @@ class manage extends CI_Controller
 		$editdefectnameth = $_POST["editdefectnameth"];
 		$editdefectnameen = $_POST["editdefectnameen"];
 
-		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode ,$editdefectnameth , $editdefectnameen, $empcodeadmin);
+		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
 		echo $rseditdefect;
 	}
 
-	// ************************* Control Detail *************************************
-	public function Detail()
+	// ************************* Control PartNumber *************************************
+	public function PartNumber()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["tablePartNo"] = $this->backoffice_model->getTablePartNo();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_partNumber.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+	public function swiftStatusPartNo()
+	{
+		$partnoId = $_GET["mpn_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPartNo($partnoId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+
+	public function AddPartNo()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addpartnumber = $_POST["addpartnumber"];
+		$addcuspartno = $_POST["addcuspartno"];
+		$addlocationpart = $_POST["addlocationpart"];
+		$adddmccheckpart = $_POST["adddmccheckpart"];
+
+		$rsaddPartNo = $this->backoffice_model->modelAddPartNo($addpartnumber, $addcuspartno, $addlocationpart, $adddmccheckpart, $empcodeadmin);
+		echo $rsaddPartNo;
+	}
+
+	public function getDataEditPartNo()
+	{
+		$partnoId = $_GET["mpn_id"];
+		$res = $this->backoffice_model->getDataEditPartNo($partnoId);
+		echo json_encode($res);
+	}
+
+	public function EditPartNumber()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditpartno = $_POST["IDeditpartno"];
+		$editpartnumber = $_POST["editpartnumber"];
+		$editcuspartno = $_POST["editcuspartno"];
+		$editlocationpart = $_POST["editlocationpart"];
+		$editdmccheckpart = $_POST["editdmccheckpart"];
+
+		$rseditpartno = $this->backoffice_model->modelEditPartNo($IDeditpartno, $editpartnumber, $editcuspartno, $editlocationpart, $editdmccheckpart, $empcodeadmin);
+		echo $rseditpartno;
+	}
+
+	// ************************* Control SelectPart *************************************
+	public function SelectPart()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["tableSelectPart"] = $this->backoffice_model->getTableSelectPart();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_selectPart.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	
+
+
+	public function swiftStatusSelectPart()
+	{
+		$selectpId = $_GET["msp_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusSelectPart($selectpId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddSelectPart()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addselectpCon = $_POST["addselectpCon"];
+		$addselectpdmc = $_POST["addselectpdmc"];
+		$addselectpno = $_POST["addselectpno"];
+		$addselectpname = $_POST["addselectpname"];
+		$addselectptime = $_POST["addselectptime"];
+
+		$rsaddPartNo = $this->backoffice_model->modelAddSelectPart(
+			$addselectpCon, 
+			$addselectpdmc, 
+			$addselectpno, 
+			$addselectpname,
+			$addselectptime,
+			$empcodeadmin);
+
+		echo $rsaddPartNo;
+	}
+
+	public function getDataEditSelectpart()
+	{
+		$selectpId = $_GET["msp_id"];
+		$res = $this->backoffice_model->getDataEditSelectPart($selectpId);
+		echo json_encode($res);
+	}
+
+	public function EditSelectPart()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditselectp = $_POST["IDeditselectp"];
+		$editselectpCon = $_POST["editselectpCon"];
+		$editselectpdmc = $_POST["editselectpdmc"];
+		$editselectpno = $_POST["editselectpno"];
+		$editselectpname = $_POST["editselectpname"];
+		$editselectptime = $_POST["editselectptime"];
+
+		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno , $editselectpname , $editselectptime , $empcodeadmin);
+		echo $rseditselectpart;
+	}
+
+	// ************************* Control PlantAdminWeb *************************************
+	public function PlantAdminWeb()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["tablePlantAdminWeb"] = $this->backoffice_model->getTablePlantAdminWeb();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_plantAdminWeb.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	public function swiftStatusPlantAdminWeb()
+	{
+		$plantwebId = $_GET["mpa_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPlantAdminWeb($plantwebId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddPlantAdminWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addplantwebphase = $_POST["addplantwebphase"];
+		$addplantwebname = $_POST["addplantwebname"];
+		$rsaddPlantweb = $this->backoffice_model->modelAddPlantAdminWeb($addplantwebphase, $addplantwebname, $empcodeadmin);
+		echo $rsaddPlantweb;
+	}
+
+	public function getDataEditPlantAdminWeb()
+	{
+		$plantwebId = $_GET["mpa_id"];
+		$res = $this->backoffice_model->getDataEditPlantWeb($plantwebId);
+		echo json_encode($res);
+	}
+
+	public function EditPlantAdminWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditplantweb = $_POST["IDeditplantweb"];
+		$editplantwebphase = $_POST["editplantwebphase"];
+		$editplantwebname = $_POST["editplantwebname"];
+
+		$rseditplantweb = $this->backoffice_model->modelEditPlantAdminWeb($IDeditplantweb, $editplantwebphase, $editplantwebname, $empcodeadmin);
+		echo $rseditplantweb;
+	}
+
+
+
+	// ************************* Control PlantAdminApp *************************************
+	public function PlantAdminApp()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["tablePlantAdminApp"] = $this->backoffice_model->getTablePlantAdminApp();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_plantAdminApp.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	public function swiftStatusPlantAdminApp()
+	{
+		$plantappId = $_GET["mpa_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPlantAdminApp($plantappId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddPlantAdminApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addplantadminappphase = $_POST["addplantadminappphase"];
+		$addplantadminappname = $_POST["addplantadminappname"];
+		$rsaddPlantapp = $this->backoffice_model->modelAddPlantAdminApp($addplantadminappphase, $addplantadminappname, $empcodeadmin);
+		echo $rsaddPlantapp;
+	}
+
+	public function getDataEditPlantAdminApp()
+	{
+		$plantappId = $_GET["mpa_id"];
+		$res = $this->backoffice_model->getDataEditPlantApp($plantappId);
+		echo json_encode($res);
+	}
+
+	public function EditPlantAdminApp()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditplantapp = $_POST["IDeditplantapp"];
+		$editplantappphase = $_POST["editplantappphase"];
+		$editplantappname = $_POST["editplantappname"];
+
+		$rseditplantapp = $this->backoffice_model->modelEditPlantAdminApp($IDeditplantapp, $editplantappphase, $editplantappname, $empcodeadmin);
+		echo $rseditplantapp;
+	}
+
+
+	// ************************* Control ZoneAdmin *************************************
+	public function ZoneAdmin()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["getzone"] = $this->backoffice_model->getZone();
+		$data["tableZone"] = $this->backoffice_model->getTableZone();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_zoneAdmin.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	public function swiftStatusZone()
+	{
+		$zoneId = $_GET["mza_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusZone($zoneId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddZone()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addnamezone = $_POST["addnamezone"];
+		$addlinezone = $_POST["addlinezone"];
+
+		$rsaddzone = $this->backoffice_model->modelAddZone($addnamezone, $addlinezone, $empcodeadmin);
+		echo $rsaddzone;
+	}
+
+	public function getDataEditZone()
+	{
+		$zoneId = $_GET["mza_id"];
+		$res = $this->backoffice_model->getDataEditZone($zoneId);
+		echo json_encode($res);
+	}
+
+	public function EditZone()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditzone = $_POST["IDeditzone"];
+		$editnamezone = $_POST["editnamezone"];
+		$editlinezone = $_POST["editlinezone"];
+
+		$rseditplantapp = $this->backoffice_model->modelEditZone($IDeditzone, $editnamezone, $editlinezone, $empcodeadmin);
+		echo $rseditplantapp;
+	}
+
+
+	// ************************* Control stationAdmin *************************************
+	public function stationAdmin()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$data["tableStation"] = $this->backoffice_model->getTableStation();
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_stationAdmin.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	public function swiftStatusStation()
+	{
+		$stationId = $_GET["msa_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusStation($stationId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddStation()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addtablestation = $_POST["addtablestation"];
+
+		$rsaddstation = $this->backoffice_model->modelAddStation($addtablestation, $empcodeadmin);
+		echo $rsaddstation;
+	}
+
+	public function getDataEditStation()
+	{
+		$stationId = $_GET["msa_id"];
+		$res = $this->backoffice_model->getDataEditStation($stationId);
+		echo json_encode($res);
+	}
+
+	public function EditStation()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditStation = $_POST["IDeditStation"];
+		$editStation = $_POST["editStation"];
+
+		$rseditstationapp = $this->backoffice_model->modelEditStation($IDeditStation, $editStation, $empcodeadmin);
+		echo $rseditstationapp;
+	}
+
+	// ************************* Defect Group *************************************
+	public function DefectGroup()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+		$data["getdefectcode"] = $this->backoffice_model->getDefectCode();
+		$data["getdefectgroup"] = $this->backoffice_model->getTableDefectGroup();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_defectGroup.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+	public function swiftStatusDefectGroup()
+	{
+		$defectId = $_GET["mdg_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDefectGroup($defectId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function getDataEditDefectGroup()
+	{
+		$defectGroupConfId = $_GET["mcd_id"];
+		$res = $this->backoffice_model->getDataEditDefectGroup($defectGroupConfId);
+		echo json_encode($res);
+	}
+	public function getDataCheckBoxDefect()
+	{
+		$res = $this->backoffice_model->getDefectCode();
+		echo json_encode($res);
+	}
+
+	public function EditDefectGroup()
+	{
+		
+	}
+
+	// ************************* Config Detail *************************************
+	public function ConfigDetail()
+	{
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+		$empcode = $this->session->userdata("empcode");
+
+
+		$data["getplantapp"] = $this->backoffice_model->modelGetPlantApp();
+		$data["getzoneapp"] = $this->backoffice_model->modelgetZoneApp();
+		$data["getstationapp"] = $this->backoffice_model->modelgetStationApp();
+		$data["gettypeapp"] = $this->backoffice_model->modelgetCheckTypenApp();
+		$data["getstatusapp"] = $this->backoffice_model->modelgetCheckStatusApp();
+		$data["getinspectionapp"] = $this->backoffice_model->modelgetInspectionApp();
+
+		$data["tabelDetails"] = $this->backoffice_model->getTableConfigDetails();
+		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
+
+		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_configDetail.php', $data);
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
+		$this->template->render();
+	}
+
+
+	public function swiftStatusConfigDetails()
+	{
+		$configId = $_GET["mcd_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusConfigDetail($configId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddConfigDetails()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addplantconfig = $_POST["addplantconfig"];
+		$addzoneconfig = $_POST["addzoneconfig"];
+		$addstationconfig = $_POST["addstationconfig"];
+		$addtypeconfig = $_POST["addtypeconfig"];
+		$addstatusconfig = $_POST["addstatusconfig"];
+		$addinspectionconfig = $_POST["addinspectionconfig"];
+		$addTimeconfig = $_POST["addTimeconfig"];
+		$addMacaddress = $_POST["addMacaddress"];
+
+		$rsaddconfig = $this->backoffice_model->modelAddConfigDetails(
+			$addplantconfig,
+			$addzoneconfig,
+			$addstationconfig,
+			$addtypeconfig,
+			$addstatusconfig,
+			$addinspectionconfig,
+			$addTimeconfig,
+			$addMacaddress,
+			$empcodeadmin
+		);
+		echo $rsaddconfig;
+	}
+
+	public function getDataEditConfigDetails()
+	{
+		$configdetailId = $_GET["mcd_id"];
+		$res = $this->backoffice_model->getDataEditConfigDetails($configdetailId);
+		echo json_encode($res);
+	}
+
+	public function EditConfigDetail()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditconfig = $_POST["IDeditconfig"];
+		$editplantconfig = $_POST["editplantconfig"];
+		$editzoneconfig = $_POST["editzoneconfig"];
+		$editstationconfig = $_POST["editstationconfig"];
+		$edittypeconfig = $_POST["edittypeconfig"];
+		$editstatusconfig = $_POST["editstatusconfig"];
+		$editinspectionconfig = $_POST["editinspectionconfig"];
+		$edittimeconfig = $_POST["edittimeconfig"];
+		$editMacaddressconfig = $_POST["editMacaddressconfig"];
+
+
+
+		$rseditconfigdetails = $this->backoffice_model->modelEditConfigDetails(
+			$IDeditconfig,
+			$editplantconfig,
+			$editzoneconfig,
+			$editstationconfig,
+			$edittypeconfig,
+			$editstatusconfig,
+			$editinspectionconfig,
+			$edittimeconfig,
+			$editMacaddressconfig,
+			$empcodeadmin
+		);
+		echo $rseditconfigdetails;
+		// echo $edittimeconfig;
+	}
+
+
+
+	// ************************* DMC Type Detail *************************************
+	public function dmcTypeDetail()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
@@ -1126,8 +1620,8 @@ class manage extends CI_Controller
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_controlDetail.php');
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_dmcTypeDetail.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
