@@ -13,8 +13,9 @@
               <thead>
                 <tr>
                   <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Config Details</th>
-                  <th style="text-align: center;">DMC Type Details</th>
+                  <th style="text-align: center;">Plant</th>
+                  <th style="text-align: center;">Zone</th>
+                  <th style="text-align: center;">Type</th>
                   <th style="text-align: center;">Part Number</th>
                   <th style="text-align: center;">Part Name</th>
                   <th style="text-align: center;">Inspection Time</th>
@@ -29,30 +30,31 @@
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
-                  echo "<td>" . $selectp["mcd_id"] . "</td>";
-                  echo "<td>" . $selectp["mdtd_id"] . "</td>";
+                  echo "<td>" . $selectp["mpa_phase_plant"] . "</td>";
+                  echo "<td>" . $selectp["mza_name"] . "</td>";
+                  echo "<td>" . $selectp["mdt_name"] . "</td>";
                   echo "<td>" . $selectp["msp_part_no"] . "</td>";
                   echo "<td>" . $selectp["msp_part_name"] . "</td>";
                   echo "<td>" . $selectp["msp_inspection_time"] . "</td>";
                   if ($selectp["msp_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusWorkShift(" . $selectp["msp_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusSelectPart$i checked onclick='statusSelectPart(" . $selectp["msp_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusSelectPart$i></label>
                                             </div>
                                        
                                     </td>";
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusWorkShift(" . $selectp["msp_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusSelectPart$i onclick='statusSelectPart(" . $selectp["msp_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusSelectPart$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editselectpart\"  onclick='getDataWorkShift(" . $selectp["msp_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editselectpart\"  onclick='getDataSelectPart(" . $selectp["msp_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -75,6 +77,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
+
                   <div class="form-group">
                     <label for="empcode">Config Details :</label>
                     <input class="form-control" type="text" id="addselectpCon" name="addselectpCon"  placeholder="Enter New Config">
@@ -82,24 +85,29 @@
 
                   <div class="form-group">
                     <label for="empcode">DMC Type Details :</label>
-                    <input class="form-control" type="text" id="addshift" name="addshift"  placeholder="Enter New DMC Type">
+                    <input class="form-control" type="text" id="addselectpdmc" name="addselectpdmc"  placeholder="Enter New DMC Type">
                   </div>
 
                   <div class="form-group">
                     <label for="password">Part Number :</label>
-                    <input class="form-control" type="time" id="addstarttime" name="addstarttime"  step="2">
+                    <input class="form-control" type="text" id="addselectpno" name="addselectpno" placeholder="Enter New Part Number">
                   </div>
 
                   <div class="form-group">
                     <label for="password">Part Name :</label>
-                    <input class="form-control" type="time" id="addendtime" name="addendtime"  step="2" >
+                    <input class="form-control" type="text" id="addselectpname" name="addselectpname" placeholder="Enter New Part Name"  >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">Inspection Time :</label>
+                    <input class="form-control" type="number" id="addselectptime" name="addselectptime" placeholder="Enter New Inspection Time">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddWorkShift">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddSelectPart">Save</a>
                 </div>
               </div>
             </div>
@@ -117,27 +125,37 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
-                    <label for="empcode">Shift :</label>
-                    <input class="form-control" type="text" id="IDeditworkshift" name="IDeditworkshift" hidden>
-                    <input class="form-control" type="text" id="editshift" name="editshift">
+                 <div class="form-group">
+                    <label for="empcode">Config Details :</label>
+                    <input class="form-control" type="text" id="IDeditselectp" name="IDeditselectp"  hidden>
+                    <input class="form-control" type="text" id="editselectpCon" name="editselectpCon"  >
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Start Time :</label>
-                    <input class="form-control" type="time" id="editstarttime" name="editstarttime"  step="2">
+                    <label for="empcode">DMC Type Details :</label>
+                    <input class="form-control" type="text" id="editselectpdmc" name="editselectpdmc" >
                   </div>
 
                   <div class="form-group">
-                    <label for="password">End Time :</label>
-                    <input class="form-control" type="time" id="editendtime" name="editendtime"  step="2" >
+                    <label for="password">Part Number :</label>
+                    <input class="form-control" type="text" id="editselectpno" name="editselectpno" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">Part Name :</label>
+                    <input class="form-control" type="text" id="editselectpname" name="editselectpname" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">Inspection Time :</label>
+                    <input class="form-control" type="number" id="editselectptime" name="editselectptime" >
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditWorkShift">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditSelectPart">Save</a>
                 </div>
               </div>
             </div>

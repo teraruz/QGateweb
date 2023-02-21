@@ -227,7 +227,7 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
-	public function editStatus($staffid)
+	public function editStatusUserWeb($staffid, $empcodeadmin)
 	{
 		$sql = "select ss_id,ss_emp_code,ss_status from sys_staff_web 
 				INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id = sys_permission_group_web.spg_id
@@ -237,7 +237,10 @@ class Backoffice_model extends CI_Model
 		$result = $row[0]["ss_status"];
 		if ($result == 1) {
 			$sql = "UPDATE sys_staff_web SET ss_status = 0 WHERE  ss_id = '{$staffid}'";
+			$sqlupdate = "UPDATE sys_staff_web SET ss_update_by = '{$empcodeadmin}' , ss_update_date = CURRENT_TIMESTAMP
+			WHERE ss_id = '{$staffid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -246,6 +249,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_staff_web SET ss_status = 1 WHERE  ss_id = '{$staffid}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_staff_web SET ss_update_by = '{$empcodeadmin}' , ss_update_date = CURRENT_TIMESTAMP
+			WHERE ss_id = '{$staffid}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -370,7 +376,7 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
-	public function editStatusPermissionWeb($Perid)
+	public function editStatusPermissionWeb($Perid, $empcodeadmin)
 	{
 		$sql = "select * from sys_permission_group_web WHERE spg_id = '{$Perid}'";
 		$res = $this->db->query($sql);
@@ -378,7 +384,10 @@ class Backoffice_model extends CI_Model
 		$result = $row[0]["spg_status"];
 		if ($result == 1) {
 			$sql = "UPDATE sys_permission_group_web SET spg_status = 0 WHERE  spg_id = '{$Perid}'";
+			$sqlupdate = "UPDATE sys_permission_group_web SET spg_update_by = '{$empcodeadmin}' , spg_update_date = CURRENT_TIMESTAMP
+			WHERE  spg_id = '{$Perid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -386,7 +395,10 @@ class Backoffice_model extends CI_Model
 			}
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_permission_group_web SET spg_status = 1 WHERE  spg_id = '{$Perid}'";
+			$sqlupdate = "UPDATE sys_permission_group_web SET spg_update_by = '{$empcodeadmin}' , spg_update_date = CURRENT_TIMESTAMP
+			WHERE  spg_id = '{$Perid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -396,7 +408,7 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-	public function editStatusPermissionDetailWeb($detailid)
+	public function editStatusPermissionDetailWeb($detailid, $empcodeadmin)
 	{
 		$sql = "SELECT * FROM sys_permission_detail_web WHERE spd_id = '{$detailid}'";
 		$res = $this->db->query($sql);
@@ -404,7 +416,10 @@ class Backoffice_model extends CI_Model
 		$result = $row[0]["spd_status"];
 		if ($result == 1) {
 			$sql = "UPDATE sys_permission_detail_web SET spd_status = 0 WHERE  spd_id = '{$detailid}'";
+			$sqlupdate = "UPDATE sys_permission_detail_web SET spd_update_by = '{$empcodeadmin}' , spd_update_date = CURRENT_TIMESTAMP
+			WHERE  spd_id = '{$detailid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -412,7 +427,10 @@ class Backoffice_model extends CI_Model
 			}
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_permission_detail_web SET spd_status = 1 WHERE  spd_id = '{$detailid}'";
+			$sqlupdate = "UPDATE sys_permission_detail_web SET spd_update_by = '{$empcodeadmin}' , spd_update_date = CURRENT_TIMESTAMP
+			WHERE  spd_id = '{$detailid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -587,7 +605,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function editStatusMenuWeb($submenuid)
+	public function editStatusMenuWeb($submenuid,  $empcodeadmin)
 	{
 		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_id = '{$submenuid}'";
 		$res = $this->db->query($sql);
@@ -595,7 +613,10 @@ class Backoffice_model extends CI_Model
 		$result = $row[0]["ssm_status"];
 		if ($result == 1) {
 			$sql = "UPDATE sys_submenu_web SET ssm_status = 0 WHERE  ssm_id = '{$submenuid}'";
+			$sqlupdate = "UPDATE sys_submenu_web SET ssm_update_by = '{$empcodeadmin}' , ssm_update_date = CURRENT_TIMESTAMP
+			WHERE  ssm_id = '{$submenuid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -603,7 +624,10 @@ class Backoffice_model extends CI_Model
 			}
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_submenu_web SET ssm_status = 1 WHERE  ssm_id = '{$submenuid}'";
+			$sqlupdate = "UPDATE sys_submenu_web SET ssm_update_by = '{$empcodeadmin}' , ssm_update_date = CURRENT_TIMESTAMP
+			WHERE  ssm_id = '{$submenuid}'";
 			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -666,7 +690,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusUserApp($userappid)
+	public function editStatusUserApp($userappid, $empcodeadmin)
 	{
 		$sql = "SELECT * FROM sys_staff_app  WHERE ss_id = '{$userappid}'";
 		$res = $this->db->query($sql);
@@ -675,6 +699,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE sys_staff_app SET ss_status = 0 WHERE  ss_id = '{$userappid}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_staff_app SET ss_update_by = '{$empcodeadmin}' , ss_update_date = CURRENT_TIMESTAMP
+			WHERE  ss_id = '{$userappid}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -683,6 +710,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_staff_app SET ss_status = 1 WHERE  ss_id = '{$userappid}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_staff_app SET ss_update_by = '{$empcodeadmin}' , ss_update_date = CURRENT_TIMESTAMP
+			WHERE  ss_id = '{$userappid}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -750,7 +780,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusPermissionApp($PeridApp)
+	public function editStatusPermissionApp($PeridApp, $empcodeadmin)
 	{
 		$sql = "select * from sys_permission_group_app WHERE spg_id = '{$PeridApp}'";
 		$res = $this->db->query($sql);
@@ -759,6 +789,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE sys_permission_group_app SET spg_status = 0 WHERE  spg_id = '{$PeridApp}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_permission_group_app SET spg_update_by = '{$empcodeadmin}' , spg_update_date = CURRENT_TIMESTAMP
+			WHERE  spg_id = '{$PeridApp}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -767,13 +800,18 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_permission_group_app SET spg_status = 1 WHERE  spg_id = '{$PeridApp}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_permission_group_app SET spg_update_by = '{$empcodeadmin}' , spg_update_date = CURRENT_TIMESTAMP
+			WHERE  spg_id = '{$PeridApp}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
-				return true;
+				if ($res) {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
-				return false;
+				return  true;
 			}
-		} else {
-			return  true;
 		}
 	}
 
@@ -838,7 +876,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusPermissionDetailApp($detailid)
+	public function editStatusPermissionDetailApp($detailid, $empcodeadmin)
 	{
 		$sql = "SELECT * FROM sys_permission_detail_app WHERE spd_id = '{$detailid}'";
 		$res = $this->db->query($sql);
@@ -847,21 +885,29 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE sys_permission_detail_app SET spd_status = 0 WHERE  spd_id = '{$detailid}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_permission_detail_app SET spd_update_by = '{$empcodeadmin}' , spd_update_date = CURRENT_TIMESTAMP
+			WHERE  spd_id = '{$detailid}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
-				return true;
+				if ($res) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if ($result == 0) {
+				$sql = "UPDATE sys_permission_detail_app SET spd_status = 1 WHERE  spd_id = '{$detailid}'";
+				$res = $this->db->query($sql);
+				$sqlupdate = "UPDATE sys_permission_detail_app SET spd_update_by = '{$empcodeadmin}' , spd_update_date = CURRENT_TIMESTAMP
+			WHERE  spd_id = '{$detailid}'";
+				$resupdate = $this->db->query($sqlupdate);
+				if ($res) {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
-				return false;
+				return  true;
 			}
-		} else if ($result == 0) {
-			$sql = "UPDATE sys_permission_detail_app SET spd_status = 1 WHERE  spd_id = '{$detailid}'";
-			$res = $this->db->query($sql);
-			if ($res) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return  true;
 		}
 	}
 
@@ -937,7 +983,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function editStatusMenuApp($MenuappId)
+	public function editStatusMenuApp($MenuappId, $empcodeadmin)
 	{
 		$sql = "select * from sys_menu_app WHERE sm_id = '{$MenuappId}'";
 		$res = $this->db->query($sql);
@@ -946,6 +992,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE sys_menu_app SET sm_status = 0 WHERE  sm_id = '{$MenuappId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_menu_app SET sm_update_by = '{$empcodeadmin}' , sm_update_date = CURRENT_TIMESTAMP
+			WHERE  sm_id = '{$MenuappId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -954,6 +1003,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE sys_menu_app SET sm_status = 1 WHERE  sm_id = '{$MenuappId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE sys_menu_app SET sm_update_by = '{$empcodeadmin}' , sm_update_date = CURRENT_TIMESTAMP
+			WHERE  sm_id = '{$MenuappId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1009,7 +1061,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function editStatusCheckType($CheckTypeId)
+	public function editStatusCheckType($CheckTypeId, $empcodeadmin)
 	{
 		$sql = "select * from mst_check_type_app WHERE mct_id = '{$CheckTypeId}'";
 		$res = $this->db->query($sql);
@@ -1018,6 +1070,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_check_type_app SET mct_status = 0 WHERE  mct_id = '{$CheckTypeId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_check_type_app SET mct_update_by = '{$empcodeadmin}' , mct_update_date = CURRENT_TIMESTAMP
+			WHERE  mct_id  = '{$CheckTypeId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1026,6 +1081,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_check_type_app SET mct_status = 1 WHERE  mct_id = '{$CheckTypeId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_check_type_app SET mct_update_by = '{$empcodeadmin}' , mct_update_date = CURRENT_TIMESTAMP
+			WHERE  mct_id  = '{$CheckTypeId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1069,7 +1127,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusCheckStatus($StatusId)
+	public function editStatusCheckStatus($StatusId, $empcodeadmin)
 	{
 		$sql = "select * from mst_check_status_app WHERE mcs_id = '{$StatusId}'";
 		$res = $this->db->query($sql);
@@ -1078,6 +1136,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_check_status_app SET mcs_status = 0 WHERE  mcs_id = '{$StatusId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_check_status_app SET mcs_update_by = '{$empcodeadmin}' , mcs_update_date = CURRENT_TIMESTAMP
+			WHERE  mcs_id  = '{$StatusId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1086,6 +1147,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_check_status_app SET mcs_status = 1 WHERE  mcs_id = '{$StatusId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_check_status_app SET mcs_update_by = '{$empcodeadmin}' , mcs_update_date = CURRENT_TIMESTAMP
+			WHERE  mcs_id  = '{$StatusId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1141,7 +1205,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusInspection($InspectionId)
+	public function editStatusInspection($InspectionId, $empcodeadmin)
 	{
 		$sql = "select * from mst_inspection_type_app WHERE mit_id = '{$InspectionId}'";
 		$res = $this->db->query($sql);
@@ -1150,6 +1214,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_inspection_type_app SET mit_status = 0 WHERE  mit_id = '{$InspectionId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_inspection_type_app SET mit_update_by = '{$empcodeadmin}' , mit_update_date = CURRENT_TIMESTAMP
+			WHERE  mit_id  = '{$InspectionId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1158,6 +1225,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_inspection_type_app SET mit_status = 1 WHERE  mit_id = '{$InspectionId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_inspection_type_app SET mit_update_by = '{$empcodeadmin}' , mit_update_date = CURRENT_TIMESTAMP
+			WHERE  mit_id  = '{$InspectionId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1216,7 +1286,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusDMC($dmcId)
+	public function editStatusDMC($dmcId, $empcodeadmin)
 	{
 		$sql = "select * from mst_dmc_data_app WHERE mdd_id = '{$dmcId}'";
 		$res = $this->db->query($sql);
@@ -1225,6 +1295,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_dmc_data_app SET mdd_status = 0 WHERE  mdd_id = '{$dmcId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_dmc_data_app SET mdd_update_by = '{$empcodeadmin}' , mdd_update_date = CURRENT_TIMESTAMP
+			WHERE  mdd_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1233,6 +1306,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_dmc_data_app SET mdd_status = 1 WHERE  mdd_id = '{$dmcId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_dmc_data_app SET mdd_update_by = '{$empcodeadmin}' , mdd_update_date = CURRENT_TIMESTAMP
+			WHERE  mdd_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1301,6 +1377,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_dmc_type_app SET mdt_status = 0 WHERE  mdt_id = '{$dmctypeId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_dmc_type_app SET mdt_update_by = '{$empcodeadmin}' , mdt_update_date = CURRENT_TIMESTAMP
+			WHERE  mdt_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1309,6 +1388,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_dmc_type_app SET mdt_status = 1 WHERE  mdt_id = '{$dmctypeId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_dmc_type_app SET mdt_update_by = '{$empcodeadmin}' , mdt_update_date = CURRENT_TIMESTAMP
+			WHERE  mdt_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1367,7 +1449,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editStatusFACode($facodeId)
+	public function editStatusFACode($facodeId, $empcodeadmin)
 	{
 		$sql = "select * from mst_fa_code_master_app WHERE mfcm_id = '{$facodeId}'";
 		$res = $this->db->query($sql);
@@ -1376,6 +1458,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_fa_code_master_app SET mfcm_status = 0 WHERE  mfcm_id = '{$facodeId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_fa_code_master_app SET mfcm_update_by = '{$empcodeadmin}' , mfcm_update_date = CURRENT_TIMESTAMP
+			WHERE  mfcm_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1384,6 +1469,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_fa_code_master_app SET mfcm_status = 1 WHERE  mfcm_id = '{$facodeId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_fa_code_master_app SET mfcm_update_by = '{$empcodeadmin}' , mfcm_update_date = CURRENT_TIMESTAMP
+			WHERE  mfcm_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1444,7 +1532,7 @@ class Backoffice_model extends CI_Model
 
 
 
-	public function editStatusWorkShift($workshiftId)
+	public function editStatusWorkShift($workshiftId, $empcodeadmin)
 	{
 		$sql = "select * from mst_work_shift_app WHERE mws_id = '{$workshiftId}'";
 		$res = $this->db->query($sql);
@@ -1453,6 +1541,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_work_shift_app SET mws_status = 0 WHERE  mws_id = '{$workshiftId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_work_shift_app SET mws_update_by = '{$empcodeadmin}' , mws_update_date = CURRENT_TIMESTAMP
+			WHERE  mws_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1461,6 +1552,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_work_shift_app SET mws_status = 1 WHERE  mws_id = '{$workshiftId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_work_shift_app SET mws_update_by = '{$empcodeadmin}' , mws_update_date = CURRENT_TIMESTAMP
+			WHERE  mws_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1524,7 +1618,7 @@ class Backoffice_model extends CI_Model
 
 
 
-	public function editStatusDefect($defectId)
+	public function editStatusDefect($defectId, $empcodeadmin)
 	{
 		$sql = "select * from mst_defect_app WHERE md_id = '{$defectId}'";
 		$res = $this->db->query($sql);
@@ -1533,6 +1627,9 @@ class Backoffice_model extends CI_Model
 		if ($result == 1) {
 			$sql = "UPDATE mst_defect_app SET md_status = 0 WHERE  md_id = '{$defectId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_defect_app SET md_update_by = '{$empcodeadmin}' , md_update_date = CURRENT_TIMESTAMP
+			WHERE  md_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1541,6 +1638,9 @@ class Backoffice_model extends CI_Model
 		} else if ($result == 0) {
 			$sql = "UPDATE mst_defect_app SET md_status = 1 WHERE  md_id = '{$defectId}'";
 			$res = $this->db->query($sql);
+			$sqlupdate = "UPDATE mst_defect_app SET md_update_by = '{$empcodeadmin}' , md_update_date = CURRENT_TIMESTAMP
+			WHERE  md_id  = '{$dmcId}'";
+			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
 			} else {
@@ -1677,12 +1777,98 @@ class Backoffice_model extends CI_Model
 
 	public function getTableSelectPart()
 	{
-		$sql = "SELECT *
-		FROM mst_select_part_app";
+		$sql = "SELECT DISTINCT
+		msp_id,
+		mpa.mpa_phase_plant,
+		mza.mza_name ,
+		mdt.mdt_name ,
+		msp_part_no ,
+		msp_part_name ,
+		msp_inspection_time ,
+		msp_status
+	FROM
+		mst_select_part_app msp
+	INNER JOIN mst_config_details_app mcd ON mcd.mcd_id = msp.mcd_id
+	LEFT JOIN mst_plant_admin_app mpa ON mpa.mpa_id = mcd.mpa_id
+	LEFT JOIN mst_zone_admin_app mza ON mza.mza_id = mcd.mza_id
+	LEFT JOIN mst_dmc_type_app mdt ON mdt.mdt_id  = mcd.mcd_id";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 	}
+
+	public function editStatusSelectPart($selectpId, $empcodeadmin)
+	{
+		$sql = "select * from mst_select_part_app WHERE msp_id = '{$selectpId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["msp_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_select_part_app SET msp_status = 0 WHERE  msp_id = '{$selectpId}'";
+			$sqlupdate = "UPDATE mst_select_part_app SET msp_update_by = '{$empcodeadmin}' , msp_update_date = CURRENT_TIMESTAMP
+			WHERE  msp_id = '{$selectpId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_select_part_app SET msp_status = 1 WHERE  msp_id = '{$selectpId}'";
+			$sqlupdate = "UPDATE mst_select_part_app SET msp_update_by = '{$empcodeadmin}' , msp_update_date = CURRENT_TIMESTAMP
+			WHERE  msp_id = '{$selectpId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddSelectPart($addselectpCon, $addselectpdmc, $addselectpno, $addselectpname, $addselectptime, $empcodeadmin)
+	{
+		$sql = "INSERT INTO mst_select_part_app (mcd_id, mdtd_id , msp_part_no , msp_part_name, msp_inspection_time , msp_create_by , msp_create_date)
+		VALUES ('{$addselectpCon}','{$addselectpdmc}', '{$addselectpno}','{$addselectpname}','{$addselectptime}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditSelectPart($selectpId)
+	{
+		$sql = "SELECT msp_id, mcd_id, mdtd_id , msp_part_no , msp_part_name , msp_inspection_time
+		FROM mst_select_part_app
+		WHERE msp_id = '{$selectpId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno, $editselectpname, $editselectptime, $empcodeadmin)
+	{
+		$sql = "UPDATE mst_select_part_app 
+			SET mcd_id = '{$editselectpCon}', mdtd_id = '{$editselectpdmc}',  msp_part_no = '{$editselectpno}' , 
+			msp_part_name = '{$editselectpname}' , msp_inspection_time = '{$editselectptime}' ,
+			msp_update_by = '{$empcodeadmin}', msp_update_date = CURRENT_TIMESTAMP
+			WHERE  msp_id = '{$IDeditselectp}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+
+
+
 
 
 
@@ -2195,4 +2381,92 @@ class Backoffice_model extends CI_Model
 	}
 	// return $res;
 	// }
+
+	// ****************************************************** mst  DEFECT GROUP ******************************************************
+
+	public function getTableDefectGroup()
+	{
+		$sql = "SELECT
+		DISTINCT
+		mcda.mcd_id ,
+		mpaa.mpa_phase_plant ,
+		mzaa.mza_name  ,
+		msaa.msa_station ,
+		mcda.mcd_status ,
+		mdg_status 
+	FROM
+		mst_defect_group_app mdga
+		LEFT JOIN mst_config_details_app mcda ON mcda.mcd_id = mdga.mcd_id
+		INNER JOIN mst_plant_admin_app mpaa ON mpaa.mpa_id = mcda.mpa_id 
+		LEFT JOIN mst_zone_admin_app mzaa ON mzaa.mza_id = mcda.mza_id
+		LEFT JOIN mst_station_admin_app msaa ON mcda.msa_id= msaa.msa_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+	public function editStatusDefectGroup($defectId, $empcodeadmin)
+	{
+		$sql = "select * from mst_defect_group_app WHERE mdg_id = '{$defectId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mdg_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_defect_group_app SET mdg_status = 0 WHERE  mdg_id = '{$defectId}'";
+			$sqlupdate = "UPDATE mst_defect_group_app SET mdg_update_by = '{$empcodeadmin}' , mdg_update_date = CURRENT_TIMESTAMP
+			WHERE  mdg_id = '{$defectId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_defect_group_app SET mdg_status = 1 WHERE  mdg_id = '{$defectId}'";
+			$sqlupdate = "UPDATE mst_defect_group_app SET mdg_update_by = '{$empcodeadmin}' , mdg_update_date = CURRENT_TIMESTAMP
+			WHERE  mdg_id = '{$defectId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+
+	public function getDataEditDefectGroup($defectGroupConfId)
+	{
+		$sql = "SELECT
+		DISTINCT
+		mcda.mcd_id ,
+		mpaa.mpa_phase_plant ,
+		mzaa.mza_name  ,
+		msaa.msa_station ,
+		mdga.md_id ,
+		mda.md_defect_en_name
+	FROM
+		mst_defect_group_app mdga
+		LEFT JOIN mst_config_details_app mcda ON mcda.mcd_id = mdga.mcd_id
+		INNER JOIN mst_plant_admin_app mpaa ON mpaa.mpa_id = mcda.mpa_id 
+		LEFT JOIN mst_zone_admin_app mzaa ON mzaa.mza_id = mcda.mza_id
+		LEFT JOIN mst_station_admin_app msaa ON mcda.msa_id= msaa.msa_id
+		LEFT JOIN mst_defect_app mda ON mdga.md_id = mda.md_id
+		WHERE mcda.mcd_id = '{$defectGroupConfId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+
+	} 
+	public function getDefectCode()
+	{
+		$sql = "SELECT * FROM mst_defect_app ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	} 
+
 }

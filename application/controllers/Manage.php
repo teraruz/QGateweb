@@ -185,8 +185,9 @@ class manage extends CI_Controller
 	public function swiftStatus()
 	{
 		$staffid = $_GET["ss_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
 
-		$res = $this->backoffice_model->editStatus($staffid);
+		$res = $this->backoffice_model->editStatusUserWeb($staffid , $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function ConEditManageUser()
@@ -332,14 +333,16 @@ class manage extends CI_Controller
 	public function swiftStatusPermissionWeb()
 	{
 		$Perid = $_GET["spg_id"];
-		$res = $this->backoffice_model->editStatusPermissionWeb($Perid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionWeb($Perid , $empcodeadmin);
 		echo json_encode($res);
 	}
 
 	public function 	swiftStatusPermissionDetailWeb()
 	{
 		$detailid = $_GET["spd_id"];
-		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid , $empcodeadmin );
 		echo json_encode($res);
 	}
 	// ดึง menu และ submenu แสดงใน EditPermissionweb
@@ -429,7 +432,8 @@ class manage extends CI_Controller
 	public function swiftStatusMenuWeb()
 	{
 		$submenuid = $_GET["ssm_id"];
-		$res = $this->backoffice_model->editStatusMenuWeb($submenuid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusMenuWeb($submenuid , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -487,7 +491,8 @@ class manage extends CI_Controller
 	public function swiftStatusUserApp()
 	{
 		$userappid = $_GET["ss_id"];
-		$res = $this->backoffice_model->editStatusUserApp($userappid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusUserApp($userappid , $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function AddManageUserApp()
@@ -548,7 +553,8 @@ class manage extends CI_Controller
 	public function swiftStatusPermissionApp()
 	{
 		$PeridApp = $_GET["spg_id"];
-		$res = $this->backoffice_model->editStatusPermissionApp($PeridApp);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionApp($PeridApp, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -587,7 +593,8 @@ class manage extends CI_Controller
 	public function 	swiftStatusPermissionDetailApp()
 	{
 		$detailid = $_GET["spd_id"];
-		$res = $this->backoffice_model->editStatusPermissionDetailApp($detailid);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusPermissionDetailApp($detailid, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -666,7 +673,8 @@ class manage extends CI_Controller
 	public function swiftStatusMenuApp()
 	{
 		$MenuappId = $_GET["sm_id"];
-		$res = $this->backoffice_model->editStatusMenuApp($MenuappId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusMenuApp($MenuappId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -740,7 +748,8 @@ class manage extends CI_Controller
 	public function swiftStatusChecktype()
 	{
 		$CheckTypeId = $_GET["mct_id"];
-		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -780,7 +789,8 @@ class manage extends CI_Controller
 	public function swiftStatusCheckStatus()
 	{
 		$StatusId = $_GET["mcs_id"];
-		$res = $this->backoffice_model->editStatusCheckStatus($StatusId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusCheckStatus($StatusId ,  $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -829,7 +839,8 @@ class manage extends CI_Controller
 	public function swiftStatusInspection()
 	{
 		$InspectionId = $_GET["mit_id"];
-		$res = $this->backoffice_model->editStatusInspection($InspectionId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusInspection($InspectionId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -878,7 +889,8 @@ class manage extends CI_Controller
 	public function swiftStatusDMC()
 	{
 		$dmcId = $_GET["mdd_id"];
-		$res = $this->backoffice_model->editStatusDMC($dmcId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDMC($dmcId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -926,7 +938,8 @@ class manage extends CI_Controller
 	public function swiftStatusDMCType()
 	{
 		$dmctypeId = $_GET["mdt_id"];
-		$res = $this->backoffice_model->editStatusDMCType($dmctypeId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDMCType($dmctypeId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -976,7 +989,8 @@ class manage extends CI_Controller
 	public function swiftStatusFACode()
 	{
 		$facodeId = $_GET["mfcm_id"];
-		$res = $this->backoffice_model->editStatusFACode($facodeId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusFACode($facodeId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -1026,7 +1040,8 @@ class manage extends CI_Controller
 	public function swiftStatusWorkShift()
 	{
 		$workshiftId = $_GET["mws_id"];
-		$res = $this->backoffice_model->editStatusWorkShift($workshiftId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusWorkShift($workshiftId , $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function AddWorkShift()
@@ -1081,7 +1096,8 @@ class manage extends CI_Controller
 	public function swiftStatusDefect()
 	{
 		$defectId = $_GET["md_id"];
-		$res = $this->backoffice_model->editStatusDefect($defectId);
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDefect($defectId , $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -1189,6 +1205,58 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_selectPart.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	
+
+
+	public function swiftStatusSelectPart()
+	{
+		$selectpId = $_GET["msp_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusSelectPart($selectpId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddSelectPart()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addselectpCon = $_POST["addselectpCon"];
+		$addselectpdmc = $_POST["addselectpdmc"];
+		$addselectpno = $_POST["addselectpno"];
+		$addselectpname = $_POST["addselectpname"];
+		$addselectptime = $_POST["addselectptime"];
+
+		$rsaddPartNo = $this->backoffice_model->modelAddSelectPart(
+			$addselectpCon, 
+			$addselectpdmc, 
+			$addselectpno, 
+			$addselectpname,
+			$addselectptime,
+			$empcodeadmin);
+
+		echo $rsaddPartNo;
+	}
+
+	public function getDataEditSelectpart()
+	{
+		$selectpId = $_GET["msp_id"];
+		$res = $this->backoffice_model->getDataEditSelectPart($selectpId);
+		echo json_encode($res);
+	}
+
+	public function EditSelectPart()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditselectp = $_POST["IDeditselectp"];
+		$editselectpCon = $_POST["editselectpCon"];
+		$editselectpdmc = $_POST["editselectpdmc"];
+		$editselectpno = $_POST["editselectpno"];
+		$editselectpname = $_POST["editselectpname"];
+		$editselectptime = $_POST["editselectptime"];
+
+		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno , $editselectpname , $editselectptime , $empcodeadmin);
+		echo $rseditselectpart;
 	}
 
 	// ************************* Control PlantAdminWeb *************************************
@@ -1406,6 +1474,8 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["getdefectcode"] = $this->backoffice_model->getDefectCode();
+		$data["getdefectgroup"] = $this->backoffice_model->getTableDefectGroup();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1413,6 +1483,31 @@ class manage extends CI_Controller
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Mastercontrol/view_defectGroup.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
+	}
+
+	public function swiftStatusDefectGroup()
+	{
+		$defectId = $_GET["mdg_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDefectGroup($defectId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function getDataEditDefectGroup()
+	{
+		$defectGroupConfId = $_GET["mcd_id"];
+		$res = $this->backoffice_model->getDataEditDefectGroup($defectGroupConfId);
+		echo json_encode($res);
+	}
+	public function getDataCheckBoxDefect()
+	{
+		$res = $this->backoffice_model->getDefectCode();
+		echo json_encode($res);
+	}
+
+	public function EditDefectGroup()
+	{
+		
 	}
 
 	// ************************* Config Detail *************************************

@@ -289,7 +289,7 @@
                     dataType: "json",
                     url: "<?php echo base_url(); ?>Login/logout?id=" + $id,
                 })
-           
+
                 window.location.href = "<?php echo base_url() ?>Login/Account";
 
             }
@@ -2439,7 +2439,152 @@
     }
     // ******************************************************mst  Select Part ******************************************************
 
-    
+    $("#btnSaveAddSelectPart").click(function() {
+        SaveAddSelectPart()
+    });
+    $("#btnSaveEditSelectPart").click(function() {
+        SaveEditSelectPart()
+    })
+
+
+    function statusSelectPart(msp_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusSelectPart?msp_id=" + msp_id
+        })
+    };
+
+
+    function SaveAddSelectPart() {
+        var addselectpCon = $('#addselectpCon').val()
+        var addselectpdmc = $('#addselectpdmc').val()
+        var addselectpno = $('#addselectpno').val()
+        var addselectpname = $('#addselectpname').val()
+        var addselectptime = $('#addselectptime').val()
+
+
+        var checkaddselectpCon = document.getElementById("addselectpCon");
+        var checkaddselectpdmc = document.getElementById("addselectpdmc");
+        var checkaddselectpno = document.getElementById("addselectpno");
+        var checkaddselectpname = document.getElementById("addselectpname");
+        var checkaddselectptime = document.getElementById("addselectptime");
+
+        if (checkaddselectpCon.value == "" || checkaddselectpdmc.value == "" ||
+            checkaddselectpno.value == "" || checkaddselectpname.value == "" || checkaddselectptime.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddSelectPart",
+                data: {
+                    addselectpCon: addselectpCon,
+                    addselectpdmc: addselectpdmc,
+                    addselectpno: addselectpno,
+                    addselectpname: addselectpname,
+                    addselectptime: addselectptime
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Select Part.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/SelectPart";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Select Part'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataSelectPart(msp_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditSelectpart?msp_id=" + msp_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditselectp").val(rs[0]["msp_id"]);
+            $("#editselectpCon").val(rs[0]["mcd_id"]);
+            $("#editselectpdmc").val(rs[0]["mdtd_id"]);
+            $("#editselectpno").val(rs[0]["msp_part_no"]);
+            $("#editselectpname").val(rs[0]["msp_part_name"]);
+            $("#editselectptime").val(rs[0]["msp_inspection_time"]);
+
+        })
+    };
+
+    function SaveEditSelectPart(mpn_id) {
+        var IDeditselectp = $('#IDeditselectp').val()
+        var editselectpCon = $('#editselectpCon').val()
+        var editselectpdmc = $('#editselectpdmc').val()
+        var editselectpno = $('#editselectpno').val()
+        var editselectpname = $('#editselectpname').val()
+        var editselectptime = $('#editselectptime').val()
+
+
+        var checkIDeditselectp = document.getElementById("IDeditselectp");
+        var checkeditselectpCon = document.getElementById("editselectpCon");
+        var checkeditselectpdmc = document.getElementById("editselectpdmc");
+        var checkeditselectpno = document.getElementById("editselectpno");
+        var checkeditselectpname = document.getElementById("editselectpname");
+        var checkeditselectptime = document.getElementById("editselectptime");
+
+        if (checkeditselectpCon.value == "" || checkeditselectpdmc.value == "" ||
+            checkeditselectpno.value == "" || checkeditselectpname.value == "" || checkeditselectptime.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/SelectPart";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditSelectPart",
+                data: {
+                    IDeditselectp: IDeditselectp,
+                    editselectpCon: editselectpCon,
+                    editselectpdmc: editselectpdmc,
+                    editselectpno: editselectpno,
+                    editselectpname: editselectpname,
+                    editselectptime: editselectptime
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Select Part is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/SelectPart";
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Select Part',
+                    })
+                }
+            });
+        }
+    }
 
 
     // ****************************************************** mst Plant Admin Web  ******************************************************
@@ -3071,9 +3216,9 @@
         var checkeditMacaddressconfig = document.getElementById("editMacaddressconfig");
 
         if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
-        checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" || 
-        checkedittypeconfig.value == "" || checkeditstatusconfig.value =="" ||
-        checkedittimeconfig.value == "" || checkeditMacaddressconfig.value == "") {
+            checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" ||
+            checkedittypeconfig.value == "" || checkeditstatusconfig.value == "" ||
+            checkedittimeconfig.value == "" || checkeditMacaddressconfig.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -3119,4 +3264,99 @@
             });
         }
     };
+
+
+    // ********************************************************************* mst Defect Group ******************************************************************
+    $("#btnSaveEditdefect").click(function() {
+        SaveEditDefect()
+    })
+
+
+    function statusDefectGroup(mdg_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDefectGroup?mdg_id=" + mdg_id
+        })
+    };
+
+
+    function getDataEditDefectGroup(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDefectGroup?mcd_id=" + mcd_id,
+        })
+        var pathnaja = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataCheckBoxDefect"
+        })
+        path.done(function(rs) {
+
+            $("#IDeditdefectgroup").val(rs[0]["mcd_id"]);
+            $("#editplantdefectgroup").val(rs[0]["mpa_phase_plant"]);
+            $("#editzonedefectgroup").val(rs[0]["mza_name"]);
+            $("#editstationdefectgroup").val(rs[0]["msa_station"]);
+            $checkbox = "";
+
+            pathnaja.done(function(rsnaja) {
+                $.each(rsnaja, function(key, value) {
+                    $check = "";
+                    $.each(rs, function(key, value1) {
+
+                        if (value1.md_id === value.md_id) {
+                            $check = "checked";
+                        } else {
+                            $check = "";
+                        }
+                    })
+                    $checkbox += '<input type="checkbox" name="checkboxdefectcode" id="checkboxdefectcode" value="' + value.md_id + '" ' + $check + ' >' + value.md_defect_en_name + '<span class="checkmark"></span><br><br>'
+                })
+
+                $("#checkBoxDefect").html($checkbox);
+
+
+                // <span class="checkmark"></span>
+
+            })
+
+        })
+    }
+
+    function SaveEditDefect() {
+        var IDeditdefectgroup = $('#IDeditdefectgroup').val()
+        var dataDefectGroupcheckId = []
+        jQuery("input[name='checkboxdefectcode']").each(function(key, values) {
+            if (this.checked == true) {
+                console.log("sssssssssssssssss==>", this.value)
+                dataDefectGroupcheckId[key] = this.value
+
+            }
+        });
+        var path = $.ajax({
+            method: "GET",
+            url: "<?php echo base_url(); ?>Manage/EditDefectGroup",
+            data: {
+                IDeditdefectgroup: IDeditdefectgroup,
+                dataDefectGroupcheckId: dataDefectGroupcheckId
+            }
+        })
+        path.done(function(rs) {
+            alert(rs);
+            if (rs === "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'You have Successfully Add Permission.',
+
+                }).then(function() {
+                    window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You Failed to Add Permission',
+                })
+            }
+        })
+    }
 </script>
