@@ -220,13 +220,22 @@ class manage extends CI_Controller
 		$password = $_POST["addpassword"];
 		$plant = $_POST["addplant"];
 		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
-		if ($rscheck === "true") {
-			$password_encoded = base64_encode($password);
-			$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
-			echo $rs;
-		} else {
-			echo $rscheck;
-		}
+		if($groupper == "Select group permission" ){
+			echo "Select group permission";
+		}else{
+			if($plant == "Select plant"){
+				echo "Select plant";
+			}else{
+				if ($rscheck === "true") {
+					$password_encoded = base64_encode($password);
+					$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
+					echo $rs;
+				} else {
+					echo $rscheck;
+				}
+			}
+			}
+		
 	}
 	public function getDataEditManageUserWeb()
 	{
@@ -1507,7 +1516,18 @@ class manage extends CI_Controller
 
 	public function EditDefectGroup()
 	{
-		
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditdefectgroup = $_GET["IDeditdefectgroup"];
+		$dataDefectGroupcheckId = $_GET["dataDefectGroupcheckId"];
+		echo $IDeditdefectgroup;
+		foreach ($dataDefectGroupcheckId as $key => $value) {
+			if ($value == " " || empty($value)) {
+				return "false";
+			} else {
+				$rseditdefect = $this->backoffice_model->modelEditDefectGroup($IDeditdefectgroup, $value, $empcodeadmin);
+				return $rseditdefect;
+			}
+		}
 	}
 
 	// ************************* Config Detail *************************************

@@ -2463,10 +2463,21 @@ class Backoffice_model extends CI_Model
 	} 
 	public function getDefectCode()
 	{
-		$sql = "SELECT * FROM mst_defect_app ";
+		$sql = "SELECT * FROM mst_defect_app  where md_status ='1'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 	} 
+
+	public function modelEditDefectGroup($IDeditdefectgroup, $value, $empcodeadmin)
+	{
+		$sql = "";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
 
 }

@@ -327,7 +327,7 @@
         var checkaddempcode = document.getElementById("addempcode");
         var checkaddfirstname = document.getElementById("addfirstname");
         var checkaddlastname = document.getElementById("addlastname");
-        var checkaddgroup = document.getElementById("addgroupper");
+        var checkaddgroup = document.getElementById("addgrouppermission");
         var checkaddemailaddress = document.getElementById("addemail");
         var checkaddpassword = document.getElementById("addpassword");
         var checkaddplant = document.getElementById("addplant");
@@ -340,6 +340,7 @@
                 text: 'Textbox someone is Empty',
                 confirmButtonColor: '#F7B267',
             })
+
         } else {
             var path = $.ajax({
                 method: "POST",
@@ -364,6 +365,16 @@
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
+                    })
+                } else if (rs == "Select group permission") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  group permission of user',
+                    })
+                } else if (rs == "Select plant") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add  plant of user',
                     })
                 } else {
                     Swal.fire({
@@ -404,8 +415,8 @@
         var checkeditempcode = document.getElementById("editempcode");
         var checkeditfirstname = document.getElementById("editfirstname");
         var checkeditlastname = document.getElementById("editlastname");
-        var checkeditgroup = document.getElementById("editgroup");
-        var checkeditemailaddress = document.getElementById("addemail");
+        var checkeditgroup = document.getElementById("editgrouppermissionuserweb");
+        var checkeditemailaddress = document.getElementById("editemailaddress");
         var checkeditplant = document.getElementById("editplant");
 
 
@@ -3315,9 +3326,6 @@
 
                 $("#checkBoxDefect").html($checkbox);
 
-
-                // <span class="checkmark"></span>
-
             })
 
         })
@@ -3325,6 +3333,10 @@
 
     function SaveEditDefect() {
         var IDeditdefectgroup = $('#IDeditdefectgroup').val()
+        var editplantdefectgroup = $('#editplantdefectgroup').val()
+        var editzonedefectgroup = $('#editzonedefectgroup').val()
+        var editstationdefectgroup = $('#editstationdefectgroup').val()
+
         var dataDefectGroupcheckId = []
         jQuery("input[name='checkboxdefectcode']").each(function(key, values) {
             if (this.checked == true) {
@@ -3333,12 +3345,16 @@
 
             }
         });
+        console.log("==>", dataDefectGroupcheckId)
         var path = $.ajax({
             method: "GET",
             url: "<?php echo base_url(); ?>Manage/EditDefectGroup",
             data: {
                 IDeditdefectgroup: IDeditdefectgroup,
-                dataDefectGroupcheckId: dataDefectGroupcheckId
+                editplantdefectgroup: editplantdefectgroup,
+                editzonedefectgroup: editzonedefectgroup,
+                editstationdefectgroup: editstationdefectgroup,
+                dataDefectGroupcheckId: dataDefectGroupcheckId,
             }
         })
         path.done(function(rs) {
@@ -3346,7 +3362,7 @@
             if (rs === "true") {
                 Swal.fire({
                     icon: 'success',
-                    title: 'You have Successfully Add Permission.',
+                    title: 'You have Successfully Edit Defect Group.',
 
                 }).then(function() {
                     window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
@@ -3354,7 +3370,7 @@
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You Failed to Add Permission',
+                    title: 'You Failed to Edit Defect Group',
                 })
             }
         })
