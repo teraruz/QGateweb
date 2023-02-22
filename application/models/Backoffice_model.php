@@ -4,7 +4,7 @@ class Backoffice_model extends CI_Model
 	// *********************************LOGINPAGE *********************************************************
 	public function modelCheckLogin($empcode, $password_encoded)
 	{
-		$sql = "select * from sys_staff_web where ss_emp_code ='{$empcode}' and ss_emp_password ='{$password_encoded}'";
+		$sql = "SELECT * from sys_staff_web WHERE ss_emp_code ='{$empcode}' AND ss_emp_password ='{$password_encoded}' AND ss_status = '1'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		if (empty($row)) {
@@ -2492,5 +2492,29 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return 	$row[0]["mcd_id"];
 
+	}
+
+	// ******************************************************* mst dmc type detail **************************************************************
+
+	public function getTableDMCTypeDetail()
+	{
+		$sql = "SELECT 
+		mdtd_id ,
+		mdt.mdt_id ,
+		mdt.mdt_name ,
+		mdd.mdd_id ,
+		mdd.mdd_name ,
+		mdtd_start ,
+		mdtd_end ,
+		mdtd_num_substring ,
+		mdtd_status
+	 
+	 FROM
+	 mst_dmc_type_detail_app mdtd
+	 INNER JOIN mst_dmc_type_app mdt ON mdt.mdt_id = mdtd.mdt_id
+	 INNER JOIN mst_dmc_data_app mdd ON mdd.mdd_id = mdtd.mdd_id";
+	 $res = $this->db->query($sql);
+	 $row = $res->result_array();
+	 return 	$row;
 	}
 }

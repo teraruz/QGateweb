@@ -178,7 +178,7 @@
                 </div>
             </div>
             <!-- <------------------------------------- Detail of Master Table ------------------------------------->
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <!-- <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 <div class="content-wrapper">
                     <div class="row">
                         <h1 class="col-12" style="color:black">Detail of Master Table</h1>
@@ -220,7 +220,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -233,7 +233,7 @@
 
 
 
-    <!-------------------------------------  ------------------------------------->
+    <!-- -----------------------------------  -----------------------------------
     <div class="content-wrapper">
         <div class="row">
             <h1 class="col-12" style="color:black">Master Control</h1>
@@ -401,7 +401,7 @@
         </div>
     </div>
 
-    <!------------------------------------- Detail of Master Table ------------------------------------->
+    <!-- ----------------------------------- Detail of Master Table ----------------------------------- -->
 
     <div class="content-wrapper">
         <hr class="new">
@@ -443,4 +443,4 @@
                 </div>
             </div>
         </div> 
-    </div>
+    </div> 

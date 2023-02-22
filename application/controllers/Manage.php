@@ -73,7 +73,7 @@ class manage extends CI_Controller
 		$rs = $this->backoffice_model->modelShowMenu($empcode);
 		echo $rs;
 	}
-	//  ****************************** setting ******************************************
+	//  ********************************************************** SETTING **********************************************************************
 	public function EditProFile()
 	{
 
@@ -156,7 +156,7 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
-	// ************************* Administartor WEB *************************************
+	// ***************************************************** Administartor WEB ***************************************************
 	public function ManageUserWeb()
 	{
 		$setTitle = "QG | Management User Web";
@@ -1648,6 +1648,7 @@ class manage extends CI_Controller
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$empcode = $this->session->userdata("empcode");
+		$data["tableDmcTypeDetail"] = $this->backoffice_model->getTableDMCTypeDetail();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);

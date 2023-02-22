@@ -270,8 +270,8 @@
 </script>
 <!-- --------------------------------------------------- LOGOUT  --------------------------------------------------- -->
 <script type="text/javascript">
-    $("#btnLogout").click(function() {
-        Logout()
+    $("#clicklogout").click(function() {
+        btnLogout()
     });
 
     function btnLogout($id) {
