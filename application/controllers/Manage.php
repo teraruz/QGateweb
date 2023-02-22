@@ -187,7 +187,7 @@ class manage extends CI_Controller
 		$staffid = $_GET["ss_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
 
-		$res = $this->backoffice_model->editStatusUserWeb($staffid , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusUserWeb($staffid, $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function ConEditManageUser()
@@ -220,12 +220,12 @@ class manage extends CI_Controller
 		$password = $_POST["addpassword"];
 		$plant = $_POST["addplant"];
 		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
-		if($groupper == "Select group permission" ){
+		if ($groupper == "Select group permission") {
 			echo "Select group permission";
-		}else{
-			if($plant == "Select plant"){
+		} else {
+			if ($plant == "Select plant") {
 				echo "Select plant";
-			}else{
+			} else {
 				if ($rscheck === "true") {
 					$password_encoded = base64_encode($password);
 					$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
@@ -234,8 +234,7 @@ class manage extends CI_Controller
 					echo $rscheck;
 				}
 			}
-			}
-		
+		}
 	}
 	public function getDataEditManageUserWeb()
 	{
@@ -343,7 +342,7 @@ class manage extends CI_Controller
 	{
 		$Perid = $_GET["spg_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusPermissionWeb($Perid , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusPermissionWeb($Perid, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -351,7 +350,7 @@ class manage extends CI_Controller
 	{
 		$detailid = $_GET["spd_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid , $empcodeadmin );
+		$res = $this->backoffice_model->editStatusPermissionDetailWeb($detailid, $empcodeadmin);
 		echo json_encode($res);
 	}
 	// ดึง menu และ submenu แสดงใน EditPermissionweb
@@ -442,7 +441,7 @@ class manage extends CI_Controller
 	{
 		$submenuid = $_GET["ssm_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusMenuWeb($submenuid , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusMenuWeb($submenuid, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -501,7 +500,7 @@ class manage extends CI_Controller
 	{
 		$userappid = $_GET["ss_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusUserApp($userappid , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusUserApp($userappid, $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function AddManageUserApp()
@@ -735,9 +734,11 @@ class manage extends CI_Controller
 	// ************************* Control Check Type *************************************
 	public function CheckType()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableChecktype"] = $this->backoffice_model->getTableCheckType();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -758,7 +759,7 @@ class manage extends CI_Controller
 	{
 		$CheckTypeId = $_GET["mct_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusCheckType($CheckTypeId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -782,9 +783,11 @@ class manage extends CI_Controller
 	// ************************* Control Check Status *************************************
 	public function CheckStatus()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableCheckStatus"] = $this->backoffice_model->getTableCheckStatus();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -799,7 +802,7 @@ class manage extends CI_Controller
 	{
 		$StatusId = $_GET["mcs_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusCheckStatus($StatusId ,  $empcodeadmin);
+		$res = $this->backoffice_model->editStatusCheckStatus($StatusId,  $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -832,9 +835,11 @@ class manage extends CI_Controller
 	// ************************* Control Inspection Type *************************************
 	public function InspectionType()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableInspection"] = $this->backoffice_model->getTableInspection();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -849,7 +854,7 @@ class manage extends CI_Controller
 	{
 		$InspectionId = $_GET["mit_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusInspection($InspectionId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusInspection($InspectionId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -882,10 +887,12 @@ class manage extends CI_Controller
 	// ************************* Control DMC Data *************************************
 	public function  DMCData()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
-		$data["tableDMC"] = $this->backoffice_model->getTableDMC();
+		$data["tableDMC"] = $this->backoffice_model->getTableDMCData();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -899,7 +906,7 @@ class manage extends CI_Controller
 	{
 		$dmcId = $_GET["mdd_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusDMC($dmcId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusDMC($dmcId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -931,9 +938,11 @@ class manage extends CI_Controller
 	// ************************* Control DMC Type *************************************
 	public function  DMCType()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableDMCType"] = $this->backoffice_model->getTableDMCType();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -948,7 +957,7 @@ class manage extends CI_Controller
 	{
 		$dmctypeId = $_GET["mdt_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusDMCType($dmctypeId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusDMCType($dmctypeId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -982,9 +991,11 @@ class manage extends CI_Controller
 	// ************************* Control FA Code *************************************
 	public function  FACode()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableFACode"] = $this->backoffice_model->getTableFACode();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -999,7 +1010,7 @@ class manage extends CI_Controller
 	{
 		$facodeId = $_GET["mfcm_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusFACode($facodeId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusFACode($facodeId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -1033,9 +1044,11 @@ class manage extends CI_Controller
 	// ************************* Control Work Shift *************************************
 	public function  WorkShift()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableWorkShift"] = $this->backoffice_model->getTableWorkShift();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1050,7 +1063,7 @@ class manage extends CI_Controller
 	{
 		$workshiftId = $_GET["mws_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusWorkShift($workshiftId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusWorkShift($workshiftId, $empcodeadmin);
 		echo json_encode($res);
 	}
 	public function AddWorkShift()
@@ -1089,9 +1102,11 @@ class manage extends CI_Controller
 	// ************************* Control Defect *************************************
 	public function  Defect()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableDefect"] = $this->backoffice_model->getTableDefect();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1106,7 +1121,7 @@ class manage extends CI_Controller
 	{
 		$defectId = $_GET["md_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusDefect($defectId , $empcodeadmin);
+		$res = $this->backoffice_model->editStatusDefect($defectId, $empcodeadmin);
 		echo json_encode($res);
 	}
 
@@ -1145,9 +1160,11 @@ class manage extends CI_Controller
 	// ************************* Control PartNumber *************************************
 	public function PartNumber()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tablePartNo"] = $this->backoffice_model->getTablePartNo();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1203,9 +1220,11 @@ class manage extends CI_Controller
 	// ************************* Control SelectPart *************************************
 	public function SelectPart()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableSelectPart"] = $this->backoffice_model->getTableSelectPart();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1216,7 +1235,7 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
-	
+
 
 
 	public function swiftStatusSelectPart()
@@ -1237,12 +1256,13 @@ class manage extends CI_Controller
 		$addselectptime = $_POST["addselectptime"];
 
 		$rsaddPartNo = $this->backoffice_model->modelAddSelectPart(
-			$addselectpCon, 
-			$addselectpdmc, 
-			$addselectpno, 
+			$addselectpCon,
+			$addselectpdmc,
+			$addselectpno,
 			$addselectpname,
 			$addselectptime,
-			$empcodeadmin);
+			$empcodeadmin
+		);
 
 		echo $rsaddPartNo;
 	}
@@ -1264,16 +1284,18 @@ class manage extends CI_Controller
 		$editselectpname = $_POST["editselectpname"];
 		$editselectptime = $_POST["editselectptime"];
 
-		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno , $editselectpname , $editselectptime , $empcodeadmin);
+		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno, $editselectpname, $editselectptime, $empcodeadmin);
 		echo $rseditselectpart;
 	}
 
 	// ************************* Control PlantAdminWeb *************************************
 	public function PlantAdminWeb()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tablePlantAdminWeb"] = $this->backoffice_model->getTablePlantAdminWeb();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1324,9 +1346,11 @@ class manage extends CI_Controller
 	// ************************* Control PlantAdminApp *************************************
 	public function PlantAdminApp()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tablePlantAdminApp"] = $this->backoffice_model->getTablePlantAdminApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1376,9 +1400,11 @@ class manage extends CI_Controller
 	// ************************* Control ZoneAdmin *************************************
 	public function ZoneAdmin()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["getzone"] = $this->backoffice_model->getZone();
 		$data["tableZone"] = $this->backoffice_model->getTableZone();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
@@ -1430,10 +1456,12 @@ class manage extends CI_Controller
 	// ************************* Control stationAdmin *************************************
 	public function stationAdmin()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$data["tableStation"] = $this->backoffice_model->getTableStation();
-		$empcode = $this->session->userdata("empcode");
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1480,9 +1508,11 @@ class manage extends CI_Controller
 	// ************************* Defect Group *************************************
 	public function DefectGroup()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["getdefectcode"] = $this->backoffice_model->getDefectCode();
 		$data["getdefectgroup"] = $this->backoffice_model->getTableDefectGroup();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
@@ -1518,22 +1548,22 @@ class manage extends CI_Controller
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		// $IDeditdefectgroup = $_GET["IDeditdefectgroup"]; //mdg_id
-		$editzonedefectgroup = $_GET["editzonedefectgroup"];//mza_id
-		$editplantdefectgroup = $_GET["editplantdefectgroup"];//mpa_id
-		$editstationdefectgroup = $_GET["editstationdefectgroup"];//msa_id
+		$editzonedefectgroup = $_GET["editzonedefectgroup"]; //mza_id
+		$editplantdefectgroup = $_GET["editplantdefectgroup"]; //mpa_id
+		$editstationdefectgroup = $_GET["editstationdefectgroup"]; //msa_id
 		$dataDefectGroupcheckId = $_GET["dataDefectGroupcheckId"]; //checkbox
 		// echo $dataDefectGroupcheckId[0];
 		// echo $editplantdefectgroup;
 		// echo $editstationdefectgroup;
 
-		$resdetailId =$this->backoffice_model->checkConfId($editzonedefectgroup,$editplantdefectgroup,$editstationdefectgroup);
+		$resdetailId = $this->backoffice_model->checkConfId($editzonedefectgroup, $editplantdefectgroup, $editstationdefectgroup);
 		// echo "resdetailId >> ",$resdetailId;
 		// $status =  "false";
 		foreach ($dataDefectGroupcheckId as $key => $value) {
 			if ($value == " " || empty($value)) {
-				echo "false";				
+				echo "false";
 			} else {
-				 $rseditdefect = $this->backoffice_model->modelEditDefectGroup($resdetailId,$value,$empcodeadmin);
+				$rseditdefect = $this->backoffice_model->modelEditDefectGroup($resdetailId, $value, $empcodeadmin);
 				echo $rseditdefect;
 				// $status = $rseditdefect;
 			}
@@ -1544,10 +1574,11 @@ class manage extends CI_Controller
 	// ************************* Config Detail *************************************
 	public function ConfigDetail()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
-
 
 		$data["getplantapp"] = $this->backoffice_model->modelGetPlantApp();
 		$data["getzoneapp"] = $this->backoffice_model->modelgetZoneApp();
@@ -1645,10 +1676,14 @@ class manage extends CI_Controller
 	// ************************* DMC Type Detail *************************************
 	public function dmcTypeDetail()
 	{
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["id"] = $data["ss_id"];
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-		$empcode = $this->session->userdata("empcode");
 		$data["tableDmcTypeDetail"] = $this->backoffice_model->getTableDMCTypeDetail();
+		$data["DMCType"] = $this->backoffice_model->getTableDMCType();
+		$data["DMCData"] = $this->backoffice_model->getTableDMCData();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
@@ -1658,11 +1693,69 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function swiftStatusDMCTypeDetail()
+	{
+		$dmcdetailId = $_GET["mdtd_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusDMCTypeDetail($dmcdetailId, $empcodeadmin);
+		echo json_encode($res);
+	}
+
+	public function AddDMCTypeDetail()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$adddmctypeofdetail = $_POST["adddmctypeofdetail"];
+		$adddmcdataofdetail = $_POST["adddmcdataofdetail"];
+		$addstartofdetail = $_POST["addstartofdetail"];
+		$addendofdetail = $_POST["addendofdetail"];
+		$addsubstringdetail = $_POST["addsubstringdetail"];
+
+
+		$rsaddDMCTypeDetail = $this->backoffice_model->modelAddDMCTypeDetail(
+			$adddmctypeofdetail,
+			$adddmcdataofdetail,
+			$addstartofdetail,
+			$addendofdetail,
+			$addsubstringdetail,
+			$empcodeadmin
+		);
+		echo $rsaddDMCTypeDetail;
+	}
+
+	public function getDataDMCTypeDetail()
+	{
+		$dmcdetailId = $_GET["mdtd_id"];
+		$res = $this->backoffice_model->getDataEditDMCTypeDetail($dmcdetailId);
+		echo json_encode($res);
+	}
+
+	public function EditDMCTypeDetail()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditDMCTypeDetail = $_POST["IDeditDMCTypeDetail"];
+		$editdmctypeofdetail = $_POST["editdmctypeofdetail"];
+		$editdatadmctypedetail = $_POST["editdatadmctypedetail"];
+		$editstartofdetail = $_POST["editstartofdetail"];
+		$editendofdetail = $_POST["editendofdetail"];
+		$editsubstringdetail = $_POST["editsubstringdetail"];
+
+
+		$reseditDMCTypeDetail =  $this->backoffice_model->modelEditDMCTypeDetail(
+			$IDeditDMCTypeDetail,
+			$editdmctypeofdetail,
+			$editdatadmctypedetail,
+			$editstartofdetail,
+			$editendofdetail,
+			$editsubstringdetail,
+			$empcodeadmin
+		);
+
+		echo $reseditDMCTypeDetail;
+	}
+
 	// ************************* Management  *************************************
 	public function QgateCheckData()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 

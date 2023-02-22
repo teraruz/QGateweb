@@ -123,7 +123,7 @@
 
                   <div class="form-group">
                     <label for="password">Station : </label>
-                    <input class="form-control" type="text" id="IDeditstationdefectgroup" name="IDeditstationdefectgroup" disabled>
+                    <input class="form-control" type="text" id="IDeditstationdefectgroup" name="IDeditstationdefectgroup" hidden>
                     <input class="form-control" type="text" id="editstationdefectgroup" name="editstationdefectgroup" disabled>
                   </div>
 

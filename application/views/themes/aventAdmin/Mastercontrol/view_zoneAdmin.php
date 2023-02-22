@@ -71,18 +71,18 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Zone Name :</label>
-                    <input class="form-control" type="text" id="addnamezone" name="addnamezone"  placeholder="Enter New Zone Name">
+                    <input class="form-control" type="text" id="addnamezone" name="addnamezone" placeholder="Enter New Zone Name">
                   </div>
 
-                    <div class="form-group">
+                  <div class="form-group">
                     <label for="username">Line :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addlinezone" name="addlinezone">
                         <option selected>Select Zone</option>
                         <?php
                         foreach ($getzone as $zone) {
-                        ?>                     
-                          <option  value="<?php echo $zone["mfcm_id"]; ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
+                        ?>
+                          <option value="<?php echo $zone["mfcm_id"]; ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -110,7 +110,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
+                  <div class="form-group">
                     <label for="empcode">Zone Name :</label>
                     <input class="form-control" type="text" id="IDeditzone" name="IDeditzone" hidden>
                     <input class="form-control" type="text" id="editnamezone" name="editnamezone">
@@ -123,8 +123,8 @@
                         <option selected>Select Zone</option>
                         <?php
                         foreach ($getzone as $zone) {
-                        ?>                     
-                          <option  value="<?php echo $zone["mfcm_id"]; ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
+                        ?>
+                          <option value="<?php echo $zone["mfcm_id"]; ?>"><?php echo $zone["mfcm_line_code"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>

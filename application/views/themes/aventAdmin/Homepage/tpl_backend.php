@@ -3370,22 +3370,175 @@
             }
         })
         path.done(function(rs) {
-            alert(rs);
-            console.log("wwwwwwwwwwwwwwwww==>", this.value)
-            // if (rs === "true") {
-            //     Swal.fire({
-            //         icon: 'success',
-            //         title: 'You have Successfully Edit Defect Group.',
-
-            //     }).then(function() {
-            //         window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
-            //     })
-            // } else {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'You Failed to Edit Defect Group',
-            //     })
-            // }
+            if (rs === "true") {
+                setTimeout(function() {
+                    swal({
+                        title: "Success",
+                        text: "Defect Group is Updated!",
+                        type: "success",
+                        confirmButtonColor: '#D80032'
+                    }, function() {
+                        window.location = "<?php echo base_url() ?>Manage/DefectGroup";
+                    });
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You Failed to Edit Defect Group',
+                })
+            }
         })
     }
+
+
+
+    // ******************************************************** mst dmc type detail ********************************************************
+
+    $("#btnSaveDMCTypeDetail").click(function() {
+        SaveAddDMCTypeDetail()
+    })
+
+    $("#btnSaveEditDMCTypeDetail").click(function() {
+        SaveEditDMCTypeDetail()
+    })
+
+
+    function statusDMCTypeDetail(mdtd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDMCTypeDetail?mdtd_id=" + mdtd_id
+        })
+    };
+
+
+    
+    function SaveAddDMCTypeDetail() {
+        var adddmctypeofdetail = $('#adddmctypeofdetail').val()
+        var adddmcdataofdetail = $('#adddmcdataofdetail').val()
+        var addstartofdetail = $('#addstartofdetail').val()
+        var addendofdetail = $('#addendofdetail').val()
+        var addsubstringdetail = $('#addsubstringdetail').val()
+
+        var checkadddmctypeofdetail = document.getElementById("adddmctypeofdetail");
+        var checkadddmcdataofdetail = document.getElementById("adddmcdataofdetail");
+        var checkaddstartofdetail = document.getElementById("addstartofdetail");
+        var checkaddendofdetail = document.getElementById("addendofdetail");
+        var checkaddsubstringdetail = document.getElementById("addsubstringdetail");
+
+
+        if (checkadddmctypeofdetail.value == "" || checkadddmcdataofdetail.value == "" ||
+        checkaddstartofdetail.value == "" || checkaddendofdetail.value == "" || checkaddsubstringdetail.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddDMCTypeDetail",
+                data: {
+                    adddmctypeofdetail: adddmctypeofdetail,
+                    adddmcdataofdetail: adddmcdataofdetail,
+                    addstartofdetail: addstartofdetail,
+                    addendofdetail:addendofdetail,
+                    addsubstringdetail:addsubstringdetail
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add DMC Type Detail.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add DMC Type Detail'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataEditDMCTypeDetail(mdtd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataDMCTypeDetail?mdtd_id=" + mdtd_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditDMCTypeDetail").val(rs[0]["mdtd_id"]);
+            $("#editdmctypeofdetail").val(rs[0]["mdt_id"]);
+            $("#editdatadmctypedetail").val(rs[0]["mdd_id"]);
+            $("#editstartofdetail").val(rs[0]["mdtd_start"]);
+            $("#editendofdetail").val(rs[0]["mdtd_end"]);
+            $("#editsubstringdetail").val(rs[0]["mdtd_num_substring"]);
+        })
+    };
+
+    function SaveEditDMCTypeDetail(mdtd_id) {
+        var IDeditDMCTypeDetail = $('#IDeditDMCTypeDetail').val()
+        var editdmctypeofdetail = $('#editdmctypeofdetail').val()
+        var editdatadmctypedetail = $('#editdatadmctypedetail').val()
+        var editstartofdetail = $('#editstartofdetail').val()
+        var editendofdetail = $('#editendofdetail').val()
+        var editsubstringdetail = $('#editsubstringdetail').val()
+
+        var checkIDeditDMCTypeDetail = document.getElementById("IDeditDMCTypeDetail");
+        var checkeditdmctypeofdetail = document.getElementById("editdmctypeofdetail");
+        var checkeditdatadmctypedetail = document.getElementById("editdatadmctypedetail");
+        var checkeditstartofdetail = document.getElementById("editstartofdetail");
+        var checkeditendofdetail = document.getElementById("editendofdetail");
+        var checkeditsubstringdetail = document.getElementById("editsubstringdetail");
+
+        if (checkIDeditDMCTypeDetail.value == "" || checkeditdmctypeofdetail.value == "" ||
+        checkeditdatadmctypedetail.value == "" || checkeditstartofdetail.value == "" || 
+        checkeditendofdetail.value == "" || checkeditsubstringdetail.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditDMCTypeDetail",
+                data: {
+                    IDeditDMCTypeDetail: IDeditDMCTypeDetail,
+                    editdmctypeofdetail: editdmctypeofdetail,
+                    editdatadmctypedetail: editdatadmctypedetail,
+                    editstartofdetail: editstartofdetail,
+                    editendofdetail: editendofdetail,
+                    editsubstringdetail: editsubstringdetail 
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Edit DMC Type Data.',
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit DMC Type Data',
+                    })
+                }
+            });
+        }
+    };
+
+
+
 </script>

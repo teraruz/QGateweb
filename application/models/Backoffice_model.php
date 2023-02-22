@@ -1273,7 +1273,7 @@ class Backoffice_model extends CI_Model
 	// ______________________________________________ mst DMC DATA_________________________________
 
 
-	public function getTableDMC()
+	public function getTableDMCData()
 	{
 		$sql = "SELECT mdd_id, mdd_name , mdd_status
 		FROM mst_dmc_data_app";
@@ -2467,7 +2467,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelEditDefectGroup($resdetailId,$value,$empcodeadmin)
+	public function modelEditDefectGroup($resdetailId, $value, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_defect_group_app(mcd_id,md_id,mdg_create_by,mdg_create_date,mdg_update_by,mdg_update_date) VALUES ('{$resdetailId}','{$value}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
@@ -2476,9 +2476,8 @@ class Backoffice_model extends CI_Model
 		} else {
 			return "false";
 		}
-			
 	}
-	public function checkConfId($editzonedefectgroup,$editplantdefectgroup,$editstationdefectgroup)
+	public function checkConfId($editzonedefectgroup, $editplantdefectgroup, $editstationdefectgroup)
 	{
 		$sql = "SELECT
 		mcd_id 
@@ -2491,7 +2490,6 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return 	$row[0]["mcd_id"];
-
 	}
 
 	// ******************************************************* mst dmc type detail **************************************************************
@@ -2513,8 +2511,100 @@ class Backoffice_model extends CI_Model
 	 mst_dmc_type_detail_app mdtd
 	 INNER JOIN mst_dmc_type_app mdt ON mdt.mdt_id = mdtd.mdt_id
 	 INNER JOIN mst_dmc_data_app mdd ON mdd.mdd_id = mdtd.mdd_id";
-	 $res = $this->db->query($sql);
-	 $row = $res->result_array();
-	 return 	$row;
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return 	$row;
+	}
+
+
+	public function editStatusDMCTypeDetail($dmcdetailId, $empcodeadmin)
+	{
+		$sql = "select * from mst_dmc_type_detail_app WHERE mdtd_id = '{$dmcdetailId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["mdtd_status"];
+		if ($result == 1) {
+			$sql = "UPDATE mst_dmc_type_detail_app SET mdtd_status = 0 WHERE  mdtd_id = '{$dmcdetailId}'";
+			$sqlupdate = "UPDATE mst_dmc_type_detail_app SET mdtd_update_by = '{$empcodeadmin}' , mdtd_update_date = CURRENT_TIMESTAMP
+			WHERE  mdtd_id = '{$dmcdetailId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE mst_dmc_type_detail_app SET mdtd_status = 1 WHERE  mdtd_id = '{$dmcdetailId}'";
+			$sqlupdate = "UPDATE mst_dmc_type_detail_app SET mdtd_update_by = '{$empcodeadmin}' , mdtd_update_date = CURRENT_TIMESTAMP
+			WHERE  mdtd_id = '{$dmcdetailId}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function modelAddDMCTypeDetail(
+		$adddmctypeofdetail,
+		$adddmcdataofdetail,
+		$addstartofdetail,
+		$addendofdetail,
+		$addsubstringdetail,
+		$empcodeadmin
+	) {
+		$sql = "INSERT INTO mst_dmc_type_detail_app 
+		(mdt_id , mdd_id , mdtd_start , mdtd_end , mdtd_num_substring , mdtd_create_by , mdtd_create_date )
+		VALUES('{$adddmctypeofdetail}','{$adddmcdataofdetail}','{$addstartofdetail}','{$addendofdetail}','{$addsubstringdetail}',
+		'{$empcodeadmin}' , CURRENT_TIMESTAMP)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function getDataEditDMCTypeDetail($dmcdetailId)
+	{
+		$sql = "SELECT mdtd_id , mdt_id , mdd_id , mdtd_start ,  mdtd_end , mdtd_num_substring 
+		FROM mst_dmc_type_detail_app
+		WHERE mdtd_id = '{$dmcdetailId}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function modelEditDMCTypeDetail(
+		$IDeditDMCTypeDetail,
+		$editdmctypeofdetail,
+		$editdatadmctypedetail,
+		$editstartofdetail,
+		$editendofdetail,
+		$editsubstringdetail,
+		$empcodeadmin
+	)
+	{
+		$sql = "UPDATE mst_dmc_type_detail_app
+		SET mdt_id = '{$editdmctypeofdetail}' ,
+		mdd_id = '{$editdatadmctypedetail}',
+		mdtd_start = '{$editstartofdetail}', 
+		mdtd_end = '{$editendofdetail}',
+		mdtd_num_substring = '{$editsubstringdetail}' ,
+		mdtd_update_by = '{$empcodeadmin}', 
+		mdtd_update_date = CURRENT_TIMESTAMP
+		WHERE mdtd_id = '{$IDeditDMCTypeDetail}'";
+		$res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else{
+			return "false";
+		}
+
 	}
 }
