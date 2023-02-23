@@ -227,9 +227,23 @@ class manage extends CI_Controller
 				echo "Select plant";
 			} else {
 				if ($rscheck === "true") {
-					$password_encoded = base64_encode($password);
-					$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
-					echo $rs;
+					$checkfullname = $this->backoffice_model->checknameAdd($firstname, $lastname);
+					// echo $checkfullname;
+					if ($checkfullname == "true") {
+						$emailcheck = $this->backoffice_model->checkEmailUserAdd($email);
+						// echo json_encode($emailcheck);
+						// echo $emailcheck;
+						if ($emailcheck == $email) {
+							echo "duplicate";
+							// echo "wwoww";
+						} else {
+							$password_encoded = base64_encode($password);
+							$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
+							echo $rs;
+						}
+					} else {
+						echo "falsadd";
+					}
 				} else {
 					echo $rscheck;
 				}
@@ -239,7 +253,7 @@ class manage extends CI_Controller
 	public function getDataEditManageUserWeb()
 	{
 		$ss_id = $_GET["ss_id"];
-		$res = $this->backoffice_model->GetDataEditUser($ss_id);
+		$res = $this->backoffice_model->GetDataEditUserWeb($ss_id);
 		echo json_encode($res);
 	}
 	public function saveEditUserWeb()
@@ -251,9 +265,37 @@ class manage extends CI_Controller
 		$groupper = $_POST["groupper"];
 		$email = $_POST["editemail"];
 		$plant = $_POST["editplant"];
+		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
+		if ($groupper == "Select group permission") {
+			echo "Select group permission";
+		} else {
+			if ($plant == "Select plant") {
+				echo "Select plant";
+			} else {
+				if ($rscheck === "true") {
+					$checkfullname = $this->backoffice_model->checknameAdd($firstname, $lastname);
+					// echo $checkfullname;
+					if ($checkfullname == "true") {
+						$emailcheck = $this->backoffice_model->checkEmailUserAdd($email);
+						// echo json_encode($emailcheck);
+						// echo $emailcheck;
+						if ($emailcheck == $email) {
+							echo "duplicate";
+							// echo "wwoww";
+						} else {
+							$rs = $this->backoffice_model->UpdateUserWeb($empcode, $firstname, $lastname, $email, $groupper, $plant, $empcodeadmin);
+							echo $rs;
+						}
+					} else {
+						echo "falsadd";
+					}
+				} else {
+					echo $rscheck;
+				}
+			}
+		}
 
-		$rs = $this->backoffice_model->UpdateUserWeb($empcode, $firstname, $lastname, $email, $groupper, $plant, $empcodeadmin);
-		echo $rs;
+	
 	}
 
 
@@ -359,6 +401,7 @@ class manage extends CI_Controller
 		$spg_id = $_GET["spg_id"];
 		$res = $this->backoffice_model->GetDataEditPermissionweb($spg_id);
 		echo json_encode($res);
+		// echo $res;
 	}
 	public function getMenuIDPermission()
 	{

@@ -268,6 +268,34 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
+	public function checknameAdd($firstname,$lastname)
+	{
+		$sql = "select * from sys_staff_web WHERE sys_staff_web.ss_emp_fname ='{$firstname}' AND sys_staff_web.ss_emp_lname ='{$lastname}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "false"; //มี
+		} else {
+			return "true"; //ไม่มี
+		}
+	}
+	public function checkEmailUserAdd($email)
+	{
+		$sql = "SELECT ss_email FROM sys_staff_web WHERE ss_email ='{$email}'";
+		$res = $this->db->query($sql);
+		// $row = $res->result_array();
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0]["ss_email"];
+		} else {
+			return "false";
+		}
+		// if (empty($res)) {
+		// 	return "false";
+		// } else {
+		// 	return "true";
+		// }
+	}
 	public function getTableGroupPermission()
 	{
 		$sql = "SELECT * FROM sys_permission_group_web";
@@ -294,11 +322,23 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
-	public function GetDataEditUser($ss_id)
+	public function GetDataEditUserWeb($ss_id)
 	{
-		$sql = "select ss_id,ss_emp_code,ss_emp_fname,ss_emp_lname,spg_name,ss_email,mpa_name,ss_status from sys_staff_web 
-		INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id = sys_permission_group_web.spg_id
-		INNER JOIN mst_plant_admin_web ON sys_staff_web.mpa_id = mst_plant_admin_web.mpa_id
+		$sql = "SELECT
+		ss_id,
+		ss_emp_code,
+		ss_emp_fname,
+		ss_emp_lname,
+		spg.spg_id ,
+		spg_name,
+		ss_email,
+		mpa.mpa_id ,
+		mpa_name,
+		ss_status
+		FROM
+			sys_staff_web ss
+		INNER JOIN sys_permission_group_web spg ON ss.spg_id = spg.spg_id
+		INNER JOIN mst_plant_admin_web mpa ON ss.mpa_id = mpa.mpa_id
 		WHERE ss_id = '{$ss_id}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();

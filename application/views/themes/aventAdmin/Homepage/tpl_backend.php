@@ -315,6 +315,13 @@
         })
     };
 
+    function isValidInput(input) {
+        var pattern = new RegExp(/^([a-z0-9])+$/i);
+        return pattern.test(input);
+    }
+
+
+
     function addUserWeb() {
         var addempcode = $('#addempcode').val();
         var addfirstname = $('#addfirstname').val();
@@ -342,47 +349,73 @@
             })
 
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
-                data: {
-                    addempcode: addempcode,
-                    addfirstname: addfirstname,
-                    addlastname: addlastname,
-                    addgroupper: addgroupper,
-                    addemail: addemail,
-                    addpassword: addpassword,
-                    addplant: addplant,
-                }
-            })
-            path.done(function(rs) {
-                console.log(rs);
-                alert(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Employee.',
+            if (addemail != 0) {
+                if (isValidInput(addemail)) {
+                    // $("#alertinput").html("<font color='green'>ผ่าน</font>");
+                    // alert("อีเมล์ถูกต้อง")
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
+                        data: {
+                            addempcode: addempcode,
+                            addfirstname: addfirstname,
+                            addlastname: addlastname,
+                            addgroupper: addgroupper,
+                            addemail: addemail,
+                            addpassword: addpassword,
+                            addplant: addplant,
+                        }
+                    })
+                    path.done(function(rs) {
+                        // alert(rs)
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Add Employee.',
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
+                            })
+                        } else if (rs == "Select group permission") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Group Permission is Empty',
+                            })
+                        } else if (rs == "Select plant") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Plant of Employee is Empty',
+                            })
+                        } else if (rs == "duplicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Email is Duplicate',
+                            })
+                        } else if (rs == "falsadd") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Name  is Duplicate',
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add Employee',
+                            })
+                        }
                     })
-                } else if (rs == "Select group permission") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  group permission of user',
-                    })
-                } else if (rs == "Select plant") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  plant of user',
-                    })
+
                 } else {
+                    // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
+                    // alert("อีเมล์ไม่ถูกต้อง")
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Employee',
+                        title: 'You failed to register',
+                        text: 'ไม่สามารถใช้ตัวอักษรพิเศษได้'
                     })
                 }
-            })
+
+
+            }
         }
     };
 
@@ -397,9 +430,9 @@
             $("#editempcode").val(rs[0]["ss_emp_code"]);
             $("#editfirstname").val(rs[0]["ss_emp_fname"]);
             $("#editlastname").val(rs[0]["ss_emp_lname"]);
-            $("#editgrouppermissionuserweb").val(rs[0]["spg_name"]);
+            $("#editgrouppermissionuserweb").val(rs[0]["spg_id"]);
             $("#editemailaddress").val(rs[0]["ss_email"]);
-            $("#editplant").val(rs[0]["mpa_name"]);
+            $("#editplant").val(rs[0]["mpa_id"]);
 
         })
     };
@@ -442,7 +475,6 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs);
                 if (rs === "true") {
                     Swal.fire({
                         icon: 'success',
@@ -474,6 +506,7 @@
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusPermissionWeb?spg_id=" + spg_id,
         })
+        window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
     };
 
 
@@ -546,7 +579,6 @@
             url: "<?php echo base_url(); ?>Manage/getDataEditPermissionWeb?spg_id=" + spg_id,
         })
         path.done(function(rs) {
-            console.log(rs);
             $("#editPermissionwebname").val(rs[0]["spg_name"]);
             $("#idPername").val(rs[0]["spg_id"]);
             load_data()
@@ -558,22 +590,23 @@
     function load_data() {
         var dropdownmenuper = $("#dropdownmenuper").val();
         $.ajax({
-            url: "<?php echo base_url(); ?>Manage/loadSubMenu",
-            method: 'POST',
-            dataType: "json",
-            data: {
-                dropdownmenuper: dropdownmenuper
-            }
-        }).done(function(rs) {
-
-            var obj = JSON.parse(rs);
-            var data = ""
-            $.each(obj, function(key, value) {
-                data += " <option value= '" + value["ssm_id"] + "'>" + value["ssm_name_submenu"] + "</option>"
+                url: "<?php echo base_url(); ?>Manage/loadSubMenu",
+                method: 'POST',
+                dataType: "json",
+                data: {
+                    dropdownmenuper: dropdownmenuper
+                }
             })
+            .done(function(rs) {
 
-            $("#dropdowneditsubmenuper").html(data)
-        })
+                var obj = JSON.parse(rs);
+                var data = ""
+                $.each(obj, function(key, value) {
+                    data += " <option value= '" + value["ssm_id"] + "'>" + value["ssm_name_submenu"] + "</option>"
+                })
+
+                $("#dropdowneditsubmenuper").html(data)
+            })
     }
 
     function SaveEditPermissionWeb() {
@@ -662,6 +695,8 @@
     }
 
     function detailpermissiongroup(spg_id) {
+
+        // $("#idPername").val(spg_id);
         var path = $.ajax({
             method: "get",
             dataType: "json",
@@ -810,7 +845,7 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Edit Permission',
+                        title: 'You Failed to Update Menu',
                     })
                 }
             });
@@ -948,7 +983,7 @@
                     setTimeout(function() {
                         swal({
                             title: "Success",
-                            text: "User App is Updated!",
+                            text: "Employee App is Updated!",
                             type: "success",
                             confirmButtonColor: '#D80032'
                         }, function() {
@@ -958,7 +993,7 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Edit User App',
+                        title: 'You Failed to Update Employee App',
                     })
                 }
             });
@@ -3411,7 +3446,7 @@
     };
 
 
-    
+
     function SaveAddDMCTypeDetail() {
         var adddmctypeofdetail = $('#adddmctypeofdetail').val()
         var adddmcdataofdetail = $('#adddmcdataofdetail').val()
@@ -3427,7 +3462,7 @@
 
 
         if (checkadddmctypeofdetail.value == "" || checkadddmcdataofdetail.value == "" ||
-        checkaddstartofdetail.value == "" || checkaddendofdetail.value == "" || checkaddsubstringdetail.value == "") {
+            checkaddstartofdetail.value == "" || checkaddendofdetail.value == "" || checkaddsubstringdetail.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -3442,8 +3477,8 @@
                     adddmctypeofdetail: adddmctypeofdetail,
                     adddmcdataofdetail: adddmcdataofdetail,
                     addstartofdetail: addstartofdetail,
-                    addendofdetail:addendofdetail,
-                    addsubstringdetail:addsubstringdetail
+                    addendofdetail: addendofdetail,
+                    addsubstringdetail: addsubstringdetail
                 }
             })
             path.done(function(rs) {
@@ -3497,8 +3532,8 @@
         var checkeditsubstringdetail = document.getElementById("editsubstringdetail");
 
         if (checkIDeditDMCTypeDetail.value == "" || checkeditdmctypeofdetail.value == "" ||
-        checkeditdatadmctypedetail.value == "" || checkeditstartofdetail.value == "" || 
-        checkeditendofdetail.value == "" || checkeditsubstringdetail.value == "") {
+            checkeditdatadmctypedetail.value == "" || checkeditstartofdetail.value == "" ||
+            checkeditendofdetail.value == "" || checkeditsubstringdetail.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -3517,7 +3552,7 @@
                     editdatadmctypedetail: editdatadmctypedetail,
                     editstartofdetail: editstartofdetail,
                     editendofdetail: editendofdetail,
-                    editsubstringdetail: editsubstringdetail 
+                    editsubstringdetail: editsubstringdetail
                 }
             })
             path.done(function(rs) {
@@ -3538,7 +3573,4 @@
             });
         }
     };
-
-
-
 </script>
