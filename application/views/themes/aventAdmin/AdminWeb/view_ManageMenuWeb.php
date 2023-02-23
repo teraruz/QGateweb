@@ -61,7 +61,7 @@
               </tbody>
             </table>
           </div>
-          
+
 
           <!-- Add Menu Modal-->
           <div class="modal fade" id="addMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,7 +122,7 @@
           <!-- Table  INFO SubMENU -->
           <div class="card-body" id="bodymenushow" style="display: none">
             <div class="table-responsive">
-              <table class="table table-bordered" id="Tabledetail" width="100%" cellspacing="0">
+              <table class="table table-bordered" id="TabledetailMenu" width="100%" cellspacing="0">
                 <h3 class="col-12" style="color:black">Information Detail</h3>
                 <hr class="new4">
                 <!-- style="display: none"-->
@@ -173,7 +173,7 @@
               </table>
             </div>
           </div>
-          
+
           <!-- addDetailSubmenuWeb Modal-->
           <div class="modal fade" id="addDetailSubMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -226,12 +226,12 @@
                   <div class="form-group">
                     <label for="password">Submenu Name :</label>
                     <input class="form-control" type="text" id="IDEditdetailSubMenu" name="IDEditdetailSubMenu" hidden>
-                    <input class="form-control" type="text" id="editSubmenuWebName" name="editSubmenuWebName" >
+                    <input class="form-control" type="text" id="editSubmenuWebName" name="editSubmenuWebName">
                   </div>
 
                   <div class="form-group">
                     <label for="password">Method :</label>
-                    <input class="form-control" type="text" id="editSubMenuPath" name="editSubMenuPath" >
+                    <input class="form-control" type="text" id="editSubMenuPath" name="editSubMenuPath">
                   </div>
 
                 </form>
