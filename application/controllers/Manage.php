@@ -445,53 +445,15 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
-	public function AddManageMenuWeb()
+	public function AddManageSubMenuWeb()
 	{
-
-		$menuname = $_POST["addmenuwebname"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDdetailSubMenu = $_POST["IDdetailSubMenu"];
 		$submenuname = $_POST["addsubmenuwebname"];
 		$path = $_POST["addmenupath"];
-		$icon = $_POST["addmenuicon"];
-		$empcodeadmin = $this->session->userdata("empcode");
 
-		$checkmenu = $this->backoffice_model->checkMenu($menuname);
-
-		if ($checkmenu == "true") {
-
-			$addmenuweb =  $this->backoffice_model->addMenuWeb($menuname, $empcodeadmin, $icon);
-			$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
-
-			if ($addmenuweb == "true") {
-
-				$checkduplicatesubmenu = $this->backoffice_model->checkDuplicateSubmenu($submenuname, $path);
-
-				if ($checkduplicatesubmenu == "true") {
-
-					$addsubmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
-					echo $addsubmenu;
-
-				}	else {
-					echo "datadupicate";
-				}
-			} else {
-				echo "false1";
-			}
-		} else if ($checkmenu == "false") {
-
-			$checkduplicatesubmenu = $this->backoffice_model->checkDuplicateSubmenu($submenuname, $path);
-
-			if ($checkduplicatesubmenu == "true") {
-
-				$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
-				$addSubmenuwitholdmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
-				echo $addSubmenuwitholdmenu;
-
-			} else {
-				echo "datadupicate";
-			}
-		} else {
-			echo "false2";
-		}
+		$checkSubMenuDuplicate  $this->backoffice_model->editStatusMenuWeb($submenuid, $empcodeadmin);
+		
 	}
 
 	public function swiftStatusMenuWeb()

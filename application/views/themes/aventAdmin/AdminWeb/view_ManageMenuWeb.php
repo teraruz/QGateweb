@@ -45,7 +45,7 @@
                   }
                   echo "<td>
                                       <div class=\"text-wrap text-center\" >
-                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\"   id=\"detailinfomenu$i\" name =\"detailinfomenu$i\"  onclick='detailinfomenu(" . $menuweb["sm_id"] . ")'><i
+                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\"   id=\"detailinfomenu$i\" name =\"detailinfomenu$i\"  onclick='DetailInfoSubmenu(" . $menuweb["sm_id"] . ")'><i
                                       class=\"mdi mdi-information-outline\"></i> info</button>                              
                                       </div>
                                     </td>";
@@ -164,13 +164,8 @@
                 </div>
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Menu Name :</label>
-                    <input class="form-control" type="text" id="IDdetailMenu" name="IDdetailMenu">
-                    <input class="form-control" type="text" id="addmenuwebname" name="addmenuwebname" required="" placeholder="Enter New Menu">
-                  </div>
-
-                  <div class="form-group">
                     <label for="password">Submenu Name :</label>
+                    <input class="form-control" type="text" id="IDdetailSubMenu" name="IDdetailSubMenu">
                     <input class="form-control" type="text" id="addsubmenuwebname" name="addsubmenuwebname" required="" placeholder="Enter New Submenu">
                   </div>
 
@@ -180,16 +175,16 @@
                   </div>
 
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="password">icon name :</label>
                     <input class="form-control" type="text" id="addmenuicon" name="addmenuicon" required="" placeholder="Enter icon name of menu">
-                  </div>
+                  </div> -->
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddSubMenuWeb">Save</a>
                 </div>
               </div>
             </div>

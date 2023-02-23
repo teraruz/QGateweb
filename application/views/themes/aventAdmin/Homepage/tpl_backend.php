@@ -845,8 +845,8 @@
 
     // ************************************************************** Manage Menu  Web **************************************************************
 
-    $("#btnSaveAddMenuWeb").click(function() {
-        SaveaddMenuWeb()
+    $("#btnSaveAddSubMenuWeb").click(function() {
+        SaveaddSubMenuWeb()
     });
 
     $("#btnSaveEditMenuWeb").click(function() {
@@ -859,76 +859,6 @@
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusMenuWeb?ssm_id=" + ssm_id,
         })
-    };
-
-
-    function SaveaddMenuWeb() {
-        var addmenuwebname = $('#addmenuwebname').val();
-        var addsubmenuwebname = $('#addsubmenuwebname').val();
-        var addmenupath = $('#addmenupath').val();
-        var addmenuicon = $("#addmenuicon").val();
-
-        var checkaddmenuwebname = document.getElementById("addmenuwebname");
-        var checkaddsubmenuwebname = document.getElementById("addsubmenuwebname")
-        var checkaddmenupath = document.getElementById("addmenupath")
-        var checkaddmenuicon = document.getElementById("addmenuicon")
-
-        if (checkaddmenuwebname.value == "" || checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon.value == "") {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Warning',
-                text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
-            })
-        } else {
-            if (addmenuwebname != 0 && addsubmenuwebname != 0) {
-                if (isValidInput(addmenuwebname, addsubmenuwebname)) {
-                    var path = $.ajax({
-                        method: "POST",
-                        url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
-                        data: {
-                            addmenuwebname: addmenuwebname,
-                            addsubmenuwebname: addsubmenuwebname,
-                            addmenupath: addmenupath,
-                            addmenuicon: addmenuicon
-                        }
-                    })
-                    path.done(function(rs) {
-                        alert(rs);
-                        if (rs === "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'You have Successfully Add Menu Web.',
-
-                            }).then(function() {
-                                window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
-                            })
-                        } else if (rs === "datadupicate") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Data is Duplicate',
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'You Failed to Add Menu Web',
-                            })
-                        }
-                    })
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You failed to register',
-                        text: 'Special characters cannot be entered.'
-                    })
-                }
-
-
-            }
-
-
-        }
     };
 
     function getDataManageMenuWeb(ssm_id) {
@@ -997,9 +927,9 @@
         }
     }
 
-    function detailinfomenu(sm_id) {
-        
-       
+    function DetailInfoSubmenu(sm_id) {
+
+
         var path = $.ajax({
             method: "get",
             dataType: "json",
@@ -1008,14 +938,14 @@
         path.done(function(rs) {
             // alert(rs)
             // console.log("rs==>>", rs)
-            GetDetailMenuWeb(rs);
+            GetDetailSubMenuWeb(rs);
             $("#bodymenushow").show("fast")
             $("#IDdetailMenu").val(sm_id)
         })
-      
+
     };
 
-    function GetDetailMenuWeb(rs) {
+    function GetDetailSubMenuWeb(rs) {
         // alert(rs)
         // console.log = ("data ==== > ", rs)
         var tb = ""
@@ -1042,7 +972,7 @@
             }
             tb += "<td>"
             tb += "<div class=\"text-wrap text-center\" >"
-            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"getDataEditsubmenuPermissionWeb"+j+"\" name =\"getDataEditsubmenuPermissionWeb"+j+"\" data-target=\"#editpermissionweb\"  onclick='getDataEditsubmenuPermissionWeb(" + menuvalue["ssm_id"] + ")'>"
+            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"getDataEditsubmenuPermissionWeb" + j + "\" name =\"getDataEditsubmenuPermissionWeb" + j + "\" data-target=\"#editpermissionweb\"  onclick='getDataEditsubmenuPermissionWeb(" + menuvalue["ssm_id"] + ")'>"
             tb += "<i class=\"fas fa-edit fa-sm\"></i> Edit</button>"
             tb += "</div>"
             tb += "</td>"
@@ -1052,6 +982,72 @@
         })
 
         $("#tbdetailsubmenu").html(tb)
+    }
+
+    function SaveaddSubMenuWeb() {
+        var IDdetailSubMenu = $('#IDdetailSubMenu').val()
+        var addsubmenuwebname = $('#addsubmenuwebname').val();
+        var addmenupath = $('#addmenupath').val();
+
+        var checkaddsubmenuwebname = document.getElementById("addsubmenuwebname")
+        var checkaddmenupath = document.getElementById("addmenupath")
+        var checkaddmenuicon = document.getElementById("addmenuicon")
+
+        if (checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Please enter Data',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            if (addsubmenuwebname != 0) {
+                if (isValidInput(addsubmenuwebname)) {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/AddManageSubMenuWeb",
+                        data: {
+                            IDdetailSubMenu: IDdetailSubMenu,
+                            addsubmenuwebname: addsubmenuwebname,
+                            addmenupath: addmenupath
+                        }
+                    })
+                    path.done(function(rs) {
+                        alert(rs);
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Add Menu Web.',
+
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                            })
+                        } else if (rs === "datadupicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data is Duplicate',
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add Menu Web',
+                            })
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You failed to Add Submenu ',
+                        text: 'Special characters cannot be entered.'
+                    })
+                }
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Please enter submenu name',
+                })
+            }
+        }
     }
 
     // *********************************************** Manage User App **************************************************
