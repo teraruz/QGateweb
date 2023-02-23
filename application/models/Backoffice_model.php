@@ -614,22 +614,41 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
-	public function checkDuplicateSubmenu($submenuname,$path){
-		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_name_submenu = '{$submenuname}' AND ssm_method = '{$path}'";
+
+	public function checkDuplicateMenuName($addMenuName){
+		$sql = "SELECT * FROM sys_menu_web WHERE sm_name_menu = '{$addMenuName}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		if ($row) {
-			return "false";
+			return "duplicate";
 		} else {
-			return "true";
+			return "pass";
+		}
+	}
+	public function checkDuplicateSubmenuName($submenuname , $path){
+		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_name_submenu = '{$submenuname}' OR ssm_method = '{$path}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
 		}
 	}
 
-	public function addMenuWeb($menuname, $empcodeadmin, $icon)
+	public function addMenuWeb($addMenuName ,$empcodeadmin)
 	{
-		$sql = "INSERT INTO sys_menu_web 
-		(sm_name_menu,sm_create_by,sm_create_date,sm_name_icon)
-		VALUES ('{$menuname}','{$empcodeadmin}',CURRENT_TIMESTAMP, '{$icon}')";
+		$sql = "INSERT INTO sys_menu_web (
+			sm_name_menu,
+			sm_create_by,
+			sm_create_date
+		)
+		VALUES
+			(
+				'{$addMenuName}',
+				'{$empcodeadmin}',
+				CURRENT_TIMESTAMP
+			)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -638,11 +657,11 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path)
+	public function editMenuWeb($IDeditMenuName, $editMenuName, $empcodeadmin)
 	{
-		$sql = "INSERT INTO sys_submenu_web 
-		(sm_id,ssm_name_submenu,ssm_create_by,ssm_create_date,ssm_method)
-		VALUES ('{$menunameconvertID}','{$submenuname}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$path}')";
+		$sql = "UPDATE sys_menu_web 
+		SET sm_name_menu = '{$editMenuName}' , sm_create_by = '{$empcodeadmin}' , sm_create_date = CURRENT_TIMESTAMP
+		WHERE sm_id = '{$IDeditMenuName}'";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -651,7 +670,65 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function editStatusMenuWeb($submenuid,  $empcodeadmin)
+	public function addSubMenuWeb($IDdetailSubMenu ,$submenuname, $path , $empcodeadmin)
+	{
+		$sql = "INSERT INTO sys_submenu_web (
+			sm_id,
+			ssm_name_submenu,
+			ssm_method,
+			ssm_create_by,
+			ssm_create_date
+		)
+		VALUES
+			(
+				'{$IDdetailSubMenu}',
+				'{$submenuname}',
+				'{$path}',
+				'{$empcodeadmin}',
+				CURRENT_TIMESTAMP
+			)";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	public function editStatusMenuWeb($menuid,  $empcodeadmin)
+	{
+		$sql = "SELECT * FROM sys_menu_web WHERE sm_id = '{$menuid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["sm_status"];
+		if ($result == 1) {
+			$sql = "UPDATE sys_menu_web SET sm_status = 0 WHERE  sm_id = '{$menuid}'";
+			$sqlupdate = "UPDATE sys_menu_web SET sm_update_by = '{$empcodeadmin}' , sm_update_date = CURRENT_TIMESTAMP
+			WHERE  sm_id = '{$menuid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ($result == 0) {
+			$sql = "UPDATE sys_menu_web SET sm_status = 1 WHERE  sm_id = '{$menuid}'";
+			$sqlupdate = "UPDATE sys_menu_web SET sm_update_by = '{$empcodeadmin}' , sm_update_date = CURRENT_TIMESTAMP
+			WHERE  sm_id = '{$menuid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return  true;
+		}
+	}
+
+	public function editStatusSubMenuWeb($submenuid,  $empcodeadmin)
 	{
 		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_id = '{$submenuid}'";
 		$res = $this->db->query($sql);
@@ -686,32 +763,34 @@ class Backoffice_model extends CI_Model
 
 	public function GetDataEditMenuWeb($id)
 	{
-		$sql = "SELECT sm_name_menu , ssm_name_submenu ,sys_menu_web.sm_id ,sys_submenu_web.ssm_id
-		FROM sys_submenu_web 
-		INNER JOIN sys_menu_web ON sys_menu_web.sm_id = sys_submenu_web.sm_id
-		WHERE ssm_id = '{$id}'";
+		$sql = "SELECT sm_id , sm_name_menu 
+		FROM sys_menu_web 
+		WHERE sm_id = '{$id}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 	}
 
-	public function editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin)
+	public function GetDataEditSubmenuWeb($id)
 	{
-		$sql = "UPDATE sys_menu_web 
-		SET sm_name_menu = '{$menuname}' ssm_update_by = '{$empcodeadmin}' ssm_update_date = CURRENT_TIMESTAMP
-		WHERE sm_id = '{$IDeditMenuName}'";
-		$res =  $this->db->query($sql);
-		if ($res) {
-			return "true";
-		} else {
-			return "false";
-		}
+		$sql = "SELECT
+		ssm_id,
+		ssm_name_submenu,
+		ssm_method
+	FROM
+		sys_submenu_web
+	WHERE
+		ssm_id = '{$id}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
 	}
-	public function editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin)
+
+	public function editSubmenuWeb($IDEditdetailSubMenu,$editSubmenuWebName,$editMenuPath,$empcodeadmin)
 	{
-		$sql = "UPDATE sys_submenu_web
-		SET ssm_name_submenu = '{$submenuname}' sm_update_by = '{$empcodeadmin}' sm_update_date = CURRENT_TIMESTAMP
-		WHERE ssm_id = '{$IDeditSubMenuName}'";
+		$sql = "UPDATE sys_submenu_web 
+		SET  ssm_name_submenu ='{$editSubmenuWebName}', ssm_method ='{$editMenuPath}' ,ssm_update_by = '{$empcodeadmin}' ,ssm_update_date = CURRENT_TIMESTAMP
+		WHERE ssm_id = '{$IDEditdetailSubMenu}'";
 		$res =  $this->db->query($sql);
 		if ($res) {
 			return "true";

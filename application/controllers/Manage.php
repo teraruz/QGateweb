@@ -445,6 +445,52 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+	public function AddManageMenuWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addMenuName = $_POST["addMenuName"];
+
+		$checkMenuDuplicate =   $this->backoffice_model->checkDuplicateMenuName($addMenuName);
+
+		if ($checkMenuDuplicate == "pass") {
+
+			$addMenuWeb = $this->backoffice_model->addMenuWeb($addMenuName, $empcodeadmin);
+			echo $addMenuWeb;
+		} else if ($checkMenuDuplicate == "duplicate") {
+
+			echo "datadupicate";
+		} else {
+			echo "false";
+		}
+	}
+
+	public function EditManageMenuWeb()
+	{
+		$empcodeadmin = $this->session->userdata("empcode");
+		$IDeditMenuName = $_POST["IDeditMenuName"];
+		$editMenuName = $_POST["editMenuName"];
+
+		$checkMenuDuplicate =   $this->backoffice_model->checkDuplicateMenuName($editMenuName);
+
+		if ($checkMenuDuplicate == "pass") {
+			$editmenuweb = $this->backoffice_model->editMenuWeb($IDeditMenuName, $editMenuName, $empcodeadmin);
+			echo $editmenuweb;
+		} else if ($checkMenuDuplicate == "duplicate") {
+			echo "datadupicate";
+		} else {
+			echo "false";
+		}
+	}
+
+
+	public function swiftStatusSubMenuWeb()
+	{
+		$submenuid = $_GET["ssm_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->editStatusSubMenuWeb($submenuid, $empcodeadmin);
+		echo json_encode($res);
+	}
+
 	public function AddManageSubMenuWeb()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
@@ -452,41 +498,66 @@ class manage extends CI_Controller
 		$submenuname = $_POST["addsubmenuwebname"];
 		$path = $_POST["addmenupath"];
 
-		$checkSubMenuDuplicate  $this->backoffice_model->editStatusMenuWeb($submenuid, $empcodeadmin);
-		
+		$checkSubMenuDuplicate =   $this->backoffice_model->checkDuplicateSubmenuName($submenuname, $path);
+
+		if ($checkSubMenuDuplicate == "pass") {
+
+			$addSubMenuWeb = $this->backoffice_model->addSubMenuWeb($IDdetailSubMenu, $submenuname, $path, $empcodeadmin);
+			echo $addSubMenuWeb;
+		} else if ($checkSubMenuDuplicate == "duplicate") {
+
+			echo "datadupicate";
+		} else {
+
+			echo "false";
+		}
 	}
 
 	public function swiftStatusMenuWeb()
 	{
-		$submenuid = $_GET["ssm_id"];
+		$menuid = $_GET["sm_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->editStatusMenuWeb($submenuid, $empcodeadmin);
+		$res = $this->backoffice_model->editStatusMenuWeb($menuid, $empcodeadmin);
 		echo json_encode($res);
 	}
 
 	public function getDataManageMenuWeb()
 	{
-		$id = $_GET["ssm_id"];
+		$id = $_GET["sm_id"];
 		$res = $this->backoffice_model->GetDataEditMenuWeb($id);
 		echo json_encode($res);
 	}
 
-	public function EditManageMenuWeb()
+	public function getDataEditDetailSubmenuWeb()
+	{
+		$id = $_GET["ssm_id"];
+		$res = $this->backoffice_model->GetDataEditSubmenuWeb($id);
+		echo json_encode($res);
+	}
+
+	public function EditManageSubMenuWeb()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
-		$menuname = $_POST["editMenuName"];
-		$submenuname = $_POST["editSubMenuName"];
-		$IDeditMenuName = $_POST["IDeditMenuName"];
-		$IDeditSubMenuName = $_POST["IDeditSubMenuName"];
+		$IDEditdetailSubMenu = $_POST["IDEditdetailSubMenu"];
+		$editSubmenuWebName = $_POST["editSubmenuWebName"];
+		$editMenuPath = $_POST["editMenuPath"];
 
-		$reseditmenuname = $this->backoffice_model->editNameMenuWeb($IDeditMenuName,	$menuname, $empcodeadmin);
-		if ($reseditmenuname == "true") {
-			$reseditsubmenuname = $this->backoffice_model->editNameSubMenuWeb($IDeditSubMenuName,	$submenuname, $empcodeadmin);
-			echo $reseditsubmenuname;
+
+		$checkSubMenuDuplicate =   $this->backoffice_model->checkDuplicateSubmenuName($editSubmenuWebName, $editMenuPath);
+
+		if ($checkSubMenuDuplicate == "pass") {
+
+			$res = $this->backoffice_model->editSubmenuWeb($IDEditdetailSubMenu, $editSubmenuWebName, $editMenuPath, $empcodeadmin);
+			echo $res;
+		} else if ($checkSubMenuDuplicate == "duplicate") {
+
+			echo "datadupicate";
 		} else {
+
 			echo "false";
 		}
 	}
+
 
 	public function getDetailMenuweb()
 	{

@@ -845,48 +845,37 @@
 
     // ************************************************************** Manage Menu  Web **************************************************************
 
-    $("#btnSaveAddSubMenuWeb").click(function() {
-        SaveaddSubMenuWeb()
-    });
 
+    $("#btnSaveaddMenuWeb").click(function() {
+        SaveAddMenuWeb()
+    });
     $("#btnSaveEditMenuWeb").click(function() {
         SaveEditMenuWeb()
     });
 
+    $("#btnSaveAddSubMenuWeb").click(function() {
+        SaveaddSubMenuWeb()
+    });
 
-    function statusManageMenuWeb(ssm_id) {
+    $("#btnSaveEditSubMenuWeb").click(function() {
+        SaveEditSubMenuWeb()
+    });
+
+
+    function statusManageMenuWeb(sm_id) {
         var path = $.ajax({
             method: "get",
-            url: "<?php echo base_url(); ?>Manage/swiftStatusMenuWeb?ssm_id=" + ssm_id,
+            url: "<?php echo base_url(); ?>Manage/swiftStatusMenuWeb?sm_id=" + sm_id,
         })
     };
 
-    function getDataManageMenuWeb(ssm_id) {
-        var path = $.ajax({
-            method: "get",
-            dataType: "json",
-            url: "<?php echo base_url(); ?>Manage/getDataManageMenuWeb?ssm_id=" + ssm_id,
-        })
-        path.done(function(rs) {
-            console.log(rs);
-            $("#editMenuName").val(rs[0]["sm_name_menu"]);
-            $("#editSubMenuName").val(rs[0]["ssm_name_submenu"]);
-            $("#IDeditMenuName").val(rs[0]["sm_id"]);
-            $("#IDeditSubMenuName").val(rs[0]["ssm_id"]);
-        })
-    };
+    function SaveAddMenuWeb() {
 
-    function SaveEditMenuWeb() {
+        var addMenuName = $("#addMenuName").val();
 
-        var editMenuName = $("#editMenuName").val();
-        var editSubMenuName = $("#editSubMenuName").val();
-        var IDeditMenuName = $("#IDeditMenuName").val();
-        var IDeditSubMenuName = $("#IDeditSubMenuName").val();
+        var checkaddMenuName = document.getElementById("addMenuName");
 
-        var checkeditMenuName = document.getElementById("editMenuName");
-        var checkeditSubMenuName = document.getElementById("editSubMenuName");
-
-        if (checkeditMenuName.value == "" || checkeditSubMenuName.value == "") {
+        if (checkaddMenuName.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -897,39 +886,99 @@
         } else {
             var path = $.ajax({
                 method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
+                url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
                 data: {
-                    editMenuName: editMenuName,
-                    editSubMenuName: editSubMenuName,
-                    IDeditMenuName: IDeditMenuName,
-                    IDeditSubMenuName: IDeditSubMenuName
+                    addMenuName: addMenuName
                 }
             })
             path.done(function(rs) {
                 if (rs == "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "Menu is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
-                        });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Update Menu',
-                    })
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Menu Web.',
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                        })
+                    } else if (rs === "datadupicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data is Duplicate',
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add Menu Web',
+                        })
+                    }
                 }
             });
         }
     }
 
+    function getDataManageMenuWeb(sm_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataManageMenuWeb?sm_id=" + sm_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditMenuName").val(rs[0]["sm_id"]);
+            $("#editMenuName").val(rs[0]["sm_name_menu"]);
+        })
+    };
+
+    function SaveEditMenuWeb() {
+
+        var IDeditMenuName = $("#IDeditMenuName").val();
+        var editMenuName = $("#editMenuName").val();
+
+        var checkEditMenuName = document.getElementById("editMenuName");
+
+        if (checkEditMenuName.value == "") {
+            swal({
+                title: "warning",
+                text: "Please Enter Menu Name ",
+                type: "warning"
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+            });
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
+                data: {
+                    IDeditMenuName: IDeditMenuName,
+                    editMenuName: editMenuName
+                }
+            })
+            path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Edit Menu Web.',
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                        })
+                    } else if (rs === "datadupicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data is Duplicate',
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit Menu Web',
+                        })
+                    }
+               
+            });
+        }
+    }
+
     function DetailInfoSubmenu(sm_id) {
-
-
         var path = $.ajax({
             method: "get",
             dataType: "json",
@@ -940,7 +989,7 @@
             // console.log("rs==>>", rs)
             GetDetailSubMenuWeb(rs);
             $("#bodymenushow").show("fast")
-            $("#IDdetailMenu").val(sm_id)
+            $("#IDdetailSubMenu").val(sm_id)
         })
 
     };
@@ -958,21 +1007,21 @@
             if (menuvalue["ssm_status"] == "1") {
                 tb += "<td>"
                 tb += "<div class=\"custom-switch text-center\" >"
-                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfomenu" + j + "'  id='statusdetailinfomenu" + j + "' checked onclick='statusPermissionDetail(" + menuvalue["ssm_id"] + ")'>"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfomenu" + j + "'  id='statusdetailinfomenu" + j + "' checked onclick='statusManageSubMenuWeb(" + menuvalue["ssm_id"] + ")'>"
                 tb += "<label class=\"custom-control-label\" for='statusdetailinfomenu" + j + "' ></label>"
                 tb += "</div>"
                 tb += "</td>"
             } else {
                 tb += "<td>"
                 tb += "<div class=\"custom-switch text-center\" >"
-                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfomenu" + j + "'  id='statusdetailinfomenu" + j + "'  onclick='statusPermissionDetail(" + menuvalue["ssm_id"] + ")'>"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfomenu" + j + "'  id='statusdetailinfomenu" + j + "'  onclick='statusManageSubMenuWeb(" + menuvalue["ssm_id"] + ")'>"
                 tb += "<label class=\"custom-control-label\" for='statusdetailinfomenu" + j + "' ></label>"
                 tb += "</div>"
                 tb += "</td>"
             }
             tb += "<td>"
             tb += "<div class=\"text-wrap text-center\" >"
-            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"getDataEditsubmenuPermissionWeb" + j + "\" name =\"getDataEditsubmenuPermissionWeb" + j + "\" data-target=\"#editpermissionweb\"  onclick='getDataEditsubmenuPermissionWeb(" + menuvalue["ssm_id"] + ")'>"
+            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"EditDetailSubmenu" + j + "\" name =\"EditDetailSubmenu" + j + "\" data-target=\"#moDalEditDetailSubMenu\"  onclick='getDataEditDetailSubmenu(" + menuvalue["ssm_id"] + ")'>"
             tb += "<i class=\"fas fa-edit fa-sm\"></i> Edit</button>"
             tb += "</div>"
             tb += "</td>"
@@ -984,6 +1033,13 @@
         $("#tbdetailsubmenu").html(tb)
     }
 
+    function statusManageSubMenuWeb(ssm_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusSubMenuWeb?ssm_id=" + ssm_id,
+        })
+    };
+
     function SaveaddSubMenuWeb() {
         var IDdetailSubMenu = $('#IDdetailSubMenu').val()
         var addsubmenuwebname = $('#addsubmenuwebname').val();
@@ -993,7 +1049,7 @@
         var checkaddmenupath = document.getElementById("addmenupath")
         var checkaddmenuicon = document.getElementById("addmenuicon")
 
-        if (checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "" || checkaddmenuicon.value == "") {
+        if (checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -1017,7 +1073,7 @@
                         if (rs === "true") {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'You have Successfully Add Menu Web.',
+                                title: 'You have Successfully Add Submenu Web.',
 
                             }).then(function() {
                                 window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
@@ -1030,7 +1086,7 @@
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'You Failed to Add Menu Web',
+                                title: 'You Failed to Add Submenu Web',
                             })
                         }
                     })
@@ -1038,6 +1094,84 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You failed to Add Submenu ',
+                        text: 'Special characters cannot be entered.'
+                    })
+                }
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Please enter submenu name',
+                })
+            }
+        }
+    }
+
+    function getDataEditDetailSubmenu(ssm_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDetailSubmenuWeb?ssm_id=" + ssm_id,
+        })
+        path.done(function(rs) {
+            $("#IDEditdetailSubMenu").val(rs[0]["ssm_id"]);
+            $("#editSubmenuWebName").val(rs[0]["ssm_name_submenu"]);
+            $("#editMenuPath").val(rs[0]["ssm_method"]);
+        })
+    }
+
+
+    function SaveEditSubMenuWeb() {
+        var IDEditdetailSubMenu = $('#IDEditdetailSubMenu').val()
+        var editSubmenuWebName = $('#editSubmenuWebName').val();
+        var editMenuPath = $('#editSubMenuPath').val();
+
+        var checkEditSubmenuWebName = document.getElementById("editSubmenuWebName")
+        var checkEditMenuPath = document.getElementById("editMenuPath")
+
+        if (checkEditSubmenuWebName.value == "" || checkEditMenuPath.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Please enter Data',
+                confirmButtonColor: '#F7B267'
+            })
+        } else {
+            if (editSubmenuWebName != 0) {
+                if (isValidInput(editSubmenuWebName)) {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/EditManageSubMenuWeb",
+                        data: {
+                            IDEditdetailSubMenu: IDEditdetailSubMenu,
+                            editSubmenuWebName: editSubmenuWebName,
+                            editMenuPath: editMenuPath
+                        }
+                    })
+                    path.done(function(rs) {
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Edit Submenu Web.',
+
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                            })
+                        } else if (rs === "datadupicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data is Duplicate',
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to edit Menu Web',
+                            })
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You failed to Edit Submenu ',
                         text: 'Special characters cannot be entered.'
                     })
                 }
