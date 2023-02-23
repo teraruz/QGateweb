@@ -294,8 +294,6 @@ class manage extends CI_Controller
 				}
 			}
 		}
-
-	
 	}
 
 
@@ -366,7 +364,7 @@ class manage extends CI_Controller
 
 			if ($checkInsertEditsubper == "true") {
 
-				$InsertSubPer =   $this->backoffice_model->modelInsertdataEditper($id, $dropdowneditsubmenu, $empcodeadmin);
+				$InsertSubPer =  $this->backoffice_model->modelInsertdataEditper($id, $dropdowneditsubmenu, $empcodeadmin);
 				echo $InsertSubPer;
 			} else {
 				return "false";
@@ -455,28 +453,43 @@ class manage extends CI_Controller
 		$icon = $_POST["addmenuicon"];
 		$empcodeadmin = $this->session->userdata("empcode");
 
-
-
 		$checkmenu = $this->backoffice_model->checkMenu($menuname);
 
-		if ($checkmenu == "false") {
-			$addmenuweb =  $this->backoffice_model->addMenuWeb($menuname, $empcodeadmin, $icon);
+		if ($checkmenu == "true") {
 
+			$addmenuweb =  $this->backoffice_model->addMenuWeb($menuname, $empcodeadmin, $icon);
 			$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
 
 			if ($addmenuweb == "true") {
-				$addsubmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
-				echo $addsubmenu;
-			} else {
-				echo "false";
-			}
-		} else if ($checkmenu == "true") {
 
-			$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
-			$addSubmenuwitholdmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
-			echo $addSubmenuwitholdmenu;
+				$checkduplicatesubmenu = $this->backoffice_model->checkDuplicateSubmenu($submenuname, $path);
+
+				if ($checkduplicatesubmenu == "true") {
+
+					$addsubmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
+					echo $addsubmenu;
+
+				}	else {
+					echo "datadupicate";
+				}
+			} else {
+				echo "false1";
+			}
+		} else if ($checkmenu == "false") {
+
+			$checkduplicatesubmenu = $this->backoffice_model->checkDuplicateSubmenu($submenuname, $path);
+
+			if ($checkduplicatesubmenu == "true") {
+
+				$menunameconvertID = $this->backoffice_model->convert("sm_id", "sys_menu_web", "sm_name_menu = '$menuname'");
+				$addSubmenuwitholdmenu = $this->backoffice_model->addSubMenuWeb($menunameconvertID, $submenuname, $empcodeadmin, $path);
+				echo $addSubmenuwitholdmenu;
+
+			} else {
+				echo "datadupicate";
+			}
 		} else {
-			echo "false";
+			echo "false2";
 		}
 	}
 

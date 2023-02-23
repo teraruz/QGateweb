@@ -609,9 +609,19 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		if ($row) {
-			return "true";
-		} else {
 			return "false";
+		} else {
+			return "true";
+		}
+	}
+	public function checkDuplicateSubmenu($submenuname,$path){
+		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_name_submenu = '{$submenuname}' AND ssm_method = '{$path}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "false";
+		} else {
+			return "true";
 		}
 	}
 

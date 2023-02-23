@@ -351,8 +351,6 @@
         } else {
             if (addemail != 0) {
                 if (isValidInput(addemail)) {
-                    // $("#alertinput").html("<font color='green'>ผ่าน</font>");
-                    // alert("อีเมล์ถูกต้อง")
                     var path = $.ajax({
                         method: "POST",
                         url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
@@ -367,7 +365,6 @@
                         }
                     })
                     path.done(function(rs) {
-                        // alert(rs)
                         if (rs === "true") {
                             Swal.fire({
                                 icon: 'success',
@@ -405,8 +402,6 @@
                     })
 
                 } else {
-                    // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
-                    // alert("อีเมล์ไม่ถูกต้อง")
                     Swal.fire({
                         icon: 'error',
                         title: 'You failed to register',
@@ -426,7 +421,6 @@
             url: "<?php echo base_url(); ?>Manage/getDataEditManageUserWeb?ss_id=" + ss_id,
         })
         path.done(function(rs) {
-            console.log(rs);
             $("#editempcode").val(rs[0]["ss_emp_code"]);
             $("#editfirstname").val(rs[0]["ss_emp_fname"]);
             $("#editlastname").val(rs[0]["ss_emp_lname"]);
@@ -791,7 +785,12 @@
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
                     })
-                } else {
+                } else if(rs === "datadupicate"){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
+                    })
+                }else {
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add Permission',
