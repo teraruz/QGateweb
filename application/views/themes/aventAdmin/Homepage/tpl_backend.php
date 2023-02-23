@@ -9,9 +9,13 @@
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/css/vendor.bundle.base.css">
 <!-- endinject -->
 <!-- Plugin css for this page -->
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.45.0/theme/dracula.min.css">
-<link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"> -->
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/jvectormap/jquery-jvectormap.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/flag-icon-css/css/flag-icon.min.css">
 <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendors/owl-carousel-2/owl.carousel.min.css">
@@ -24,10 +28,128 @@
 <!-- inject:css -->
 <!-- endinject -->
 <!-- Layout styles -->
-<link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>css/style.css">
+<link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>css/newStyle.css">
 <!-- End layout styles -->
 <link rel="shortcut icon" href="<?php echo base_url() . $image_url; ?>images/logoQgate.png" />
+<style>
+    table.dataTable.no-footer {
+        border-bottom: 2px solid rgb(207 0 46);
+    }
 
+    .custom-control-label::before {
+        position: absolute;
+        left: -1.5rem;
+        top: 0px;
+        width: 1rem;
+        height: 1rem;
+        pointer-events: none;
+        content: "";
+        background-color: #fff;
+        border: #adb5bd solid 1px;
+    }
+
+    table.dataTable thead>tr>th.sorting:after,
+    table.dataTable thead>tr>th.sorting_asc:after,
+    table.dataTable thead>tr>th.sorting_desc:after,
+    table.dataTable thead>tr>th.sorting_asc_disabled:after,
+    table.dataTable thead>tr>th.sorting_desc_disabled:after,
+    table.dataTable thead>tr>td.sorting:after,
+    table.dataTable thead>tr>td.sorting_asc:after,
+    table.dataTable thead>tr>td.sorting_desc:after,
+    table.dataTable thead>tr>td.sorting_asc_disabled:after,
+    table.dataTable thead>tr>td.sorting_desc_disabled:after {
+        top: 25%;
+        content: "▼";
+    }
+
+    table.dataTable thead>tr>th.sorting:before,
+    table.dataTable thead>tr>th.sorting_asc:before,
+    table.dataTable thead>tr>th.sorting_desc:before,
+    table.dataTable thead>tr>th.sorting_asc_disabled:before,
+    table.dataTable thead>tr>th.sorting_desc_disabled:before,
+    table.dataTable thead>tr>td.sorting:before,
+    table.dataTable thead>tr>td.sorting_asc:before,
+    table.dataTable thead>tr>td.sorting_desc:before,
+    table.dataTable thead>tr>td.sorting_asc_disabled:before,
+    table.dataTable thead>tr>td.sorting_desc_disabled:before {
+        bottom: 20%;
+        /* content: "▲"; */
+    }
+
+    .custom-switch .custom-control-label::after {
+        top: calc(0.25rem + -2px);
+        left: calc(-2.25rem + 2px);
+        width: calc(1rem - 4px);
+        height: calc(1rem - 4px);
+        background-color: #adb5bd;
+        border-radius: 0.5rem;
+        transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .dt-buttons,
+    .dataTables_filter {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .dataTables_wrapper label {
+        font-size: .8125rem;
+        color: black;
+    }
+
+    .paginate_button.current:hover {
+        background: yellow;
+    }
+
+    .card-table {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #e2e2e2;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #0000001a;
+    }
+
+    .dataTables_wrapper .dataTables_info {
+        font-size: 0.875rem;
+        color: black;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        color: white !important;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background-color: rgba(230, 230, 230, 0.1);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(230, 230, 230, 0.1)), color-stop(100%, rgba(0, 0, 0, 0.1)));
+        background: -webkit-linear-gradient(top, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+        background: -moz-linear-gradient(top, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+        background: -ms-linear-gradient(top, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+        background: -o-linear-gradient(top, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+        background: #d80032;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        box-sizing: border-box;
+        display: inline-block;
+        min-width: 1.5em;
+        padding: 0.5em 1em;
+        margin-left: 2px;
+        text-align: center;
+        text-decoration: none !important;
+        cursor: pointer;
+        color: #707070 !important;
+        border: 1px solid transparent;
+        border-radius: 2px;
+    }
+</style>
 
 <body>
     <?php echo $page_header; ?>
@@ -87,9 +209,9 @@
 
 <!-- Datatables bootstrap -->
 <!-- <link rel="stylesheet" href="<?php echo base_url() . $css_url; ?>vendor/datatables/jquery.dataTables.min.css"> -->
-<script src="<?php echo base_url() . $js_url; ?>vendor/datatables/jquery.dataTables.min.js"></script>
+<!-- <script src="<?php echo base_url() . $js_url; ?>vendor/datatables/jquery.dataTables.min.js"></script> -->
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -299,7 +421,16 @@
 <!----------------------------------------------------- Manage User Web  ------------------------------------------------------------>
 <script>
     $(document).ready(function() {
-        $('#DataTable').DataTable();
+        $('#example').DataTable({
+            buttons: [{
+                extend: 'excelHtml5',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    // columns: ':visible'
+                }
+            }, ]
+        });
     });
     $("#btnSaveAdd").click(function() {
         addUserWeb()
@@ -405,7 +536,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You failed to register',
-                        text: 'ไม่สามารถใช้ตัวอักษรพิเศษได้'
+                        text: 'Special characters cannot be entered.'
                     })
                 }
 
@@ -730,21 +861,6 @@
         })
     };
 
-    function getDataManageMenuWeb(ssm_id) {
-        var path = $.ajax({
-            method: "get",
-            dataType: "json",
-            url: "<?php echo base_url(); ?>Manage/getDataManageMenuWeb?ssm_id=" + ssm_id,
-        })
-        path.done(function(rs) {
-            console.log(rs);
-            $("#editMenuName").val(rs[0]["sm_name_menu"]);
-            $("#editSubMenuName").val(rs[0]["ssm_name_submenu"]);
-            $("#IDeditMenuName").val(rs[0]["sm_id"]);
-            $("#IDeditSubMenuName").val(rs[0]["ssm_id"]);
-        })
-    };
-
 
     function SaveaddMenuWeb() {
         var addmenuwebname = $('#addmenuwebname').val();
@@ -765,39 +881,69 @@
                 confirmButtonColor: '#F7B267'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
-                data: {
-                    addmenuwebname: addmenuwebname,
-                    addsubmenuwebname: addsubmenuwebname,
-                    addmenupath: addmenupath,
-                    addmenuicon: addmenuicon
-                }
-            })
-            path.done(function(rs) {
-                alert(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Permission.',
+            if (addmenuwebname != 0 && addsubmenuwebname != 0) {
+                if (isValidInput(addmenuwebname, addsubmenuwebname)) {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
+                        data: {
+                            addmenuwebname: addmenuwebname,
+                            addsubmenuwebname: addsubmenuwebname,
+                            addmenupath: addmenupath,
+                            addmenuicon: addmenuicon
+                        }
+                    })
+                    path.done(function(rs) {
+                        alert(rs);
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Add Menu Web.',
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                            })
+                        } else if (rs === "datadupicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data is Duplicate',
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add Menu Web',
+                            })
+                        }
                     })
-                } else if(rs === "datadupicate"){
+
+                } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Data is Duplicate',
-                    })
-                }else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add Permission',
+                        title: 'You failed to register',
+                        text: 'Special characters cannot be entered.'
                     })
                 }
-            })
+
+
+            }
+
+
         }
+    };
+
+    function getDataManageMenuWeb(ssm_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataManageMenuWeb?ssm_id=" + ssm_id,
+        })
+        path.done(function(rs) {
+            console.log(rs);
+            $("#editMenuName").val(rs[0]["sm_name_menu"]);
+            $("#editSubMenuName").val(rs[0]["ssm_name_submenu"]);
+            $("#IDeditMenuName").val(rs[0]["sm_id"]);
+            $("#IDeditSubMenuName").val(rs[0]["ssm_id"]);
+        })
     };
 
     function SaveEditMenuWeb() {
@@ -850,6 +996,64 @@
             });
         }
     }
+
+    function detailinfomenu(sm_id) {
+        
+       
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDetailMenuweb?sm_id=" + sm_id,
+        })
+        path.done(function(rs) {
+            // alert(rs)
+            // console.log("rs==>>", rs)
+            GetDetailMenuWeb(rs);
+            $("#bodymenushow").show("fast")
+            $("#IDdetailMenu").val(sm_id)
+        })
+      
+    };
+
+    function GetDetailMenuWeb(rs) {
+        // alert(rs)
+        // console.log = ("data ==== > ", rs)
+        var tb = ""
+        var j = 1
+        var i = 0
+
+        $.each(rs, function(key, menuvalue) {
+            tb += "<tr><td>" + parseInt(i + 1) + "</td>"
+            tb += "<td>" + menuvalue["ssm_name_submenu"] + "</td>"
+            if (menuvalue["ssm_status"] == "1") {
+                tb += "<td>"
+                tb += "<div class=\"custom-switch text-center\" >"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfomenu" + j + "'  id='statusdetailinfomenu" + j + "' checked onclick='statusPermissionDetail(" + menuvalue["ssm_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetailinfomenu" + j + "' ></label>"
+                tb += "</div>"
+                tb += "</td>"
+            } else {
+                tb += "<td>"
+                tb += "<div class=\"custom-switch text-center\" >"
+                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetailinfomenu" + j + "'  id='statusdetailinfomenu" + j + "'  onclick='statusPermissionDetail(" + menuvalue["ssm_id"] + ")'>"
+                tb += "<label class=\"custom-control-label\" for='statusdetailinfomenu" + j + "' ></label>"
+                tb += "</div>"
+                tb += "</td>"
+            }
+            tb += "<td>"
+            tb += "<div class=\"text-wrap text-center\" >"
+            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"getDataEditsubmenuPermissionWeb"+j+"\" name =\"getDataEditsubmenuPermissionWeb"+j+"\" data-target=\"#editpermissionweb\"  onclick='getDataEditsubmenuPermissionWeb(" + menuvalue["ssm_id"] + ")'>"
+            tb += "<i class=\"fas fa-edit fa-sm\"></i> Edit</button>"
+            tb += "</div>"
+            tb += "</td>"
+            tb += "</tr>"
+            j++
+            i++
+        })
+
+        $("#tbdetailsubmenu").html(tb)
+    }
+
     // *********************************************** Manage User App **************************************************
 
     $("#btnSaveAddUserApp").click(function() {

@@ -9,21 +9,20 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
+            <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Permission Name</th>
-                  <th style="text-align: center;">Status</th>
-                  <th style="text-align: center;">Details</th>
-                  <th style="text-align: center;">Action</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Permission Name</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Details</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 $i = 0;
                 foreach ($tablePermissionWeb as $value) {
-                  //$i = $value["sa_id"];
                   $i++;
                   echo "<tr>";
                   echo "<td>" . $value["spg_id"] . "</td>";
@@ -56,6 +55,7 @@
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
+                  echo "<tr>";
                 }
                 ?>
               </tbody>
@@ -144,11 +144,11 @@
                           <?php
                           if ($menu["sm_id"] == $submenu["sm_id"]) {
                           ?>
-                              <label class="container">
-                                <input type="checkbox" name="checkboxsubmenu" id="checkboxsubmenu" value="<?php echo $submenu["ssm_id"]; ?>" <?php echo $submenu["ssm_id"]; ?>>
-                                <span class="checkmark"></span>
-                                <?php echo $submenu["ssm_name_submenu"]; ?>
-                              </label>
+                            <label class="container">
+                              <input type="checkbox" name="checkboxsubmenu" id="checkboxsubmenu" value="<?php echo $submenu["ssm_id"]; ?>" <?php echo $submenu["ssm_id"]; ?>>
+                              <span class="checkmark"></span>
+                              <?php echo $submenu["ssm_name_submenu"]; ?>
+                            </label>
                           <?php } ?>
                         <?php } ?>
                       <?php } ?>
@@ -168,7 +168,7 @@
           <!-------------------------------------------------- Table info ---------------------------------------------------------------------------- -->
           <div class="card-body" id="bodyshow" style="display: none">
             <div class="table-responsive">
-              <table class="table table-bordered" id="Tabledetail" width="100%" cellspacing="0">
+              <table class="display table" id="Tabledetail" width="100%" cellspacing="0">
                 <h3 class="col-12" style="color:black">Information Detail</h3>
                 <hr class="new4">
                 <!-- style="display: none"-->
@@ -207,6 +207,7 @@
                                         </div>
                                     </td>";
                     }
+                    
                     echo "</tr>";
                   }
                   ?>

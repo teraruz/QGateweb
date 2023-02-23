@@ -595,9 +595,9 @@ class Backoffice_model extends CI_Model
 	// ***************************** MANAGE MENU WEB *****************************************
 	public function getTableManageMenuweb()
 	{
-		$sql = "SELECT ssm_id , sys_menu_web.sm_id , sm_name_menu , ssm_name_submenu ,ssm_status
-		FROM sys_submenu_web
-		INNER JOIN sys_menu_web ON sys_submenu_web.sm_id = sys_menu_web.sm_id";
+		$sql = "SELECT *
+		FROM sys_menu_web
+		ORDER BY sm_id";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
@@ -718,6 +718,26 @@ class Backoffice_model extends CI_Model
 		} else {
 			return "false";
 		}
+	}
+
+	public function detailMenuWeb($id)
+	{
+		$sql = "SELECT *
+		FROM sys_submenu_web
+		WHERE sm_id = '{$id}'
+		ORDER BY ssm_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function getTableDetailSubmenu(){
+		$sql = "SELECT *
+		FROM sys_submenu_web
+		ORDER BY ssm_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
 	}
 	// *************************************************** Manage User App ***************************************************
 	public function getTableManageUserApp()

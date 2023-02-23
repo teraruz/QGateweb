@@ -436,6 +436,7 @@ class manage extends CI_Controller
 		$data["plant"] = $data["mpa_name"];
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$data["tableMenuWeb"] = $this->backoffice_model->getTableManageMenuweb();
+		$data["tableDetailSubMenuWeb"] = $this->backoffice_model->getTableDetailSubmenu();
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
@@ -523,6 +524,13 @@ class manage extends CI_Controller
 		} else {
 			echo "false";
 		}
+	}
+
+	public function getDetailMenuweb()
+	{
+		$id = $_GET["sm_id"];
+		$res = $this->backoffice_model->detailMenuWeb($id);
+		echo json_encode($res);
 	}
 
 

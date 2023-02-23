@@ -3,20 +3,20 @@
     <div class="row">
       <h1 class="col-12" style="color:black">Manage Menu Web</h1>
       <div class="card-table shadow col-12"><br>
-        <div style="width:98%; text-align:right">
+        <div style="width: 98.7%; text-align:right">
           <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuweb><i class="mdi mdi-library-plus"></i>Add Menu</a>
         </div>
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
+            <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Menu Name</th>
-                  <th style="text-align: center;">Submenu Name</th>
-                  <th style="text-align: center;">Status</th>
-                  <th style="text-align: center;">Action</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Menu Name</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46);text-align: center;">Status</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Details</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46);text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,11 +27,10 @@
                   echo "<tr>";
                   echo "<td>" . $i . "</td>";
                   echo "<td>" . $menuweb["sm_name_menu"] . "</td>";
-                  echo "<td>" . $menuweb["ssm_name_submenu"] . "</td>";
-                  if ($menuweb["ssm_status"] == "1") {
+                  if ($menuweb["sm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusManageMenuWeb(" . $menuweb["sm_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -39,14 +38,20 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuweb["ssm_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusManageMenuWeb(" . $menuweb["sm_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
+                                      <div class=\"text-wrap text-center\" >
+                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\"   id=\"detailinfomenu$i\" name =\"detailinfomenu$i\"  onclick='detailinfomenu(" . $menuweb["sm_id"] . ")'><i
+                                      class=\"mdi mdi-information-outline\"></i> info</button>                              
+                                      </div>
+                                    </td>";
+                  echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuweb["ssm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editMenuWeb\"  onclick='getDataManageMenuWeb(" . $menuweb["sm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -55,15 +60,104 @@
                 ?>
               </tbody>
             </table>
-
           </div>
+          
 
-          <!-- addPermissionWeb Modal-->
-          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- EditPermissionWeb Modal-->
+          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i> Add Menu Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Menu Web</h5>
+                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+
+                <form class="card-body" action="#">
+                  <div class="form-group">
+                    <label for="NameMenuWeb">Menu Name :</label>
+                    <input class="form-control" type="text" id="editMenuName" name="editMenuName">
+                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="NameSubMenuWeb">Submenu Name :</label>
+                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
+                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
+                  </div>
+
+                </form>
+
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table  INFO MENU -->
+          <div class="card-body" id="bodymenushow" style="display: none">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="Tabledetail" width="100%" cellspacing="0">
+                <h3 class="col-12" style="color:black">Information Detail</h3>
+                <hr class="new4">
+                <!-- style="display: none"-->
+                <div class="card-header py" style="width:100%; text-align:right">
+                  <a hidden href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addDetailSubMenu id="btnaddDetailSubMenu"><i class="mdi mdi-library-plus"></i> Add Submenu </a>
+                </div>
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">No.</th>
+                    <th style="text-align: center;">Submenu</th>
+                    <th style="text-align: center;">Status</th>
+                    <th style="text-align: center;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbdetailsubmenu">
+                  <?php
+                  $j = 0;
+                  foreach ($tableDetailSubMenuWeb as $DetailSub) {
+                    $j++;
+                    echo "<tr>";
+                    echo "<td>" . $j . "</td>";
+                    echo "<td>" . $DetailSub["ssm_name_submenu"] . "</td>";
+                    if ($DetailSub["ssm_status"] == "1") {
+                      echo "<td>
+                                            <div class=\"custom-switch text-center\" >
+                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j checked onclick='statusPermissionDetail(" . $DetailSub["ssm_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusdetailinfo$j ></label>
+                                            </div>
+                                    </td>";
+                    } else {
+                      echo "<td>
+                                        <div class=\"custom-switch text-center\" >
+                                            <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j onclick='statusPermissionDetail(" . $DetailSub["ssm_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusdetailinfo$j></label>
+                                        </div>
+                                    </td>";
+                    }
+                    echo "<td>
+                                    <div class=\"text-wrap text-center\" >
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"getDataEditsubmenuPermissionWeb$i\" name =\"getDataEditsubmenuPermissionWeb$i\" data-target=\"#editpermissionweb\"  onclick='getDataEditsubmenuPermissionWeb(" . $DetailSub["ssm_id"] . ")'><i
+                                     class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
+                                    </div>
+                                </td>";
+                    echo "</tr>";
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- addDetailSubmenuWeb Modal-->
+          <div class="modal fade" id="addDetailSubMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i> Add SubMenu</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -71,6 +165,7 @@
                 <form class="card-body" action="#">
                   <div class="form-group">
                     <label for="empcode">Menu Name :</label>
+                    <input class="form-control" type="text" id="IDdetailMenu" name="IDdetailMenu">
                     <input class="form-control" type="text" id="addmenuwebname" name="addmenuwebname" required="" placeholder="Enter New Menu">
                   </div>
 
@@ -95,40 +190,6 @@
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                   <a class="btn btn-success" type="submit" id="btnSaveAddMenuWeb">Save</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- EditPermissionWeb Modal-->
-          <div class="modal fade" id="editMenuWeb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Menu Web</h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-
-                <form class="card-body" action="#">
-                  <div class="form-group">
-                    <label for="NameMenuWeb">Menu Name :</label>
-                    <input class="form-control" type="text" id="editMenuName" name="editMenuName" >
-                    <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="NameSubMenuWeb">Submenu Name :</label>
-                    <input class="form-control" type="text" id="editSubMenuName" name="editMenuName">
-                    <input class="form-control" type="text" id="IDeditSubMenuName" name="IDeditMenuName" hidden>
-                  </div>
-
-                </form>
-
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuWeb">Save</a>
                 </div>
               </div>
             </div>
