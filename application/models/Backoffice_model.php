@@ -867,6 +867,28 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
+	public function checkUserApp($addempcodeapp, $addnameapp, $addpathpicapp)
+	{
+		$sql = "SELECT ss_emp_code FROM sys_staff_app WHERE ss_emp_code ='{$addempcodeapp}' OR ss_emp_name ='{$addnameapp}' OR ss_pic='{$addpathpicapp}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
+	public function checkPathUserApp( $editpathpicapp)
+	{
+		$sql = "SELECT ss_pic FROM sys_staff_app WHERE ss_pic='{$editpathpicapp}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 
 	public function addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin)
 	{

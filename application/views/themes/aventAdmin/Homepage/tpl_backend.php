@@ -305,7 +305,8 @@
                 swal({
                     title: "warning",
                     text: "Please fill textbox ",
-                    type: "warning"
+                    type: "warning",
+                    confirmButtonColor: '#D80032'
                 }, function() {
                     window.location = "<?php echo base_url() ?>Manage/EditProFile";
                 });
@@ -442,8 +443,8 @@
             }, ]
         });
     });
-  
-  
+
+
     $("#btnSaveAdd").click(function() {
         addUserWeb()
     });
@@ -488,7 +489,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox someone is Empty',
-                confirmButtonColor: '#F7B267',
+                confirmButtonColor: '#D80032'
             })
 
         } else {
@@ -512,6 +513,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'You have Successfully Add Employee.',
+                                confirmButtonColor: '#D80032'
 
                             }).then(function() {
                                 window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
@@ -520,26 +522,31 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Group Permission is Empty',
+                                confirmButtonColor: '#D80032'
                             })
                         } else if (rs == "Select plant") {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Plant of Employee is Empty',
+                                confirmButtonColor: '#D80032'
                             })
                         } else if (rs == "duplicate") {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Email is Duplicate',
+                                confirmButtonColor: '#D80032'
                             })
                         } else if (rs == "falsadd") {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Name  is Duplicate',
+                                confirmButtonColor: '#D80032'
                             })
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'You Failed to Add Employee',
+                                confirmButtonColor: '#D80032'
                             })
                         }
                     })
@@ -596,7 +603,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox someone is Empty',
-                confirmButtonColor: '#F7B267',
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -617,6 +624,7 @@
                         icon: 'success',
                         title: 'Successfully',
                         text: 'You have successfully Edit Employee',
+                        confirmButtonColor: '#D80032'
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
                     })
@@ -625,6 +633,7 @@
                         icon: 'error',
                         title: 'Data not found',
                         text: 'You Failed to Edit Employee',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -670,7 +679,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267',
+                confirmButtonColor: '#D80032'
             })
         } else {
             console.log("==>", dataSubMenuId)
@@ -688,6 +697,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Permission.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
@@ -696,6 +706,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add Permission',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -757,7 +768,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
             });
@@ -788,6 +800,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Permission',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -891,7 +904,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
             });
@@ -909,6 +923,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'You have Successfully Add Menu Web.',
+                            confirmButtonColor: '#D80032'
 
                         }).then(function() {
                             window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
@@ -917,11 +932,13 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Data is Duplicate',
+                            confirmButtonColor: '#D80032'
                         })
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'You Failed to Add Menu Web',
+                            confirmButtonColor: '#D80032'
                         })
                     }
                 }
@@ -952,7 +969,8 @@
             swal({
                 title: "warning",
                 text: "Please Enter Menu Name ",
-                type: "warning"
+                type: "warning",
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
             });
@@ -966,26 +984,29 @@
                 }
             })
             path.done(function(rs) {
-                    if (rs === "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'You have Successfully Edit Menu Web.',
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Edit Menu Web.',
+                        confirmButtonColor: '#D80032'
 
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
-                        })
-                    } else if (rs === "datadupicate") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Data is Duplicate',
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Edit Menu Web',
-                        })
-                    }
-               
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                    })
+                } else if (rs === "datadupicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Menu Web',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
+
             });
         }
     }
@@ -1066,7 +1087,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Please enter Data',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             if (addsubmenuwebname != 0) {
@@ -1086,6 +1107,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'You have Successfully Add Submenu Web.',
+                                confirmButtonColor: '#D80032'
 
                             }).then(function() {
                                 window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
@@ -1094,11 +1116,13 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Data is Duplicate',
+                                confirmButtonColor: '#D80032'
                             })
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'You Failed to Add Submenu Web',
+                                confirmButtonColor: '#D80032'
                             })
                         }
                     })
@@ -1106,13 +1130,15 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You failed to Add Submenu ',
-                        text: 'Special characters cannot be entered.'
+                        text: 'Special characters cannot be entered.',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             } else {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Please enter submenu name',
+                    confirmButtonColor: '#D80032'
                 })
             }
         }
@@ -1145,7 +1171,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Please enter Data',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             if (editSubmenuWebName != 0) {
@@ -1164,6 +1190,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'You have Successfully Edit Submenu Web.',
+                                confirmButtonColor: '#D80032'
 
                             }).then(function() {
                                 window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
@@ -1172,11 +1199,13 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Data is Duplicate',
+                                confirmButtonColor: '#D80032'
                             })
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'You Failed to edit Menu Web',
+                                confirmButtonColor: '#D80032'
                             })
                         }
                     })
@@ -1184,13 +1213,15 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You failed to Edit Submenu ',
-                        text: 'Special characters cannot be entered.'
+                        text: 'Special characters cannot be entered.',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             } else {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Please enter submenu name',
+                    confirmButtonColor: '#D80032'
                 })
             }
         }
@@ -1256,7 +1287,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -1273,17 +1304,32 @@
                 if (rs === "true") {
                     Swal.fire({
                         icon: 'success',
-                        title: 'You have Successfully Add User App.',
+                        title: 'You have Successfully Add Employee App.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
                     })
+                } else if (rs == "Select group permission") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Group Permission is Empty',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else if (rs == "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add User App',
+                        title: 'You Failed to Add Employee App',
+                        confirmButtonColor: '#D80032'
                     })
                 }
+
             })
         }
     };
@@ -1306,7 +1352,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" ,
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageUserApp";
             });
@@ -1323,22 +1370,26 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs)
-                if (rs == "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
+                if (rs === "true") {
+                    Swal.fire({
+                        title: "Success",
                             text: "Employee App is Updated!",
                             type: "success",
                             confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
-                        });
-                    });
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
+                    })
+                } else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Update Employee App',
+                        title: 'You Failed to Add Employee App',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -1386,7 +1437,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267',
+                confirmButtonColor: '#D80032'
             })
         } else {
             console.log("==>", dataMenuAppId)
@@ -1412,6 +1463,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add Permission',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -1442,7 +1494,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
             });
@@ -1474,6 +1527,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Permission',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -1562,7 +1616,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -1579,6 +1633,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Menu App.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageMenuApp";
@@ -1587,6 +1642,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add Menu App',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -1633,7 +1689,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuApp";
             });
@@ -1665,6 +1722,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Menu App',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -1702,7 +1760,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -1717,6 +1775,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Type Part.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/CheckType";
@@ -1725,6 +1784,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add  Type Part',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -1757,7 +1817,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/CheckType";
             });
@@ -1787,6 +1848,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Type',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -1820,7 +1882,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -1835,6 +1897,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Status.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/CheckStatus";
@@ -1843,6 +1906,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add  Status',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -1875,7 +1939,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/CheckStatus";
             });
@@ -1905,6 +1970,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Status Name',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -1938,7 +2004,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -1953,6 +2019,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Inspection.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/InspectionType";
@@ -1961,6 +2028,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add  Inspection',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -1993,7 +2061,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/InspectionType";
             });
@@ -2023,6 +2092,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Inspection Name',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2057,7 +2127,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2072,6 +2142,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add DMC Data.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/DMCData";
@@ -2080,6 +2151,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add  DMC Data',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2112,7 +2184,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/DMCData";
             });
@@ -2142,6 +2215,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit DMC Data',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2180,7 +2254,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2196,6 +2270,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add DMC Type.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/DMCType";
@@ -2204,6 +2279,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add  DMC Data Type',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2239,7 +2315,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/DMCType";
             });
@@ -2270,6 +2347,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit DMC Type',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2310,7 +2388,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2326,6 +2404,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add FA Code.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/FACode";
@@ -2334,6 +2413,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add  FA Code',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2369,7 +2449,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/FACode";
             });
@@ -2400,6 +2481,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit FA Code',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2440,7 +2522,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2458,6 +2540,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Work Shift.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/WorkShift";
@@ -2466,6 +2549,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Add Work Shift',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2506,7 +2590,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/WorkShift";
             });
@@ -2538,6 +2623,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Work Shift',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2578,7 +2664,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2597,6 +2683,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Defect.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/Defect";
@@ -2604,7 +2691,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Defect'
+                        title: 'You Failed to Add Defect',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2645,7 +2733,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/Defect";
             });
@@ -2677,6 +2766,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Defect',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2721,7 +2811,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2740,6 +2830,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Part Number.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/PartNumber";
@@ -2747,7 +2838,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Part Number'
+                        title: 'You Failed to Add Part Number',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2790,7 +2882,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/PartNumber";
             });
@@ -2823,6 +2916,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Part Number',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -2866,7 +2960,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -2885,6 +2979,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Select Part.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/SelectPart";
@@ -2892,7 +2987,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Select Part'
+                        title: 'You Failed to Add Select Part',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -2937,7 +3033,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/SelectPart";
             });
@@ -2971,6 +3068,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Select Part',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -3009,7 +3107,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -3025,6 +3123,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Plant Web.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/PlantAdminWeb";
@@ -3032,7 +3131,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Plant Web'
+                        title: 'You Failed to Add Plant Web',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -3069,7 +3169,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/PlantAdminWeb";
             });
@@ -3100,6 +3201,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Plant Web',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -3137,7 +3239,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -3154,6 +3256,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Plant App.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/PlantAdminApp";
@@ -3161,7 +3264,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Plant App'
+                        title: 'You Failed to Add Plant App',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -3198,7 +3302,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/PlantAdminApp";
             });
@@ -3229,6 +3334,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Plant App',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -3265,7 +3371,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -3282,6 +3388,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Zone.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
@@ -3289,7 +3396,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Zone'
+                        title: 'You Failed to Add Zone',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -3324,7 +3432,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ZoneAdmin";
             });
@@ -3355,6 +3464,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Zone',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -3390,7 +3500,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -3406,6 +3516,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Zone.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
@@ -3413,7 +3524,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Zone'
+                        title: 'You Failed to Add Zone',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -3446,7 +3558,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/StationAdmin";
             });
@@ -3476,6 +3589,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Station',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -3527,7 +3641,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -3550,6 +3664,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Zone.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ConfigDetail";
@@ -3557,7 +3672,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Zone'
+                        title: 'You Failed to Add Zone',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -3613,7 +3729,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             })
         } else {
 
@@ -3650,6 +3767,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit Config Details',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });
@@ -3765,6 +3883,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'You Failed to Edit Defect Group',
+                    confirmButtonColor: '#D80032'
                 })
             }
         })
@@ -3812,7 +3931,7 @@
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Textbox is Empty',
-                confirmButtonColor: '#F7B267'
+                confirmButtonColor: '#D80032'
             })
         } else {
             var path = $.ajax({
@@ -3831,6 +3950,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add DMC Type Detail.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
@@ -3838,7 +3958,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add DMC Type Detail'
+                        title: 'You Failed to Add DMC Type Detail',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             })
@@ -3882,7 +4003,8 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning"
+                type: "warning" , 
+                confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/dmcTypeDetail";
             });
@@ -3905,6 +4027,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Edit DMC Type Data.',
+                        confirmButtonColor: '#D80032'
 
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
@@ -3913,6 +4036,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'You Failed to Edit DMC Type Data',
+                        confirmButtonColor: '#D80032'
                     })
                 }
             });

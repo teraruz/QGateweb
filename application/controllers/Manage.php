@@ -228,14 +228,12 @@ class manage extends CI_Controller
 			} else {
 				if ($rscheck === "true") {
 					$checkfullname = $this->backoffice_model->checknameAdd($firstname, $lastname);
-					// echo $checkfullname;
+
 					if ($checkfullname == "true") {
 						$emailcheck = $this->backoffice_model->checkEmailUserAdd($email);
-						// echo json_encode($emailcheck);
-						// echo $emailcheck;
+
 						if ($emailcheck == $email) {
 							echo "duplicate";
-							// echo "wwoww";
 						} else {
 							$password_encoded = base64_encode($password);
 							$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
@@ -607,8 +605,19 @@ class manage extends CI_Controller
 		$addnameapp = $_POST["addnameapp"];
 		$addgrouppermissionapp = $_POST["addgrouppermissionapp"];
 		$addpathpicapp = $_POST["addpathpicapp"];
-		$rsadduserapp = $this->backoffice_model->addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin);
-		echo $rsadduserapp;
+
+		$userappcheck = $this->backoffice_model->checkUserApp($addempcodeapp, $addnameapp, $addpathpicapp);
+
+		if ($addgrouppermissionapp == "Select group permission") {
+			echo "Select group permission";
+		} else {
+			if ($userappcheck == "pass") {
+				$rsadduserapp = $this->backoffice_model->addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin);
+				echo $rsadduserapp;
+			} else {
+				echo "duplicate";
+			}
+		}
 	}
 
 	public function getDataManageUserAppUser()
@@ -627,8 +636,19 @@ class manage extends CI_Controller
 		$editgrouppermissionuserapp = $_GET["editgrouppermissionuserapp"];
 		$editpathpicapp = $_GET["editpathpicapp"];
 
-		$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $editpathpicapp, $empcodeadmin);
-		echo $resedituserapp;
+
+		$pathuserappcheck = $this->backoffice_model->checkPathUserApp( $editpathpicapp);
+
+		if ($editgrouppermissionuserapp == "Select group permission") {
+			echo "Select group permission";
+		} else {
+			if ($pathuserappcheck == "pass") {
+				$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $editpathpicapp, $empcodeadmin);
+				echo $resedituserapp;
+			} else {
+				echo "duplicate";
+			}
+		}
 	}
 
 	// ---------------------------------- Manage Permission App ----------------------------------------
