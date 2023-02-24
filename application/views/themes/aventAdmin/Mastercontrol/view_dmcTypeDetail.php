@@ -9,17 +9,17 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
+          <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">DMC Type</th>
-                  <th style="text-align: center;">DMC Data</th>
-                  <th style="text-align: center;">Digit Start</th>
-                  <th style="text-align: center;">Digit End</th>
-                  <th style="text-align: center;">No. Substring</th>
-                  <th style="text-align: center;">Status</th>
-                  <th style="text-align: center;">Action</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">DMC Type</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">DMC Data</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Digit Start</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Digit End</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">No. Substring</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>

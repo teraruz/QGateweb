@@ -9,16 +9,16 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
+          <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Shift</th>
-                  <th style="text-align: center;">Start Time</th>
-                  <th style="text-align: center;">End Time</th>
-                  <th style="text-align: center;">Status</th>
-                  <th style="text-align: center;">Action</th>
-                </tr>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Shift</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Start Time</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">End Time</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
+                </tr> 
               </thead>
               <tbody>
                 <?php

@@ -9,21 +9,21 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
+            <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Plant</th>
-                  <th style="text-align: center;">Zone</th>
-                  <th style="text-align: center;">Station</th>
-                  <th style="text-align: center;">Type</th>
-                  <th style="text-align: center;">Status</th>
-                  <th style="text-align: center;">Inspection</th>
-                  <th style="text-align: center;">Time</th>
-                  <th style="text-align: center;">Mac Address</th>
-                  <th style="text-align: center;">Select Part</th>
-                  <th style="text-align: center;">Status Config</th>
-                  <th style="text-align: center;">Action</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plant</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Zone</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Station</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Type</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Inspection</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Time</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Mac Address</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Select Part</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status Config</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>

@@ -9,13 +9,13 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered " id="DataTable" width="100%" cellspacing="0">
+          <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                <th style="text-align: center;">NO.</th>
-                  <th style="text-align: center;">Status Name</th>
-                  <th style="text-align: center;">status</th>
-                  <th style="text-align: center;">Action</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status Name</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">status</th>
+                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                 </tr>
               </thead>
               <tbody>

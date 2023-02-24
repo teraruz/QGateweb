@@ -9,7 +9,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-          <table id="example" class="display table" width="100%" cellspacing="0">
+            <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
@@ -105,8 +105,8 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  
-                <div class="form-group">
+
+                  <div class="form-group">
                     <label for="empcode">Menu Name :</label>
                     <input class="form-control" type="text" id="editmenuappid" name="editmenuappid" hidden>
                     <input class="form-control" type="text" id="editmenuappname" name="editmenuappname" required="" placeholder="Enter New Menu">

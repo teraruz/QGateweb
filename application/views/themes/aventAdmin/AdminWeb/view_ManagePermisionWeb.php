@@ -9,7 +9,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table id="example" class="display table" width="100%" cellspacing="0">
+            <table id="exampletest" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
@@ -62,157 +62,80 @@
             </table>
 
           </div>
-          <!------------------------------------------------   EditPermissionWeb Modal   ------------------------------------------------>
-
-          <div class="modal fade" id="editpermissionweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-------------------------------------- addPermissionWeb Modal ---------------------------------------------------->
+          <div class="modal fade" id="addmenuapp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Permission Group Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i> Add Menu App</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <form class="card-body" action="#">
                   <div class="form-group">
-                    <label for="empcode">Permission Name :</label>
-                    <input class="form-control" type="text" id="editPermissionwebname" name="editPermissionwebname">
-                    <input class="form-control" type="text" id="idPername" name="idPername" hidden>
+                    <label for="empcode">Menu Name :</label>
+                    <input class="form-control" type="text" id="addmenuappname" name="addmenuappname" required="" placeholder="Enter New Menu">
                   </div>
 
-                  <div>
-                    <h4 for="password" class="text-center">Update Permission</h4>
-                    <div class="card-body col-md-12 row mb-3">
-                      <label class="col-sm-6 col-form-label"> Menu :</label>
-                      <div class="col-sm-6">
-                        <select class="form-control" id="dropdownmenuper" name="dropdownmenuper">
-                          <?php
-                          foreach ($getmenu as $value) {
-                          ?>
-                            <option value="<?php echo $value["sm_name_menu"] ?>"><?php echo $value["sm_name_menu"]; ?></option>
-                          <?php  } ?>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="card-body col-md-12 row mb-3">
-                      <label class="col-sm-6 col-form-label"> Submenu :</label>
-                      <div class="col-sm-6">
-                        <select class="form-control" id="dropdowneditsubmenuper" name="dropdowneditsubmenuper">
-                        </select>
-                      </div>
-                    </div>
+                  <div class="form-group">
+                    <label for="password">Method path :</label>
+                    <input class="form-control" type="text" id="addmenupathapp" name="addmenupathapp" required="" placeholder="Enter path menu">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="password">Picture file name :</label>
+                    <input class="form-control" type="text" id="addmenupicapp" name="addmenupicapp" required="" placeholder="Enter file name menu">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveEditPermissionWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveAddMenuApp">Save</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <!---------------------------------------------------- addPermissionWeb Modal ---------------------------------------------------------------->
-
-          <div class="modal fade" id="addpermissionweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-------------------------------------------- EditPermissionWeb Modal --------------------------------------------->
+          <div class="modal fade" id="editMenuApp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Permission Group Web</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Menu App</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
+
                 <form class="card-body" action="#">
-                  <div class="form-group">
-                    <label for="empcode">Permission Name :</label>
-                    <input class="form-control" type="text" id="addPermissionwebname" name="addPermissionwebname" required="" placeholder="Enter New Permission">
-                  </div> <br>
-                  <hr class="new4">
 
                   <div class="form-group">
-                    <h4 for="password" class="text-center">Permission</h4>
-                    <div>
-                      <?php
-                      foreach ($getmenu as $menu) {
-                      ?>
-                        <label><?php echo $menu["sm_name_menu"]; ?></label>
-                        <?php
-                        foreach ($getsubmenu as $submenu) {
-                        ?>
-                          <?php
-                          if ($menu["sm_id"] == $submenu["sm_id"]) {
-                          ?>
-                            <label class="container">
-                              <input type="checkbox" name="checkboxsubmenu" id="checkboxsubmenu" value="<?php echo $submenu["ssm_id"]; ?>" <?php echo $submenu["ssm_id"]; ?>>
-                              <span class="checkmark"></span>
-                              <?php echo $submenu["ssm_name_submenu"]; ?>
-                            </label>
-                          <?php } ?>
-                        <?php } ?>
-                      <?php } ?>
-                    </div>
+                    <label for="empcode">Menu Name :</label>
+                    <input class="form-control" type="text" id="editmenuappid" name="editmenuappid" hidden>
+                    <input class="form-control" type="text" id="editmenuappname" name="editmenuappname" required="" placeholder="Enter New Menu">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">Method path :</label>
+                    <input class="form-control" type="text" id="editmenupathapp" name="editmenupathapp" required="" placeholder="Enter path menu">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="password">Picture file name :</label>
+                    <input class="form-control" type="text" id="editmenupicapp" name="editmenupicapp" required="" placeholder="Enter file name menu">
                   </div>
 
                 </form>
 
                 <div class="modal-footer">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddPermissionWeb">Save</a>
+                  <a class="btn btn-success" type="submit" id="btnSaveEditMenuApp">Save</a>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-------------------------------------------------- Table info ---------------------------------------------------------------------------- -->
-          <div class="card-body" id="bodyshow" style="display: none">
-            <div class="table-responsive">
-              <table class="display table" id="Tabledetail" width="100%" cellspacing="0">
-                <h3 class="col-12" style="color:black">Information Detail</h3>
-                <hr class="new4">
-                <!-- style="display: none"-->
-                <!-- <div class="card-header py" style="width:100%; text-align:right">
-                            <a hidden href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addpermenu id="btnaddpermenu"><i class="fas fa-user-plus fa-sm"></i> Register </a>
-                        </div> -->
-                <thead>
-                  <tr>
-                    <th style="text-align: center;">No.</th>
-                    <th style="text-align: center;">Menu</th>
-                    <th style="text-align: center;">Submenu</th>
-                    <th style="text-align: center;">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="tbsubmenu">
-                  <?php
-                  $j = 0;
-                  foreach ($tabledetail as $detail) {
-                    $j++;
-                    echo "<tr>";
-                    echo "<td>" . $j . "</td>";
-                    echo "<td>" . $detail["sm_name_menu"] . "</td>";
-                    echo "<td>" . $detail["ssm_name_submenu"] . "</td>";
-                    if ($detail["spd_status"] == "1") {
-                      echo "<td>
-                                            <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j checked onclick='statusPermissionDetail(" . $detail["spd_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=statusdetailinfo$j ></label>
-                                            </div>
-                                    </td>";
-                    } else {
-                      echo "<td>
-                                        <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetailinfo$j  id=statusdetailinfo$j onclick='statusPermissionDetail(" . $detail["spd_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=statusdetailinfo$j></label>
-                                        </div>
-                                    </td>";
-                    }
-                    
-                    echo "</tr>";
-                  }
-                  ?>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>

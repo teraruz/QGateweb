@@ -431,7 +431,19 @@
                 }
             }, ]
         });
+        $('#exampletest').DataTable({
+            buttons: [{
+                extend: 'excelHtml5',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    // columns: ':visible'
+                }
+            }, ]
+        });
     });
+  
+  
     $("#btnSaveAdd").click(function() {
         addUserWeb()
     });
