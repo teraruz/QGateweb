@@ -4,7 +4,7 @@
       <h1 class="col-12" style="color:black">Manage Menu App</h1>
       <div class="card-table shadow col-12"><br>
         <div style="width:98%; text-align:right">
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuapp><i class="mdi mdi- "></i>Add Menu</a>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle=modal data-target=#addmenuapp><i class="mdi mdi-library-plus"></i>Add Menu</a>
         </div>
 
         <div class="card-body">

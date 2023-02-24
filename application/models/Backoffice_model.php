@@ -1138,6 +1138,20 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
+	public function checkMenuApp($addmenuappname , $addmenupathapp)
+	{
+		$sql = "SELECT sm_id, sm_menu , sm_path
+		FROM sys_menu_app
+		WHERE sm_menu = '{$addmenuappname}' OR sm_path = '{$addmenupathapp}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
+
 	public function modelAddMenuApp($addmenuappname, $addmenupathapp, $addmenupicapp, $empcodeadmin)
 	{
 		$sql = "INSERT INTO sys_menu_app (sm_menu, sm_path,sm_pic, sm_craete_by, sm_create_date)

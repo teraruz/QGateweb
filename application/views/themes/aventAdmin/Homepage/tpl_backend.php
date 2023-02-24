@@ -1638,6 +1638,12 @@
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageMenuApp";
                     })
+                }else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',

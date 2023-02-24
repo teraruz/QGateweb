@@ -8,43 +8,48 @@
                     <div class="card-body py-0 px-0 px-sm-3">
                         <div class="row align-items-center">
                             <div class="col-4 col-sm-3 col-xl-2">
-                                <img src="<?php echo base_url() ?>assets/images/dashboard/Group126@2x.png"
-                                    class="gradient-corona-img img-fluid" alt="">
+                                <img src="<?php echo base_url() ?>assets/images/dashboard/Group126@2x.png" class="gradient-corona-img img-fluid" alt="">
                             </div>
                             <div class="row col-sm-6 col-xl-8 p-0  align-items-center">
 
                                 <div class="mb row col-md-4">
-                                    <label class="col-form-label">Plant  :</label>
+                                    <label class="col-form-label">Plant :</label>
                                     <div class="col-md-3">
-                                        <select class="form-control" aria-label="Default select example">
-                                            <option selected>Select Plant...</option>
-                                            <option value="1">TBKK Thailand Phase 8</option>
-                                            <option value="2">TBKK Thailand Phase 10</option>
+                                        <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <option selected>Select Plant</option>
+                                            <?php
+                                            foreach ($getplant as $plant) {
+                                            ?>
+                                                <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="mb row col-md-4">
-                                    <label class="col-form-label">Zone  :</label>        
+                                    <label class="col-form-label">Zone :</label>
                                     <div class="col-md-3">
-                                        <select class="form-control" aria-label="Default select example">
-                                            <option selected>Select Zone...</option>
-                                            <option value="1">Bearing</option>
-                                            <option value="2">Turbine Housing</option>
-                                            <option value="3">GKN</option>
-                                            <option value="4">PD1</option>
+                                        <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <option selected>Select Zone</option>
+                                            <?php
+                                            foreach ($getzone as $zone) {
+                                            ?>
+                                                <option value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="mb row col-md-4">
-                                    <label class="col-form-label">Station  :</label> 
-                                    <div class="col-md-4">
-                                        <select class="form-control" aria-label="Default select example">
-                                            <option selected>Select Station...</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                    <label class="col-form-label">Station :</label>
+                                    <div class="col-md-3">
+                                        <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <option selected>Select Zone</option>
+                                            <?php
+                                            foreach ($getstation as $station) {
+                                            ?>
+                                                <option value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -53,10 +58,8 @@
 
                             <div class="col-3 col-sm text-center">
                                 <span>
-                                    <button type="submit" id="strt"
-                                        class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
-                                    <button type="submit" id="end"
-                                        class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
+                                    <button type="submit" id="strt" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
+                                    <button type="submit" id="end" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
                                 </span>
                             </div>
                         </div>
@@ -82,42 +85,42 @@
                                     <th style="text-align: center;">Plant</th>
                                     <th style="text-align: center;">Zone</th>
                                     <th style="text-align: center;">Station</th>
-                                    <th style="text-align: center;">Date</th>                 
+                                    <th style="text-align: center;">Date</th>
                                     <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- <?php
-                $i = 0;
-                foreach ($tableUserWeb as $value) {
-                  $i++;
-                  echo "<tr>";
-                  echo "<td>" . $value["ss_id"] . "</td>";
-                  echo "<td>" . $value["ss_emp_code"] . "</td>";
-                  echo "<td>" . $value["ss_emp_fname"] . "</td>";
-                  echo "<td>" . $value["ss_emp_lname"] . "</td>";
-                  echo "<td>" . $value["ss_email"] . "</td>";
-                  echo "<td>" . $value["spg_name"] . "</td>";
-                  echo "<td>" . $value["mpa_name"] . "</td>";
+                                        $i = 0;
+                                        foreach ($tableUserWeb as $value) {
+                                            $i++;
+                                            echo "<tr>";
+                                            echo "<td>" . $value["ss_id"] . "</td>";
+                                            echo "<td>" . $value["ss_emp_code"] . "</td>";
+                                            echo "<td>" . $value["ss_emp_fname"] . "</td>";
+                                            echo "<td>" . $value["ss_emp_lname"] . "</td>";
+                                            echo "<td>" . $value["ss_email"] . "</td>";
+                                            echo "<td>" . $value["spg_name"] . "</td>";
+                                            echo "<td>" . $value["mpa_name"] . "</td>";
 
-                  if ($value["ss_status"] == "1") {
-                    echo "<td>
+                                            if ($value["ss_status"] == "1") {
+                                                echo "<td>
                                             <div class=\"custom-switch text-center\" >
                                                 <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='status(" . $value["ss_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=status$i></label>
                                             </div>
                                        
-                                    </td>";//เปิด Permission
-                  } else {
-                    echo "<td>
+                                    </td>"; //เปิด Permission
+                                            } else {
+                                                echo "<td>
                                         <div class=\"custom-switch text-center\" >
                                             <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ss_id"] . ")'>
                                             <label class=\"custom-control-label\" for=status$i></label>
                                         </div>
-                                    </td>";//ปิด Permission
-                  }
+                                    </td>"; //ปิด Permission
+                                            }
 
-                  echo "<td>
+                                            echo "<td>
                                     <div class=\"text-wrap text-center\" >
                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#edituser\"  onclick='getDataEditUserWeb(" . $value["ss_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
@@ -125,16 +128,15 @@
                                 </td>";
 
 
-                  echo "</tr>";
-                }
-                ?> -->
+                                            echo "</tr>";
+                                        }
+                                        ?> -->
                             </tbody>
                         </table>
 
                     </div>
                     <!-- Edit Modal-->
-                    <div class="modal fade" id="edituser" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -158,22 +160,19 @@
 
                                     <div class="form-group">
                                         <label for="lastname">Last Name :</label>
-                                        <input class="form-control" type="text" required="" id="editlastname"
-                                            name="editlastname">
+                                        <input class="form-control" type="text" required="" id="editlastname" name="editlastname">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="username">Group Permission :</label>
                                         <div>
-                                            <select class="form-select col-md-12"
-                                                style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
-                                                aria-label="Default select example" id="editgroup">
+                                            <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgroup">
 
                                                 <?php
-                        foreach ($groupper as $groupPer) {
-                          ?>
-                                                <option value="<?php echo $groupPer["spg_id"]; ?>">
-                                                    <?php echo $groupPer["spg_name"]; ?></option>
+                                                foreach ($groupper as $groupPer) {
+                                                ?>
+                                                    <option value="<?php echo $groupPer["spg_id"]; ?>">
+                                                        <?php echo $groupPer["spg_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -181,22 +180,18 @@
 
                                     <div class="form-group">
                                         <label for="emailaddress">Email :</label>
-                                        <input class="form-control" type="email" id="editemailaddress"
-                                            name="editemailaddress" required="">
+                                        <input class="form-control" type="email" id="editemailaddress" name="editemailaddress" required="">
                                     </div>
 
                                     <div>
                                         <label for="plant">Plant :</label>
                                         <div>
-                                            <select class="form-select col-md-12"
-                                                style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;"
-                                                id="editplant" aria-label="Default select example"
-                                                placeholder="Enter your plant">
+                                            <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="editplant" aria-label="Default select example" placeholder="Enter your plant">
                                                 <?php
-                        foreach ($getplant as $plant) {
-                          ?>
-                                                <option value="<?php echo $plant["mpa_id"]; ?>">
-                                                    <?php echo $plant["mpa_name"]; ?></option>
+                                                foreach ($getplant as $plant) {
+                                                ?>
+                                                    <option value="<?php echo $plant["mpa_id"]; ?>">
+                                                        <?php echo $plant["mpa_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>

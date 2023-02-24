@@ -791,8 +791,16 @@ class manage extends CI_Controller
 		$addmenupathapp = $_POST["addmenupathapp"];
 		$addmenupicapp = $_POST["addmenupicapp"];
 
-		$rsaddmenuapp =  $this->backoffice_model->modelAddMenuApp($addmenuappname, $addmenupathapp, $addmenupicapp, $empcodeadmin);
-		echo $rsaddmenuapp;
+		$checkMenuApp = $this->backoffice_model->checkMenuApp($addmenuappname , $addmenupathapp);
+
+		if ($checkMenuApp == "pass") {
+			$rsaddmenuapp =  $this->backoffice_model->modelAddMenuApp($addmenuappname, $addmenupathapp, $addmenupicapp, $empcodeadmin);
+			echo $rsaddmenuapp;
+		} else {
+			echo "duplicate";
+		}
+
+	
 	}
 
 	public function swiftStatusMenuApp()
@@ -1908,12 +1916,15 @@ class manage extends CI_Controller
 		$data["lname"] = $data["ss_emp_lname"];
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
+		$data["getplant"] = $this->backoffice_model->modelGetPlantApp();
+		$data["getzone"] = $this->backoffice_model->modelgetZoneApp();
+		$data["getstation"] = $this->backoffice_model->modelgetStationApp();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_NCNGData.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_NCNGData.php',$data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
