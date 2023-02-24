@@ -11,12 +11,12 @@
                                 <img src="<?php echo base_url() ?>assets/images/dashboard/Group126@2x.png"
                                     class="gradient-corona-img img-fluid" alt="">
                             </div>
-                            
-                            <div class="row col-sm-5 col-xl-8 p-0  align-items-center">
+                            <div class="row col-sm-6 col-xl-8 p-0  align-items-center">
+
                                 <div class="mb row col-md-4">
-                                    <h4 class="mb-1 mb-sm-0">Plant :</h4>
-                                    <div class="col-sm-3" style="border-radius:6px">
-                                        <select class="form-select" aria-label="Default select example">
+                                    <label class="col-form-label">Plant  :</label>
+                                    <div class="col-md-3">
+                                        <select class="form-control" aria-label="Default select example">
                                             <option selected>Select Plant...</option>
                                             <option value="1">TBKK Thailand Phase 8</option>
                                             <option value="2">TBKK Thailand Phase 10</option>
@@ -25,9 +25,9 @@
                                 </div>
 
                                 <div class="mb row col-md-4">
-                                    <h4 class="mb-1 mb-sm-0">Zone :</h4>
-                                    <div class="col-sm-3">
-                                        <select class="form-select" aria-label="Default select example">
+                                    <label class="col-form-label">Zone  :</label>        
+                                    <div class="col-md-3">
+                                        <select class="form-control" aria-label="Default select example">
                                             <option selected>Select Zone...</option>
                                             <option value="1">Bearing</option>
                                             <option value="2">Turbine Housing</option>
@@ -38,9 +38,9 @@
                                 </div>
 
                                 <div class="mb row col-md-4">
-                                    <h4 class="mb-1 mb-sm-0">Station :</h4>
-                                    <div class="col-sm-3">
-                                        <select class="form-select" aria-label="Default select example">
+                                    <label class="col-form-label">Station  :</label> 
+                                    <div class="col-md-4">
+                                        <select class="form-control" aria-label="Default select example">
                                             <option selected>Select Station...</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -51,7 +51,7 @@
                             </div>
 
 
-                            <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
+                            <div class="col-3 col-sm text-center">
                                 <span>
                                     <button type="submit" id="strt"
                                         class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
@@ -63,6 +63,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             <div class="card-table shadow col-12">
                 <!-- <div style="width:98%; text-align:right">
@@ -108,14 +110,14 @@
                                                 <label class=\"custom-control-label\" for=status$i></label>
                                             </div>
                                        
-                                    </td>";//เปิด Permission
+                                    </td>"; //เปิด Permission
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
                                             <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='status(" . $value["ss_id"] . ")'>
                                             <label class=\"custom-control-label\" for=status$i></label>
                                         </div>
-                                    </td>";//ปิด Permission
+                                    </td>"; //ปิด Permission
                   }
 
                   echo "<td>
