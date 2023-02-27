@@ -12,11 +12,11 @@
                             </div>
                             <div class="row col-sm-6 col-xl-8 p-0  align-items-center">
 
-                                <div class="row">
-                                    <div class="mb row col-md-4">
+                                <div class="row col-md">
+                                    <div class="mb row col-md-6">
                                         <label class="col-form-label">Plant :</label>
                                         <div class="col-md-3">
-                                            <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
                                                 <option selected>Select Plant</option>
                                                 <?php
                                                 foreach ($getplant as $plant) {
@@ -30,11 +30,11 @@
                                 </div>
 
 
-                                <div class="row">
-                                    <div class="mb row col-md-4">
+                                <div class="row col-md">
+                                    <div class="mb row col-md-6">
                                         <label class="col-form-label">Zone :</label>
                                         <div class="col-md-3">
-                                            <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
                                                 <option selected>Select Zone</option>
                                                 <?php
                                                 foreach ($getzone as $zone) {
@@ -48,13 +48,11 @@
                                 </div>
 
 
-
-
-                                <div class="row">
-                                    <div class="mb row col-md-3">
+                                <div class="row col-md">
+                                    <div class="mb row col-md-6">
                                         <label class="col-form-label">Station:</label>
-                                        <div class="col-md-3">
-                                            <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                        <div class="col-md-2">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
                                                 <option selected>Select Station</option>
                                                 <?php
                                                 foreach ($getstation as $station) {

@@ -149,6 +149,49 @@
         border: 1px solid transparent;
         border-radius: 2px;
     }
+
+    .form-control,
+    .asColorPicker-input,
+    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
+    .jsgrid .jsgrid-table .jsgrid-filter-row select,
+    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
+    .select2-container--default .select2-selection--single,
+    .select2-container--default .select2-selection--single .select2-search__field,
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        border: 1px solid #2c2e33;
+        height: calc(2.25rem + 2px);
+        font-weight: normal;
+        width: 100%;
+        font-size: 0.875rem;
+        padding: 0rem 0.2rem !important;
+        background-color: #ffffff;
+        border-radius: 2px;
+        color: #000000;
+    }
+
+
+    .asColorPicker-input,
+    .dataTables_wrapper select,
+    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
+    .jsgrid .jsgrid-table .jsgrid-filter-row select,
+    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
+    .select2-container--default .select2-selection--single,
+    .select2-container--default .select2-selection--single .select2-search__field,
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        border: 1px solid #2c2e33;
+        height: calc(2.25rem + 2px);
+        font-weight: normal;
+        font-size: 0.875rem;
+        padding: 0rem 0.2rem !important;
+        background-color: #ffffff;
+        border-radius: 2px;
+        color: #000000;
+    }
+    
 </style>
 
 <body>
@@ -768,7 +811,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
@@ -904,7 +947,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
@@ -1348,7 +1391,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" ,
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageUserApp";
@@ -1368,9 +1411,9 @@
                 if (rs === "true") {
                     Swal.fire({
                         title: "Success",
-                            text: "Employee App is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
+                        text: "Employee App is Updated!",
+                        type: "success",
+                        confirmButtonColor: '#D80032'
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
                     })
@@ -1489,7 +1532,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
@@ -1633,7 +1676,7 @@
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageMenuApp";
                     })
-                }else if (rs === "duplicate") {
+                } else if (rs === "duplicate") {
                     Swal.fire({
                         icon: 'error',
                         title: 'Data is Duplicate',
@@ -1690,7 +1733,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuApp";
@@ -1818,7 +1861,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/CheckType";
@@ -1940,7 +1983,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/CheckStatus";
@@ -2062,7 +2105,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/InspectionType";
@@ -2185,7 +2228,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/DMCData";
@@ -2316,7 +2359,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/DMCType";
@@ -2450,7 +2493,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/FACode";
@@ -2591,7 +2634,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/WorkShift";
@@ -2734,7 +2777,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/Defect";
@@ -2883,7 +2926,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/PartNumber";
@@ -3034,7 +3077,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/SelectPart";
@@ -3170,7 +3213,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/PlantAdminWeb";
@@ -3303,7 +3346,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/PlantAdminApp";
@@ -3433,7 +3476,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/ZoneAdmin";
@@ -3559,7 +3602,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/StationAdmin";
@@ -3730,7 +3773,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             })
         } else {
@@ -4004,7 +4047,7 @@
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
-                type: "warning" , 
+                type: "warning",
                 confirmButtonColor: '#D80032'
             }, function() {
                 window.location = "<?php echo base_url() ?>Manage/dmcTypeDetail";

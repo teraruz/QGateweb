@@ -25,6 +25,7 @@
                     <i class="mdi mdi-eye" id="togglePassword1" style="margin-left: -30px; cursor: pointer;"></i>
                   </div>
                 </div>
+                <hr class="new4">
                 <div class="card-body col-md-10 row mb-3">
                   <label class="col-sm-3 col-form-label">New Password :</label>
                   <div class="col-sm-8">

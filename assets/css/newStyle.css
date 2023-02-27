@@ -23023,27 +23023,6 @@ code {
     background: none;
 }
 
-.form-control,
-.asColorPicker-input,
-.dataTables_wrapper select,
-.jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
-.jsgrid .jsgrid-table .jsgrid-filter-row select,
-.jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
-.select2-container--default .select2-selection--single,
-.select2-container--default .select2-selection--single .select2-search__field,
-.typeahead,
-.tt-query,
-.tt-hint {
-    border: 1px solid #2c2e33;
-    height: calc(2.25rem + 2px);
-    font-weight: normal;
-    font-size: 0.875rem;
-    padding: 0.625rem 0.6875rem;
-    background-color: #ffffff;
-    border-radius: 2px;
-    color: #000000;
-}
-
 .form-control:focus,
 .asColorPicker-input:focus,
 .dataTables_wrapper select:focus,
@@ -29442,4 +29421,5 @@ hr.new5 {
 }
 
 
-/*# sourceMappingURL=maps/style.css.map */
+/*# sourceMappingURL=maps/style.css.map *
+/*# sourceMappingURL=maps/style.css.map *nt

@@ -35,6 +35,7 @@
     text-align: center;
     color: #D80032;
   }
+
   .txtback:hover {
     color: #800000;
   }
@@ -68,7 +69,7 @@
                 <hr style="background-color:aliceblue">
                 <a href="<?php echo base_url() ?>Login/Account" class="forgot-pass txtback">Back</a>
               </div>
-            
+
             </div>
           </div>
         </div>
@@ -138,13 +139,17 @@
         Swal.fire({
           icon: 'success',
           text: 'your password has been change',
+          confirmButtonColor: '#D80032'
+        }).then(function() {
+          window.location.href = "<?php echo base_url() ?>Login/Account";
         })
       } else {
         Swal.fire({
           icon: 'error',
           text: 'your email is incorrect',
+          confirmButtonColor: '#D80032'
         })
-      } 
+      }
     })
     $("#email").val("");
     $("#password").val("");
