@@ -87,7 +87,7 @@
                     <div class="card-body col-md-12 row mb-3">
                       <label class="col-sm-6 col-form-label"> Menu :</label>
                       <div class="col-sm-6">
-                        <select class="form-control" id="dropdowneditmenu" name ="dropdowneditmenu" >
+                        <select class="form-control col-sm-12" id="dropdowneditmenu" name ="dropdowneditmenu" >
                           <?php
                           foreach ($getmenu as $value) {
                           ?>

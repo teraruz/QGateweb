@@ -99,11 +99,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label for="pathpic">Path Picture :</label>
-                    <input class="form-control" type="text" id="editpathpicapp" name="editpathpicapp">
-                  </div>
-
                 </div>
 
 
@@ -150,10 +145,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label for="pathpic">Path Picture :</label>
-                    <input class="form-control" type="text" id="addpathpicapp" name="addpathpicapp" required="" placeholder="Enter picture path">
-                  </div>
+                 
                 </form>
 
                 <div class="modal-footer">

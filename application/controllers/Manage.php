@@ -604,15 +604,14 @@ class manage extends CI_Controller
 		$addempcodeapp = $_POST["addempcodeapp"];
 		$addnameapp = $_POST["addnameapp"];
 		$addgrouppermissionapp = $_POST["addgrouppermissionapp"];
-		$addpathpicapp = $_POST["addpathpicapp"];
 
-		$userappcheck = $this->backoffice_model->checkUserApp($addempcodeapp, $addnameapp, $addpathpicapp);
+		$userappcheck = $this->backoffice_model->checkUserApp($addempcodeapp, $addnameapp);
 
 		if ($addgrouppermissionapp == "Select group permission") {
 			echo "Select group permission";
 		} else {
 			if ($userappcheck == "pass") {
-				$rsadduserapp = $this->backoffice_model->addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin);
+				$rsadduserapp = $this->backoffice_model->addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $empcodeadmin);
 				echo $rsadduserapp;
 			} else {
 				echo "duplicate";
@@ -634,20 +633,11 @@ class manage extends CI_Controller
 		$editempcodeuserapp = $_GET["editempcodeuserapp"];
 		$editnameapp = $_GET["editnameapp"];
 		$editgrouppermissionuserapp = $_GET["editgrouppermissionuserapp"];
-		$editpathpicapp = $_GET["editpathpicapp"];
-
-
-		$pathuserappcheck = $this->backoffice_model->checkPathUserApp( $editpathpicapp);
-
 		if ($editgrouppermissionuserapp == "Select group permission") {
 			echo "Select group permission";
 		} else {
-			if ($pathuserappcheck == "pass") {
-				$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $editpathpicapp, $empcodeadmin);
+				$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $empcodeadmin);
 				echo $resedituserapp;
-			} else {
-				echo "duplicate";
-			}
 		}
 	}
 
@@ -1919,6 +1909,7 @@ class manage extends CI_Controller
 		$data["getplant"] = $this->backoffice_model->modelGetPlantApp();
 		$data["getzone"] = $this->backoffice_model->modelgetZoneApp();
 		$data["getstation"] = $this->backoffice_model->modelgetStationApp();
+		$data["tableNCNG"] = $this->backoffice_model->getTableNCNG(); 
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');

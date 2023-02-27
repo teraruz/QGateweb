@@ -1257,7 +1257,6 @@
             $("#IDedituserapp").val(data.getdataEdit[0]["ss_id"]);
             $("#editempcodeuserapp").val(data.getdataEdit[0]["ss_emp_code"]);
             $("#editnameapp").val(data.getdataEdit[0]["ss_emp_name"]);
-            $("#editpathpicapp").val(data.getdataEdit[0]["ss_pic"]);
             $.each(data.PermissionAll, function(key, value) {
                 // alert(value["spg_name"] + " = " + data.getdataEdit[0]["spg_name"])
                 if (value["spg_name"] == data.getdataEdit[0]["spg_name"]) {
@@ -1275,14 +1274,12 @@
         var addempcodeapp = $('#addempcodeapp').val();
         var addnameapp = $('#addnameapp').val();
         var addgrouppermissionapp = $('#addgrouppermissionapp').val();
-        var addpathpicapp = $("#addpathpicapp").val();
 
         var checkaddempcodeapp = document.getElementById("addempcodeapp");
         var checkaddnameapp = document.getElementById("addnameapp")
         var checkaddgrouppermissionapp = document.getElementById("addgrouppermissionapp")
-        var checkaddpathpicapp = document.getElementById("addpathpicapp")
 
-        if (checkaddempcodeapp.value == "" || checkaddnameapp.value == "" || checkaddgrouppermissionapp.value == "" || checkaddpathpicapp.value == "") {
+        if (checkaddempcodeapp.value == "" || checkaddnameapp.value == "" || checkaddgrouppermissionapp.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
@@ -1296,8 +1293,7 @@
                 data: {
                     addempcodeapp: addempcodeapp,
                     addnameapp: addnameapp,
-                    addgrouppermissionapp: addgrouppermissionapp,
-                    addpathpicapp: addpathpicapp
+                    addgrouppermissionapp: addgrouppermissionapp
                 }
             })
             path.done(function(rs) {
@@ -1348,7 +1344,7 @@
 
 
         if (checkeditempcodeuserapp.value == "" || checkeditnameapp.value == "" ||
-            checkeditgrouppermissionuserapp == "" || checkeditpathpicapp == "") {
+            checkeditgrouppermissionuserapp == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -1365,8 +1361,7 @@
                     IDedituserapp: IDedituserapp,
                     editempcodeuserapp: editempcodeuserapp,
                     editnameapp: editnameapp,
-                    editgrouppermissionuserapp: editgrouppermissionuserapp,
-                    editpathpicapp: editpathpicapp
+                    editgrouppermissionuserapp: editgrouppermissionuserapp
                 }
             })
             path.done(function(rs) {

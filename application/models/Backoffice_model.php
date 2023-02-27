@@ -867,20 +867,9 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-	public function checkUserApp($addempcodeapp, $addnameapp, $addpathpicapp)
+	public function checkUserApp($addempcodeapp, $addnameapp)
 	{
-		$sql = "SELECT ss_emp_code FROM sys_staff_app WHERE ss_emp_code ='{$addempcodeapp}' OR ss_emp_name ='{$addnameapp}' OR ss_pic='{$addpathpicapp}'";
-		$res = $this->db->query($sql);
-		$row = $res->result_array();
-		if ($row) {
-			return "duplicate";
-		} else {
-			return "pass";
-		}
-	}
-	public function checkPathUserApp( $editpathpicapp)
-	{
-		$sql = "SELECT ss_pic FROM sys_staff_app WHERE ss_pic='{$editpathpicapp}'";
+		$sql = "SELECT ss_emp_code FROM sys_staff_app WHERE ss_emp_code ='{$addempcodeapp}' OR ss_emp_name ='{$addnameapp}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		if ($row) {
@@ -890,11 +879,11 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $addpathpicapp, $empcodeadmin)
+	public function addManageUserApp($addempcodeapp, $addnameapp, $addgrouppermissionapp, $empcodeadmin)
 	{
 		$sql = "INSERT INTO sys_staff_app 
-		(ss_emp_code,ss_emp_name,spg_id,ss_pic,ss_create_by,ss_create_date)
-		VALUES ('{$addempcodeapp}','{$addnameapp}','{$addgrouppermissionapp}','{$addpathpicapp}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		(ss_emp_code, ss_emp_name, spg_id, ss_create_by, ss_create_date)
+		VALUES ('{$addempcodeapp}','{$addnameapp}','{$addgrouppermissionapp}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -905,7 +894,7 @@ class Backoffice_model extends CI_Model
 
 	public function GetDataEditUserApp($ss_id)
 	{
-		$sql = "SELECT ss_id ,ss_emp_code, ss_emp_name, spg_name, ss_pic
+		$sql = "SELECT ss_id ,ss_emp_code, ss_emp_name, spg_name
 		FROM sys_staff_app
 		INNER JOIN sys_permission_group_app ON sys_staff_app.spg_id = sys_permission_group_app.spg_id
 		WHERE ss_id ='{$ss_id}'";
@@ -914,12 +903,11 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $editpathpicapp, $empcodeadmin)
+	public function editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_staff_app
 		SET ss_emp_code= '{$editempcodeuserapp}', ss_emp_name= '{$editnameapp}'
-		,spg_id = '{$editgrouppermissionuserapp}',ss_pic = '{$editpathpicapp}'
-		,ss_update_by = '{$empcodeadmin}',ss_update_date = CURRENT_TIMESTAMP 
+		,spg_id = '{$editgrouppermissionuserapp}', ss_update_by = '{$empcodeadmin}', ss_update_date = CURRENT_TIMESTAMP 
 		WHERE ss_id = '{$IDedituserapp}'";
 		$res = $this->db->query($sql);
 		if ($res) {
@@ -928,7 +916,6 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
-
 
 	// *************************************************** Manage Permission App ***************************************************
 
@@ -2791,5 +2778,40 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 
+	}
+
+
+
+	// ---------------------------------------- NC NG Data ---------------------------------------------------------------------------------
+
+
+
+	public function getTableNCNG()
+	{
+		$sql = "SELECT 
+		idd_id,
+		mpa_name,
+		mza_name,
+		msa_station,
+		ifts_part_no,
+		FORMAT (idd_create_date, 'yyyy-MM-dd')  AS Date,
+		CASE idd_type
+		WHEN '1' THEN 'NC'
+		WHEN '0' THEN 'NG'
+		ELSE 'Unknown'
+		END AS type
+		FROM
+			info_operation_tag_complete_app
+		INNER JOIN info_operation_detail_count_app ON info_operation_tag_complete_app.ifts_id = info_operation_detail_count_app.ifts_id
+		INNER JOIN mst_config_details_app ON info_operation_detail_count_app.mcd_id = mst_config_details_app.mcd_id
+		INNER JOIN info_defect_detail_app ON info_operation_detail_count_app.iodc_id = info_defect_detail_app.iodc_id
+		INNER JOIN info_fa_tag_scan_app ON info_operation_detail_count_app.ifts_id = info_fa_tag_scan_app.ifts_id
+		INNER JOIN mst_plant_admin_app ON mst_config_details_app.mpa_id = mst_plant_admin_app.mpa_id
+		INNER JOIN mst_zone_admin_app ON mst_config_details_app.mza_id = mst_zone_admin_app.mza_id
+		INNER JOIN mst_station_admin_app ON mst_config_details_app.msa_id = mst_station_admin_app.msa_id ";
+
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
 	}
 }
