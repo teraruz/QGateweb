@@ -67,18 +67,18 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Menu Name :</label>
                     <input class="form-control" type="text" id="addmenuappname" name="addmenuappname" required="" placeholder="Enter New Menu">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Method path :</label>
                     <input class="form-control" type="text" id="addmenupathapp" name="addmenupathapp" required="" placeholder="Enter path menu">
                   </div>
 
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Picture file name :</label>
                     <input class="form-control" type="text" id="addmenupicapp" name="addmenupicapp" required="" placeholder="Enter file name menu">
                   </div>
@@ -106,19 +106,19 @@
 
                 <form class="card-body" action="#">
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Menu Name :</label>
                     <input class="form-control" type="text" id="editmenuappid" name="editmenuappid" hidden>
                     <input class="form-control" type="text" id="editmenuappname" name="editmenuappname" required="" placeholder="Enter New Menu">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Method path :</label>
                     <input class="form-control" type="text" id="editmenupathapp" name="editmenupathapp" required="" placeholder="Enter path menu">
                   </div>
 
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Picture file name :</label>
                     <input class="form-control" type="text" id="editmenupicapp" name="editmenupicapp" required="" placeholder="Enter file name menu">
                   </div>
