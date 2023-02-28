@@ -67,7 +67,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Inspection Name :</label>
                     <input class="form-control" type="text" id="addinspectiontype" name="addinspectiontype" placeholder="Enter New Inspection">
                   </div>
@@ -94,7 +94,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameInspection">Inspection Name :</label>
                     <input class="form-control" type="text" id="editInspectionName" name="editInspectionName" >
                     <input class="form-control" type="text" id="IDeditInspectionName" name="IDeditInspectionName" hidden>

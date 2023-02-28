@@ -69,12 +69,12 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">DMC Type Name :</label>
                     <input class="form-control" type="text" id="adddmctypename" name="adddmctypename" placeholder="Enter New DMC Type">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Digit :</label>
                     <input class="form-control" type="text" id="adddmcdigit" name="adddmcdigit"  placeholder="Enter Digit of DMC">
                   </div>
@@ -101,13 +101,13 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameMenuWeb">Dmc Type Name :</label>
                     <input class="form-control" type="text" id="editdmctypename" name="editdmctypename" >
                     <input class="form-control" type="text" id="IDeditdmctype" name="IDeditdmctype" hidden >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameSubMenuWeb">Digit:</label>
                     <input class="form-control" type="text" id="editdmcdigit" name="editdmcdigit">
                 

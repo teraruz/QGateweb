@@ -67,7 +67,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">DMC Name :</label>
                     <input class="form-control" type="text" id="adddmcname" name="adddmcname" required="" placeholder="Enter New DMC">
                   </div>
@@ -94,7 +94,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameMenuWeb">DMC Name :</label>
                     <input class="form-control" type="text" id="editdmcname" name="editdmcname">
                     <input class="form-control" type="text" id="IDeditdmcname" name="IDeditdmcname" hidden>

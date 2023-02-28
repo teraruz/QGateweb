@@ -84,7 +84,7 @@
                 </div>
                 <form class="card-body" action="#">
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Plant :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addplantconfig" name="addplantconfig">
@@ -98,7 +98,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Zone :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addzoneconfig" name="addzoneconfig">
@@ -112,7 +112,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Station :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addstationconfig" name="addstationconfig">
@@ -126,7 +126,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Type :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addtypeconfig" name="addtypeconfig">
@@ -140,7 +140,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Status :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addstatusconfig" name="addstatusconfig">
@@ -154,7 +154,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Inspection :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addinspectionconfig" name="addinspectionconfig">
@@ -168,17 +168,17 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Time :</label>
                     <input class="form-control" type="number" id="addTimeconfig" name="addTimeconfig">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Mac Address :</label>
                     <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Select Part :</label>
                     <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
                   </div>
@@ -206,7 +206,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Plant :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editplantconfig" name="editplantconfig">
@@ -220,7 +220,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Zone :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editzoneconfig" name="editzoneconfig">
@@ -234,7 +234,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Station :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editstationconfig" name="editstationconfig">
@@ -248,7 +248,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Type :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="edittypeconfig" name="edittypeconfig">
@@ -262,7 +262,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Status :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editstatusconfig" name="editstatusconfig">
@@ -276,7 +276,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Inspection :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editinspectionconfig" name="editinspectionconfig">
@@ -291,18 +291,18 @@
                   </div>
 
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Time :</label>
                     <input class="form-control" type="text" id="IDeditconfig" name="IDeditconfig" hidden>
                     <input class="form-control" type="number" id="edittimeconfig" name="edittimeconfig" placeholder="-">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Mac Address :</label>
                     <input class="form-control" type="text" id="editmacaddressconfig" name="editmacaddressconfig" placeholder="-">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Select Part :</label>
                     <input class="form-control" type="text" id="editselectpartconfig" name="editselectpartconfig" placeholder="-">
                   </div>
