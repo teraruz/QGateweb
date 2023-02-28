@@ -54,25 +54,25 @@
   }
 
   .form-control,
-    .asColorPicker-input,
-    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
-    .jsgrid .jsgrid-table .jsgrid-filter-row select,
-    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
-    .select2-container--default .select2-selection--single,
-    .select2-container--default .select2-selection--single .select2-search__field,
-    .typeahead,
-    .tt-query,
-    .tt-hint {
-        border: 1px solid #2c2e33;
-        height: calc(2.25rem + 2px);
-        font-weight: normal;
-        width: 100%;
-        font-size: 0.875rem;
-        padding: 0rem 0.2rem !important;
-        background-color: #ffffff;
-        border-radius: 2px;
-        color: #000000;
-    }
+  .asColorPicker-input,
+  .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
+  .jsgrid .jsgrid-table .jsgrid-filter-row select,
+  .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--single .select2-search__field,
+  .typeahead,
+  .tt-query,
+  .tt-hint {
+    border: 1px solid #2c2e33;
+    height: calc(2.25rem + 2px);
+    font-weight: normal;
+    width: 100%;
+    font-size: 0.875rem;
+    padding: 0rem 0.2rem !important;
+    background-color: #ffffff;
+    border-radius: 2px;
+    color: #000000;
+  }
 </style>
 
 <body>
@@ -90,7 +90,7 @@
               <div class="form-group" action="<?php $_SERVER['PHP_SELF'] ?>" <label>Employee Code :</label>
                 <input type="text" class="form-control" id="empcode" name="empcode">
               </div>
-              <div class="form-group">
+              <div class="form-group"
                 <label>Password :</label>
                 <input type="password" class="form-control" id="password" name="password">
               </div><br>
