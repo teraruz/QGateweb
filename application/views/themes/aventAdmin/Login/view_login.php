@@ -52,6 +52,27 @@
   .icon-right {
     margin-right: 0;
   }
+
+  .form-control,
+    .asColorPicker-input,
+    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
+    .jsgrid .jsgrid-table .jsgrid-filter-row select,
+    .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
+    .select2-container--default .select2-selection--single,
+    .select2-container--default .select2-selection--single .select2-search__field,
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        border: 1px solid #2c2e33;
+        height: calc(2.25rem + 2px);
+        font-weight: normal;
+        width: 100%;
+        font-size: 0.875rem;
+        padding: 0rem 0.2rem !important;
+        background-color: #ffffff;
+        border-radius: 2px;
+        color: #000000;
+    }
 </style>
 
 <body>
