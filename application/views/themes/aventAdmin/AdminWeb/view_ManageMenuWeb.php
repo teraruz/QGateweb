@@ -76,7 +76,7 @@
 
                 <form class="card-body" action="#">
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameMenuWeb">Menu Name :</label>
                     <input class="form-control" type="text" id="addMenuName" name="addMenuName">
                   </div>
@@ -102,7 +102,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameMenuWeb">Menu Name :</label>
                     <input class="form-control" type="text" id="editMenuName" name="editMenuName">
                     <input class="form-control" type="text" id="IDeditMenuName" name="editMenuName" hidden>
@@ -185,13 +185,13 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Submenu Name :</label>
                     <input class="form-control" type="text" id="IDdetailSubMenu" name="IDdetailSubMenu" hidden>
                     <input class="form-control" type="text" id="addsubmenuwebname" name="addsubmenuwebname" required="" placeholder="Enter New Submenu">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Method :</label>
                     <input class="form-control" type="text" id="addmenupath" name="addmenupath" required="" placeholder="Enter path of menu">
                   </div>
