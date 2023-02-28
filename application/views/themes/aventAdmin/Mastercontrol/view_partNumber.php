@@ -73,22 +73,22 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Part Number :</label>
                     <input class="form-control" type="text" id="addpartnumber" name="addpartnumber"  placeholder="Enter New Part Number">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Customer Part Number :</label>
                     <input class="form-control" type="text" id="addcuspartno" name="addcuspartno"  placeholder="Enter New Customer Part Number" >
                   </div>
 
-                  <div class="form-group">
-                    <label for="password">location :</label>
+                  <div class="form-group"
+                    <label for="password">Location :</label>
                     <input class="form-control" type="text" id="addlocationpart" name="addlocationpart"  placeholder="Enter New location" >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">DMC Check :</label>
                     <input class="form-control" type="text" id="adddmccheckpart" name="adddmccheckpart"  placeholder="Enter New DMC Check" >
                   </div>
@@ -115,23 +115,23 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
+                <div class="form-group"
                     <label for="empcode">Part Number :</label>
                     <input class="form-control" type="text" id="IDeditpartno" name="IDeditpartno"  placeholder="Enter New Part Number" hidden>
                     <input class="form-control" type="text" id="editpartnumber" name="editpartnumber"  placeholder="Enter New Part Number">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Customer Part Number :</label>
                     <input class="form-control" type="text" id="editcuspartno" name="editcuspartno"  placeholder="Enter New Customer Part Number" >
                   </div>
 
-                  <div class="form-group">
-                    <label for="password">location :</label>
+                  <div class="form-group"
+                    <label for="password">Location :</label>
                     <input class="form-control" type="text" id="editlocationpart" name="editlocationpart"  placeholder="Enter New location" >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">DMC Check :</label>
                     <input class="form-control" type="text" id="editdmccheckpart" name="editdmccheckpart"  placeholder="Enter New DMC Check" >
                   </div>

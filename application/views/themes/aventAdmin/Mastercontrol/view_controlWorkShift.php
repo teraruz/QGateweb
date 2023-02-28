@@ -71,17 +71,17 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Shift :</label>
                     <input class="form-control" type="text" id="addshift" name="addshift"  placeholder="Enter New Shift">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Start Time :</label>
                     <input class="form-control" type="time" id="addstarttime" name="addstarttime"  step="2">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">End Time :</label>
                     <input class="form-control" type="time" id="addendtime" name="addendtime"  step="2" >
                   </div>
@@ -108,18 +108,18 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
+                <div class="form-group"
                     <label for="empcode">Shift :</label>
                     <input class="form-control" type="text" id="IDeditworkshift" name="IDeditworkshift" hidden>
                     <input class="form-control" type="text" id="editshift" name="editshift">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Start Time :</label>
                     <input class="form-control" type="time" id="editstarttime" name="editstarttime"  step="2">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">End Time :</label>
                     <input class="form-control" type="time" id="editendtime" name="editendtime"  step="2" >
                   </div>

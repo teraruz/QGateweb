@@ -83,22 +83,22 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Employee Code :</label>
                     <input class="form-control" type="text" id="editempcode" required="" disabled>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="fristname">First Name :</label>
                     <input class="form-control" type="text" id="editfirstname" required="">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="lastname">Last Name :</label>
                     <input class="form-control" type="text" required="" id="editlastname" name="editlastname">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Group Permission :</label>
                     <div>
                       <select class="form-control"
@@ -114,12 +114,12 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="emailaddress">Email :</label>
                     <input class="form-control" type="email" id="editemailaddress" name="editemailaddress" required="">
                   </div>
 
-                  <div>
+                  <div class="form-group"
                     <label for="plant">Plant :</label>
                     <div>
                       <select class="form-control"
@@ -156,25 +156,25 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Employee Code :</label>
                     <input class="form-control" type="text" id="addempcode" required="" name="addempcode"
                       placeholder="Enter employee code">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="fristname">First Name :</label>
                     <input class="form-control" type="text" id="addfirstname" required="" name="addfirstname"
                       placeholder="Enter first name">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="lastname">Last Name :</label>
                     <input class="form-control" type="text" required="" id="addlastname" name="addlastname"
                       placeholder="Enter last name">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Group Permission :</label>
                     <div>
                       <select class="form-control"
@@ -190,17 +190,17 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="emailaddress">Email :</label>
                     <input class="form-control" type="email" id="addemail" name="addemail" required="" placeholder="Enter your email">
                   </div>
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Password :</label>
                     <input class="form-control" type="password" id="addpassword" name="addpassword" required=""
                       placeholder="Enter password">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Plant :</label>
                     <div>
                       <select class="form-control"

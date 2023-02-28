@@ -67,7 +67,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Part Type Name :</label>
                     <input class="form-control" type="text" id="addparttypename" name="addparttypename" required="" placeholder="Enter New Type of Part">
                   </div>
@@ -95,7 +95,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameMenuWeb">Type Name :</label>
                     <input class="form-control" type="text" id="editparttypeName" name="editparttypeName" >
                     <input class="form-control" type="text" id="IDeditparttype" name="IDeditparttype" hidden>

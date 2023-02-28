@@ -76,9 +76,9 @@
                 </div>
                 <form class="card-body" action="#">
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">DMC Type :</label>
-                    <div>
+                    <div class="form-group"
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="adddmctypeofdetail" name="adddmctypeofdetail">
                         <option selected>Select Type</option>
                         <?php
@@ -90,7 +90,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">DMC Data :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="adddmcdataofdetail" name="adddmcdataofdetail">
@@ -104,17 +104,17 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Digit Start :</label>
                     <input class="form-control" type="number" id="addstartofdetail" name="addstartofdetail">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Digit End :</label>
                     <input class="form-control" type="number" id="addendofdetail" name="addendofdetail">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Number Substring :</label>
                     <input class="form-control" type="number" id="addsubstringdetail" name="addsubstringdetail">
                   </div>
@@ -143,7 +143,7 @@
                 <form class="card-body" action="#">
 
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">DMC Type :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editdmctypeofdetail" name="editdmctypeofdetail">
@@ -157,7 +157,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">DMC Data :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editdatadmctypedetail" name="editdatadmctypedetail">
@@ -171,18 +171,18 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Digit Start :</label>
                     <input class="form-control" type="number" id="IDeditDMCTypeDetail" name="IDeditDMCTypeDetail" hidden>
                     <input class="form-control" type="number" id="editstartofdetail" name="editstartofdetail">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Digit End :</label>
                     <input class="form-control" type="number" id="editendofdetail" name="editendofdetail">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Number Substring :</label>
                     <input class="form-control" type="number" id="editsubstringdetail" name="editsubstringdetail">
                   </div>

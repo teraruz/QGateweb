@@ -69,12 +69,12 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Line :</label>
                     <input class="form-control" type="text" id="addfaline" name="addfaline" required="" placeholder="Enter New Line">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Name :</label>
                     <input class="form-control" type="text" id="addfaname" name="addfaname"  placeholder="Enter New Name">
                   </div>
@@ -101,14 +101,14 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameMenuWeb">Line :</label>
                     <input class="form-control" type="text" id="IDeditfacode" name="IDeditfacode" hidden>
                     <input class="form-control" type="text" id="editfaline" name="editfaline" >
                   
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="NameSubMenuWeb">Name :</label>
                     <input class="form-control" type="text" id="editfaname" name="editfaname">
                   </div>

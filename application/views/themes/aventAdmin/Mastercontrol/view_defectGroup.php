@@ -71,17 +71,17 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Shift :</label>
                     <input class="form-control" type="text" id="addshift" name="addshift" placeholder="Enter New Shift">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Start Time :</label>
                     <input class="form-control" type="time" id="addstarttime" name="addstarttime" step="2">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">End Time :</label>
                     <input class="form-control" type="time" id="addendtime" name="addendtime" step="2">
                   </div>
@@ -108,20 +108,20 @@
                 </div>
 
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Plant : </label>
                     <input class="form-control" type="text" id="IDeditdefectgroup" name="IDeditdefectgroup" hidden>
                     <input class="form-control" type="text" id="IDeditplantdefectgroup" name="IDeditplantdefectgroup" hidden>
                     <input class="form-control" type="text" id="editplantdefectgroup" name="editplantdefectgroup" disabled>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Zone : </label>
                     <input class="form-control" type="text" id="IDeditzonedefectgroup" name="IDeditzonedefectgroup" hidden>
                     <input class="form-control" type="text" id="editzonedefectgroup" name="editzonedefectgroup" disabled>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Station : </label>
                     <input class="form-control" type="text" id="IDeditstationdefectgroup" name="IDeditstationdefectgroup" hidden>
                     <input class="form-control" type="text" id="editstationdefectgroup" name="editstationdefectgroup" disabled>

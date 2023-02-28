@@ -76,7 +76,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Permission Name :</label>
                     <input class="form-control" type="text" id="editPermissionappname" name="editPermissionappname" >
                     <input class="form-control" type="text" id="idPerApp" name="idPerApp" hidden>
@@ -120,7 +120,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Permission Name :</label>
                     <input class="form-control" type="text" id="addPermissionappname" name="addPermissionappname" required="" placeholder="Enter New Permission">
                   </div> <br>

@@ -69,12 +69,12 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Phase :</label>
                     <input class="form-control" type="number" id="addplantwebphase" name="addplantwebphase"  placeholder="Enter New Phase">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Name :</label>
                     <input class="form-control" type="text" id="addplantwebname" name="addplantwebname"  placeholder="Enter New Name">
                   </div>
@@ -102,13 +102,13 @@
 
                 <form class="card-body" action="#">
 
-                <div class="form-group">
+                <div class="form-group"
                     <label for="empcode">Phase :</label>
                     <input class="form-control" type="text" id="IDeditplantweb" name="IDeditplantweb" hidden>
                     <input class="form-control" type="number" id="editplantwebphase" name="editplantwebphase"  placeholder="Enter New Phase">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Name :</label>
                     <input class="form-control" type="text" id="editplantwebname" name="editplantwebname"  placeholder="Enter New Name">
                   </div>

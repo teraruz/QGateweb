@@ -67,7 +67,7 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Station :</label>
                     <input class="form-control" type="number" id="addtablestation" name="addtablestation"  placeholder="Enter New Station">
                   </div>
@@ -94,7 +94,7 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
+                <div class="form-group"
                     <label for="empcode">Station :</label>
                     <input class="form-control" type="text" id="IDeditStation" name="IDeditStation" hidden>
                     <input class="form-control" type="number" id="editStation" name="editStation">

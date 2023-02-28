@@ -75,18 +75,18 @@
                 </div>
 
                 <div class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Employee Code :</label>
                     <input class="form-control" type="text" id="editempcodeuserapp" name="editempcodeuserapp" disabled>
                     <input class="form-control" type="text" id="IDedituserapp" name="IDedituserapp" hidden>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="fristname">Name :</label>
                     <input class="form-control" type="text" id="editnameapp" name="editnameapp">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Group Permission :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgrouppermissionuserapp" name="editgrouppermissionuserapp">
@@ -121,17 +121,17 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Employee Code :</label>
                     <input class="form-control" type="text" id="addempcodeapp" required="" name="addempcodeapp" placeholder="Enter employee code">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="fristname">Name :</label>
                     <input class="form-control" type="text" id="addnameapp" required="" name="addnameapp" placeholder="Enter name">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="username">Group Permission :</label>
                     <div>
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgrouppermissionapp" name="addgrouppermissionapp">

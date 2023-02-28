@@ -71,17 +71,17 @@
                   </button>
                 </div>
                 <form class="card-body" action="#">
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Defect Code :</label>
                     <input class="form-control" type="text" id="adddefectcode" name="adddefectcode"  placeholder="Enter New  Defect Code">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Defect Name TH :</label>
                     <input class="form-control" type="text" id="adddefectnameth" name="adddefectnameth"  placeholder="Enter New Defect name TH">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Defect Name EN :</label>
                     <input class="form-control" type="text" id="adddefectnameen" name="adddefectnameen"  placeholder="Enter New Defect name EN">
                   </div>
@@ -111,18 +111,18 @@
                 </div>
 
                 <form class="card-body" action="#">
-                <div class="form-group">
+                <div class="form-group"
                     <label for="empcode">Defect Code :</label>
                     <input class="form-control" type="text" id="IDeditdefect" name="IDeditdefect" required="" >
                     <input class="form-control" type="text" id="editdefectcode" name="editdefectcode" required="" placeholder="Enter New  Defect Code">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Defect Name TH :</label>
                     <input class="form-control" type="text" id="editdefectnameth" name="editdefectnameth" required="" placeholder="Enter New Defect name TH">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Defect Name EN :</label>
                     <input class="form-control" type="text" id="editdefectnameen" name="editdefectnameen" required="" placeholder="Enter New Defect name EN">
                   </div>

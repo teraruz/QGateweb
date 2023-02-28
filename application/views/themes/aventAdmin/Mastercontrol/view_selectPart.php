@@ -76,27 +76,27 @@
                 </div>
                 <form class="card-body" action="#">
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">Config Details :</label>
                     <input class="form-control" type="text" id="addselectpCon" name="addselectpCon"  placeholder="Enter New Config">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">DMC Type Details :</label>
                     <input class="form-control" type="text" id="addselectpdmc" name="addselectpdmc"  placeholder="Enter New DMC Type">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Part Number :</label>
                     <input class="form-control" type="text" id="addselectpno" name="addselectpno" placeholder="Enter New Part Number">
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Part Name :</label>
                     <input class="form-control" type="text" id="addselectpname" name="addselectpname" placeholder="Enter New Part Name"  >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Inspection Time :</label>
                     <input class="form-control" type="number" id="addselectptime" name="addselectptime" placeholder="Enter New Inspection Time">
                   </div>
@@ -123,28 +123,28 @@
                 </div>
 
                 <form class="card-body" action="#">
-                 <div class="form-group">
+                 <div class="form-group"
                     <label for="empcode">Config Details :</label>
                     <input class="form-control" type="text" id="IDeditselectp" name="IDeditselectp"  hidden>
                     <input class="form-control" type="text" id="editselectpCon" name="editselectpCon"  >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="empcode">DMC Type Details :</label>
                     <input class="form-control" type="text" id="editselectpdmc" name="editselectpdmc" >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Part Number :</label>
                     <input class="form-control" type="text" id="editselectpno" name="editselectpno" >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Part Name :</label>
                     <input class="form-control" type="text" id="editselectpname" name="editselectpname" >
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group"
                     <label for="password">Inspection Time :</label>
                     <input class="form-control" type="number" id="editselectptime" name="editselectptime" >
                   </div>
