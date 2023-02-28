@@ -268,7 +268,7 @@ class Backoffice_model extends CI_Model
 			return "true";
 		}
 	}
-	public function checknameAdd($firstname,$lastname)
+	public function checknameAdd($firstname, $lastname)
 	{
 		$sql = "select * from sys_staff_web WHERE sys_staff_web.ss_emp_fname ='{$firstname}' AND sys_staff_web.ss_emp_lname ='{$lastname}'";
 		$res = $this->db->query($sql);
@@ -615,7 +615,8 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function checkDuplicateMenuName($addMenuName){
+	public function checkDuplicateMenuName($addMenuName)
+	{
 		$sql = "SELECT * FROM sys_menu_web WHERE sm_name_menu = '{$addMenuName}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
@@ -625,7 +626,8 @@ class Backoffice_model extends CI_Model
 			return "pass";
 		}
 	}
-	public function checkDuplicateSubmenuName($submenuname , $path){
+	public function checkDuplicateSubmenuName($submenuname, $path)
+	{
 		$sql = "SELECT * FROM sys_submenu_web WHERE ssm_name_submenu = '{$submenuname}' OR ssm_method = '{$path}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
@@ -636,7 +638,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function addMenuWeb($addMenuName ,$empcodeadmin)
+	public function addMenuWeb($addMenuName, $empcodeadmin)
 	{
 		$sql = "INSERT INTO sys_menu_web (
 			sm_name_menu,
@@ -670,7 +672,7 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function addSubMenuWeb($IDdetailSubMenu ,$submenuname, $path , $empcodeadmin)
+	public function addSubMenuWeb($IDdetailSubMenu, $submenuname, $path, $empcodeadmin)
 	{
 		$sql = "INSERT INTO sys_submenu_web (
 			sm_id,
@@ -786,7 +788,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function editSubmenuWeb($IDEditdetailSubMenu,$editSubmenuWebName,$editMenuPath,$empcodeadmin)
+	public function editSubmenuWeb($IDEditdetailSubMenu, $editSubmenuWebName, $editMenuPath, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_submenu_web 
 		SET  ssm_name_submenu ='{$editSubmenuWebName}', ssm_method ='{$editMenuPath}' ,ssm_update_by = '{$empcodeadmin}' ,ssm_update_date = CURRENT_TIMESTAMP
@@ -810,7 +812,8 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function getTableDetailSubmenu(){
+	public function getTableDetailSubmenu()
+	{
 		$sql = "SELECT *
 		FROM sys_submenu_web
 		ORDER BY ssm_id";
@@ -1125,7 +1128,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function checkMenuApp($addmenuappname , $addmenupathapp)
+	public function checkMenuApp($addmenuappname, $addmenupathapp)
 	{
 		$sql = "SELECT sm_id, sm_menu , sm_path
 		FROM sys_menu_app
@@ -1952,7 +1955,6 @@ class Backoffice_model extends CI_Model
 		mdt.mdt_name ,
 		msp_part_no ,
 		msp_part_name ,
-		msp_inspection_time ,
 		msp_status
 	FROM
 		mst_select_part_app msp
@@ -2760,8 +2762,7 @@ class Backoffice_model extends CI_Model
 		$editendofdetail,
 		$editsubstringdetail,
 		$empcodeadmin
-	)
-	{
+	) {
 		$sql = "UPDATE mst_dmc_type_detail_app
 		SET mdt_id = '{$editdmctypeofdetail}' ,
 		mdd_id = '{$editdatadmctypedetail}',
@@ -2772,12 +2773,11 @@ class Backoffice_model extends CI_Model
 		mdtd_update_date = CURRENT_TIMESTAMP
 		WHERE mdtd_id = '{$IDeditDMCTypeDetail}'";
 		$res = $this->db->query($sql);
-		if($res){
+		if ($res) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
-
 	}
 
 

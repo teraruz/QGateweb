@@ -18,7 +18,6 @@
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Type</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part Number</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part Name</th>
-                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Inspection Time</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                 </tr>
@@ -35,7 +34,6 @@
                   echo "<td>" . $selectp["mdt_name"] . "</td>";
                   echo "<td>" . $selectp["msp_part_no"] . "</td>";
                   echo "<td>" . $selectp["msp_part_name"] . "</td>";
-                  echo "<td>" . $selectp["msp_inspection_time"] . "</td>";
                   if ($selectp["msp_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
