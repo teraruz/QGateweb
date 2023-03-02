@@ -4,13 +4,25 @@ class Backoffice_model extends CI_Model
 	// *********************************LOGINPAGE *********************************************************
 	public function modelCheckLogin($empcode, $password_encoded)
 	{
-		$sql = "SELECT * from sys_staff_web WHERE ss_emp_code ='{$empcode}' AND ss_emp_password ='{$password_encoded}' AND ss_status = '1'";
+		$sql = "SELECT * from sys_staff_web   WHERE ss_emp_code ='{$empcode}' AND ss_emp_password ='{$password_encoded}'";
 		$res = $this->db->query($sql);
-		$row = $res->result_array();
-		if (empty($row)) {
-			return "false";
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0]['ss_status'];
 		} else {
-			return "true";
+			return "false";
+		}
+	}
+	public function modelCheckLoginGroup($empcode)
+	{
+		$sql = "SELECT sys_permission_group_web.spg_status  from sys_staff_web  INNER JOIN sys_permission_group_web ON sys_staff_web.spg_id = sys_permission_group_web.spg_id
+		 WHERE ss_emp_code ='{$empcode}'";
+		$res = $this->db->query($sql);
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0]['spg_status'];
+		} else {
+			return "false";
 		}
 	}
 	public function modelCheckLoginSession($empcode, $password_encoded)
@@ -2493,12 +2505,13 @@ class Backoffice_model extends CI_Model
 		$addinspectionconfig,
 		$addTimeconfig,
 		$addMacaddress,
+		$addSelectpart,
 		$empcodeadmin
 	) {
 		$sql = "INSERT INTO mst_config_details_app 
-		(mpa_id , mza_id , msa_id , mct_id , mcs_id , mit_id , mcd_inspection_time , mcd_mac_address , mcd_create_by , mcd_create_date)
+		(mpa_id , mza_id , msa_id , mct_id , mcs_id , mit_id , mcd_inspection_time , mcd_mac_address ,mcd_select_part, mcd_create_by , mcd_create_date)
 		VALUES('{$addplantconfig}','{$addzoneconfig}','{$addstationconfig}','{$addtypeconfig}','{$addstatusconfig}',
-		'{$addinspectionconfig}','{$addTimeconfig}','{$addMacaddress}' , '{$empcodeadmin}' , CURRENT_TIMESTAMP)";
+		'{$addinspectionconfig}','{$addTimeconfig}','{$addMacaddress}','{$addSelectpart}', '{$empcodeadmin}' , CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -2515,6 +2528,21 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+	}
+
+	public function checkConfigDetail($MacAddress)
+	{
+		$sql = "SELECT mcd_mac_address 
+		FROM 
+		mst_config_details_app
+		WHERE mcd_mac_address = '{$MacAddress}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
 	}
 
 	public function modelEditConfigDetails(
@@ -2549,8 +2577,6 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
-	// return $res;
-	// }
 
 	// ****************************************************** mst  DEFECT GROUP ******************************************************
 
@@ -2794,6 +2820,7 @@ class Backoffice_model extends CI_Model
 		mza_name,
 		msa_station,
 		ifts_part_no,
+		idd_status,
 		FORMAT (idd_create_date, 'yyyy-MM-dd')  AS Date,
 		CASE idd_type
 		WHEN '1' THEN 'NC'
@@ -2813,5 +2840,59 @@ class Backoffice_model extends CI_Model
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
+	}
+
+
+	public function confirmStatusNG($ngid, $empcodeadmin)
+	{
+		$sql = "select * from info_defect_detail_app WHERE idd_id = '{$ngid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["idd_status"];
+		if ($result == 0 || $result == 1 || $result == 5) {
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 9 WHERE  idd_id = '{$ngid}'";
+			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
+			WHERE  idd_id = '{$ngid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} else if ($result == 9) {
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 0 WHERE  idd_id = '{$ngid}'";
+			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
+			WHERE  idd_id = '{$ngid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+	}
+
+	public function confirmStatusNC($ngid, $empcodeadmin)
+	{
+		$sql = "select * from info_defect_detail_app WHERE idd_id = '{$ngid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["idd_status"];
+		if ($result == 0 || $result == 1 || $result == 5) {
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 9 WHERE  idd_id = '{$ngid}'";
+			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
+			WHERE  idd_id = '{$ngid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} else {
+			return "false";
+		}
 	}
 }

@@ -90,8 +90,7 @@
               <div class="form-group" action="<?php $_SERVER['PHP_SELF'] ?>" <label>Employee Code :</label>
                 <input type="text" class="form-control" id="empcode" name="empcode">
               </div>
-              <div class="form-group"
-                <label>Password :</label>
+              <div class="form-group" <label>Password :</label>
                 <input type="password" class="form-control" id="password" name="password">
               </div><br>
 
@@ -171,6 +170,7 @@
 
     // รับresult กลับมาจาก controller เพื่อกำหนดเงื่อนไข
     path.done(function(rs) {
+      alert(rs)
       var empcode = $("#empcode").val();
       if (rs === "true") {
         Swal.fire({
@@ -180,6 +180,19 @@
           text: 'Welcome to Q-Gate Website',
           showConfirmButton: false,
           footer: '<a href="<?php echo base_url() ?>Manage/Homepage?empcode=' + empcode + '">GO TO WEBSITE</a>',
+        })
+      } else if (rs === "disabled") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!!',
+          text: 'Your status is disabled',
+        })
+
+      } else if (rs === "disabledgroup") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!!',
+          text: 'Your Group status is disabled',
         })
       } else {
         Swal.fire({

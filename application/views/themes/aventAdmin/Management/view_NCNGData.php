@@ -52,7 +52,7 @@
                                     <div class="mb row col-md-6">
                                         <label class="col-form-label">Station:</label>
                                         <div class="col-md-2">
-                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);"aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
                                                 <option selected>Select Station</option>
                                                 <?php
                                                 foreach ($getstation as $station) {
@@ -115,26 +115,53 @@
                                     echo "<td>" . $table["Date"] . "</td>";
 
                                     if ($table["type"] == "NG") {
-                                        echo "<td>
+                                        if ($table["idd_status"] == "9") {
+                                            echo "<td>
                                                             <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-md btn-success shadow-sm  me-md-2 \"  data-toggle=\"modal\" 
-                                                                data-target=\"#editzone\"  onclick='getDataZone(" . $table["idd_id"] . ")'> Confirm </button>                              
+                                                                <button  class=\"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" 
+                                                                id=btnconfirmNG$i clicked onclick='ChangeStatusNG(" . $table["idd_id"] . ")'> Confirm NG</button>                          
                                                             </div>
+                                           
+                                                        </td>";
+                                        } else {
+                                            echo "<td>
+                                                            <div class=\"text-wrap text-center\" >
+                                                                <button  class=\"d-none d-sm-inline-block btn btn-md btn-danger shadow-sm  me-md-2 \" 
+                                                                 id=btnconfirmNG$i onclick='ChangeStatusNG(" . $table["idd_id"] . ")'> Confirm NG</button>                              
+                                                            </div>
+                                        
                                                            
                                                         </td>";
+                                        }
                                     } else if ($table["type"] == "NC") {
-                                        echo "<td>
+                                        if($table["idd_status"] == "9") {
+                                            echo "<td>
                                                             <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"  data-toggle=\"modal\" 
-                                                                data-target=\"#editzone\"  onclick='getDataZone(" . $table["idd_id"] . ")'> Confirm </button>                              
+                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
+                                                                id=btnconfirmNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Confirm NC</button>                              
                                                             </div> <br>
 
                                                             <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm  me-md-2 \"  data-toggle=\"modal\" 
-                                                                data-target=\"#editzone\"  onclick='getDataZone(" . $table["idd_id"] . ")'> Restore </button>                              
+                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
+                                                                id=btnrestoreNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Restore NC</button>                              
                                                             </div>
 
                                                         </td>";
+
+                                        }else{
+                                        echo "<td>
+                                                            <div class=\"text-wrap text-center\" >
+                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"
+                                                                id=btnconfirmNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Confirm NC</button>                              
+                                                            </div> <br>
+
+                                                            <div class=\"text-wrap text-center\" >
+                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-success shadow-sm  me-md-2 \"
+                                                                id=btnrestoreNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Restore NC</button>                              
+                                                            </div>
+
+                                                        </td>";
+                                        }
                                     }
                                     echo "</tr>";
                                 }

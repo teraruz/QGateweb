@@ -191,7 +191,6 @@
         border-radius: 2px;
         color: #000000;
     }
-    
 </style>
 
 <body>
@@ -1097,7 +1096,7 @@
             }
             tb += "<td>"
             tb += "<div class=\"text-wrap text-center\" >"
-            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"EditDetailSubmenu" + j + "\" name =\"EditDetailSubmenu" + j + "\" data-target=\"#moDalEditDetailSubMenu\"  onclick='getDataEditDetailSubmenu(" + menuvalue["ssm_id"] + ")'>"
+            tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"EditDetailSubmenu" + j + "\" name =\"EditDetailSubmenu" + j + "\" data-target=\"#moDalEditDetailSubMenu\"  onclick='getDataEditDetailSubmenuWeb(" + menuvalue["ssm_id"] + ")'>"
             tb += "<i class=\"fas fa-edit fa-sm\"></i> Edit</button>"
             tb += "</div>"
             tb += "</td>"
@@ -1119,11 +1118,10 @@
     function SaveaddSubMenuWeb() {
         var IDdetailSubMenu = $('#IDdetailSubMenu').val()
         var addsubmenuwebname = $('#addsubmenuwebname').val();
-        var addmenupath = $('#addmenupath').val();
+        var addsubmenupath = $('#addmenupath').val();
 
         var checkaddsubmenuwebname = document.getElementById("addsubmenuwebname")
-        var checkaddmenupath = document.getElementById("addmenupath")
-        var checkaddmenuicon = document.getElementById("addmenuicon")
+        var checkaddmenupath = document.getElementById("addsubmenupath")
 
         if (checkaddsubmenuwebname.value == "" || checkaddmenupath.value == "") {
             Swal.fire({
@@ -1141,7 +1139,7 @@
                         data: {
                             IDdetailSubMenu: IDdetailSubMenu,
                             addsubmenuwebname: addsubmenuwebname,
-                            addmenupath: addmenupath
+                            addsubmenupath: addsubmenupath
                         }
                     })
                     path.done(function(rs) {
@@ -1187,7 +1185,7 @@
         }
     }
 
-    function getDataEditDetailSubmenu(ssm_id) {
+    function getDataEditDetailSubmenuWeb(ssm_id) {
         var path = $.ajax({
             method: "get",
             dataType: "json",
@@ -1196,7 +1194,7 @@
         path.done(function(rs) {
             $("#IDEditdetailSubMenu").val(rs[0]["ssm_id"]);
             $("#editSubmenuWebName").val(rs[0]["ssm_name_submenu"]);
-            $("#editMenuPath").val(rs[0]["ssm_method"]);
+            $("#editsubmenumethod").val(rs[0]["ssm_method"]);
         })
     }
 
@@ -1204,10 +1202,10 @@
     function SaveEditSubMenuWeb() {
         var IDEditdetailSubMenu = $('#IDEditdetailSubMenu').val()
         var editSubmenuWebName = $('#editSubmenuWebName').val();
-        var editMenuPath = $('#editSubMenuPath').val();
+        var editMenuPath = $('#editsubmenumethod').val();
 
         var checkEditSubmenuWebName = document.getElementById("editSubmenuWebName")
-        var checkEditMenuPath = document.getElementById("editMenuPath")
+        var checkEditMenuPath = document.getElementById("editsubmenumethod")
 
         if (checkEditSubmenuWebName.value == "" || checkEditMenuPath.value == "") {
             Swal.fire({
@@ -3667,7 +3665,8 @@
         var addstatusconfig = $('#addstatusconfig').val()
         var addinspectionconfig = $('#addinspectionconfig').val()
         var addTimeconfig = $('#addTimeconfig').val()
-        var addMacaddress = $('#addMacaddress').val()
+        var addMacaddress = $('#addMacaddressConfig').val()
+        var addSelectpart = $('#addSelectpart').val()
 
         var checkaddplantconfig = document.getElementById("addplantconfig");
         var checkaddzoneconfig = document.getElementById("addzoneconfig");
@@ -3676,7 +3675,7 @@
         var checkaddstatusconfig = document.getElementById("addstatusconfig");
         var checkaddinspectionconfig = document.getElementById("addinspectionconfig");
         var checkaddTimeconfig = document.getElementById("addTimeconfig");
-        var checkaddMacaddress = document.getElementById("addMacaddress");
+        var checkaddMacaddress = document.getElementById("addMacaddressConfig");
 
         if (checkaddplantconfig.value == "" || checkaddzoneconfig.value == "" || checkaddstationconfig.value == "" ||
             checkaddtypeconfig.value == "" || checkaddstatusconfig.value == "" || checkaddinspectionconfig.value == "" ||
@@ -3700,10 +3699,11 @@
                     addinspectionconfig: addinspectionconfig,
                     addTimeconfig: addTimeconfig,
                     addMacaddress: addMacaddress,
+                    addSelectpart: addSelectpart
                 }
             })
             path.done(function(rs) {
-                alert(rs)
+
                 if (rs === "true") {
                     Swal.fire({
                         icon: 'success',
@@ -3713,10 +3713,17 @@
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ConfigDetail";
                     })
+                } else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Mac Address is Duplicate',
+                        confirmButtonColor: '#D80032'
+
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Zone',
+                        title: 'You Failed to Add Config Detail',
                         confirmButtonColor: '#D80032'
                     })
                 }
@@ -3769,7 +3776,7 @@
         if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
             checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" ||
             checkedittypeconfig.value == "" || checkeditstatusconfig.value == "" ||
-            checkedittimeconfig.value == "" || checkeditMacaddressconfig.value == "") {
+            checkedittimeconfig.value == "") {
             swal({
                 title: "warning",
                 text: "Please fill the textbox ",
@@ -3794,8 +3801,6 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs)
-                console.log(rs)
                 if (rs === "true") {
                     setTimeout(function() {
                         swal({
@@ -3807,6 +3812,13 @@
                             window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
                         });
                     });
+                } else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Mac Address is Duplicate',
+                        confirmButtonColor: '#D80032'
+
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -4086,4 +4098,85 @@
             });
         }
     };
+
+
+    // ----------------------------------------------------- NC/NG Data -----------------------------------------------------------------
+
+
+    function ChangeStatusNG(idd_id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Confirm NG?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#D80032',
+            cancelButtonColor: 'rgb(138 143 145)',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var path = $.ajax({
+                    method: "get",
+                    url: "<?php echo base_url(); ?>Manage/changeStatusNG?idd_id=" + idd_id
+                })
+                path.done(function(rs) {
+                    alert(rs)
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successfully!',
+                            confirmButtonColor: '#D80032'
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to Confirm NG',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+
+    function ChangeStatusNC(idd_id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Confirm NC?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#D80032',
+            cancelButtonColor: 'rgb(138 143 145)',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var path = $.ajax({
+                    method: "get",
+                    url: "<?php echo base_url(); ?>Manage/changeStatusNC?idd_id=" + idd_id
+                })
+                path.done(function(rs) {
+                    alert(rs)
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successfully!',
+                            confirmButtonColor: '#D80032'
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to Confirm NG',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            }
+        })
+    }
 </script>

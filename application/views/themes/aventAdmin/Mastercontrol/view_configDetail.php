@@ -175,12 +175,12 @@
 
                   <div class="form-group"
                     <label for="empcode">Mac Address :</label>
-                    <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
+                    <input class="form-control" type="text" id="addMacaddressConfig" name="addMacaddressConfig">
                   </div>
 
                   <div class="form-group"
                     <label for="empcode">Select Part :</label>
-                    <input class="form-control" type="text" id="addMacaddress" name="addMacaddressconfig">
+                    <input class="form-control" type="text" id="addSelectpart" name="addSelectpart">
                   </div>
 
                 </form>
@@ -299,7 +299,7 @@
 
                   <div class="form-group"
                     <label for="empcode">Mac Address :</label>
-                    <input class="form-control" type="text" id="editmacaddressconfig" name="editmacaddressconfig" placeholder="-">
+                    <input class="form-control" type="text" id="editMacaddressconfig" name="editMacaddressconfig" placeholder="-">
                   </div>
 
                   <div class="form-group"

@@ -494,7 +494,7 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		$IDdetailSubMenu = $_POST["IDdetailSubMenu"];
 		$submenuname = $_POST["addsubmenuwebname"];
-		$path = $_POST["addmenupath"];
+		$path = $_POST["addsubmenupath"];
 
 		$checkSubMenuDuplicate =   $this->backoffice_model->checkDuplicateSubmenuName($submenuname, $path);
 
@@ -636,8 +636,8 @@ class manage extends CI_Controller
 		if ($editgrouppermissionuserapp == "Select group permission") {
 			echo "Select group permission";
 		} else {
-				$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $empcodeadmin);
-				echo $resedituserapp;
+			$resedituserapp = $this->backoffice_model->editManageUserApp($IDedituserapp, $editempcodeuserapp, $editnameapp, $editgrouppermissionuserapp, $empcodeadmin);
+			echo $resedituserapp;
 		}
 	}
 
@@ -781,7 +781,7 @@ class manage extends CI_Controller
 		$addmenupathapp = $_POST["addmenupathapp"];
 		$addmenupicapp = $_POST["addmenupicapp"];
 
-		$checkMenuApp = $this->backoffice_model->checkMenuApp($addmenuappname , $addmenupathapp);
+		$checkMenuApp = $this->backoffice_model->checkMenuApp($addmenuappname, $addmenupathapp);
 
 		if ($checkMenuApp == "pass") {
 			$rsaddmenuapp =  $this->backoffice_model->modelAddMenuApp($addmenuappname, $addmenupathapp, $addmenupicapp, $empcodeadmin);
@@ -789,8 +789,6 @@ class manage extends CI_Controller
 		} else {
 			echo "duplicate";
 		}
-
-	
 	}
 
 	public function swiftStatusMenuApp()
@@ -1733,19 +1731,27 @@ class manage extends CI_Controller
 		$addinspectionconfig = $_POST["addinspectionconfig"];
 		$addTimeconfig = $_POST["addTimeconfig"];
 		$addMacaddress = $_POST["addMacaddress"];
+		$addSelectpart = $_POST["addSelectpart"];
 
-		$rsaddconfig = $this->backoffice_model->modelAddConfigDetails(
-			$addplantconfig,
-			$addzoneconfig,
-			$addstationconfig,
-			$addtypeconfig,
-			$addstatusconfig,
-			$addinspectionconfig,
-			$addTimeconfig,
-			$addMacaddress,
-			$empcodeadmin
-		);
-		echo $rsaddconfig;
+		$checkconfigdetail = $this->backoffice_model->checkConfigDetail($addMacaddress);
+
+		if ($checkconfigdetail == "pass") {
+				$rsaddconfig = $this->backoffice_model->modelAddConfigDetails(
+				$addplantconfig,
+				$addzoneconfig,
+				$addstationconfig,
+				$addtypeconfig,
+				$addstatusconfig,
+				$addinspectionconfig,
+				$addTimeconfig,
+				$addMacaddress,
+				$addSelectpart ,
+				$empcodeadmin
+			);
+			echo $rsaddconfig;
+		} else {
+			echo $checkconfigdetail;
+		}
 	}
 
 	public function getDataEditConfigDetails()
@@ -1768,22 +1774,25 @@ class manage extends CI_Controller
 		$edittimeconfig = $_POST["edittimeconfig"];
 		$editMacaddressconfig = $_POST["editMacaddressconfig"];
 
+		$checkconfigdetail = $this->backoffice_model->checkConfigDetail($editMacaddressconfig);
 
-
-		$rseditconfigdetails = $this->backoffice_model->modelEditConfigDetails(
-			$IDeditconfig,
-			$editplantconfig,
-			$editzoneconfig,
-			$editstationconfig,
-			$edittypeconfig,
-			$editstatusconfig,
-			$editinspectionconfig,
-			$edittimeconfig,
-			$editMacaddressconfig,
-			$empcodeadmin
-		);
-		echo $rseditconfigdetails;
-		// echo $edittimeconfig;
+		if ($checkconfigdetail == "pass") {
+			$rseditconfigdetails = $this->backoffice_model->modelEditConfigDetails(
+				$IDeditconfig,
+				$editplantconfig,
+				$editzoneconfig,
+				$editstationconfig,
+				$edittypeconfig,
+				$editstatusconfig,
+				$editinspectionconfig,
+				$edittimeconfig,
+				$editMacaddressconfig,
+				$empcodeadmin
+			);
+			echo $rseditconfigdetails;
+		} else {
+			echo $checkconfigdetail;
+		}
 	}
 
 
@@ -1909,16 +1918,33 @@ class manage extends CI_Controller
 		$data["getplant"] = $this->backoffice_model->modelGetPlantApp();
 		$data["getzone"] = $this->backoffice_model->modelgetZoneApp();
 		$data["getstation"] = $this->backoffice_model->modelgetStationApp();
-		$data["tableNCNG"] = $this->backoffice_model->getTableNCNG(); 
+		$data["tableNCNG"] = $this->backoffice_model->getTableNCNG();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_NCNGData.php',$data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_NCNGData.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+
+	public function changeStatusNG()
+	{
+		$ngid = $_GET["idd_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->confirmStatusNG($ngid, $empcodeadmin);
+		echo $res;
+	}
+
+	public function changeStatusNC()
+	{
+		$ngid = $_GET["idd_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->confirmStatusNC($ngid, $empcodeadmin);
+		echo $res;
+	}
+
 
 	public function ReturnPart()
 	{

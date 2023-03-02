@@ -41,7 +41,6 @@ class Login extends CI_Controller
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->set_master_template('themes/' . $this->theme . '/Login/view_login.php');
 		$this->template->render();
-
 	}
 
 	public function forgotpassword()
@@ -57,35 +56,48 @@ class Login extends CI_Controller
 		$password_encoded = base64_encode($password);
 		$resultCheckLogin = $this->backoffice_model->modelCheckLogin($empcode, $password_encoded);
 
-
-		$data = $this->backoffice_model->modelCheckLoginSession($empcode, $password_encoded);
-		if ($data == true) {
-			$session_data = array(
-				'id' => $data['ss_id'],
-				'empcode' => $data['ss_emp_code'],
-				'fname' => $data['ss_emp_fname'],
-				'lname' => $data['ss_emp_lname'],
-				'email' => $data['ss_email'],
-				'plant' => $data['mpa_name'],
-				'pic' => $data['ss_pic'],
-				'login' => "OK"
-			);
-			$this->session->set_userdata($session_data);
-		}
-		echo $resultCheckLogin;
-		$id = $data['ss_id'];
-
-		$checklog  = $this->backoffice_model->checklogin_id($id);
-		if ($checklog == false) {
-			$loginlog = $this->backoffice_model->insertlogin($id);
+		if ($resultCheckLogin == "0") {
+			echo "disabled";
+		} else if ($resultCheckLogin == "false") {
+			echo "false";
 		} else {
-			$null_logout = $checklog['lsa_logout_date'];
-
-			if ($null_logout == null) {
-				$checkMaxid = $this->backoffice_model->maxlogId($id);
-				$insertlog = $this->backoffice_model->insertloginaddUpdate($id, $checkMaxid);
+			$checkstatusgroup = $this->backoffice_model->modelCheckLoginGroup($empcode);
+			if ($checkstatusgroup == "0") {
+				echo "disabledgroup";
+			} else if ($checkstatusgroup == "false") {
+				echo "false";
 			} else {
-				$loginlog = $this->backoffice_model->insertlogin($id);
+				$checkstatusgroup = "true";
+				$data = $this->backoffice_model->modelCheckLoginSession($empcode, $password_encoded);
+				if ($data == true) {
+					$session_data = array(
+						'id' => $data['ss_id'],
+						'empcode' => $data['ss_emp_code'],
+						'fname' => $data['ss_emp_fname'],
+						'lname' => $data['ss_emp_lname'],
+						'email' => $data['ss_email'],
+						'plant' => $data['mpa_name'],
+						'pic' => $data['ss_pic'],
+						'login' => "OK"
+					);
+					$this->session->set_userdata($session_data);
+				}
+				echo $checkstatusgroup;
+				$id = $data['ss_id'];
+
+				$checklog  = $this->backoffice_model->checklogin_id($id);
+				if ($checklog == false) {
+					$loginlog = $this->backoffice_model->insertlogin($id);
+				} else {
+					$null_logout = $checklog['lsa_logout_date'];
+
+					if ($null_logout == null) {
+						$checkMaxid = $this->backoffice_model->maxlogId($id);
+						$insertlog = $this->backoffice_model->insertloginaddUpdate($id, $checkMaxid);
+					} else {
+						$loginlog = $this->backoffice_model->insertlogin($id);
+					}
+				}
 			}
 		}
 	}

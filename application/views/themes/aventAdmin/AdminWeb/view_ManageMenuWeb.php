@@ -162,7 +162,7 @@
                     }
                     echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"EditDetailSubmenu$i\" name =\"EditDetailSubmenu$i\" data-target=\"#moDalEditDetailSubMenu\"  onclick='getDataEditDetailSubmenu(" . $DetailSub["ssm_id"] . ")'><i
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"EditDetailSubmenu$i\" name =\"EditDetailSubmenu$i\" data-target=\"#moDalEditDetailSubMenu\"  onclick='getDataEditDetailSubmenuWeb(" . $DetailSub["ssm_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -193,14 +193,11 @@
 
                   <div class="form-group"
                     <label for="password">Method :</label>
-                    <input class="form-control" type="text" id="addmenupath" name="addmenupath" required="" placeholder="Enter path of menu">
+                    <input class="form-control" type="text" id="addsubmenupath" name="addsubmenupath" required="" placeholder="Enter path of menu">
                   </div>
 
 
-                  <!-- <div class="form-group">
-                    <label for="password">icon name :</label>
-                    <input class="form-control" type="text" id="addmenuicon" name="addmenuicon" required="" placeholder="Enter icon name of menu">
-                  </div> -->
+
 
                 </form>
 
@@ -217,7 +214,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i> Edit Submenu</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-library-plus"></i>Edit Submenu</h5>
                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -231,7 +228,7 @@
 
                   <div class="form-group">
                     <label for="password">Method :</label>
-                    <input class="form-control" type="text" id="editSubMenuPath" name="editSubMenuPath">
+                    <input class="form-control" type="text" id="editsubmenumethod" name="editsubmenumethod">
                   </div>
 
                 </form>
