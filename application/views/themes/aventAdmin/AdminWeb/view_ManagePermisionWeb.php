@@ -12,8 +12,8 @@
             <table id="example" class="display table" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
-                  <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Permission Name</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); ">NO.</th>
+                  <th style="border-bottom: 2px solid rgb(207 0 46); ">Permission Name</th>
                   <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
                   <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Details</th>
                   <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>

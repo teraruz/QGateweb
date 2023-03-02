@@ -501,9 +501,10 @@
         })
     };
 
-    function isValidInput(input) {
+    function isValidInput(input,input2) {
+       
         var pattern = new RegExp(/^([a-z0-9])+$/i);
-        return pattern.test(input);
+        return pattern.test(input,input2);
     }
 
 
@@ -535,8 +536,8 @@
             })
 
         } else {
-            if (addemail != 0) {
-                if (isValidInput(addemail)) {
+            if (addempcode != 0) {
+                if (isValidInput(addempcode)) {
                     var path = $.ajax({
                         method: "POST",
                         url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
@@ -551,6 +552,7 @@
                         }
                     })
                     path.done(function(rs) {
+                        alert(rs)
                         if (rs === "true") {
                             Swal.fire({
                                 icon: 'success',
@@ -578,10 +580,10 @@
                                 title: 'Email is Duplicate',
                                 confirmButtonColor: '#D80032'
                             })
-                        } else if (rs == "falsadd") {
+                        } else if (rs == "empduplicate") {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Name  is Duplicate',
+                                title: 'Employee Code is Duplicate',
                                 confirmButtonColor: '#D80032'
                             })
                         } else {
@@ -593,15 +595,7 @@
                         }
                     })
 
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You failed to register',
-                        text: 'Special characters cannot be entered.'
-                    })
-                }
-
-
+                } 
             }
         }
     };

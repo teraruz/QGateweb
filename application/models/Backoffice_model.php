@@ -269,13 +269,13 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-	public function checkUserAdd($empcode)
+	public function checkEmpUserAdd($empcode)
 	{
 		$sql = "select sys_staff_web.ss_emp_code from sys_staff_web WHERE sys_staff_web.ss_emp_code ='{$empcode}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		if ($row) {
-			return "false";
+			return "empduplicate";
 		} else {
 			return "true";
 		}
@@ -307,6 +307,17 @@ class Backoffice_model extends CI_Model
 		// } else {
 		// 	return "true";
 		// }
+	}
+	public function checkempcodeUserAdd($empcode)
+	{
+		$sql = "SELECT ss_emp_code FROM sys_staff_web WHERE ss_emp_code ='{$empcode}'";
+		$res = $this->db->query($sql);
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0]["ss_emp_code"];
+		} else {
+			return "false";
+		}
 	}
 	public function getTableGroupPermission()
 	{

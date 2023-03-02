@@ -219,7 +219,7 @@ class manage extends CI_Controller
 		$email = $_POST["addemail"];
 		$password = $_POST["addpassword"];
 		$plant = $_POST["addplant"];
-		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
+		$rscheck = $this->backoffice_model->checkEmpUserAdd($empcode);
 		if ($groupper == "Select group permission") {
 			echo "Select group permission";
 		} else {
@@ -227,11 +227,7 @@ class manage extends CI_Controller
 				echo "Select plant";
 			} else {
 				if ($rscheck === "true") {
-					$checkfullname = $this->backoffice_model->checknameAdd($firstname, $lastname);
-
-					if ($checkfullname == "true") {
 						$emailcheck = $this->backoffice_model->checkEmailUserAdd($email);
-
 						if ($emailcheck == $email) {
 							echo "duplicate";
 						} else {
@@ -239,9 +235,6 @@ class manage extends CI_Controller
 							$rs = $this->backoffice_model->insertUserWeb($empcode, $firstname, $lastname, $email, $groupper, $password_encoded, $plant, $empcodeadmin);
 							echo $rs;
 						}
-					} else {
-						echo "falsadd";
-					}
 				} else {
 					echo $rscheck;
 				}
@@ -1736,7 +1729,7 @@ class manage extends CI_Controller
 		$checkconfigdetail = $this->backoffice_model->checkConfigDetail($addMacaddress);
 
 		if ($checkconfigdetail == "pass") {
-				$rsaddconfig = $this->backoffice_model->modelAddConfigDetails(
+			$rsaddconfig = $this->backoffice_model->modelAddConfigDetails(
 				$addplantconfig,
 				$addzoneconfig,
 				$addstationconfig,
@@ -1745,7 +1738,7 @@ class manage extends CI_Controller
 				$addinspectionconfig,
 				$addTimeconfig,
 				$addMacaddress,
-				$addSelectpart ,
+				$addSelectpart,
 				$empcodeadmin
 			);
 			echo $rsaddconfig;
