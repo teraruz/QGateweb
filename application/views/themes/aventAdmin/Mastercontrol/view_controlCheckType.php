@@ -29,7 +29,7 @@
                   if ($Checktype["mct_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusCheckStatus(" . $Checktype["mct_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusCheckType(" . $Checktype["mct_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                             </div>
                                        
@@ -37,7 +37,7 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusCheckStatus(" . $Checktype["mct_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusCheckType(" . $Checktype["mct_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";

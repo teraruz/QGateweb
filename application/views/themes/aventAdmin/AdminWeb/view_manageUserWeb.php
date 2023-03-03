@@ -159,7 +159,7 @@
                   <div class="form-group"
                     <label for="empcode">Employee Code :</label>
                     <input class="form-control" type="text" id="addempcode" required="" name="addempcode"
-                      placeholder="Enter employee code">
+                      placeholder="Enter employee code" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*">
                   </div>
 
                   <div class="form-group"
@@ -198,7 +198,7 @@
                     <label for="password">Password :</label>
                     <input class="form-control" type="password" id="addpassword" name="addpassword" required=""
                       placeholder="Enter password">
-                  </div>
+                 </div>
 
                   <div class="form-group"
                     <label for="password">Plant :</label>

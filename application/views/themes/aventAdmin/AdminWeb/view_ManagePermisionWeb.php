@@ -25,7 +25,7 @@
                 foreach ($tablePermissionWeb as $value) {
                   $i++;
                   echo "<tr>";
-                  echo "<td>" . $value["spg_id"] . "</td>";
+                  echo "<td>" . $i . "</td>";
                   echo "<td>" . $value["spg_name"] . "</td>";
                   if ($value["spg_status"] == "1") {
                     echo "<td>          

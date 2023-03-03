@@ -78,7 +78,7 @@
 
                   <div class="form-group"
                     <label for="NameMenuWeb">Menu Name :</label>
-                    <input class="form-control" type="text" id="addMenuName" name="addMenuName">
+                    <input class="form-control" type="text" id="addMenuNameweb" name="addMenuNameweb">
                   </div>
 
                 </form>

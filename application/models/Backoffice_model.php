@@ -389,14 +389,14 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 	public function checkAddNamePermissionWeb($permissionwebname)
-	{ //ถ้าquery แล้วมีอยู่ใน DB Return false ไม่ให้Add
-		$sql = "SELECT * FROM sys_permission_group_web WHERE spg_name = '{$permissionwebname}'";
+	{ 
+		$sql = "SELECT spg_name FROM sys_permission_group_web WHERE spg_name = '{$permissionwebname}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
-		if (empty($row)) {
-			return "true";
-		} else {
+		if ($row) {
 			return "false";
+		} else {
+			return "true";
 		}
 	}
 	public function insertPermissionWeb($permissionwebname, $empcodeadmin)
@@ -404,16 +404,16 @@ class Backoffice_model extends CI_Model
 		$sql = "INSERT INTO sys_permission_group_web(spg_name, spg_create_by, spg_create_date)
 		VALUES ('{$permissionwebname}', '{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
-		if (empty($res)) {
-			return "false";
-		} else {
+		if ($res) {
 			return "true";
+		} else {
+			return "false";
 		}
 	}
-	public function insertPermissionDetailWeb($permissionwebnameconvert, $checkboxaddsubmenu, $empcodeadmin)
+	public function insertPermissionDetailWeb($idpermissionname, $valuesubmenu, $empcodeadmin)
 	{
-		$sql = "INSERT INTO sys_permission_detail_web (spg_id,ssm_id,create_by,create_date)
-		VALUES ('{$permissionwebnameconvert}','{$checkboxaddsubmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		$sql = "INSERT INTO sys_permission_detail_web (spg_id, ssm_id, spd_create_by , spd_create_date)
+		VALUES ('{$idpermissionname}','{$valuesubmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -603,8 +603,12 @@ class Backoffice_model extends CI_Model
 
 	public function modelInsertdataEditper($id, $dropdowneditsubmenu, $empcodeadmin)
 	{
-		$sql = "INSERT INTO sys_permission_detail_web 
-		(spg_id,ssm_id,create_by,create_date)
+		$sql = "INSERT INTO 
+		sys_permission_detail_web (
+		spg_id,
+		ssm_id,
+		spd_create_by,
+		spd_create_date )
 		VALUES('{$id}','{$dropdowneditsubmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
 		if ($res) {
@@ -1243,6 +1247,18 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
+
+	public function modelCheckNameType($addparttypename)
+	{
+		$sql = "SELECT mct_name FROM mst_check_type_app WHERE mct_name = '{$addparttypename}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 	public function modelAddCheckType($addparttypename, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_check_type_app (mct_name, mct_create_by , mct_create_date)
@@ -1257,7 +1273,7 @@ class Backoffice_model extends CI_Model
 
 	public function editStatusCheckType($CheckTypeId, $empcodeadmin)
 	{
-		$sql = "select * from mst_check_type_app WHERE mct_id = '{$CheckTypeId}'";
+		$sql = "SELECT * FROM mst_check_type_app WHERE mct_id = '{$CheckTypeId}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["mct_status"];
@@ -1353,6 +1369,17 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
+	public function modelCheckAddStatus($addstatusname)
+	{
+		$sql = "SELECT mcs_name FROM mst_check_status_app WHERE mcs_name = '{$addstatusname}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 
 	public function modelAddStatus($addstatusname, $empcodeadmin)
 	{
@@ -1429,6 +1456,17 @@ class Backoffice_model extends CI_Model
 			}
 		} else {
 			return  true;
+		}
+	}
+	public function modelCheckAddInspection($addinspectiontype)
+	{
+		$sql = "SELECT mit_name FROM mst_inspection_type_app WHERE mit_name = '{$addinspectiontype}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
 		}
 	}
 
@@ -1512,7 +1550,17 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-
+	public function modelCheckAddDMC($adddmcname)
+	{
+		$sql = "SELECT mdd_name FROM mst_dmc_data_app WHERE mdd_name = '{$adddmcname}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 	public function modelAddDMC($adddmcname, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_dmc_data_app (mdd_name, mdd_create_by , mdd_create_date)
@@ -1562,7 +1610,7 @@ class Backoffice_model extends CI_Model
 	}
 
 
-	public function editStatusDMCType($dmctypeId)
+	public function editStatusDMCType($dmctypeId, $empcodeadmin)
 	{
 		$sql = "select * from mst_dmc_type_app WHERE mdt_id = '{$dmctypeId}'";
 		$res = $this->db->query($sql);
@@ -1572,7 +1620,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_dmc_type_app SET mdt_status = 0 WHERE  mdt_id = '{$dmctypeId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_dmc_type_app SET mdt_update_by = '{$empcodeadmin}' , mdt_update_date = CURRENT_TIMESTAMP
-			WHERE  mdt_id  = '{$dmcId}'";
+			WHERE  mdt_id  = '{$dmctypeId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1583,7 +1631,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_dmc_type_app SET mdt_status = 1 WHERE  mdt_id = '{$dmctypeId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_dmc_type_app SET mdt_update_by = '{$empcodeadmin}' , mdt_update_date = CURRENT_TIMESTAMP
-			WHERE  mdt_id  = '{$dmcId}'";
+			WHERE  mdt_id  = '{$dmctypeId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1595,7 +1643,17 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-
+	public function modelCheckAddDMCType($adddmctypename)
+	{
+		$sql = "SELECT mdt_name FROM mst_dmc_type_app WHERE mdt_name = '{$adddmctypename}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 	public function modelAddDMCType($adddmctypename, $adddmcdigit, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_dmc_type_app (mdt_name, mdt_digit, mdt_create_by , mdt_create_date)
@@ -1645,7 +1703,7 @@ class Backoffice_model extends CI_Model
 
 	public function editStatusFACode($facodeId, $empcodeadmin)
 	{
-		$sql = "select * from mst_fa_code_master_app WHERE mfcm_id = '{$facodeId}'";
+		$sql = "SELECT * FROM mst_fa_code_master_app WHERE mfcm_id = '{$facodeId}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["mfcm_status"];
@@ -1653,7 +1711,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_fa_code_master_app SET mfcm_status = 0 WHERE  mfcm_id = '{$facodeId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_fa_code_master_app SET mfcm_update_by = '{$empcodeadmin}' , mfcm_update_date = CURRENT_TIMESTAMP
-			WHERE  mfcm_id  = '{$dmcId}'";
+			WHERE  mfcm_id  = '{$facodeId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1664,7 +1722,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_fa_code_master_app SET mfcm_status = 1 WHERE  mfcm_id = '{$facodeId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_fa_code_master_app SET mfcm_update_by = '{$empcodeadmin}' , mfcm_update_date = CURRENT_TIMESTAMP
-			WHERE  mfcm_id  = '{$dmcId}'";
+			WHERE  mfcm_id  = '{$facodeId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1673,6 +1731,17 @@ class Backoffice_model extends CI_Model
 			}
 		} else {
 			return  true;
+		}
+	}
+	public function modelCheckAddFACode($addfaname)
+	{
+		$sql = "SELECT mfcm_name_code FROM mst_fa_code_master_app WHERE mfcm_name_code = '{$addfaname}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if ($row) {
+			return "duplicate";
+		} else {
+			return "pass";
 		}
 	}
 

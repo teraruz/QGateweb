@@ -31,7 +31,7 @@
                   if ($facode["mfcm_status"] == "1") {
                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusFACode$i checked onclick='statusFACode(" . $facode["mfcm_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusFACode$i checked onclick='statusFACodeMaster(" . $facode["mfcm_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusFACode$i></label>
                                             </div>
                                        
@@ -39,7 +39,7 @@
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusFACode$i onclick='statusFACode(" . $facode["mfcm_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusFACode$i onclick='statusFACodeMaster(" . $facode["mfcm_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusFACode$i></label>
                                         </div>
                                     </td>";

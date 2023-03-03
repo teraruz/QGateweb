@@ -170,7 +170,6 @@
 
     // รับresult กลับมาจาก controller เพื่อกำหนดเงื่อนไข
     path.done(function(rs) {
-      alert(rs)
       var empcode = $("#empcode").val();
       if (rs === "true") {
         Swal.fire({

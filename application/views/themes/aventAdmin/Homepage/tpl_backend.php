@@ -501,13 +501,16 @@
         })
     };
 
-    function isValidInput(input,input2) {
-       
+    function isValidInput(input) {
         var pattern = new RegExp(/^([a-z0-9])+$/i);
-        return pattern.test(input,input2);
+        return pattern.test(input);
     }
 
 
+    function isValidEmail(input) {
+        var pattern = new RegExp(/^([a-zA-Z0-9\-_\.]{6,20})+@([a-zA-Z0-9]{2,10})+\.([a-zA-z0-9]{2,10})+$/i);
+        return pattern.test(input);
+    }
 
     function addUserWeb() {
         var addempcode = $('#addempcode').val();
@@ -538,64 +541,101 @@
         } else {
             if (addempcode != 0) {
                 if (isValidInput(addempcode)) {
-                    var path = $.ajax({
-                        method: "POST",
-                        url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
-                        data: {
-                            addempcode: addempcode,
-                            addfirstname: addfirstname,
-                            addlastname: addlastname,
-                            addgroupper: addgroupper,
-                            addemail: addemail,
-                            addpassword: addpassword,
-                            addplant: addplant,
-                        }
-                    })
-                    path.done(function(rs) {
-                        alert(rs)
-                        if (rs === "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'You have Successfully Add Employee.',
-                                confirmButtonColor: '#D80032'
+                    if (isValidInput(addfirstname)) {
+                        if (isValidInput(addlastname)) {
+                            if (isValidEmail(addemail)) {
+                                var path = $.ajax({
+                                    method: "POST",
+                                    url: "<?php echo base_url(); ?>Manage/addManageUserWeb",
+                                    data: {
+                                        addempcode: addempcode,
+                                        addfirstname: addfirstname,
+                                        addlastname: addlastname,
+                                        addgroupper: addgroupper,
+                                        addemail: addemail,
+                                        addpassword: addpassword,
+                                        addplant: addplant
+                                    }
+                                })
+                                path.done(function(rs) {
+                                    alert(rs)
+                                    if (rs === "true") {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'You have Successfully Add Employee.',
+                                            confirmButtonColor: '#D80032'
 
-                            }).then(function() {
-                                window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
-                            })
-                        } else if (rs == "Select group permission") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Group Permission is Empty',
-                                confirmButtonColor: '#D80032'
-                            })
-                        } else if (rs == "Select plant") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Plant of Employee is Empty',
-                                confirmButtonColor: '#D80032'
-                            })
-                        } else if (rs == "duplicate") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Email is Duplicate',
-                                confirmButtonColor: '#D80032'
-                            })
-                        } else if (rs == "empduplicate") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Employee Code is Duplicate',
-                                confirmButtonColor: '#D80032'
-                            })
+                                        }).then(function() {
+                                            window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
+                                        })
+                                    } else if (rs == "Select group permission") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Group Permission is Empty',
+                                            confirmButtonColor: '#D80032'
+                                        })
+                                    } else if (rs == "Select plant") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Plant of Employee is Empty',
+                                            confirmButtonColor: '#D80032'
+                                        })
+                                    } else if (rs == "duplicate") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Email is Duplicate',
+                                            confirmButtonColor: '#D80032'
+                                        })
+                                    } else if (rs == "empduplicate") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Employee Code is Duplicate',
+                                            confirmButtonColor: '#D80032'
+                                        })
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'You Failed to Add Employee',
+                                            confirmButtonColor: '#D80032'
+                                        })
+                                    }
+                                })
+
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Email is incorrect',
+                                    confirmButtonColor: '#D80032'
+                                })
+                            }
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'You Failed to Add Employee',
+                                title: 'Error',
+                                text: 'Cannot insert special character in Last Name',
                                 confirmButtonColor: '#D80032'
                             })
+
                         }
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Cannot insert special character in First Name',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Cannot insert special character in Employee Code',
+                        confirmButtonColor: '#D80032'
                     })
 
-                } 
+                }
             }
         }
     };
@@ -664,6 +704,24 @@
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/ManageUserWeb";
                     })
+                } else if (rs == "Select group permission") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Group Permission is Empty',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else if (rs == "Select plant") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Plant of Employee is Empty',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else if (rs == "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -703,7 +761,6 @@
             //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
             //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
             if (this.checked == true) {
-                console.log("sssssssssssssssss==>", this.value)
                 // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
                 dataSubMenuId[key] = this.value
                 // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
@@ -718,34 +775,47 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            console.log("==>", dataSubMenuId)
-            var path = $.ajax({
-                method: "GET",
-                url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
-                data: {
-                    addPermissionwebname: addPermissionwebname,
-                    dataSubMenuId: dataSubMenuId
-                }
-            })
-            path.done(function(rs) {
-                alert(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Permission.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addPermissionwebname)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddManagePermissionWeb",
+                    data: {
+                        addPermissionwebname: addPermissionwebname,
+                        dataSubMenuId: dataSubMenuId
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Permission.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add Permission',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
+                        })
+                    } else if (rs === "perwebduplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Permission Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add Permission',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Permission Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -820,7 +890,6 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs)
                 if (rs === "true") {
                     setTimeout(function() {
                         swal({
@@ -831,6 +900,27 @@
                         }, function() {
                             window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
                         });
+                    });
+                } else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Permission menu is duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else if (rs === "cantupdate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Cannot Edit Permission',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else if (rs === "updatename") {
+                    swal({
+                        title: "Success",
+                        text: "Permission Name is Updated!",
+                        type: "success",
+                        confirmButtonColor: '#D80032'
+                    }, function() {
+                        window.location = "<?php echo base_url() ?>Manage/ManagePermisionWeb";
                     });
                 } else {
                     Swal.fire({
@@ -932,9 +1022,9 @@
 
     function SaveAddMenuWeb() {
 
-        var addMenuName = $("#addMenuName").val();
+        var addMenuName = $("#addMenuNameweb").val();
 
-        var checkaddMenuName = document.getElementById("addMenuName");
+        var checkaddMenuName = document.getElementById("addMenuNameweb");
 
         if (checkaddMenuName.value == "") {
             swal({
@@ -946,39 +1036,48 @@
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
             });
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
-                data: {
-                    addMenuName: addMenuName
-                }
-            })
-            path.done(function(rs) {
-                if (rs == "true") {
-                    if (rs === "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'You have Successfully Add Menu Web.',
-                            confirmButtonColor: '#D80032'
-
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
-                        })
-                    } else if (rs === "datadupicate") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Data is Duplicate',
-                            confirmButtonColor: '#D80032'
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Add Menu Web',
-                            confirmButtonColor: '#D80032'
-                        })
+            if (isValidInput(addMenuName)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddManageMenuWeb",
+                    data: {
+                        addMenuName: addMenuName
                     }
-                }
-            });
+                })
+                path.done(function(rs) {
+                    if (rs == "true") {
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Add Menu Web.',
+                                confirmButtonColor: '#D80032'
+
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                            })
+                        } else if (rs === "datadupicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data is Duplicate',
+                                confirmButtonColor: '#D80032'
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add Menu Web',
+                                confirmButtonColor: '#D80032'
+                            })
+                        }
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Menu name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
@@ -1799,31 +1898,46 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddCheckType",
-                data: {
-                    addparttypename: addparttypename,
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Type Part.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addparttypename)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddCheckType",
+                    data: {
+                        addparttypename: addparttypename,
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Type Part.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/CheckType";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  Type Part',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/CheckType";
+                        })
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Type Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add  Type Part',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Type Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -1859,35 +1973,43 @@
                 window.location = "<?php echo base_url() ?>Manage/CheckType";
             });
         } else {
-
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditCheckType",
-                data: {
-                    IDeditparttype: IDeditparttype,
-                    editparttypeName: editparttypeName
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "Type is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/CheckType";
+            if (isValidInput(editparttypeName)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditCheckType",
+                    data: {
+                        IDeditparttype: IDeditparttype,
+                        editparttypeName: editparttypeName
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "Type is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/CheckType";
+                            });
                         });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit Type',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit Type',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Type Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
@@ -1921,31 +2043,46 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddStatus",
-                data: {
-                    addstatusname: addstatusname,
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Status.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addstatusname)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddStatus",
+                    data: {
+                        addstatusname: addstatusname,
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Status.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/CheckStatus";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  Status',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/CheckStatus";
+                        })
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Type Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add  Status',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Status Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -1981,35 +2118,43 @@
                 window.location = "<?php echo base_url() ?>Manage/CheckStatus";
             });
         } else {
-
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditCheckStatus",
-                data: {
-                    IDeditStatusName: IDeditStatusName,
-                    editStatusName: editStatusName
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "Status Name is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/CheckStatus";
+            if (isValidInput(editStatusName)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditCheckStatus",
+                    data: {
+                        IDeditStatusName: IDeditStatusName,
+                        editStatusName: editStatusName
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "Status Name is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/CheckStatus";
+                            });
                         });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit Status Name',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit Status Name',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Status Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
@@ -2043,31 +2188,41 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddInspection",
-                data: {
-                    addinspectiontype: addinspectiontype,
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Inspection.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addinspectiontype)) {
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/InspectionType";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  Inspection',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddInspection",
+                    data: {
+                        addinspectiontype: addinspectiontype,
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Inspection.',
+                            confirmButtonColor: '#D80032'
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/InspectionType";
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add  Inspection',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Inspection Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -2103,35 +2258,50 @@
                 window.location = "<?php echo base_url() ?>Manage/InspectionType";
             });
         } else {
+            if (isValidInput(editInspectionName)) {
 
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditInspection",
-                data: {
-                    IDeditInspectionName: IDeditInspectionName,
-                    editInspectionName: editInspectionName
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "Inspection Name is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/InspectionType";
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditInspection",
+                    data: {
+                        IDeditInspectionName: IDeditInspectionName,
+                        editInspectionName: editInspectionName
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "Inspection Name is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/InspectionType";
+                            });
                         });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit Inspection Name',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Inspection Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit Inspection Name',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Inspection Type',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
@@ -2166,31 +2336,47 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddDMCData",
-                data: {
-                    adddmcname: adddmcname,
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add DMC Data.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(adddmcname)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddDMCData",
+                    data: {
+                        adddmcname: adddmcname,
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add DMC Data.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/DMCData";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  DMC Data',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/DMCData";
+                        })
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'DMC Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add  DMC Data',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in DMC Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
+
         }
     };
 
@@ -2226,35 +2412,50 @@
                 window.location = "<?php echo base_url() ?>Manage/DMCData";
             });
         } else {
-
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditDMC",
-                data: {
-                    IDeditdmcname: IDeditdmcname,
-                    editdmcname: editdmcname
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "DMC Data  is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/DMCData";
+            if (isValidInput(editdmcname)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditDMC",
+                    data: {
+                        IDeditdmcname: IDeditdmcname,
+                        editdmcname: editdmcname
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "DMC Data  is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/DMCData";
+                            });
                         });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit DMC Data',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'DMC Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit DMC Data',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in DMC name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
+
         }
     }
 
@@ -2293,32 +2494,47 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddDMCType",
-                data: {
-                    adddmctypename: adddmctypename,
-                    adddmcdigit: adddmcdigit
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add DMC Type.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(adddmctypename)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddDMCType",
+                    data: {
+                        adddmctypename: adddmctypename,
+                        adddmcdigit: adddmcdigit
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add DMC Type.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/DMCType";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add  DMC Data Type',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/DMCType";
+                        })
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'DMC is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add  DMC Type',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in DMC Type Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -2357,36 +2573,44 @@
                 window.location = "<?php echo base_url() ?>Manage/DMCType";
             });
         } else {
-
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditDMCType",
-                data: {
-                    IDeditdmctype: IDeditdmctype,
-                    editdmctypename: editdmctypename,
-                    editdmcdigit: editdmcdigit
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "DMC Type  is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/DMCType";
+            if (isValidInput(editdmctypename)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditDMCType",
+                    data: {
+                        IDeditdmctype: IDeditdmctype,
+                        editdmctypename: editdmctypename,
+                        editdmcdigit: editdmcdigit
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "DMC Type  is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/DMCType";
+                            });
                         });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit DMC Type',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit DMC Type',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in DMC Type Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
 
     }
@@ -2403,7 +2627,7 @@
     })
 
 
-    function statusFACode(mfcm_id) {
+    function statusFACodeMaster(mfcm_id) {
         var path = $.ajax({
             method: "get",
             url: "<?php echo base_url(); ?>Manage/swiftStatusFACode?mfcm_id=" + mfcm_id
@@ -2427,32 +2651,56 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddFACode",
-                data: {
-                    addfaline: addfaline,
-                    addfaname: addfaname
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add FA Code.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addfaline)) {
+                if (isValidInput(addfaname)) {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/AddFACode",
+                        data: {
+                            addfaline: addfaline,
+                            addfaname: addfaname
+                        }
+                    })
+                    path.done(function(rs) {
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Add FA Code.',
+                                confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/FACode";
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/FACode";
+                            })
+                        } else if (rs == "duplicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'FA Name is Duplicate',
+                                confirmButtonColor: '#D80032'
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add  FA Code',
+                                confirmButtonColor: '#D80032'
+                            })
+                        }
                     })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add  FA Code',
+                        title: 'Error',
+                        text: 'Cannot insert special character in FA name',
                         confirmButtonColor: '#D80032'
                     })
                 }
-            })
+            }else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Cannot insert special character in FA Line',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
         }
     };
 
@@ -2491,36 +2739,44 @@
                 window.location = "<?php echo base_url() ?>Manage/FACode";
             });
         } else {
-
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditFACode",
-                data: {
-                    IDeditfacode: IDeditfacode,
-                    editfaline: editfaline,
-                    editfaname: editfaname
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "FA Code is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/FACode";
+            if (isValidInput(editfaname)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditFACode",
+                    data: {
+                        IDeditfacode: IDeditfacode,
+                        editfaline: editfaline,
+                        editfaname: editfaname
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "FA Code is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/FACode";
+                            });
                         });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit FA Code',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit FA Code',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in FA name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
