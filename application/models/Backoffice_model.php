@@ -1805,7 +1805,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_work_shift_app SET mws_status = 0 WHERE  mws_id = '{$workshiftId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_work_shift_app SET mws_update_by = '{$empcodeadmin}' , mws_update_date = CURRENT_TIMESTAMP
-			WHERE  mws_id  = '{$dmcId}'";
+			WHERE  mws_id  = '{$workshiftId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1816,7 +1816,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_work_shift_app SET mws_status = 1 WHERE  mws_id = '{$workshiftId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_work_shift_app SET mws_update_by = '{$empcodeadmin}' , mws_update_date = CURRENT_TIMESTAMP
-			WHERE  mws_id  = '{$dmcId}'";
+			WHERE  mws_id  = '{$workshiftId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1827,6 +1827,21 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
+	public function modelCheckWorkShift($addshift)
+	{
+		$sql = "SELECT
+		mws_shift
+		FROM
+		mst_work_shift_app
+		WHERE mws_shift = '{$addshift}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
+
 
 	public function modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin)
 	{
@@ -1891,7 +1906,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_defect_app SET md_status = 0 WHERE  md_id = '{$defectId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_defect_app SET md_update_by = '{$empcodeadmin}' , md_update_date = CURRENT_TIMESTAMP
-			WHERE  md_id  = '{$dmcId}'";
+			WHERE  md_id  = '{$defectId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1902,7 +1917,7 @@ class Backoffice_model extends CI_Model
 			$sql = "UPDATE mst_defect_app SET md_status = 1 WHERE  md_id = '{$defectId}'";
 			$res = $this->db->query($sql);
 			$sqlupdate = "UPDATE mst_defect_app SET md_update_by = '{$empcodeadmin}' , md_update_date = CURRENT_TIMESTAMP
-			WHERE  md_id  = '{$dmcId}'";
+			WHERE  md_id  = '{$defectId}'";
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
 				return true;
@@ -1911,6 +1926,21 @@ class Backoffice_model extends CI_Model
 			}
 		} else {
 			return  true;
+		}
+	}
+
+	public function modelCheckDefect($defect)
+	{
+		$sql = "SELECT
+		md_defect_code
+		FROM
+		mst_defect_app
+		WHERE md_defect_code = '{$defect}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "duplicate";
+		} else {
+			return "pass";
 		}
 	}
 
@@ -2044,7 +2074,6 @@ class Backoffice_model extends CI_Model
 		msp_id,
 		mpa.mpa_phase_plant,
 		mza.mza_name ,
-		mdt.mdt_name ,
 		msp_part_no ,
 		msp_part_name ,
 		msp_status
@@ -2092,10 +2121,10 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function modelAddSelectPart($addselectpCon, $addselectpdmc, $addselectpno, $addselectpname, $addselectptime, $empcodeadmin)
+	public function modelAddSelectPart($addselectConfig, $addselectpno, $addselectpname, $addselectptime, $empcodeadmin)
 	{
-		$sql = "INSERT INTO mst_select_part_app (mcd_id, mdtd_id , msp_part_no , msp_part_name, msp_inspection_time , msp_create_by , msp_create_date)
-		VALUES ('{$addselectpCon}','{$addselectpdmc}', '{$addselectpno}','{$addselectpname}','{$addselectptime}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$sql = "INSERT INTO mst_select_part_app (mcd_id, msp_part_no, msp_part_name, msp_create_by, msp_create_date)
+		VALUES ('{$addselectConfig}', '{$addselectpno}','{$addselectpname}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -2106,19 +2135,29 @@ class Backoffice_model extends CI_Model
 
 	public function getDataEditSelectPart($selectpId)
 	{
-		$sql = "SELECT msp_id, mcd_id, mdtd_id , msp_part_no , msp_part_name , msp_inspection_time
-		FROM mst_select_part_app
-		WHERE msp_id = '{$selectpId}'";
+		$sql = "SELECT
+		msp_id,
+		msp.mcd_id,
+		mpa_phase_plant,
+		mza_name,
+		msp_part_no,
+		msp_part_name
+	FROM
+		mst_select_part_app msp
+	INNER JOIN mst_config_details_app mcd ON mcd.mcd_id = msp.mcd_id
+	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
+	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
+	WHERE
+		msp_id = '{$selectpId}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
 	}
-	public function modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno, $editselectpname, $editselectptime, $empcodeadmin)
+	public function modelEditSelectPart($IDeditselectp, $editselectpCon,$editselectpno, $editselectpname,$empcodeadmin)
 	{
 		$sql = "UPDATE mst_select_part_app 
-			SET mcd_id = '{$editselectpCon}', mdtd_id = '{$editselectpdmc}',  msp_part_no = '{$editselectpno}' , 
-			msp_part_name = '{$editselectpname}' , msp_inspection_time = '{$editselectptime}' ,
-			msp_update_by = '{$empcodeadmin}', msp_update_date = CURRENT_TIMESTAMP
+			SET mcd_id = '{$editselectpCon}',msp_part_no = '{$editselectpno}' , 
+			msp_part_name = '{$editselectpname}' , msp_update_by = '{$empcodeadmin}', msp_update_date = CURRENT_TIMESTAMP
 			WHERE  msp_id = '{$IDeditselectp}'";
 		$res = $this->db->query($sql);
 		if ($res) {
@@ -2353,7 +2392,20 @@ class Backoffice_model extends CI_Model
 			return  true;
 		}
 	}
-
+	public function modelCheckZone($line)
+	{
+		$sql = "SELECT
+		mza_name
+		FROM
+		mst_zone_admin_app
+		WHERE mza_name = '{$line}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 	public function modelAddZone($addnamezone, $addlinezone, $empcodeadmin)
 	{
 		$sql = "INSERT INTO mst_zone_admin_app (mza_name, mfcm_id , mza_create_by , mza_create_date)
@@ -2434,6 +2486,20 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
+	public function modelCheckStation($station)
+	{
+		$sql = "SELECT
+		msa_station
+		FROM
+		mst_station_admin_app
+		WHERE msa_station = '{$station}'";
+		$res = $this->db->query($sql);
+		if ($res) {
+			return "duplicate";
+		} else {
+			return "pass";
+		}
+	}
 
 	public function modelAddStation($addtablestation, $empcodeadmin)
 	{
@@ -2894,28 +2960,34 @@ class Backoffice_model extends CI_Model
 
 	public function getTableNCNG()
 	{
-		$sql = "SELECT 
-		idd_id,
+		$sql = "SELECT
+		idd.idd_id,
+		ifts_part_no,
 		mpa_name,
 		mza_name,
 		msa_station,
-		ifts_part_no,
 		idd_status,
-		FORMAT (idd_create_date, 'yyyy-MM-dd')  AS Date,
+		FORMAT (
+			idd_create_date,
+			'yyyy-MM-dd'
+		) AS idd_create_date,
 		CASE idd_type
-		WHEN '1' THEN 'NC'
-		WHEN '0' THEN 'NG'
-		ELSE 'Unknown'
-		END AS type
-		FROM
-			info_operation_tag_complete_app
-		INNER JOIN info_operation_detail_count_app ON info_operation_tag_complete_app.ifts_id = info_operation_detail_count_app.ifts_id
-		INNER JOIN mst_config_details_app ON info_operation_detail_count_app.mcd_id = mst_config_details_app.mcd_id
-		INNER JOIN info_defect_detail_app ON info_operation_detail_count_app.iodc_id = info_defect_detail_app.iodc_id
-		INNER JOIN info_fa_tag_scan_app ON info_operation_detail_count_app.ifts_id = info_fa_tag_scan_app.ifts_id
-		INNER JOIN mst_plant_admin_app ON mst_config_details_app.mpa_id = mst_plant_admin_app.mpa_id
-		INNER JOIN mst_zone_admin_app ON mst_config_details_app.mza_id = mst_zone_admin_app.mza_id
-		INNER JOIN mst_station_admin_app ON mst_config_details_app.msa_id = mst_station_admin_app.msa_id ";
+	WHEN '1' THEN
+		'NC'
+	WHEN '0' THEN
+		'NG'
+	ELSE
+		'Unknown'
+	END AS idd_type
+	FROM
+		info_defect_detail_app idd
+	INNER JOIN info_operation_detail_count_app iodc ON idd.iodc_id = iodc.iodc_id
+	INNER JOIN info_fa_tag_scan_app ifts ON iodc.ifts_id = ifts.ifts_id
+	INNER JOIN mst_defect_group_app mdg ON idd.mdg_id = mdg.mdg_id
+	INNER JOIN mst_config_details_app mcd ON mdg.mcd_id = mcd.mcd_id
+	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
+	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
+	INNER JOIN mst_station_admin_app msa ON mcd.msa_id = msa.msa_id";
 
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
@@ -2954,16 +3026,16 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function confirmStatusNC($ngid, $empcodeadmin)
+	public function confirmStatusNC($ncid, $empcodeadmin)
 	{
-		$sql = "select * from info_defect_detail_app WHERE idd_id = '{$ngid}'";
+		$sql = "select * from info_defect_detail_app WHERE idd_id = '{$ncid}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["idd_status"];
-		if ($result == 0 || $result == 1 || $result == 5) {
-			$sql = "UPDATE info_defect_detail_app SET idd_status = 9 WHERE  idd_id = '{$ngid}'";
+		if ($result == 0 || $result == 1 ) {
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 5 WHERE  idd_id = '{$ncid}'";
 			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
-			WHERE  idd_id = '{$ngid}'";
+			WHERE  idd_id = '{$ncid}'";
 			$res = $this->db->query($sql);
 			$resupdate = $this->db->query($sqlupdate);
 			if ($res) {
@@ -2971,8 +3043,38 @@ class Backoffice_model extends CI_Model
 			} else {
 				return "false";
 			}
-		} else {
-			return "false";
+		} else if ($result == 5) {
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 0 WHERE  idd_id = '{$ncid}'";
+			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
+			WHERE  idd_id = '{$ncid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+	}
+
+
+	public function restoreNC($ncid, $empcodeadmin)
+	{
+		$sql = "select * from info_defect_detail_app WHERE idd_id = '{$ncid}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		$result = $row[0]["idd_status"];
+		if ($result == 5 || $result == 1 || $result == 0 ) {
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 2 WHERE  idd_id = '{$ncid}'";
+			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
+			WHERE  idd_id = '{$ncid}'";
+			$res = $this->db->query($sql);
+			$resupdate = $this->db->query($sqlupdate);
+			if ($res) {
+				return "true";
+			} else {
+				return "false";
+			}
 		}
 	}
 }

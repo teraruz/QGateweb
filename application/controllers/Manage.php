@@ -1203,9 +1203,16 @@ class manage extends CI_Controller
 		$addstarttime = $_POST["addstarttime"];
 		$addendtime = $_POST["addendtime"];
 
-		$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin);
-		echo $rsaddWorkShift;
+		$checkShift = $this->backoffice_model->modelCheckWorkShift($addshift);
+
+		if($checkShift == "pass"){
+			$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin);
+			echo $rsaddWorkShift;
+		}else{
+			echo "duplicate";
+		}
 	}
+	
 
 	public function getDataEditWorkShift()
 	{
@@ -1223,8 +1230,15 @@ class manage extends CI_Controller
 		$editstarttime = $_POST["editstarttime"];
 		$editendtime = $_POST["editendtime"];
 
-		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
+		$checkShift = $this->backoffice_model->modelCheckWorkShift($editshift);
+
+		if($checkShift == "pass"){
+			$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
 		echo $rseditworkshift;
+		}else{
+			echo "duplicate";
+		}
+	
 	}
 
 
@@ -1262,8 +1276,17 @@ class manage extends CI_Controller
 		$adddefectnameth = $_POST["adddefectnameth"];
 		$adddefectnameen = $_POST["adddefectnameen"];
 
-		$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode, $adddefectnameth, $adddefectnameen, $empcodeadmin);
-		echo $rsaddDefect;
+
+		$checkDefect = $this->backoffice_model->modelCheckDefect($adddefectcode);
+
+		if($checkDefect == "pass"){
+			$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode, $adddefectnameth, $adddefectnameen, $empcodeadmin);
+			echo $rsaddDefect;
+		}else{
+			echo "duplicate";
+		}
+
+		
 	}
 
 
@@ -1283,8 +1306,15 @@ class manage extends CI_Controller
 		$editdefectnameth = $_POST["editdefectnameth"];
 		$editdefectnameen = $_POST["editdefectnameen"];
 
-		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
-		echo $rseditdefect;
+
+		$checkDefect = $this->backoffice_model->modelCheckDefect($editdefectcode);
+
+		if($checkDefect == "pass"){
+			$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
+			echo $rseditdefect;
+		}else{
+			echo "duplicate";
+		}
 	}
 
 	// ************************* Control PartNumber *************************************
@@ -1379,18 +1409,14 @@ class manage extends CI_Controller
 	public function AddSelectPart()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
-		$addselectpCon = $_POST["addselectpCon"];
-		$addselectpdmc = $_POST["addselectpdmc"];
+		$addselectConfig = $_POST["addselectConfig"];
 		$addselectpno = $_POST["addselectpno"];
 		$addselectpname = $_POST["addselectpname"];
-		$addselectptime = $_POST["addselectptime"];
 
 		$rsaddPartNo = $this->backoffice_model->modelAddSelectPart(
-			$addselectpCon,
-			$addselectpdmc,
+			$addselectConfig,
 			$addselectpno,
 			$addselectpname,
-			$addselectptime,
 			$empcodeadmin
 		);
 
@@ -1409,12 +1435,10 @@ class manage extends CI_Controller
 		$empcodeadmin = $this->session->userdata("empcode");
 		$IDeditselectp = $_POST["IDeditselectp"];
 		$editselectpCon = $_POST["editselectpCon"];
-		$editselectpdmc = $_POST["editselectpdmc"];
 		$editselectpno = $_POST["editselectpno"];
 		$editselectpname = $_POST["editselectpname"];
-		$editselectptime = $_POST["editselectptime"];
 
-		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpdmc, $editselectpno, $editselectpname, $editselectptime, $empcodeadmin);
+		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon,$editselectpno, $editselectpname,$empcodeadmin);
 		echo $rseditselectpart;
 	}
 
@@ -1560,8 +1584,16 @@ class manage extends CI_Controller
 		$addnamezone = $_POST["addnamezone"];
 		$addlinezone = $_POST["addlinezone"];
 
-		$rsaddzone = $this->backoffice_model->modelAddZone($addnamezone, $addlinezone, $empcodeadmin);
-		echo $rsaddzone;
+		$checkzone = $this->backoffice_model->modelCheckZone($addlinezone);
+
+		if($checkzone	== "pass"){
+			$rsaddzone = $this->backoffice_model->modelAddZone($addnamezone, $addlinezone, $empcodeadmin);
+			echo $rsaddzone;
+		}else{
+			echo "duplicate";
+		}
+
+	
 	}
 
 	public function getDataEditZone()
@@ -1578,8 +1610,15 @@ class manage extends CI_Controller
 		$editnamezone = $_POST["editnamezone"];
 		$editlinezone = $_POST["editlinezone"];
 
-		$rseditplantapp = $this->backoffice_model->modelEditZone($IDeditzone, $editnamezone, $editlinezone, $empcodeadmin);
-		echo $rseditplantapp;
+		$checkzone = $this->backoffice_model->modelCheckZone($addlinezone);
+
+		if($checkzone	== "pass"){
+			$rseditplantapp = $this->backoffice_model->modelEditZone($IDeditzone, $editnamezone, $editlinezone, $empcodeadmin);
+			echo $rseditplantapp;
+		}else{
+			echo "duplicate";
+		}
+		
 	}
 
 
@@ -1609,13 +1648,21 @@ class manage extends CI_Controller
 		echo json_encode($res);
 	}
 
+
 	public function AddStation()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
 		$addtablestation = $_POST["addtablestation"];
 
-		$rsaddstation = $this->backoffice_model->modelAddStation($addtablestation, $empcodeadmin);
-		echo $rsaddstation;
+		$checkstation = $this->backoffice_model->modelCheckStation($addtablestation);
+
+		if($checkstation == "pass"){
+			$rsaddstation = $this->backoffice_model->modelAddStation($addtablestation, $empcodeadmin);
+			echo $rsaddstation;
+		}else{
+			echo "duplicate";
+		}
+		
 	}
 
 	public function getDataEditStation()
@@ -1631,8 +1678,16 @@ class manage extends CI_Controller
 		$IDeditStation = $_POST["IDeditStation"];
 		$editStation = $_POST["editStation"];
 
-		$rseditstationapp = $this->backoffice_model->modelEditStation($IDeditStation, $editStation, $empcodeadmin);
-		echo $rseditstationapp;
+		$checkstation = $this->backoffice_model->modelCheckStation($addtablestation);
+
+
+		if($checkstation == "pass"){
+			$rseditstationapp = $this->backoffice_model->modelEditStation($IDeditStation, $editStation, $empcodeadmin);
+			echo $rseditstationapp;
+		}else{
+			echo "duplicate";
+		}
+		
 	}
 
 	// ************************* Defect Group *************************************
@@ -1677,27 +1732,20 @@ class manage extends CI_Controller
 	public function EditDefectGroup()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
-		// $IDeditdefectgroup = $_GET["IDeditdefectgroup"]; //mdg_id
 		$editzonedefectgroup = $_GET["editzonedefectgroup"]; //mza_id
 		$editplantdefectgroup = $_GET["editplantdefectgroup"]; //mpa_id
 		$editstationdefectgroup = $_GET["editstationdefectgroup"]; //msa_id
 		$dataDefectGroupcheckId = $_GET["dataDefectGroupcheckId"]; //checkbox
-		// echo $dataDefectGroupcheckId[0];
-		// echo $editplantdefectgroup;
-		// echo $editstationdefectgroup;
 
 		$resdetailId = $this->backoffice_model->checkConfId($editzonedefectgroup, $editplantdefectgroup, $editstationdefectgroup);
-		// echo "resdetailId >> ",$resdetailId;
-		// $status =  "false";
+
 		foreach ($dataDefectGroupcheckId as $key => $value) {
 			if ($value == " " || empty($value)) {
 				echo "false";
 			} else {
 				$rseditdefect = $this->backoffice_model->modelEditDefectGroup($resdetailId, $value, $empcodeadmin);
 				echo $rseditdefect;
-				// $status = $rseditdefect;
 			}
-			// echo $status;
 		}
 	}
 
@@ -1956,9 +2004,17 @@ class manage extends CI_Controller
 
 	public function changeStatusNC()
 	{
-		$ngid = $_GET["idd_id"];
+		$ncid = $_GET["idd_id"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		$res = $this->backoffice_model->confirmStatusNC($ngid, $empcodeadmin);
+		$res = $this->backoffice_model->confirmStatusNC($ncid, $empcodeadmin);
+		echo $res;
+	}
+
+	public function reStoreNC()
+	{
+		$ncid = $_GET["idd_id"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$res = $this->backoffice_model->restoreNC($ncid, $empcodeadmin);
 		echo $res;
 	}
 

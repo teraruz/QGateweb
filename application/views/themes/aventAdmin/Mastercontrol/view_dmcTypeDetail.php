@@ -78,7 +78,7 @@
 
                   <div class="form-group"
                     <label for="username">DMC Type :</label>
-                    <div class="form-group"
+                    <div class="form-group">
                       <select class="form-control" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="adddmctypeofdetail" name="adddmctypeofdetail">
                         <option selected>Select Type</option>
                         <?php

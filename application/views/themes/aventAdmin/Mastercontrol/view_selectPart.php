@@ -15,7 +15,6 @@
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plant</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Zone</th>
-                  <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Type</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part Number</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part Name</th>
                   <th style=" border-bottom: 2px solid rgb(207 0 46); text-align: center;">Status</th>
@@ -31,7 +30,6 @@
                   echo "<td>" . $i . "</td>";
                   echo "<td>" . $selectp["mpa_phase_plant"] . "</td>";
                   echo "<td>" . $selectp["mza_name"] . "</td>";
-                  echo "<td>" . $selectp["mdt_name"] . "</td>";
                   echo "<td>" . $selectp["msp_part_no"] . "</td>";
                   echo "<td>" . $selectp["msp_part_name"] . "</td>";
                   if ($selectp["msp_status"] == "1") {
@@ -77,13 +75,8 @@
                 <form class="card-body" action="#">
 
                   <div class="form-group"
-                    <label for="empcode">Config Details :</label>
-                    <input class="form-control" type="text" id="addselectpCon" name="addselectpCon"  placeholder="Enter New Config">
-                  </div>
-
-                  <div class="form-group"
-                    <label for="empcode">DMC Type Details :</label>
-                    <input class="form-control" type="text" id="addselectpdmc" name="addselectpdmc"  placeholder="Enter New DMC Type">
+                    <label for="empcode">Config Details ID:</label>
+                    <input class="form-control" type="number" id="addselectConfig" name="addselectConfig"  placeholder="Enter New Config">
                   </div>
 
                   <div class="form-group"
@@ -94,11 +87,6 @@
                   <div class="form-group"
                     <label for="password">Part Name :</label>
                     <input class="form-control" type="text" id="addselectpname" name="addselectpname" placeholder="Enter New Part Name"  >
-                  </div>
-
-                  <div class="form-group"
-                    <label for="password">Inspection Time :</label>
-                    <input class="form-control" type="number" id="addselectptime" name="addselectptime" placeholder="Enter New Inspection Time">
                   </div>
 
                 </form>
@@ -124,14 +112,9 @@
 
                 <form class="card-body" action="#">
                  <div class="form-group"
-                    <label for="empcode">Config Details :</label>
+                    <label for="empcode">Config Details ID:</label>
                     <input class="form-control" type="text" id="IDeditselectp" name="IDeditselectp"  hidden>
                     <input class="form-control" type="text" id="editselectpCon" name="editselectpCon"  >
-                  </div>
-
-                  <div class="form-group"
-                    <label for="empcode">DMC Type Details :</label>
-                    <input class="form-control" type="text" id="editselectpdmc" name="editselectpdmc" >
                   </div>
 
                   <div class="form-group"
@@ -142,11 +125,6 @@
                   <div class="form-group"
                     <label for="password">Part Name :</label>
                     <input class="form-control" type="text" id="editselectpname" name="editselectpname" >
-                  </div>
-
-                  <div class="form-group"
-                    <label for="password">Inspection Time :</label>
-                    <input class="form-control" type="number" id="editselectptime" name="editselectptime" >
                   </div>
 
                 </form>

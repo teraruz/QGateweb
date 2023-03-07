@@ -107,19 +107,19 @@
                                     $i++;
                                     echo "<tr>";
                                     echo "<td>" . $i . "</td>";
-                                    echo "<td>" . $table["type"] . "</td>";
+                                    echo "<td>" . $table["idd_type"] . "</td>";
                                     echo "<td>" . $table["ifts_part_no"] . "</td>";
                                     echo "<td>" . $table["mpa_name"] . "</td>";
                                     echo "<td>" . $table["mza_name"] . "</td>";
                                     echo "<td>" . $table["msa_station"] . "</td>";
-                                    echo "<td>" . $table["Date"] . "</td>";
+                                    echo "<td>" . $table["idd_create_date"] . "</td>";
 
-                                    if ($table["type"] == "NG") {
+                                    if ($table["idd_type"] == "NG") {
                                         if ($table["idd_status"] == "9") {
                                             echo "<td>
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" 
-                                                                id=btnconfirmNG$i clicked onclick='ChangeStatusNG(" . $table["idd_id"] . ")'> Confirm NG</button>                          
+                                                                id=btnconfirmNG$i clicked onclick='ChangeStatusNG(" . $table["idd_id"] . ")' > Confirm NG</button>                          
                                                             </div>
                                            
                                                         </td>";
@@ -133,17 +133,17 @@
                                                            
                                                         </td>";
                                         }
-                                    } else if ($table["type"] == "NC") {
-                                        if($table["idd_status"] == "9") {
+                                    } else if ($table["idd_type"] == "NC") {
+                                        if($table["idd_status"] == "5" || $table["idd_status"] == "2" ) {
                                             echo "<td>
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
-                                                                id=btnconfirmNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Confirm NC</button>                              
+                                                                id=btnconfirmNC$i onclick='ChangeStatusNC(" . $table["idd_id"] . ")'> Confirm NC</button>                              
                                                             </div> <br>
 
                                                             <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
-                                                                id=btnrestoreNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Restore NC</button>                              
+                                                                <button class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
+                                                                id=btnrestoreNC$i onclick='RestoreNC(" . $table["idd_id"] . ")'> Restore NC</button>                              
                                                             </div>
 
                                                         </td>";
@@ -152,12 +152,12 @@
                                         echo "<td>
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"
-                                                                id=btnconfirmNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Confirm NC</button>                              
+                                                                id=btnconfirmNC$i onclick='ChangeStatusNC(" . $table["idd_id"] . ")'> Confirm NC</button>                              
                                                             </div> <br>
 
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-sm btn-success shadow-sm  me-md-2 \"
-                                                                id=btnrestoreNC$i onclick='getDataZone(" . $table["idd_id"] . ")'> Restore NC</button>                              
+                                                                id=btnrestoreNC$i onclick='RestoreNC(" . $table["idd_id"] . ")'> Restore NC</button>                              
                                                             </div>
 
                                                         </td>";

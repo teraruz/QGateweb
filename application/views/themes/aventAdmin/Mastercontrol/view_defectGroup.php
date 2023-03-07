@@ -59,44 +59,8 @@
             </table>
 
           </div>
-
-          <!---------------------------- add Work Shift ------------------------------------------------>
-          <div class="modal fade" id="addmenuweb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="mdi mdi-database-plus"></i> Add Work Shift</h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form class="card-body" action="#">
-                  <div class="form-group"
-                    <label for="empcode">Shift :</label>
-                    <input class="form-control" type="text" id="addshift" name="addshift" placeholder="Enter New Shift">
-                  </div>
-
-                  <div class="form-group"
-                    <label for="password">Start Time :</label>
-                    <input class="form-control" type="time" id="addstarttime" name="addstarttime" step="2">
-                  </div>
-
-                  <div class="form-group"
-                    <label for="password">End Time :</label>
-                    <input class="form-control" type="time" id="addendtime" name="addendtime" step="2">
-                  </div>
-
-                </form>
-
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-success" type="submit" id="btnSaveAddWorkShift">Save</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!------------------------------------------------- Edit Work Shift ------------------------------------------------->
+          
+          <!------------------------------------------------- Edit Defect Group  ------------------------------------------------->
           <div class="modal fade" id="editdefect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
