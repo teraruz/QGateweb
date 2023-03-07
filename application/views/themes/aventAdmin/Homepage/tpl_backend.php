@@ -1110,39 +1110,49 @@
                 window.location = "<?php echo base_url() ?>Manage/ManageMenuWeb";
             });
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
-                data: {
-                    IDeditMenuName: IDeditMenuName,
-                    editMenuName: editMenuName
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Edit Menu Web.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(editMenuName)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditManageMenuWeb",
+                    data: {
+                        IDeditMenuName: IDeditMenuName,
+                        editMenuName: editMenuName
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Edit Menu Web.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
-                    })
-                } else if (rs === "datadupicate") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data is Duplicate',
-                        confirmButtonColor: '#D80032'
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit Menu Web',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                        })
+                    } else if (rs === "datadupicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit Menu Web',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
 
-            });
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Menu Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
+
         }
     }
 
@@ -1308,56 +1318,40 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            if (editSubmenuWebName != 0) {
-                if (isValidInput(editSubmenuWebName)) {
-                    var path = $.ajax({
-                        method: "POST",
-                        url: "<?php echo base_url(); ?>Manage/EditManageSubMenuWeb",
-                        data: {
-                            IDEditdetailSubMenu: IDEditdetailSubMenu,
-                            editSubmenuWebName: editSubmenuWebName,
-                            editMenuPath: editMenuPath
-                        }
-                    })
-                    path.done(function(rs) {
-                        if (rs === "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'You have Successfully Edit Submenu Web.',
-                                confirmButtonColor: '#D80032'
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditManageSubMenuWeb",
+                data: {
+                    IDEditdetailSubMenu: IDEditdetailSubMenu,
+                    editSubmenuWebName: editSubmenuWebName,
+                    editMenuPath: editMenuPath
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Edit Submenu Web.',
+                        confirmButtonColor: '#D80032'
 
-                            }).then(function() {
-                                window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
-                            })
-                        } else if (rs === "datadupicate") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Data is Duplicate',
-                                confirmButtonColor: '#D80032'
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'You Failed to edit Menu Web',
-                                confirmButtonColor: '#D80032'
-                            })
-                        }
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuWeb";
+                    })
+                } else if (rs === "datadupicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
+                        confirmButtonColor: '#D80032'
                     })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You failed to Edit Submenu ',
-                        text: 'Special characters cannot be entered.',
+                        title: 'You Failed to edit Menu Web',
                         confirmButtonColor: '#D80032'
                     })
                 }
-            } else {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Please enter submenu name',
-                    confirmButtonColor: '#D80032'
-                })
-            }
+            })
+
         }
     }
 
@@ -1570,32 +1564,51 @@
             })
         } else {
             console.log("==>", dataMenuAppId)
-            var path = $.ajax({
-                method: "GET",
-                url: "<?php echo base_url(); ?>Manage/AddManagePermissionApp",
-                data: {
-                    addPermissionappname: addPermissionappname,
-                    dataMenuAppId: dataMenuAppId
-                }
-            })
-            path.done(function(rs) {
-                alert(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Permission.',
+            if (Array.isArray(dataMenuAppId)) {
+                Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Checkbox is Empty',
+                confirmButtonColor: '#D80032'
+                })
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add Permission',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+            } else {
+                var path = $.ajax({
+                    method: "GET",
+                    url: "<?php echo base_url(); ?>Manage/AddManagePermissionApp",
+                    data: {
+                        addPermissionappname: addPermissionappname,
+                        dataMenuAppId: dataMenuAppId
+                    }
+                })
+                path.done(function(rs) {
+                    alert(rs);
+                    console.log(rs)
+                    if (rs == "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Permission.',
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+                        })
+                    } else if (rs == "empty") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Type Name is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add Permission',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+
+            }
+
         }
     };
 
@@ -1629,6 +1642,7 @@
                 window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
             });
         } else {
+
             var path = $.ajax({
                 method: "POST",
                 url: "<?php echo base_url(); ?>Manage/EditManagePermissionApp",
@@ -1640,7 +1654,6 @@
             })
             path.done(function(rs) {
                 alert(rs)
-                console.log(rs)
                 if (rs === "true") {
                     setTimeout(function() {
                         swal({
@@ -1652,6 +1665,12 @@
                             window.location = "<?php echo base_url() ?>Manage/ManagePermisionApp";
                         });
                     });
+                } else if (rs == "empty") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Checkbox is Empty',
+                        confirmButtonColor: '#D80032'
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -3817,425 +3836,111 @@
     };
 
 
-        // +++++++++++++++++++++++++++++++++++++ mst Station Admin +++++++++++++++++++++++++++++++++++++++++++++++++
+    // +++++++++++++++++++++++++++++++++++++ mst Station Admin +++++++++++++++++++++++++++++++++++++++++++++++++
 
-        $("#btnSaveAddStation").click(function() {
-            SaveAddStation()
-        });
-        $("#btnSaveEditStation").click(function() {
-            SaveEditStation()
+    $("#btnSaveAddStation").click(function() {
+        SaveAddStation()
+    });
+    $("#btnSaveEditStation").click(function() {
+        SaveEditStation()
+    })
+
+
+    function statusStation(msa_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusStation?msa_id=" + msa_id
         })
+    };
 
 
-        function statusStation(msa_id) {
-            var path = $.ajax({
-                method: "get",
-                url: "<?php echo base_url(); ?>Manage/swiftStatusStation?msa_id=" + msa_id
+    function SaveAddStation() {
+        var addtablestation = $('#addtablestation').val()
+
+        var checkaddtablestation = document.getElementById("addtablestation");
+
+        if (checkaddtablestation.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#D80032'
             })
-        };
-
-
-        function SaveAddStation() {
-            var addtablestation = $('#addtablestation').val()
-
-            var checkaddtablestation = document.getElementById("addtablestation");
-
-            if (checkaddtablestation.value == "") {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Warning',
-                    text: 'Textbox is Empty',
-                    confirmButtonColor: '#D80032'
-                })
-            } else {
-                var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/AddStation",
-                    data: {
-                        addtablestation: addtablestation,
-                    }
-                })
-                path.done(function(rs) {
-                    alert(rs)
-                    if (rs === "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'You have Successfully Add Zone.',
-                            confirmButtonColor: '#D80032'
-
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
-                        })
-                    }else if (rs == "duplicate") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Type Name is Duplicate',
-                            confirmButtonColor: '#D80032'
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Add Zone',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                })
-            }
-        };
-
-
-        function getDataStation(msa_id) {
+        } else {
             var path = $.ajax({
-                method: "get",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>Manage/getDataEditStation?msa_id=" + msa_id,
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddStation",
+                data: {
+                    addtablestation: addtablestation,
+                }
             })
             path.done(function(rs) {
-                $("#IDeditStation").val(rs[0]["msa_id"]);
-                $("#editStation").val(rs[0]["msa_station"]);
+                alert(rs)
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Zone.',
+                        confirmButtonColor: '#D80032'
 
-            })
-        };
-
-
-        function SaveEditStation(msa_id) {
-            var IDeditStation = $('#IDeditStation').val()
-            var editStation = $('#editStation').val()
-
-            var checkIDeditStation = document.getElementById("IDeditStation");
-            var checkeditStation = document.getElementById("editStation");
-
-            if (checkIDeditStation.value == "" || checkeditStation.value == "") {
-                swal({
-                    title: "warning",
-                    text: "Please fill the textbox ",
-                    type: "warning",
-                    confirmButtonColor: '#D80032'
-                }, function() {
-                    window.location = "<?php echo base_url() ?>Manage/StationAdmin";
-                });
-            } else {
-
-                var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/EditStation",
-                    data: {
-                        IDeditStation: IDeditStation,
-                        editStation: editStation,
-                    }
-                })
-                path.done(function(rs) {
-                    if (rs === "true") {
-                        setTimeout(function() {
-                            swal({
-                                title: "Success",
-                                text: "Station is Updated!",
-                                type: "success",
-                                confirmButtonColor: '#D80032'
-                            }, function() {
-                                window.location = "<?php echo base_url() ?>Manage/StationAdmin";
-                            });
-                        });
-                    }else if (rs == "duplicate") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Type Name is Duplicate',
-                            confirmButtonColor: '#D80032'
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Edit Station',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                });
-            }
-        };
-
-
-
-        // ---------------------------------------------------------------  mst config Details -----------------------------------------------------------
-
-        $("#btnSaveAddConfigDetails").click(function() {
-            SaveAddConfigDetails()
-        });
-        $("#btnSaveEditConfigDetails").click(function() {
-            SaveEditConfigDetails()
-        })
-
-
-        function statusConfigDetails(mcd_id) {
-            var path = $.ajax({
-                method: "get",
-                url: "<?php echo base_url(); ?>Manage/swiftStatusConfigDetails?mcd_id=" + mcd_id
-            })
-        };
-
-        function SaveAddConfigDetails() {
-            var addplantconfig = $('#addplantconfig').val()
-            var addzoneconfig = $('#addzoneconfig').val()
-            var addstationconfig = $('#addstationconfig').val()
-            var addtypeconfig = $('#addtypeconfig').val()
-            var addstatusconfig = $('#addstatusconfig').val()
-            var addinspectionconfig = $('#addinspectionconfig').val()
-            var addTimeconfig = $('#addTimeconfig').val()
-            var addMacaddress = $('#addMacaddressConfig').val()
-            var addSelectpart = $('#addSelectpart').val()
-
-            var checkaddplantconfig = document.getElementById("addplantconfig");
-            var checkaddzoneconfig = document.getElementById("addzoneconfig");
-            var checkaddstationconfig = document.getElementById("addstationconfig");
-            var checkaddtypeconfig = document.getElementById("addtypeconfig");
-            var checkaddstatusconfig = document.getElementById("addstatusconfig");
-            var checkaddinspectionconfig = document.getElementById("addinspectionconfig");
-            var checkaddTimeconfig = document.getElementById("addTimeconfig");
-            var checkaddMacaddress = document.getElementById("addMacaddressConfig");
-
-            if (checkaddplantconfig.value == "" || checkaddzoneconfig.value == "" || checkaddstationconfig.value == "" ||
-                checkaddtypeconfig.value == "" || checkaddstatusconfig.value == "" || checkaddinspectionconfig.value == "" ||
-                checkaddTimeconfig.value == "" || checkaddMacaddress == "") {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Warning',
-                    text: 'Textbox is Empty',
-                    confirmButtonColor: '#D80032'
-                })
-            } else {
-                var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/AddConfigDetails",
-                    data: {
-                        addplantconfig: addplantconfig,
-                        addzoneconfig: addzoneconfig,
-                        addstationconfig: addstationconfig,
-                        addtypeconfig: addtypeconfig,
-                        addstatusconfig: addstatusconfig,
-                        addinspectionconfig: addinspectionconfig,
-                        addTimeconfig: addTimeconfig,
-                        addMacaddress: addMacaddress,
-                        addSelectpart: addSelectpart
-                    }
-                })
-                path.done(function(rs) {
-
-                    if (rs === "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'You have Successfully Add Config Details.',
-                            confirmButtonColor: '#D80032'
-
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/ConfigDetail";
-                        })
-                    } else if (rs === "duplicate") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Mac Address is Duplicate',
-                            confirmButtonColor: '#D80032'
-
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Add Config Detail',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                })
-            }
-        };
-
-
-        function getDataConfigDetails(mcd_id) {
-            var path = $.ajax({
-                method: "get",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>Manage/getDataEditConfigDetails?mcd_id=" + mcd_id,
-            })
-            path.done(function(rs) {
-                $("#IDeditconfig").val(rs[0]["mcd_id"]);
-                $("#editplantconfig").val(rs[0]["mpa_id"]);
-                $("#editzoneconfig").val(rs[0]["mza_id"]);
-                $("#editstationconfig").val(rs[0]["msa_id"]);
-                $("#edittypeconfig").val(rs[0]["mct_id"]);
-                $("#editstatusconfig").val(rs[0]["mcs_id"]);
-                $("#editinspectionconfig").val(rs[0]["mit_id"]);
-                $("#edittimeconfig").val(rs[0]["mcd_inspection_time"]);
-                $("#editmacaddressconfig").val(rs[0]["mcd_mac_address"]);
-                $("#editselectpartconfig").val(rs[0]["mcd_select_part"]);
-            })
-        };
-
-
-        function SaveEditConfigDetails(mcd_id) {
-            var IDeditconfig = $('#IDeditconfig').val()
-            var editplantconfig = $('#editplantconfig').val()
-            var editzoneconfig = $('#editzoneconfig').val()
-            var editstationconfig = $('#editstationconfig').val()
-            var edittypeconfig = $('#edittypeconfig').val()
-            var editstatusconfig = $('#editstatusconfig').val()
-            var editinspectionconfig = $('#editinspectionconfig').val()
-            var edittimeconfig = $('#edittimeconfig').val()
-            var editMacaddressconfig = $('#editMacaddressconfig').val()
-
-            var checkIDeditconfig = document.getElementById("IDeditconfig");
-            var checkeditplantconfig = document.getElementById("editplantconfig");
-            var checkeditzoneconfig = document.getElementById("editzoneconfig");
-            var checkeditstationconfig = document.getElementById("editstationconfig");
-            var checkedittypeconfig = document.getElementById("edittypeconfig");
-            var checkeditstatusconfig = document.getElementById("editstatusconfig");
-            var checkedittimeconfig = document.getElementById("edittimeconfig");
-            var checkeditMacaddressconfig = document.getElementById("editMacaddressconfig");
-
-            if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
-                checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" ||
-                checkedittypeconfig.value == "" || checkeditstatusconfig.value == "" ||
-                checkedittimeconfig.value == "") {
-                swal({
-                    title: "warning",
-                    text: "Please fill the textbox ",
-                    type: "warning",
-                    confirmButtonColor: '#D80032'
-                })
-            } else {
-
-                var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/EditConfigDetail",
-                    data: {
-                        IDeditconfig: IDeditconfig,
-                        editplantconfig: editplantconfig,
-                        editzoneconfig: editzoneconfig,
-                        editstationconfig: editstationconfig,
-                        edittypeconfig: edittypeconfig,
-                        editstatusconfig: editstatusconfig,
-                        editinspectionconfig: editinspectionconfig,
-                        edittimeconfig: edittimeconfig,
-                        editMacaddressconfig: editMacaddressconfig
-                    }
-                })
-                path.done(function(rs) {
-                    if (rs === "true") {
-                        setTimeout(function() {
-                            swal({
-                                title: "Success",
-                                text: "Config Detail is Updated!",
-                                type: "success",
-                                confirmButtonColor: '#D80032'
-                            }, function() {
-                                window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
-                            });
-                        });
-                    } else if (rs === "duplicate") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Mac Address is Duplicate',
-                            confirmButtonColor: '#D80032'
-
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Edit Config Details',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                });
-            }
-        };
-
-
-        // ********************************************************************* mst Defect Group ******************************************************************
-        $("#btnSaveEditdefectGroup").click(function() {
-            SaveEditDefectGroup()
-        })
-
-
-
-
-        function statusDefectGroup(mdg_id) {
-            var path = $.ajax({
-                method: "get",
-                url: "<?php echo base_url(); ?>Manage/swiftStatusDefectGroup?mdg_id=" + mdg_id
-            })
-        };
-
-
-        function getDataEditDefectGroup(mcd_id) {
-            var path = $.ajax({
-                method: "get",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>Manage/getDataEditDefectGroup?mcd_id=" + mcd_id,
-            })
-            var pathnaja = $.ajax({
-                method: "get",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>Manage/getDataCheckBoxDefect"
-            })
-            path.done(function(rs) {
-
-                $("#IDeditdefectgroup").val(rs[0]["mcd_id"]);
-                $("#editplantdefectgroup").val(rs[0]["mpa_phase_plant"]);
-                $("#editzonedefectgroup").val(rs[0]["mza_name"]);
-                $("#editstationdefectgroup").val(rs[0]["msa_station"]);
-                $("#IDeditplantdefectgroup").val(rs[0]["mpa_id"]);
-                $("#IDeditzonedefectgroup").val(rs[0]["mza_id"]);
-                $("#IDeditstationdefectgroup").val(rs[0]["msa_id"]);
-                $checkbox = "";
-                var G_check = ""
-                pathnaja.done(function(rsnaja) {
-                    console.log("rs===>", rs)
-                    console.log("rsnaja===>", rsnaja)
-                    var checkbox = "";
-                    var check = "checked";
-                    $.each(rsnaja, function(keyCheck, value) {
-                        G_check = ""
-                        checkData(rs, value.md_id)
-                        checkbox += '<input type="checkbox" class="checkboxdefectcode" name="checkboxdefectcode" id="checkboxdefectcode"  value="' + value.md_id + '" ' + G_check + ' >' + value.md_defect_en_name + '<span class="checkmark"></span><br><br>'
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ZoneAdmin";
                     })
-                    $("#checkBoxDefect").html(checkbox);
-                })
-
-                function checkData(ResultSelect, md_id) {
-                    $status = true
-                    $.each(ResultSelect, function(keyData, valueData) { //2 or 3
-                        if (md_id == valueData.md_id) {
-                            G_check = "checked"
-                            return false;
-                        }
+                } else if (rs == "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Type Name is Duplicate',
+                        confirmButtonColor: '#D80032'
                     })
-
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Zone',
+                        confirmButtonColor: '#D80032'
+                    })
                 }
             })
         }
+    };
 
-        function SaveEditDefectGroup() {
-            var IDeditdefectgroup = $('#IDeditdefectgroup').val()
-            var editplantdefectgroup = $('#IDeditplantdefectgroup').val()
-            var editzonedefectgroup = $('#IDeditzonedefectgroup').val()
-            var editstationdefectgroup = $('#IDeditstationdefectgroup').val()
 
-            var dataDefectGroupcheckId = []
-            jQuery("input[name='checkboxdefectcode']").each(function(key, values) {
-                if (this.checked == true) {
-                    console.log("sssssssssssssssss==>", this.value)
-                    dataDefectGroupcheckId[key] = this.value
-                    // alert("this.value===>"+this.value)
+    function getDataStation(msa_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditStation?msa_id=" + msa_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditStation").val(rs[0]["msa_id"]);
+            $("#editStation").val(rs[0]["msa_station"]);
 
-                }
+        })
+    };
 
+
+    function SaveEditStation(msa_id) {
+        var IDeditStation = $('#IDeditStation').val()
+        var editStation = $('#editStation').val()
+
+        var checkIDeditStation = document.getElementById("IDeditStation");
+        var checkeditStation = document.getElementById("editStation");
+
+        if (checkIDeditStation.value == "" || checkeditStation.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning",
+                confirmButtonColor: '#D80032'
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/StationAdmin";
             });
-            console.log("==>", dataDefectGroupcheckId)
+        } else {
+
             var path = $.ajax({
-                method: "GET",
-                url: "<?php echo base_url(); ?>Manage/EditDefectGroup",
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditStation",
                 data: {
-                    // IDeditdefectgroup: IDeditdefectgroup,
-                    editplantdefectgroup: editplantdefectgroup,
-                    editzonedefectgroup: editzonedefectgroup,
-                    editstationdefectgroup: editstationdefectgroup,
-                    dataDefectGroupcheckId: dataDefectGroupcheckId,
+                    IDeditStation: IDeditStation,
+                    editStation: editStation,
                 }
             })
             path.done(function(rs) {
@@ -4243,291 +3948,605 @@
                     setTimeout(function() {
                         swal({
                             title: "Success",
-                            text: "Defect Group is Updated!",
+                            text: "Station is Updated!",
                             type: "success",
                             confirmButtonColor: '#D80032'
                         }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/DefectGroup";
+                            window.location = "<?php echo base_url() ?>Manage/StationAdmin";
                         });
                     });
+                } else if (rs == "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Type Name is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Edit Defect Group',
+                        title: 'You Failed to Edit Station',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
+            });
+        }
+    };
+
+
+
+    // ---------------------------------------------------------------  mst config Details -----------------------------------------------------------
+
+    $("#btnSaveAddConfigDetails").click(function() {
+        SaveAddConfigDetails()
+    });
+    $("#btnSaveEditConfigDetails").click(function() {
+        SaveEditConfigDetails()
+    })
+
+
+    function statusConfigDetails(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusConfigDetails?mcd_id=" + mcd_id
+        })
+    };
+
+    function SaveAddConfigDetails() {
+        var addplantconfig = $('#addplantconfig').val()
+        var addzoneconfig = $('#addzoneconfig').val()
+        var addstationconfig = $('#addstationconfig').val()
+        var addtypeconfig = $('#addtypeconfig').val()
+        var addstatusconfig = $('#addstatusconfig').val()
+        var addinspectionconfig = $('#addinspectionconfig').val()
+        var addTimeconfig = $('#addTimeconfig').val()
+        var addMacaddress = $('#addMacaddressConfig').val()
+        var addSelectpart = $('#addSelectpart').val()
+
+        var checkaddplantconfig = document.getElementById("addplantconfig");
+        var checkaddzoneconfig = document.getElementById("addzoneconfig");
+        var checkaddstationconfig = document.getElementById("addstationconfig");
+        var checkaddtypeconfig = document.getElementById("addtypeconfig");
+        var checkaddstatusconfig = document.getElementById("addstatusconfig");
+        var checkaddinspectionconfig = document.getElementById("addinspectionconfig");
+        var checkaddTimeconfig = document.getElementById("addTimeconfig");
+        var checkaddMacaddress = document.getElementById("addMacaddressConfig");
+
+        if (checkaddplantconfig.value == "" || checkaddzoneconfig.value == "" || checkaddstationconfig.value == "" ||
+            checkaddtypeconfig.value == "" || checkaddstatusconfig.value == "" || checkaddinspectionconfig.value == "" ||
+            checkaddTimeconfig.value == "" || checkaddMacaddress == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#D80032'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddConfigDetails",
+                data: {
+                    addplantconfig: addplantconfig,
+                    addzoneconfig: addzoneconfig,
+                    addstationconfig: addstationconfig,
+                    addtypeconfig: addtypeconfig,
+                    addstatusconfig: addstatusconfig,
+                    addinspectionconfig: addinspectionconfig,
+                    addTimeconfig: addTimeconfig,
+                    addMacaddress: addMacaddress,
+                    addSelectpart: addSelectpart
+                }
+            })
+            path.done(function(rs) {
+
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Config Details.',
+                        confirmButtonColor: '#D80032'
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ConfigDetail";
+                    })
+                } else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Mac Address is Duplicate',
+                        confirmButtonColor: '#D80032'
+
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Config Detail',
                         confirmButtonColor: '#D80032'
                     })
                 }
             })
         }
+    };
 
 
-
-        // ******************************************************** mst dmc type detail ********************************************************
-
-        $("#btnSaveDMCTypeDetail").click(function() {
-            SaveAddDMCTypeDetail()
+    function getDataConfigDetails(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditConfigDetails?mcd_id=" + mcd_id,
         })
-
-        $("#btnSaveEditDMCTypeDetail").click(function() {
-            SaveEditDMCTypeDetail()
+        path.done(function(rs) {
+            $("#IDeditconfig").val(rs[0]["mcd_id"]);
+            $("#editplantconfig").val(rs[0]["mpa_id"]);
+            $("#editzoneconfig").val(rs[0]["mza_id"]);
+            $("#editstationconfig").val(rs[0]["msa_id"]);
+            $("#edittypeconfig").val(rs[0]["mct_id"]);
+            $("#editstatusconfig").val(rs[0]["mcs_id"]);
+            $("#editinspectionconfig").val(rs[0]["mit_id"]);
+            $("#edittimeconfig").val(rs[0]["mcd_inspection_time"]);
+            $("#editmacaddressconfig").val(rs[0]["mcd_mac_address"]);
+            $("#editselectpartconfig").val(rs[0]["mcd_select_part"]);
         })
+    };
 
 
-        function statusDMCTypeDetail(mdtd_id) {
-            var path = $.ajax({
-                method: "get",
-                url: "<?php echo base_url(); ?>Manage/swiftStatusDMCTypeDetail?mdtd_id=" + mdtd_id
+    function SaveEditConfigDetails(mcd_id) {
+        var IDeditconfig = $('#IDeditconfig').val()
+        var editplantconfig = $('#editplantconfig').val()
+        var editzoneconfig = $('#editzoneconfig').val()
+        var editstationconfig = $('#editstationconfig').val()
+        var edittypeconfig = $('#edittypeconfig').val()
+        var editstatusconfig = $('#editstatusconfig').val()
+        var editinspectionconfig = $('#editinspectionconfig').val()
+        var edittimeconfig = $('#edittimeconfig').val()
+        var editMacaddressconfig = $('#editMacaddressconfig').val()
+
+        var checkIDeditconfig = document.getElementById("IDeditconfig");
+        var checkeditplantconfig = document.getElementById("editplantconfig");
+        var checkeditzoneconfig = document.getElementById("editzoneconfig");
+        var checkeditstationconfig = document.getElementById("editstationconfig");
+        var checkedittypeconfig = document.getElementById("edittypeconfig");
+        var checkeditstatusconfig = document.getElementById("editstatusconfig");
+        var checkedittimeconfig = document.getElementById("edittimeconfig");
+        var checkeditMacaddressconfig = document.getElementById("editMacaddressconfig");
+
+        if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
+            checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" ||
+            checkedittypeconfig.value == "" || checkeditstatusconfig.value == "" ||
+            checkedittimeconfig.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning",
+                confirmButtonColor: '#D80032'
             })
-        };
+        } else {
 
-
-
-        function SaveAddDMCTypeDetail() {
-            var adddmctypeofdetail = $('#adddmctypeofdetail').val()
-            var adddmcdataofdetail = $('#adddmcdataofdetail').val()
-            var addstartofdetail = $('#addstartofdetail').val()
-            var addendofdetail = $('#addendofdetail').val()
-            var addsubstringdetail = $('#addsubstringdetail').val()
-
-            var checkadddmctypeofdetail = document.getElementById("adddmctypeofdetail");
-            var checkadddmcdataofdetail = document.getElementById("adddmcdataofdetail");
-            var checkaddstartofdetail = document.getElementById("addstartofdetail");
-            var checkaddendofdetail = document.getElementById("addendofdetail");
-            var checkaddsubstringdetail = document.getElementById("addsubstringdetail");
-
-
-            if (checkadddmctypeofdetail.value == "" || checkadddmcdataofdetail.value == "" ||
-                checkaddstartofdetail.value == "" || checkaddendofdetail.value == "" || checkaddsubstringdetail.value == "") {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Warning',
-                    text: 'Textbox is Empty',
-                    confirmButtonColor: '#D80032'
-                })
-            } else {
-                var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/AddDMCTypeDetail",
-                    data: {
-                        adddmctypeofdetail: adddmctypeofdetail,
-                        adddmcdataofdetail: adddmcdataofdetail,
-                        addstartofdetail: addstartofdetail,
-                        addendofdetail: addendofdetail,
-                        addsubstringdetail: addsubstringdetail
-                    }
-                })
-                path.done(function(rs) {
-                    if (rs === "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'You have Successfully Add DMC Type Detail.',
-                            confirmButtonColor: '#D80032'
-
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Add DMC Type Detail',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                })
-            }
-        };
-
-        function getDataEditDMCTypeDetail(mdtd_id) {
             var path = $.ajax({
-                method: "get",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>Manage/getDataDMCTypeDetail?mdtd_id=" + mdtd_id,
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditConfigDetail",
+                data: {
+                    IDeditconfig: IDeditconfig,
+                    editplantconfig: editplantconfig,
+                    editzoneconfig: editzoneconfig,
+                    editstationconfig: editstationconfig,
+                    edittypeconfig: edittypeconfig,
+                    editstatusconfig: editstatusconfig,
+                    editinspectionconfig: editinspectionconfig,
+                    edittimeconfig: edittimeconfig,
+                    editMacaddressconfig: editMacaddressconfig
+                }
             })
             path.done(function(rs) {
-                $("#IDeditDMCTypeDetail").val(rs[0]["mdtd_id"]);
-                $("#editdmctypeofdetail").val(rs[0]["mdt_id"]);
-                $("#editdatadmctypedetail").val(rs[0]["mdd_id"]);
-                $("#editstartofdetail").val(rs[0]["mdtd_start"]);
-                $("#editendofdetail").val(rs[0]["mdtd_end"]);
-                $("#editsubstringdetail").val(rs[0]["mdtd_num_substring"]);
+                if (rs === "true") {
+                    setTimeout(function() {
+                        swal({
+                            title: "Success",
+                            text: "Config Detail is Updated!",
+                            type: "success",
+                            confirmButtonColor: '#D80032'
+                        }, function() {
+                            window.location = "<?php echo base_url() ?>Manage/ConfigDetail";
+                        });
+                    });
+                } else if (rs === "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Mac Address is Duplicate',
+                        confirmButtonColor: '#D80032'
+
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit Config Details',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
+            });
+        }
+    };
+
+
+    // ********************************************************************* mst Defect Group ******************************************************************
+    $("#btnSaveEditdefectGroup").click(function() {
+        SaveEditDefectGroup()
+    })
+
+
+
+
+    function statusDefectGroup(mdg_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDefectGroup?mdg_id=" + mdg_id
+        })
+    };
+
+
+    function getDataEditDefectGroup(mcd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataEditDefectGroup?mcd_id=" + mcd_id,
+        })
+        var pathnaja = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataCheckBoxDefect"
+        })
+        path.done(function(rs) {
+
+            $("#IDeditdefectgroup").val(rs[0]["mcd_id"]);
+            $("#editplantdefectgroup").val(rs[0]["mpa_phase_plant"]);
+            $("#editzonedefectgroup").val(rs[0]["mza_name"]);
+            $("#editstationdefectgroup").val(rs[0]["msa_station"]);
+            $("#IDeditplantdefectgroup").val(rs[0]["mpa_id"]);
+            $("#IDeditzonedefectgroup").val(rs[0]["mza_id"]);
+            $("#IDeditstationdefectgroup").val(rs[0]["msa_id"]);
+            $checkbox = "";
+            var G_check = ""
+            pathnaja.done(function(rsnaja) {
+                console.log("rs===>", rs)
+                console.log("rsnaja===>", rsnaja)
+                var checkbox = "";
+                var check = "checked";
+                $.each(rsnaja, function(keyCheck, value) {
+                    G_check = ""
+                    checkData(rs, value.md_id)
+                    checkbox += '<input type="checkbox" class="checkboxdefectcode" name="checkboxdefectcode" id="checkboxdefectcode"  value="' + value.md_id + '" ' + G_check + ' >' + value.md_defect_en_name + '<span class="checkmark"></span><br><br>'
+                })
+                $("#checkBoxDefect").html(checkbox);
             })
-        };
 
-        function SaveEditDMCTypeDetail(mdtd_id) {
-            var IDeditDMCTypeDetail = $('#IDeditDMCTypeDetail').val()
-            var editdmctypeofdetail = $('#editdmctypeofdetail').val()
-            var editdatadmctypedetail = $('#editdatadmctypedetail').val()
-            var editstartofdetail = $('#editstartofdetail').val()
-            var editendofdetail = $('#editendofdetail').val()
-            var editsubstringdetail = $('#editsubstringdetail').val()
+            function checkData(ResultSelect, md_id) {
+                $status = true
+                $.each(ResultSelect, function(keyData, valueData) { //2 or 3
+                    if (md_id == valueData.md_id) {
+                        G_check = "checked"
+                        return false;
+                    }
+                })
 
-            var checkIDeditDMCTypeDetail = document.getElementById("IDeditDMCTypeDetail");
-            var checkeditdmctypeofdetail = document.getElementById("editdmctypeofdetail");
-            var checkeditdatadmctypedetail = document.getElementById("editdatadmctypedetail");
-            var checkeditstartofdetail = document.getElementById("editstartofdetail");
-            var checkeditendofdetail = document.getElementById("editendofdetail");
-            var checkeditsubstringdetail = document.getElementById("editsubstringdetail");
+            }
+        })
+    }
 
-            if (checkIDeditDMCTypeDetail.value == "" || checkeditdmctypeofdetail.value == "" ||
-                checkeditdatadmctypedetail.value == "" || checkeditstartofdetail.value == "" ||
-                checkeditendofdetail.value == "" || checkeditsubstringdetail.value == "") {
-                swal({
-                    title: "warning",
-                    text: "Please fill the textbox ",
-                    type: "warning",
-                    confirmButtonColor: '#D80032'
-                }, function() {
-                    window.location = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+    function SaveEditDefectGroup() {
+        var IDeditdefectgroup = $('#IDeditdefectgroup').val()
+        var editplantdefectgroup = $('#IDeditplantdefectgroup').val()
+        var editzonedefectgroup = $('#IDeditzonedefectgroup').val()
+        var editstationdefectgroup = $('#IDeditstationdefectgroup').val()
+
+        var dataDefectGroupcheckId = []
+        jQuery("input[name='checkboxdefectcode']").each(function(key, values) {
+            if (this.checked == true) {
+                console.log("sssssssssssssssss==>", this.value)
+                dataDefectGroupcheckId[key] = this.value
+                // alert("this.value===>"+this.value)
+
+            }
+
+        });
+        console.log("==>", dataDefectGroupcheckId)
+        var path = $.ajax({
+            method: "GET",
+            url: "<?php echo base_url(); ?>Manage/EditDefectGroup",
+            data: {
+                // IDeditdefectgroup: IDeditdefectgroup,
+                editplantdefectgroup: editplantdefectgroup,
+                editzonedefectgroup: editzonedefectgroup,
+                editstationdefectgroup: editstationdefectgroup,
+                dataDefectGroupcheckId: dataDefectGroupcheckId,
+            }
+        })
+        path.done(function(rs) {
+            if (rs === "true") {
+                setTimeout(function() {
+                    swal({
+                        title: "Success",
+                        text: "Defect Group is Updated!",
+                        type: "success",
+                        confirmButtonColor: '#D80032'
+                    }, function() {
+                        window.location = "<?php echo base_url() ?>Manage/DefectGroup";
+                    });
                 });
             } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You Failed to Edit Defect Group',
+                    confirmButtonColor: '#D80032'
+                })
+            }
+        })
+    }
 
+
+
+    // ******************************************************** mst dmc type detail ********************************************************
+
+    $("#btnSaveDMCTypeDetail").click(function() {
+        SaveAddDMCTypeDetail()
+    })
+
+    $("#btnSaveEditDMCTypeDetail").click(function() {
+        SaveEditDMCTypeDetail()
+    })
+
+
+    function statusDMCTypeDetail(mdtd_id) {
+        var path = $.ajax({
+            method: "get",
+            url: "<?php echo base_url(); ?>Manage/swiftStatusDMCTypeDetail?mdtd_id=" + mdtd_id
+        })
+    };
+
+
+
+    function SaveAddDMCTypeDetail() {
+        var adddmctypeofdetail = $('#adddmctypeofdetail').val()
+        var adddmcdataofdetail = $('#adddmcdataofdetail').val()
+        var addstartofdetail = $('#addstartofdetail').val()
+        var addendofdetail = $('#addendofdetail').val()
+        var addsubstringdetail = $('#addsubstringdetail').val()
+
+        var checkadddmctypeofdetail = document.getElementById("adddmctypeofdetail");
+        var checkadddmcdataofdetail = document.getElementById("adddmcdataofdetail");
+        var checkaddstartofdetail = document.getElementById("addstartofdetail");
+        var checkaddendofdetail = document.getElementById("addendofdetail");
+        var checkaddsubstringdetail = document.getElementById("addsubstringdetail");
+
+
+        if (checkadddmctypeofdetail.value == "" || checkadddmcdataofdetail.value == "" ||
+            checkaddstartofdetail.value == "" || checkaddendofdetail.value == "" || checkaddsubstringdetail.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Textbox is Empty',
+                confirmButtonColor: '#D80032'
+            })
+        } else {
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/AddDMCTypeDetail",
+                data: {
+                    adddmctypeofdetail: adddmctypeofdetail,
+                    adddmcdataofdetail: adddmcdataofdetail,
+                    addstartofdetail: addstartofdetail,
+                    addendofdetail: addendofdetail,
+                    addsubstringdetail: addsubstringdetail
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add DMC Type Detail.',
+                        confirmButtonColor: '#D80032'
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add DMC Type Detail',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
+            })
+        }
+    };
+
+    function getDataEditDMCTypeDetail(mdtd_id) {
+        var path = $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>Manage/getDataDMCTypeDetail?mdtd_id=" + mdtd_id,
+        })
+        path.done(function(rs) {
+            $("#IDeditDMCTypeDetail").val(rs[0]["mdtd_id"]);
+            $("#editdmctypeofdetail").val(rs[0]["mdt_id"]);
+            $("#editdatadmctypedetail").val(rs[0]["mdd_id"]);
+            $("#editstartofdetail").val(rs[0]["mdtd_start"]);
+            $("#editendofdetail").val(rs[0]["mdtd_end"]);
+            $("#editsubstringdetail").val(rs[0]["mdtd_num_substring"]);
+        })
+    };
+
+    function SaveEditDMCTypeDetail(mdtd_id) {
+        var IDeditDMCTypeDetail = $('#IDeditDMCTypeDetail').val()
+        var editdmctypeofdetail = $('#editdmctypeofdetail').val()
+        var editdatadmctypedetail = $('#editdatadmctypedetail').val()
+        var editstartofdetail = $('#editstartofdetail').val()
+        var editendofdetail = $('#editendofdetail').val()
+        var editsubstringdetail = $('#editsubstringdetail').val()
+
+        var checkIDeditDMCTypeDetail = document.getElementById("IDeditDMCTypeDetail");
+        var checkeditdmctypeofdetail = document.getElementById("editdmctypeofdetail");
+        var checkeditdatadmctypedetail = document.getElementById("editdatadmctypedetail");
+        var checkeditstartofdetail = document.getElementById("editstartofdetail");
+        var checkeditendofdetail = document.getElementById("editendofdetail");
+        var checkeditsubstringdetail = document.getElementById("editsubstringdetail");
+
+        if (checkIDeditDMCTypeDetail.value == "" || checkeditdmctypeofdetail.value == "" ||
+            checkeditdatadmctypedetail.value == "" || checkeditstartofdetail.value == "" ||
+            checkeditendofdetail.value == "" || checkeditsubstringdetail.value == "") {
+            swal({
+                title: "warning",
+                text: "Please fill the textbox ",
+                type: "warning",
+                confirmButtonColor: '#D80032'
+            }, function() {
+                window.location = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+            });
+        } else {
+
+            var path = $.ajax({
+                method: "POST",
+                url: "<?php echo base_url(); ?>Manage/EditDMCTypeDetail",
+                data: {
+                    IDeditDMCTypeDetail: IDeditDMCTypeDetail,
+                    editdmctypeofdetail: editdmctypeofdetail,
+                    editdatadmctypedetail: editdatadmctypedetail,
+                    editstartofdetail: editstartofdetail,
+                    editendofdetail: editendofdetail,
+                    editsubstringdetail: editsubstringdetail
+                }
+            })
+            path.done(function(rs) {
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Edit DMC Type Data.',
+                        confirmButtonColor: '#D80032'
+
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Edit DMC Type Data',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
+            });
+        }
+    };
+
+
+    // ----------------------------------------------------- NC/NG Data -----------------------------------------------------------------
+
+
+    function ChangeStatusNG(idd_id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Confirm NG?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#D80032',
+            cancelButtonColor: 'rgb(138 143 145)',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
                 var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/EditDMCTypeDetail",
-                    data: {
-                        IDeditDMCTypeDetail: IDeditDMCTypeDetail,
-                        editdmctypeofdetail: editdmctypeofdetail,
-                        editdatadmctypedetail: editdatadmctypedetail,
-                        editstartofdetail: editstartofdetail,
-                        editendofdetail: editendofdetail,
-                        editsubstringdetail: editsubstringdetail
-                    }
+                    method: "get",
+                    url: "<?php echo base_url(); ?>Manage/changeStatusNG?idd_id=" + idd_id
                 })
                 path.done(function(rs) {
                     if (rs === "true") {
                         Swal.fire({
                             icon: 'success',
-                            title: 'You have Successfully Edit DMC Type Data.',
+                            title: 'Successfully!',
                             confirmButtonColor: '#D80032'
 
                         }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/dmcTypeDetail";
+                            window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
                         })
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'You Failed to Edit DMC Type Data',
+                            title: 'Failed to Confirm NG',
                             confirmButtonColor: '#D80032'
                         })
                     }
-                });
+                })
             }
-        };
+        })
+    }
 
 
-        // ----------------------------------------------------- NC/NG Data -----------------------------------------------------------------
+    function ChangeStatusNC(idd_id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Confirm NC?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#D80032',
+            cancelButtonColor: 'rgb(138 143 145)',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var path = $.ajax({
+                    method: "get",
+                    url: "<?php echo base_url(); ?>Manage/changeStatusNC?idd_id=" + idd_id
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successfully!',
+                            confirmButtonColor: '#D80032'
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to Confirm NG',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            }
+        })
+    }
 
 
-        function ChangeStatusNG(idd_id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to Confirm NG?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#D80032',
-                cancelButtonColor: 'rgb(138 143 145)',
-                confirmButtonText: 'Yes!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var path = $.ajax({
-                        method: "get",
-                        url: "<?php echo base_url(); ?>Manage/changeStatusNG?idd_id=" + idd_id
-                    })
-                    path.done(function(rs) {
-                        if (rs === "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Successfully!',
-                                confirmButtonColor: '#D80032'
+    function RestoreNC(idd_id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to restore NC?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#D80032',
+            cancelButtonColor: 'rgb(138 143 145)',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var path = $.ajax({
+                    method: "get",
+                    url: "<?php echo base_url(); ?>Manage/reStoreNC?idd_id=" + idd_id
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Restore Successfully!',
+                            confirmButtonColor: '#D80032'
 
-                            }).then(function() {
-                                window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Failed to Confirm NG',
-                                confirmButtonColor: '#D80032'
-                            })
-                        }
-                    })
-                }
-            })
-        }
-
-
-        function ChangeStatusNC(idd_id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to Confirm NC?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#D80032',
-                cancelButtonColor: 'rgb(138 143 145)',
-                confirmButtonText: 'Yes!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var path = $.ajax({
-                        method: "get",
-                        url: "<?php echo base_url(); ?>Manage/changeStatusNC?idd_id=" + idd_id
-                    })
-                    path.done(function(rs) {
-                        if (rs === "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Successfully!',
-                                confirmButtonColor: '#D80032'
-
-                            }).then(function() {
-                                window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Failed to Confirm NG',
-                                confirmButtonColor: '#D80032'
-                            })
-                        }
-                    })
-                }
-            })
-        }
-
-
-        function RestoreNC(idd_id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to restore NC?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#D80032',
-                cancelButtonColor: 'rgb(138 143 145)',
-                confirmButtonText: 'Yes!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var path = $.ajax({
-                        method: "get",
-                        url: "<?php echo base_url(); ?>Manage/reStoreNC?idd_id=" + idd_id
-                    })
-                    path.done(function(rs) {
-                        if (rs === "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Restore Successfully!',
-                                confirmButtonColor: '#D80032'
-
-                            }).then(function() {
-                                window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Failed to Restore NC',
-                                confirmButtonColor: '#D80032'
-                            })
-                        }
-                    })
-                }
-            })
-        }
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to Restore NC',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            }
+        })
+    }
 </script>

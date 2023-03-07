@@ -1103,9 +1103,15 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelUpdateNamePermissionApp($editnameper, $id)
+	public function modelUpdateNamePermissionApp($editnameper, $id ,$empcodeadmin)
 	{
-		$sql = "UPDATE sys_permission_group_app SET spg_name = '{$editnameper}' WHERE spg_id = '{$id}'";
+		$sql = "UPDATE 
+		sys_permission_group_app 
+		SET 
+		spg_name = '{$editnameper}' ,
+		spg_update_by = '{$empcodeadmin}',
+		spg_update_date = CURRENT_TIMESTAMP
+		WHERE spg_id = '{$id}'";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -1134,8 +1140,8 @@ class Backoffice_model extends CI_Model
 	public function modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin)
 	{
 		$sql = "INSERT INTO sys_permission_detail_app 
-		(spg_id,sm_id,spd_create_by,spd_create_date,spd_update_by,spd_update_date)
-		VALUES('{$id}','{$dropdowneditmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP,'{$empcodeadmin}',CURRENT_TIMESTAMP)";
+		(spg_id,sm_id,spd_create_by,spd_create_date)
+		VALUES('{$id}','{$dropdowneditmenu}','{$empcodeadmin}',CURRENT_TIMESTAMP)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";

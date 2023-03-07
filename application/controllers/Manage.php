@@ -335,7 +335,7 @@ class manage extends CI_Controller
 
 		$updatenameper =  $this->backoffice_model->modelUpdateNamePermission($editnameper, $id);
 
-		// if ($updatenameper == "true") {
+
 		$checksubper = $this->backoffice_model->modelcheckInsertdataEditPer($id, $dropdowneditsubmenu);
 
 		if ($checksubper == "true") {
@@ -655,28 +655,28 @@ class manage extends CI_Controller
 
 	public function AddManagePermissionApp()
 	{
-		$empcodeadmin = $this->session->userdata("empcode");
-		$addPermissionappname = $_GET["addPermissionappname"];
+		// $empcodeadmin = $this->session->userdata("empcode");
+		// $addPermissionappname = $_GET["addPermissionappname"];
 		$dataMenuAppId = $_GET["dataMenuAppId"];
-		$rscheckaddnameapp = $this->backoffice_model->checkAddNamePermissionApp($addPermissionappname);
-		if ($rscheckaddnameapp == "true") {
-			$rsaddnameperapp = $this->backoffice_model->insertPermissionApp($addPermissionappname, $empcodeadmin);
-			$permissionappnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_app", "spg_name = '$addPermissionappname'");
-			if ($rsaddnameperapp == "true") {
-				foreach ($dataMenuAppId as $key => $value) {
-					if ($value == " " || empty($value)) {
-						// return "false";
-					} else {
-						$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailApp($permissionappnameconvert, $value, $empcodeadmin);
-					}
-				}
-				echo $rsaddpermissiondetail;
-			} else {
-				echo  "false";
-			}
-		} else {
-			echo "false";
-		}
+		// echo ($dataMenuAppId);
+		// $rscheckaddnameapp = $this->backoffice_model->checkAddNamePermissionApp($addPermissionappname);
+		// if ($rscheckaddnameapp == "true") {
+		// 	$rsaddnameperapp = $this->backoffice_model->insertPermissionApp($addPermissionappname, $empcodeadmin);
+		// 	$permissionappnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_app", "spg_name = '$addPermissionappname'");
+		// 	if ($rsaddnameperapp == "true") {
+		// 		foreach ($dataMenuAppId as $key => $value) {
+		// 			if ($value == " " || empty($value)) {
+		// 			} else {
+		// 				$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailApp($permissionappnameconvert, $value, $empcodeadmin);
+		// 			}
+		// 		}
+		// 		echo $rsaddpermissiondetail;
+		// 	} else {
+		// 		echo  "false";
+		// 	}
+		// } else {
+		// 	echo "false";
+		// }
 	}
 	public function getDetailGroupApp()
 	{
@@ -707,20 +707,14 @@ class manage extends CI_Controller
 		$editnameper = $_REQUEST["editPermissionappname"];
 		$dropdowneditmenu = $_REQUEST["dropdowneditmenu"];
 		$empcodeadmin = $this->session->userdata("empcode");
-		// echo $dropdowneditmenu;
 
-		$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id);
+		$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id, $empcodeadmin);
 
-		if ($updatenameper == "true") {
+		$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
 
-			$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
-			// echo $checkInsertEditper;
-			if ($checkInsertEditper == "true") {
-				$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
-				echo $InsertPer;
-			} else {
-				echo "false";
-			}
+		if ($checkInsertEditper == "true") {
+			$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
+			echo $InsertPer;
 		} else {
 			echo "false";
 		}
@@ -912,13 +906,12 @@ class manage extends CI_Controller
 
 		$checkaddnamestatus = $this->backoffice_model->modelCheckAddStatus($addstatusname);
 
-		if($checkaddnamestatus == "pass"){
+		if ($checkaddnamestatus == "pass") {
 			$rsaddstatus = $this->backoffice_model->modelAddStatus($addstatusname, $empcodeadmin);
 			echo $rsaddstatus;
-		}else {
+		} else {
 			echo "duplicate";
 		}
-	
 	}
 
 	public function getDataEditCheckStatus()
@@ -971,10 +964,10 @@ class manage extends CI_Controller
 		$addinspectiontype = $_POST["addinspectiontype"];
 		$checkinspection = $this->backoffice_model->modelCheckAddInspection($addinspectiontype);
 
-		if($checkinspection =="pass"){
+		if ($checkinspection == "pass") {
 			$rsinspection = $this->backoffice_model->modelAddInspection($addinspectiontype, $empcodeadmin);
 			echo $rsinspection;
-		}else{
+		} else {
 			echo "duplicate";
 		}
 	}
@@ -994,7 +987,6 @@ class manage extends CI_Controller
 
 		$rseditinspection = $this->backoffice_model->modelEditInspection($IDeditInspectionName, $editInspectionName, $empcodeadmin);
 		echo $rseditinspection;
-		
 	}
 
 	// ************************* Control DMC Data *************************************
@@ -1029,13 +1021,12 @@ class manage extends CI_Controller
 		$adddmcname = $_POST["adddmcname"];
 		$checkDMCdataname = $this->backoffice_model->modelCheckAddDMC($adddmcname);
 
-		if($checkDMCdataname =="pass"){
+		if ($checkDMCdataname == "pass") {
 			$rsinspection = $this->backoffice_model->modelAddDMC($adddmcname, $empcodeadmin);
 			echo $rsinspection;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-	
 	}
 
 	public function getDataEditDMC()
@@ -1088,13 +1079,12 @@ class manage extends CI_Controller
 		$adddmcdigit = $_POST["adddmcdigit"];
 		$checkDMCtype = $this->backoffice_model->modelCheckAddDMCType($adddmctypename);
 
-		if($checkDMCtype =="pass"){
+		if ($checkDMCtype == "pass") {
 			$rsadddmctype = $this->backoffice_model->modelAddDMCType($adddmctypename, $adddmcdigit, $empcodeadmin);
 			echo $rsadddmctype;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-	
 	}
 
 	public function getDataEditDMCType()
@@ -1147,10 +1137,8 @@ class manage extends CI_Controller
 		$addfaline = $_POST["addfaline"];
 		$addfaname = $_POST["addfaname"];
 
-			$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline, $addfaname, $empcodeadmin);
-			echo $rsaddFACode;
-		
-
+		$rsaddFACode = $this->backoffice_model->modelAddFACode($addfaline, $addfaname, $empcodeadmin);
+		echo $rsaddFACode;
 	}
 	public function getDataEditFACode()
 	{
@@ -1205,14 +1193,14 @@ class manage extends CI_Controller
 
 		$checkShift = $this->backoffice_model->modelCheckWorkShift($addshift);
 
-		if($checkShift == "pass"){
+		if ($checkShift == "pass") {
 			$rsaddWorkShift = $this->backoffice_model->modelAddWorkShift($addshift, $addstarttime, $addendtime, $empcodeadmin);
 			echo $rsaddWorkShift;
-		}else{
+		} else {
 			echo "duplicate";
 		}
 	}
-	
+
 
 	public function getDataEditWorkShift()
 	{
@@ -1232,13 +1220,12 @@ class manage extends CI_Controller
 
 		$checkShift = $this->backoffice_model->modelCheckWorkShift($editshift);
 
-		if($checkShift == "pass"){
+		if ($checkShift == "pass") {
 			$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
-		echo $rseditworkshift;
-		}else{
+			echo $rseditworkshift;
+		} else {
 			echo "duplicate";
 		}
-	
 	}
 
 
@@ -1279,14 +1266,12 @@ class manage extends CI_Controller
 
 		$checkDefect = $this->backoffice_model->modelCheckDefect($adddefectcode);
 
-		if($checkDefect == "pass"){
+		if ($checkDefect == "pass") {
 			$rsaddDefect = $this->backoffice_model->modelAddDefect($adddefectcode, $adddefectnameth, $adddefectnameen, $empcodeadmin);
 			echo $rsaddDefect;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-
-		
 	}
 
 
@@ -1309,10 +1294,10 @@ class manage extends CI_Controller
 
 		$checkDefect = $this->backoffice_model->modelCheckDefect($editdefectcode);
 
-		if($checkDefect == "pass"){
+		if ($checkDefect == "pass") {
 			$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
 			echo $rseditdefect;
-		}else{
+		} else {
 			echo "duplicate";
 		}
 	}
@@ -1438,7 +1423,7 @@ class manage extends CI_Controller
 		$editselectpno = $_POST["editselectpno"];
 		$editselectpname = $_POST["editselectpname"];
 
-		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon,$editselectpno, $editselectpname,$empcodeadmin);
+		$rseditselectpart = $this->backoffice_model->modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpno, $editselectpname, $empcodeadmin);
 		echo $rseditselectpart;
 	}
 
@@ -1586,14 +1571,12 @@ class manage extends CI_Controller
 
 		$checkzone = $this->backoffice_model->modelCheckZone($addlinezone);
 
-		if($checkzone	== "pass"){
+		if ($checkzone	== "pass") {
 			$rsaddzone = $this->backoffice_model->modelAddZone($addnamezone, $addlinezone, $empcodeadmin);
 			echo $rsaddzone;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-
-	
 	}
 
 	public function getDataEditZone()
@@ -1612,13 +1595,12 @@ class manage extends CI_Controller
 
 		$checkzone = $this->backoffice_model->modelCheckZone($addlinezone);
 
-		if($checkzone	== "pass"){
+		if ($checkzone	== "pass") {
 			$rseditplantapp = $this->backoffice_model->modelEditZone($IDeditzone, $editnamezone, $editlinezone, $empcodeadmin);
 			echo $rseditplantapp;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-		
 	}
 
 
@@ -1656,13 +1638,12 @@ class manage extends CI_Controller
 
 		$checkstation = $this->backoffice_model->modelCheckStation($addtablestation);
 
-		if($checkstation == "pass"){
+		if ($checkstation == "pass") {
 			$rsaddstation = $this->backoffice_model->modelAddStation($addtablestation, $empcodeadmin);
 			echo $rsaddstation;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-		
 	}
 
 	public function getDataEditStation()
@@ -1681,13 +1662,12 @@ class manage extends CI_Controller
 		$checkstation = $this->backoffice_model->modelCheckStation($addtablestation);
 
 
-		if($checkstation == "pass"){
+		if ($checkstation == "pass") {
 			$rseditstationapp = $this->backoffice_model->modelEditStation($IDeditStation, $editStation, $empcodeadmin);
 			echo $rseditstationapp;
-		}else{
+		} else {
 			echo "duplicate";
 		}
-		
 	}
 
 	// ************************* Defect Group *************************************
