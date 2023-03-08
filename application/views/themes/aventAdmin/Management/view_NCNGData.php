@@ -115,11 +115,11 @@
                                     echo "<td>" . $table["idd_create_date"] . "</td>";
 
                                     if ($table["idd_type"] == "NG") {
-                                        if ($table["idd_status"] == "9") {
+                                        if ($table["idd_status"] == "5") {
                                             echo "<td>
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" 
-                                                                id=btnconfirmNG$i clicked onclick='ChangeStatusNG(" . $table["idd_id"] . ")' > Confirm NG</button>                          
+                                                                id=btnconfirmNG$i clicked onclick='ChangeStatusNG(" . $table["idd_id"] . ")' disabled > Confirm NG</button>                          
                                                             </div>
                                            
                                                         </td>";
@@ -134,16 +134,16 @@
                                                         </td>";
                                         }
                                     } else if ($table["idd_type"] == "NC") {
-                                        if($table["idd_status"] == "5" || $table["idd_status"] == "2" ) {
+                                        if($table["idd_status"] == "5") {
                                             echo "<td>
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
-                                                                id=btnconfirmNC$i onclick='ChangeStatusNC(" . $table["idd_id"] . ")'> Confirm NC</button>                              
+                                                                id=btnconfirmNC$i onclick='ChangeStatusNC(" . $table["idd_id"] . ")' disabled> Confirm NC</button>                              
                                                             </div> <br>
 
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
-                                                                id=btnrestoreNC$i onclick='RestoreNC(" . $table["idd_id"] . ")'> Restore NC</button>                              
+                                                                id=btnrestoreNC$i onclick='RestoreNC(" . $table["idd_id"] . ")' disabled> Restore NC</button>                              
                                                             </div>
 
                                                         </td>";

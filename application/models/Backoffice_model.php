@@ -3008,7 +3008,7 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		$result = $row[0]["idd_status"];
 		if ($result == 0 || $result == 1 || $result == 5) {
-			$sql = "UPDATE info_defect_detail_app SET idd_status = 9 WHERE  idd_id = '{$ngid}'";
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 5 WHERE  idd_id = '{$ngid}'";
 			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
 			WHERE  idd_id = '{$ngid}'";
 			$res = $this->db->query($sql);
@@ -3071,7 +3071,7 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		$result = $row[0]["idd_status"];
 		if ($result == 5 || $result == 1 || $result == 0 ) {
-			$sql = "UPDATE info_defect_detail_app SET idd_status = 2 WHERE  idd_id = '{$ncid}'";
+			$sql = "UPDATE info_defect_detail_app SET idd_status = 9 WHERE  idd_id = '{$ncid}'";
 			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
 			WHERE  idd_id = '{$ncid}'";
 			$res = $this->db->query($sql);
