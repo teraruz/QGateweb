@@ -134,7 +134,7 @@
                                                         </td>";
                                         }
                                     } else if ($table["idd_type"] == "NC") {
-                                        if($table["idd_status"] == "5") {
+                                        if($table["idd_status"] == "5" || $table["idd_status"] == "9" ) {
                                             echo "<td>
                                                             <div class=\"text-wrap text-center\" >
                                                                 <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
