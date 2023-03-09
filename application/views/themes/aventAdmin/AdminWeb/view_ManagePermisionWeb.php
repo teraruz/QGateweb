@@ -28,35 +28,70 @@
                   echo "<td>" . $i . "</td>";
                   echo "<td>" . $value["spg_name"] . "</td>";
                   if ($value["spg_status"] == "1") {
-                    echo "<td>          
+                    echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='statusPermission(" . $value["spg_id"] . ")'>
-                                                <label class=\"custom-control-label\" for=status$i></label>
-                                            </div>                                      
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i checked onclick='statusPermission(" . $value["spg_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
+                                            </div>
+                                       
                                     </td>";
                   } else {
                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='statusPermission(" . $value["spg_id"] . ")'>
-                                            <label class=\"custom-control-label\" for=status$i></label>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusMenuWeb$i onclick='statusPermission(" . $value["spg_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusMenuWeb$i></label>
                                         </div>
                                     </td>";
                   }
                   echo "<td>
-                                    <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm  me-md-2 \"  data-toggle=\"modal\"   id=\"detailpermissiongrouppp$i\" name =\"detailpermissiongrouppp$i\"  onclick='detailpermissiongroup(" . $value["spg_id"] . ")'><i
-                                     class=\"mdi mdi-information-outline\"></i> info</button>                              
-                                    </div>
-                                </td>";
-
+                                      <div class=\"text-wrap text-center\" >
+                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm  me-md-2 \"  data-toggle=\"modal\"   id=\"detailpermissiongrouppp$i\" name =\"detailpermissiongrouppp$i\"  onclick='detailpermissiongroup(" . $value["spg_id"] . ")'><i
+                //                      class=\"mdi mdi-information-outline\"></i> info</button>                                      
+                                      </div>
+                                    </td>";
                   echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"editPermissionWeb$i\" name =\"editPermissionWeb$i\" data-target=\"#editpermissionweb\"  onclick='getDataEditPermissionWeb(" . $value["spg_id"] . ")'><i
-                                     class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
+                                    <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"editPermissionWeb$i\" name =\"editPermissionWeb$i\" data-target=\"#editpermissionweb\"  onclick='getDataEditPermissionWeb(" . $value["spg_id"] . ")'><i
+                //                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
-                  echo "<tr>";
+                  echo "</tr>";
                 }
+                // foreach ($tablePermissionWeb as $value) {
+                //   $i++;
+                //   echo "<tr>";
+                //   echo "<td>" . $i . "</td>";
+                //   echo "<td>" . $value["spg_name"] . "</td>";
+                //   if ($value["spg_status"] == "1") {
+                //     echo "<td>          
+                //                             <div class=\"custom-switch text-center\" >
+                //                                 <input type=\"checkbox\" class=\"custom-control-input\" id=status$i checked onclick='statusPermission(" . $value["spg_id"] . ")'>
+                //                                 <label class=\"custom-control-label\" for=status$i></label>
+                //                             </div>                                      
+                //                     </td>";
+                //   } else {
+                //     echo "<td>
+                //                         <div class=\"custom-switch text-center\" >
+                //                             <input type=\"checkbox\" class=\"custom-control-input\" id=status$i onclick='statusPermission(" . $value["spg_id"] . ")'>
+                //                             <label class=\"custom-control-label\" for=status$i></label>
+                //                         </div>
+                //                     </td>";
+                //   }
+                //   echo "<td>
+                //                     <div class=\"text-wrap text-center\" >
+                //                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm  me-md-2 \"  data-toggle=\"modal\"   id=\"detailpermissiongrouppp$i\" name =\"detailpermissiongrouppp$i\"  onclick='detailpermissiongroup(" . $value["spg_id"] . ")'><i
+                //                      class=\"mdi mdi-information-outline\"></i> info</button>                              
+                //                     </div>
+                //                 </td>";
+
+                //   echo "<td>
+                //                     <div class=\"text-wrap text-center\" >
+                //                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"  data-toggle=\"modal\" id=\"editPermissionWeb$i\" name =\"editPermissionWeb$i\" data-target=\"#editpermissionweb\"  onclick='getDataEditPermissionWeb(" . $value["spg_id"] . ")'><i
+                //                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
+                //                     </div>
+                //                 </td>";
+                //   echo "<tr>";
+                // }
                 ?>
               </tbody>
             </table>

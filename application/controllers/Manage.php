@@ -291,6 +291,7 @@ class manage extends CI_Controller
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
 		$data["tablePermissionWeb"] = $this->backoffice_model->getTableManagePermissionWeb();
+		$data["tableMenuWeb"] = $this->backoffice_model->getTableManageMenuweb();
 		$data["getmenu"] = $this->backoffice_model->modelGetMenu();
 		$data["getsubmenu"] = $this->backoffice_model->modelGetSubmenu();
 		$data["getpermissiondetail"] = $this->backoffice_model->modelGetPermissionDetail();
