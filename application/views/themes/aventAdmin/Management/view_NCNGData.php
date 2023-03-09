@@ -34,7 +34,7 @@
                                     <div class="mb row col-md-6">
                                         <label class="col-form-label">Zone :</label>
                                         <div class="col-md-3">
-                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectZoneNCNG" name="selectZoneNCNG">
                                                 <option selected>Select Zone</option>
                                                 <?php
                                                 foreach ($getzone as $zone) {
@@ -52,7 +52,7 @@
                                     <div class="mb row col-md-6">
                                         <label class="col-form-label">Station:</label>
                                         <div class="col-md-2">
-                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectStationNCNG" name="selectStationNCNG">
                                                 <option selected>Select Station</option>
                                                 <?php
                                                 foreach ($getstation as $station) {
@@ -70,8 +70,8 @@
 
                             <div class="col-3 col-sm text-center">
                                 <span>
-                                    <button type="submit" id="strt" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
-                                    <button type="submit" id="end" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
+                                    <button type="submit" id="btnNCNGstart" name="btnNCNGstart" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
+                                    <button type="submit" id="btnNCNGend" name="btnNCNGend" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
                                 </span>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                                     <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id = tbNCNG >
                                 <?php
                                 $i = 0;
                                 foreach ($tableNCNG as $table) {

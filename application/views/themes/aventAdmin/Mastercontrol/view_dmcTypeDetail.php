@@ -116,7 +116,7 @@
 
                   <div class="form-group"
                     <label for="password">Number Substring :</label>
-                    <input class="form-control" type="number" id="addsubstringdetail" name="addsubstringdetail">
+                    <input class="form-control" type="number" min="0" id="addsubstringdetail" name="addsubstringdetail">
                   </div>
 
                 </form>
@@ -184,7 +184,7 @@
 
                   <div class="form-group"
                     <label for="password">Number Substring :</label>
-                    <input class="form-control" type="number" id="editsubstringdetail" name="editsubstringdetail">
+                    <input class="form-control" type="number" min="0" id="editsubstringdetail" name="editsubstringdetail">
                   </div>
 
 

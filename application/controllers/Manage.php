@@ -655,28 +655,27 @@ class manage extends CI_Controller
 
 	public function AddManagePermissionApp()
 	{
-		// $empcodeadmin = $this->session->userdata("empcode");
-		// $addPermissionappname = $_GET["addPermissionappname"];
+		$empcodeadmin = $this->session->userdata("empcode");
+		$addPermissionappname = $_GET["addPermissionappname"];
 		$dataMenuAppId = $_GET["dataMenuAppId"];
-		// echo ($dataMenuAppId);
-		// $rscheckaddnameapp = $this->backoffice_model->checkAddNamePermissionApp($addPermissionappname);
-		// if ($rscheckaddnameapp == "true") {
-		// 	$rsaddnameperapp = $this->backoffice_model->insertPermissionApp($addPermissionappname, $empcodeadmin);
-		// 	$permissionappnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_app", "spg_name = '$addPermissionappname'");
-		// 	if ($rsaddnameperapp == "true") {
-		// 		foreach ($dataMenuAppId as $key => $value) {
-		// 			if ($value == " " || empty($value)) {
-		// 			} else {
-		// 				$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailApp($permissionappnameconvert, $value, $empcodeadmin);
-		// 			}
-		// 		}
-		// 		echo $rsaddpermissiondetail;
-		// 	} else {
-		// 		echo  "false";
-		// 	}
-		// } else {
-		// 	echo "false";
-		// }
+		$rscheckaddnameapp = $this->backoffice_model->checkAddNamePermissionApp($addPermissionappname);
+		if ($rscheckaddnameapp == "true") {
+			$rsaddnameperapp = $this->backoffice_model->insertPermissionApp($addPermissionappname, $empcodeadmin);
+			$permissionappnameconvert = $this->backoffice_model->convert("spg_id", "sys_permission_group_app", "spg_name = '$addPermissionappname'");
+			if ($rsaddnameperapp == "true") {
+				foreach ($dataMenuAppId as $key => $value) {
+					if ($value == " " || empty($value)) {
+					} else {
+						$rsaddpermissiondetail = $this->backoffice_model->insertPermissionDetailApp($permissionappnameconvert, $value, $empcodeadmin);
+					}
+				}
+				echo $rsaddpermissiondetail;
+			} else {
+				echo  "false";
+			}
+		} else {
+			echo "false";
+		}
 	}
 	public function getDetailGroupApp()
 	{
@@ -1936,19 +1935,32 @@ class manage extends CI_Controller
 		$data["lname"] = $data["ss_emp_lname"];
 		$data["pic"] = $data["ss_pic"];
 		$data["plant"] = $data["mpa_name"];
+		$data["getplant"] = $this->backoffice_model->modelGetPlantApp();
+		$data["getzone"] = $this->backoffice_model->modelgetZoneApp();
+		$data["getstation"] = $this->backoffice_model->modelgetStationApp();
+		$data["tableCheckData"] = $this->backoffice_model->getTableCheckData();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/Web/view_menu.php', $data);
-		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php');
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_QgateCheckData.php');
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/Web/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/Management/view_QgateCheckData.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/Web/view_footer.php');
 		$this->template->render();
 	}
+
+	public function SearchCheckData(){
+
+		$plant = $_POST["plant"];
+		$zone = $_POST["zone"];
+		$station = $_POST["station"];
+
+		$Searchtable = $this->backoffice_model->SearchCheckData($plant,$zone,$station);
+		echo json_encode($Searchtable);
+
+	}
 	public function NCNGData()
 	{
-		// $data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		// $empcode = $this->session->userdata("empcode");
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 
@@ -1974,6 +1986,17 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
+
+	public function SearchNCNG(){
+
+		$plant = $_POST["plant"];
+		$zone = $_POST["zone"];
+		$station = $_POST["station"];
+
+		$Searchtable = $this->backoffice_model->SearchNCNG($plant,$zone,$station);
+		echo json_encode($Searchtable);
+
+	}
 	public function changeStatusNG()
 	{
 		$ngid = $_GET["idd_id"];

@@ -689,7 +689,7 @@ class Backoffice_model extends CI_Model
 	public function editMenuWeb($IDeditMenuName, $editMenuName, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_menu_web 
-		SET sm_name_menu = '{$editMenuName}' , sm_create_by = '{$empcodeadmin}' , sm_create_date = CURRENT_TIMESTAMP
+		SET sm_name_menu = '{$editMenuName}' , sm_update_by = '{$empcodeadmin}' , sm_update_date = CURRENT_TIMESTAMP
 		WHERE sm_id = '{$IDeditMenuName}'";
 		$res = $this->db->query($sql);
 		if ($res) {
@@ -859,7 +859,7 @@ class Backoffice_model extends CI_Model
 	}
 	public function getTableGroupPermissionApp()
 	{
-		$sql = "SELECT * FROM sys_permission_group_app";
+		$sql = "SELECT * FROM sys_permission_group_app WHERE spg_status = 1";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;
@@ -1841,7 +1841,8 @@ class Backoffice_model extends CI_Model
 		mst_work_shift_app
 		WHERE mws_shift = '{$addshift}'";
 		$res = $this->db->query($sql);
-		if ($res) {
+		$row = $res->result_array();
+		if ($row) {
 			return "duplicate";
 		} else {
 			return "pass";
@@ -1943,7 +1944,8 @@ class Backoffice_model extends CI_Model
 		mst_defect_app
 		WHERE md_defect_code = '{$defect}'";
 		$res = $this->db->query($sql);
-		if ($res) {
+		$row = $res->result_array();
+		if ($row) {
 			return "duplicate";
 		} else {
 			return "pass";
@@ -2127,10 +2129,23 @@ class Backoffice_model extends CI_Model
 		}
 	}
 
-	public function modelAddSelectPart($addselectConfig, $addselectpno, $addselectpname, $addselectptime, $empcodeadmin)
+	public function modelAddSelectPart($addselectConfig, $addselectpno, $addselectpname, $empcodeadmin)
 	{
-		$sql = "INSERT INTO mst_select_part_app (mcd_id, msp_part_no, msp_part_name, msp_create_by, msp_create_date)
-		VALUES ('{$addselectConfig}', '{$addselectpno}','{$addselectpname}','{$empcodeadmin}', CURRENT_TIMESTAMP)";
+		$sql = "INSERT INTO mst_select_part_app (
+			mcd_id,
+			msp_part_no,
+			msp_part_name,
+			msp_create_by,
+			msp_create_date
+		)
+		VALUES
+			(
+				'{$addselectConfig}',
+				'{$addselectpno}',
+				'{$addselectpname}',
+				'{$empcodeadmin}',
+				CURRENT_TIMESTAMP
+			)";
 		$res = $this->db->query($sql);
 		if ($res) {
 			return "true";
@@ -2406,7 +2421,8 @@ class Backoffice_model extends CI_Model
 		mst_zone_admin_app
 		WHERE mza_name = '{$line}'";
 		$res = $this->db->query($sql);
-		if ($res) {
+		$row = $res->result_array();
+		if ($row) {
 			return "duplicate";
 		} else {
 			return "pass";
@@ -2500,7 +2516,8 @@ class Backoffice_model extends CI_Model
 		mst_station_admin_app
 		WHERE msa_station = '{$station}'";
 		$res = $this->db->query($sql);
-		if ($res) {
+		$row = $res->result_array();
+		if ($row) {
 			return "duplicate";
 		} else {
 			return "pass";
@@ -2957,12 +2974,120 @@ class Backoffice_model extends CI_Model
 			return "false";
 		}
 	}
+	//======================================== Qgate Check Data ===========================================================================
+
+	public function getTableCheckData()
+	{
+		$sql = "SELECT
+		iodc_id,
+		ifts_line_cd,
+		ifts_plan_date,
+		ifts_seq_paln,
+		ifts_part_no,
+		ifts_snp,
+		ifts_box,
+		ifts_lot_no_prod,
+		ifts_lot_current,
+		mpa_name,
+		mza_name,
+		msa_station ,
+		FORMAT (
+			iodc_created_date,
+			'yyyy-MM-dd'
+		) AS iodc_created_date
+	
+	FROM
+		info_operation_detail_count_app iodc
+	INNER JOIN info_fa_tag_scan_app ifts ON ifts.ifts_id = iodc.ifts_id
+	INNER JOIN mst_config_details_app mcd ON mcd.mcd_id = iodc.mcd_id
+	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
+	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
+	INNER JOIN mst_station_admin_app msa ON mcd.mcd_id = msa.msa_id";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
+
+	public function SearchCheckData($plantID,$zoneID,$stationID)
+	{
+		$sql = "SELECT
+		iodc_id,
+		ifts_line_cd,
+		ifts_plan_date,
+		ifts_seq_paln,
+		ifts_part_no,
+		ifts_snp,
+		ifts_box,
+		ifts_lot_no_prod,
+		ifts_lot_current,
+		mpa.mpa_id , 
+		mpa_name,
+		mza.mza_id,
+		mza_name,
+		msa.msa_id,
+		msa_station ,
+		FORMAT (
+			iodc_created_date,
+			'yyyy-MM-dd'
+		) AS iodc_created_date
+	
+	FROM
+		info_operation_detail_count_app iodc
+	INNER JOIN info_fa_tag_scan_app ifts ON ifts.ifts_id = iodc.ifts_id
+	INNER JOIN mst_config_details_app mcd ON mcd.mcd_id = iodc.mcd_id
+	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
+	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
+	INNER JOIN mst_station_admin_app msa ON mcd.mcd_id = msa.msa_id
+	WHERE mpa.mpa_id = '{$plantID}' AND mza.mza_id = '{$zoneID}' AND msa.msa_id = '{$stationID}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+	}
 
 
 
 	// ---------------------------------------- NC NG Data ---------------------------------------------------------------------------------
 
+	public function SearchNCNG($plant,$zone,$station)
+	{
+		$sql = "SELECT
+		idd.idd_id,
+		ifts_part_no,
+		mpa.mpa_id ,
+		mpa_name,
+		mza.mza_id ,
+		mza_name,
+		msa.msa_id ,
+		msa_station,
+		idd_status,
+		FORMAT (
+			idd_create_date,
+			'yyyy-MM-dd'
+		) AS idd_create_date,
+		CASE idd_type
+	WHEN '1' THEN
+		'NC'
+	WHEN '0' THEN
+		'NG'
+	ELSE
+		'Unknown'
+	END AS idd_type
+	FROM
+		info_defect_detail_app idd
+	INNER JOIN info_operation_detail_count_app iodc ON idd.iodc_id = iodc.iodc_id
+	INNER JOIN info_fa_tag_scan_app ifts ON iodc.ifts_id = ifts.ifts_id
+	INNER JOIN mst_defect_group_app mdg ON idd.mdg_id = mdg.mdg_id
+	INNER JOIN mst_config_details_app mcd ON mdg.mcd_id = mcd.mcd_id
+	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
+	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
+	INNER JOIN mst_station_admin_app msa ON mcd.msa_id = msa.msa_id
+WHERE mpa.mpa_id = '{$plant}' AND mza.mza_id = '{$zone}' AND msa.msa_id = '{$station}'";
 
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		return $row;
+
+	}
 
 	public function getTableNCNG()
 	{

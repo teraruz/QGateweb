@@ -502,7 +502,7 @@
     };
 
     function isValidInput(input) {
-        var pattern = new RegExp(/^([a-z0-9])+$/i);
+        var pattern = new RegExp(/^([a-z0-9 \t])+$/i);
         return pattern.test(input);
     }
 
@@ -1221,7 +1221,7 @@
     function SaveaddSubMenuWeb() {
         var IDdetailSubMenu = $('#IDdetailSubMenu').val()
         var addsubmenuwebname = $('#addsubmenuwebname').val();
-        var addsubmenupath = $('#addmenupath').val();
+        var addsubmenupath = $('#addsubmenupath').val();
 
         var checkaddsubmenuwebname = document.getElementById("addsubmenuwebname")
         var checkaddmenupath = document.getElementById("addsubmenupath")
@@ -1246,7 +1246,6 @@
                         }
                     })
                     path.done(function(rs) {
-                        alert(rs);
                         if (rs === "true") {
                             Swal.fire({
                                 icon: 'success',
@@ -1415,48 +1414,66 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddManageUserApp",
-                data: {
-                    addempcodeapp: addempcodeapp,
-                    addnameapp: addnameapp,
-                    addgrouppermissionapp: addgrouppermissionapp
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Employee App.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addempcodeapp)) {
+                if (isValidInput(addnameapp)) {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/AddManageUserApp",
+                        data: {
+                            addempcodeapp: addempcodeapp,
+                            addnameapp: addnameapp,
+                            addgrouppermissionapp: addgrouppermissionapp
+                        }
+                    })
+                    path.done(function(rs) {
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have Successfully Add Employee App.',
+                                confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
-                    })
-                } else if (rs == "Select group permission") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Group Permission is Empty',
-                        confirmButtonColor: '#D80032'
-                    })
-                } else if (rs == "duplicate") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data is Duplicate',
-                        confirmButtonColor: '#D80032'
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
+                            })
+                        } else if (rs == "Select group permission") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Group Permission is Empty',
+                                confirmButtonColor: '#D80032'
+                            })
+                        } else if (rs == "duplicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data is Duplicate',
+                                confirmButtonColor: '#D80032'
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add Employee App',
+                                confirmButtonColor: '#D80032'
+                            })
+                        }
+
                     })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Employee App',
+                        title: 'Error',
+                        text: 'Cannot insert special character in Employee Name',
                         confirmButtonColor: '#D80032'
                     })
                 }
-
-            })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Employee Code',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
-    };
+    }
 
     function SaveEditUserApp() {
         var IDedituserapp = $("#IDedituserapp").val();
@@ -1482,40 +1499,58 @@
                 window.location = "<?php echo base_url() ?>Manage/ManageUserApp";
             });
         } else {
-            var path = $.ajax({
-                method: "GET",
-                url: "<?php echo base_url(); ?>Manage/EditManageUserApp",
-                data: {
-                    IDedituserapp: IDedituserapp,
-                    editempcodeuserapp: editempcodeuserapp,
-                    editnameapp: editnameapp,
-                    editgrouppermissionuserapp: editgrouppermissionuserapp
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        title: "Success",
-                        text: "Employee App is Updated!",
-                        type: "success",
-                        confirmButtonColor: '#D80032'
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
+            if (isValidInput(addempcodeapp)) {
+                if (isValidInput(addnameapp)) {
+                    var path = $.ajax({
+                        method: "GET",
+                        url: "<?php echo base_url(); ?>Manage/EditManageUserApp",
+                        data: {
+                            IDedituserapp: IDedituserapp,
+                            editempcodeuserapp: editempcodeuserapp,
+                            editnameapp: editnameapp,
+                            editgrouppermissionuserapp: editgrouppermissionuserapp
+                        }
                     })
-                } else if (rs === "duplicate") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data is Duplicate',
-                        confirmButtonColor: '#D80032'
+                    path.done(function(rs) {
+                        if (rs === "true") {
+                            Swal.fire({
+                                title: "Success",
+                                text: "Employee App is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>Manage/ManageUserApp";
+                            })
+                        } else if (rs === "duplicate") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data is Duplicate',
+                                confirmButtonColor: '#D80032'
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Add Employee App',
+                                confirmButtonColor: '#D80032'
+                            })
+                        }
                     })
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'You Failed to Add Employee App',
+                        title: 'Error',
+                        text: 'Cannot insert special character in Employee Name',
                         confirmButtonColor: '#D80032'
                     })
                 }
-            });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Employee Code',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
@@ -1544,17 +1579,14 @@
         var dataMenuAppId = []
         var checkaddPermissionappname = document.getElementById("addPermissionappname");
         jQuery("input[name='checkboxmenuapp']").each(function(key, values) {
-            // setค่าให้เป็น input เพื่อมองว่า checkbox เป็น input โดย name ก็คือชื่อ  html checkbox ใน view 
-            //  .each หมายถึงการวนลูปออก(ในหน้าviewsจะเป็นการวนลูปเข้า) โดย key คือ index วนตามลำดับ(0,1,2,..) 
-            //   และ values ก็คือค่าที่ถูกกำหนดใน checkbox นั้น 
             if (this.checked == true) {
-                console.log("sssssssssssssssss==>", this.value)
-                // this.checked = ถ้าตัวมันเองถูก check (เพราะเป็นcheckbox) ก็จะทำเงื่อนไข
+
                 dataMenuAppId[key] = this.value
-                // this.value คือการเก็บ values ที่อยู่ใน checkbox ออกมาใส่ array key
 
             }
+            console.log("sssssssssssssssss==>", dataMenuAppId[key])
         });
+
         if (addPermissionappname.value == "") {
             Swal.fire({
                 icon: 'warning',
@@ -1562,52 +1594,48 @@
                 text: 'Textbox is Empty',
                 confirmButtonColor: '#D80032'
             })
-        } else {
-            console.log("==>", dataMenuAppId)
-            if (Array.isArray(dataMenuAppId)) {
-                Swal.fire({
+        } else if (dataMenuAppId == "") {
+            Swal.fire({
                 icon: 'warning',
                 title: 'Warning',
                 text: 'Checkbox is Empty',
                 confirmButtonColor: '#D80032'
-                })
+            })
 
-            } else {
-                var path = $.ajax({
-                    method: "GET",
-                    url: "<?php echo base_url(); ?>Manage/AddManagePermissionApp",
-                    data: {
-                        addPermissionappname: addPermissionappname,
-                        dataMenuAppId: dataMenuAppId
-                    }
-                })
-                path.done(function(rs) {
-                    alert(rs);
-                    console.log(rs)
-                    if (rs == "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'You have Successfully Add Permission.',
+        } else {
+            var path = $.ajax({
+                method: "GET",
+                url: "<?php echo base_url(); ?>Manage/AddManagePermissionApp",
+                data: {
+                    addPermissionappname: addPermissionappname,
+                    dataMenuAppId: dataMenuAppId
+                }
+            })
+            path.done(function(rs) {
+                if (rs == "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You have Successfully Add Permission.',
 
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
-                        })
-                    } else if (rs == "empty") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Type Name is Duplicate',
-                            confirmButtonColor: '#D80032'
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Add Permission',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                })
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/ManagePermisionApp";
+                    })
+                } else if (rs == "empty") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Type Name is Duplicate',
+                        confirmButtonColor: '#D80032'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You Failed to Add Permission',
+                        confirmButtonColor: '#D80032'
+                    })
+                }
+            })
 
-            }
+            // }
 
         }
     };
@@ -1767,39 +1795,48 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddManageMenuApp",
-                data: {
-                    addmenuappname: addmenuappname,
-                    addmenupathapp: addmenupathapp,
-                    addmenupicapp: addmenupicapp,
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Menu App.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(addmenuappname)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddManageMenuApp",
+                    data: {
+                        addmenuappname: addmenuappname,
+                        addmenupathapp: addmenupathapp,
+                        addmenupicapp: addmenupicapp,
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Menu App.',
+                            confirmButtonColor: '#D80032'
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/ManageMenuApp";
-                    })
-                } else if (rs === "duplicate") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data is Duplicate',
-                        confirmButtonColor: '#D80032'
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add Menu App',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/ManageMenuApp";
+                        })
+                    } else if (rs === "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add Menu App',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Menu Name',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -2846,7 +2883,7 @@
                 }
             })
             path.done(function(rs) {
-                if (rs === "true") {
+                if (rs == "true") {
                     Swal.fire({
                         icon: 'success',
                         title: 'You have Successfully Add Work Shift.',
@@ -3157,7 +3194,6 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs)
                 if (rs === "true") {
                     Swal.fire({
                         icon: 'success',
@@ -4434,7 +4470,186 @@
     };
 
 
+
+
+
+    // ======================================================== Qgate Check Data ========================================================
+
+
+    $("#btnCheckDataStart").click(function() {
+        checkDataStart()
+    })
+
+
+    function checkDataStart() {
+
+        var plant = $('#selectPlantNCNG').val()
+        var zone = $('#selectZoneData').val()
+        var station = $('#selectStationData').val()
+
+
+        var path = $.ajax({
+            method: "POST",
+            url: "<?php echo base_url(); ?>Manage/SearchCheckData",
+            data: {
+                plant: plant,
+                zone: zone,
+                station: station
+            }
+        })
+        path.done(function(rs) {
+
+
+            var data = JSON.parse(rs);
+            var tb = " "
+            var i = 0
+
+            if (data == 0) {
+                swal({
+                    title: "warning",
+                    text: "Not have data",
+                    type: "warning",
+                    confirmButtonColor: '#D80032'
+                });
+
+            } else {
+
+                $.each(data, function(key, value) {
+                    tb += "<tr><td>" + parseInt(i + 1) + "</td>"
+                    tb += "<td>" + value["ifts_line_cd"] + "</td>"
+                    tb += "<td>" + value["ifts_plan_date"] + "</td>"
+                    tb += "<td>" + value["ifts_seq_paln"] + "</td>"
+                    tb += "<td>" + value["ifts_part_no"] + "</td>"
+                    tb += "<td>" + value["ifts_snp"] + "</td>"
+                    tb += "<td>" + value["ifts_box"] + "</td>"
+                    tb += "<td>" + value["ifts_lot_no_prod"] + "</td>"
+                    tb += "<td>" + value["ifts_lot_current"] + "</td>"
+                    tb += "<td>" + value["mpa_name"] + "</td>"
+                    tb += "<td>" + value["mza_name"] + "</td>"
+                    tb += "<td>" + value["msa_station"] + "</td>"
+                    tb += "<td>" + value["iodc_created_date"] + "</td>"
+                    tb += "</tr>"
+
+                    i++
+                })
+                $("#tbQgcheckdata").html(tb)
+
+            }
+
+
+
+
+        });
+
+    }
+
+
+
+
+
+
     // ----------------------------------------------------- NC/NG Data -----------------------------------------------------------------
+
+
+
+    $("#btnNCNGstart").click(function() {
+        NCNGStart()
+    })
+
+
+    function NCNGStart() {
+        var plant = $('#selectPlantNCNG').val()
+        var zone = $('#selectZoneNCNG').val()
+        var station = $('#selectStationNCNG').val()
+
+        var path = $.ajax({
+            method: "POST",
+            url: "<?php echo base_url(); ?>Manage/SearchNCNG",
+            data: {
+                plant: plant,
+                zone: zone,
+                station: station
+            }
+        })
+        path.done(function(rs) {
+            var data = JSON.parse(rs);
+            var tb = " "
+            var i = 0
+
+            if (data == 0) {
+                swal({
+                    title: "warning",
+                    text: "Not have data",
+                    type: "warning",
+                    confirmButtonColor: '#D80032'
+                });
+
+            } else {
+                // $.each(data, function(key, value) {
+                //     tb += "<tr><td>" + parseInt(i + 1) + "</td>"
+                //     tb += "<td>" + value["idd_type"] + "</td>"
+                //     tb += "<td>" + value["ifts_plan_date"] + "</td>"
+                //     tb += "<td>" + value["ifts_part_no"] + "</td>"
+                //     tb += "<td>" + value["mpa_name"] + "</td>"
+                //     tb += "<td>" + value["mza_name"] + "</td>"
+                //     tb += "<td>" + value["msa_station"] + "</td>"
+                //     tb += "<td>" + value["idd_create_date"] + "</td>"
+
+                //     if ($table["idd_type"] == "NG") {
+                //         if ($table["idd_status"] == "5") {
+                //             tb += "<td>"
+                //             tb += "<div class=\"text-wrap text-center\" >"
+                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" "
+                //             tb += "id=btnconfirmNG$i clicked onclick='ChangeStatusNG(".$table["idd_id"].")' disabled > Confirm NG</button>"
+                //             tb += "</div>"
+                //             tb += "</td>"
+
+                //         } else {
+                //             tb += "<td>"
+                //             tb += "<div class=\"text-wrap text-center\" >"
+                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-md btn-danger shadow-sm  me-md-2 \""
+                //             tb += "id=btnconfirmNG$i onclick='ChangeStatusNG(".$table["idd_id"].")'> Confirm NG</button>"
+                //             tb += "</div>"
+                //             tb += "</td>"
+                //         }
+                //     } else if ($table["idd_type"] == "NC") {
+                //         if ($table["idd_status"] == "5" || $table["idd_status"] == "9") {
+                //             tb += "<td>"
+                //             tb += "<div class=\"text-wrap text-center\" >"
+                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \""
+                //             tb += "id=btnconfirmNC$i onclick='ChangeStatusNC(".$table["idd_id"].")' disabled> Confirm NC</button>"
+                //             tb += "</div> <br>"
+                //             tb += " <div class=\"text-wrap text-center\" >"
+                //             tb += " <button class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \""
+                //             tb += " id=btnrestoreNC$i onclick='RestoreNC(".$table["idd_id"].")' disabled> Restore NC</button>"
+                //             tb += "</div>"
+                //             tb += "<td>"
+                //         } else {
+                //             tb += "<td>"
+                //             tb += "<div class=\"text-wrap text-center\" >"
+                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \""
+                //             tb += "id=btnconfirmNC$i onclick='ChangeStatusNC(".$table["idd_id"].")'> Confirm NC</button>"
+                //             tb += "</div> <br>"
+                //             tb += "<div class=\"text-wrap text-center\" >"
+                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-success shadow-sm  me-md-2 \""
+                //             tb += " id=btnrestoreNC$i onclick='RestoreNC(".$table["idd_id"].")'> Restore NC</button>"
+                //             tb += "</div>"
+                //             tb += "<td>"
+
+                //             i++
+                //         }
+                //     }
+
+                // })
+
+            }
+
+        })
+    }
+
+
+
+
 
 
     function ChangeStatusNG(idd_id) {
@@ -4456,7 +4671,7 @@
                     if (rs === "true") {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Successfully!',
+                            title: 'Confirm NG Successfully!',
                             confirmButtonColor: '#D80032'
 
                         }).then(function() {
@@ -4494,7 +4709,7 @@
                     if (rs === "true") {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Successfully!',
+                            title: 'Confirm NC Successfully!',
                             confirmButtonColor: '#D80032'
 
                         }).then(function() {
@@ -4503,7 +4718,7 @@
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Failed to Confirm NG',
+                            title: 'Failed to Confirm NC',
                             confirmButtonColor: '#D80032'
                         })
                     }
