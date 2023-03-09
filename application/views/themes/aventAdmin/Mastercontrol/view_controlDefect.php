@@ -113,7 +113,7 @@
                 <form class="card-body" action="#">
                 <div class="form-group"
                     <label for="empcode">Defect Code :</label>
-                    <input class="form-control" type="text" id="IDeditdefect" name="IDeditdefect" required="" >
+                    <input class="form-control" type="text" id="IDeditdefect" name="IDeditdefect" required="" hidden>
                     <input class="form-control" type="text" id="editdefectcode" name="editdefectcode" required="" placeholder="Enter New  Defect Code">
                   </div>
 

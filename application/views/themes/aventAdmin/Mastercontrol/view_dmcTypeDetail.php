@@ -106,17 +106,17 @@
 
                   <div class="form-group"
                     <label for="password">Digit Start :</label>
-                    <input class="form-control" type="number" id="addstartofdetail" name="addstartofdetail">
+                    <input class="form-control" type="number" min="0" id="addstartofdetail" name="addstartofdetail">
                   </div>
 
                   <div class="form-group"
                     <label for="password">Digit End :</label>
-                    <input class="form-control" type="number" id="addendofdetail" name="addendofdetail">
+                    <input class="form-control" type="number" min="0" id="addendofdetail" name="addendofdetail">
                   </div>
 
                   <div class="form-group"
                     <label for="password">Number Substring :</label>
-                    <input class="form-control" type="number" min="0" id="addsubstringdetail" name="addsubstringdetail">
+                    <input class="form-control" type="number" min="0" min="0" id="addsubstringdetail" name="addsubstringdetail">
                   </div>
 
                 </form>
@@ -174,12 +174,12 @@
                   <div class="form-group"
                     <label for="password">Digit Start :</label>
                     <input class="form-control" type="number" id="IDeditDMCTypeDetail" name="IDeditDMCTypeDetail" hidden>
-                    <input class="form-control" type="number" id="editstartofdetail" name="editstartofdetail">
+                    <input class="form-control" type="number" min="0" id="editstartofdetail" name="editstartofdetail">
                   </div>
 
                   <div class="form-group"
                     <label for="password">Digit End :</label>
-                    <input class="form-control" type="number" id="editendofdetail" name="editendofdetail">
+                    <input class="form-control" type="number" min="0" id="editendofdetail" name="editendofdetail">
                   </div>
 
                   <div class="form-group"

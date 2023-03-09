@@ -3980,7 +3980,7 @@
                 }
             })
             path.done(function(rs) {
-                if (rs === "true") {
+                if (rs == "true") {
                     setTimeout(function() {
                         swal({
                             title: "Success",

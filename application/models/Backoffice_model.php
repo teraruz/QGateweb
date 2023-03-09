@@ -383,7 +383,7 @@ class Backoffice_model extends CI_Model
 	// ***************************** MANAGE PERMISSION WEB *****************************************
 	public function getTableManagePermissionWeb()
 	{
-		$sql = "SELECT * FROM  sys_permission_group_web";
+		$sql = "SELECT spg_id, spg_name, spg_status FROM  sys_permission_group_web";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;

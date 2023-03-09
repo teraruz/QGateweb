@@ -262,13 +262,8 @@ class manage extends CI_Controller
 			if ($plant == "Select plant") {
 				echo "Select plant";
 			} else {
-				$emailcheck = $this->backoffice_model->checkEmailUserAdd($email);
-				if ($emailcheck == $email) {
-					echo "duplicate";
-				} else {
-					$rs = $this->backoffice_model->UpdateUserWeb($empcode, $firstname, $lastname, $email, $groupper, $plant, $empcodeadmin);
-					echo $rs;
-				}
+				$rs = $this->backoffice_model->UpdateUserWeb($empcode, $firstname, $lastname, $email, $groupper, $plant, $empcodeadmin);
+				echo $rs;
 			}
 		}
 	}
@@ -449,16 +444,8 @@ class manage extends CI_Controller
 		$IDeditMenuName = $_POST["IDeditMenuName"];
 		$editMenuName = $_POST["editMenuName"];
 
-		$checkMenuDuplicate =   $this->backoffice_model->checkDuplicateMenuName($editMenuName);
-
-		if ($checkMenuDuplicate == "pass") {
-			$editmenuweb = $this->backoffice_model->editMenuWeb($IDeditMenuName, $editMenuName, $empcodeadmin);
-			echo $editmenuweb;
-		} else if ($checkMenuDuplicate == "duplicate") {
-			echo "datadupicate";
-		} else {
-			echo "false";
-		}
+		$editmenuweb = $this->backoffice_model->editMenuWeb($IDeditMenuName, $editMenuName, $empcodeadmin);
+		echo $editmenuweb;
 	}
 
 
@@ -1217,15 +1204,8 @@ class manage extends CI_Controller
 		$editshift = $_POST["editshift"];
 		$editstarttime = $_POST["editstarttime"];
 		$editendtime = $_POST["editendtime"];
-
-		$checkShift = $this->backoffice_model->modelCheckWorkShift($editshift);
-
-		if ($checkShift == "pass") {
-			$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
-			echo $rseditworkshift;
-		} else {
-			echo "duplicate";
-		}
+		$rseditworkshift = $this->backoffice_model->modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin);
+		echo $rseditworkshift;
 	}
 
 
@@ -1291,15 +1271,8 @@ class manage extends CI_Controller
 		$editdefectnameth = $_POST["editdefectnameth"];
 		$editdefectnameen = $_POST["editdefectnameen"];
 
-
-		$checkDefect = $this->backoffice_model->modelCheckDefect($editdefectcode);
-
-		if ($checkDefect == "pass") {
 			$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
 			echo $rseditdefect;
-		} else {
-			echo "duplicate";
-		}
 	}
 
 	// ************************* Control PartNumber *************************************
@@ -1659,7 +1632,7 @@ class manage extends CI_Controller
 		$IDeditStation = $_POST["IDeditStation"];
 		$editStation = $_POST["editStation"];
 
-		$checkstation = $this->backoffice_model->modelCheckStation($addtablestation);
+		$checkstation = $this->backoffice_model->modelCheckStation($editStation);
 
 
 		if ($checkstation == "pass") {
@@ -1950,15 +1923,15 @@ class manage extends CI_Controller
 		$this->template->render();
 	}
 
-	public function SearchCheckData(){
+	public function SearchCheckData()
+	{
 
 		$plant = $_POST["plant"];
 		$zone = $_POST["zone"];
 		$station = $_POST["station"];
 
-		$Searchtable = $this->backoffice_model->SearchCheckData($plant,$zone,$station);
+		$Searchtable = $this->backoffice_model->SearchCheckData($plant, $zone, $station);
 		echo json_encode($Searchtable);
-
 	}
 	public function NCNGData()
 	{
@@ -1988,15 +1961,15 @@ class manage extends CI_Controller
 	}
 
 
-	public function SearchNCNG(){
+	public function SearchNCNG()
+	{
 
 		$plant = $_POST["plant"];
 		$zone = $_POST["zone"];
 		$station = $_POST["station"];
 
-		$Searchtable = $this->backoffice_model->SearchNCNG($plant,$zone,$station);
+		$Searchtable = $this->backoffice_model->SearchNCNG($plant, $zone, $station);
 		echo json_encode($Searchtable);
-
 	}
 	public function changeStatusNG()
 	{
