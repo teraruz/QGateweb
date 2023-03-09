@@ -18,17 +18,16 @@
                                         <div class="col-md-3">
                                             <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
                                                 <option selected>Select Plant</option>
-                                                
+
                                                 <?php
-                                           
+
 
                                                 foreach ($getplant as $plant) {
-                                                   
-                                                ?> 
-                                                <!-- id='checkDataPlant' name ='checkDataPlant'  -->
+
+                                                ?>
                                                     <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
-                                              
-                                                    <?php } ?>
+
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -43,11 +42,10 @@
                                             <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectZoneData" name="selectZoneData">
                                                 <option selected>Select Zone</option>
                                                 <?php
-                                               
+
                                                 foreach ($getzone as $zone) {
-                                                   
+
                                                 ?>
-                                                 <!-- id="checkDataZone" name = "checkDataZone" -->
                                                     <option value="<?php echo $zone["mza_id"]; ?>"><?php echo $zone["mza_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
@@ -64,12 +62,12 @@
                                             <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectStationData" name="selectStationData">
                                                 <option selected>Select Station</option>
                                                 <?php
-                                             
+
                                                 foreach ($getstation as $station) {
-                                                    
+
                                                 ?>
-                                                <!-- id="checkDataStation" name = "checkDataStation" -->
-                                                    <option  value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
+                                                    <!-- id="checkDataStation" name = "checkDataStation" -->
+                                                    <option value="<?php echo $station["msa_id"]; ?>"><?php echo $station["msa_station"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -79,11 +77,20 @@
 
                             </div>
 
+                            <div class="row col-md">
+                                <div class="mb row col-md-6">
+                                    <label class="col-form-label">Date :</label>
+                                    <div class="col-md-3">
+                                        <input class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" type="date" placeholder="yyyy-mm-dd" min="01-01-1997" max="31-12-2050" id="CheckDatadatesearch" name="CheckDatadatesearch">
+                                    </div>
+                                </div>
+
+                            </div>
+
 
                             <div class="col-3 col-sm text-center">
                                 <span>
-                                    <button type="submit" id="btnCheckDataStart" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
-                                    <button type="submit" id="btnCheckDataend" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
+                                    <button type="submit" id="btnCheckDataSearch" name="btnCheckDataSearch" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Search</button>
                                 </span>
                             </div>
                         </div>
@@ -94,51 +101,33 @@
             <div class="card-table shadow col-12">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="display table" id="example" width="100%" cellspacing="0">
-                            <thead >
-                                <tr>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Line</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plan Date</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Seq Plan</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part No</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">SNP</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Box</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Production Lot</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Qgate Lot</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plant</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Zone</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Station</th>
-                                    <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id = tbQgcheckdata>
-                                <?php
-                                $i = 0;
-                                foreach ($tableCheckData as $checkdata) {
-                                    $i++;
-                                    echo "<tr>";
-                                    echo "<td>" . $i . "</td>";
-                                    echo "<td>" . $checkdata["ifts_line_cd"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_plan_date"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_seq_paln"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_part_no"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_snp"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_box"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_lot_no_prod"] . "</td>";
-                                    echo "<td>" . $checkdata["ifts_lot_current"] . "</td>";
-                                    echo "<td>" . $checkdata["mpa_name"] . "</td>";
-                                    echo "<td>" . $checkdata["mza_name"] . "</td>";
-                                    echo "<td>" . $checkdata["msa_station"] . "</td>";
-                                    echo "<td>" . $checkdata["iodc_created_date"] . "</td>";
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="display table" id="example1" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Line</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plan Date</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Seq Plan</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part No</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">SNP</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Box</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Production Lot</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Qgate Lot</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plant</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Zone</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Station</th>
+                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                   
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

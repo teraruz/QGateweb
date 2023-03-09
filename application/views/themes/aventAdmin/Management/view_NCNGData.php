@@ -65,13 +65,23 @@
 
                                 </div>
 
+                                
+
                             </div>
+                            <div class="row col-md">
+                                    <div class="mb row col-md-6">
+                                        <label class="col-form-label">Date :</label>
+                                        <div class="col-md-3">
+                                        <input class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" type="date" placeholder="yyyy-mm-dd" min="01-01-1997" max="31-12-2050" id="NCNGdatesearch" name="NCNGdatesearch">
+                                        </div>
+                                    </div>
+
+                                </div>
 
 
                             <div class="col-3 col-sm text-center">
                                 <span>
-                                    <button type="submit" id="btnNCNGstart" name="btnNCNGstart" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
-                                    <button type="submit" id="btnNCNGend" name="btnNCNGend" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
+                                    <button type="submit" id="btnNCNGSearch" name="btnNCNGSearch" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Search</button>
                                 </span>
                             </div>
                         </div>

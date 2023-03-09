@@ -4476,7 +4476,7 @@
     // ======================================================== Qgate Check Data ========================================================
 
 
-    $("#btnCheckDataStart").click(function() {
+    $("#btnCheckDataSearch").click(function() {
         checkDataStart()
     })
 
@@ -4486,60 +4486,83 @@
         var plant = $('#selectPlantNCNG').val()
         var zone = $('#selectZoneData').val()
         var station = $('#selectStationData').val()
+        var date = $('#CheckDatadatesearch').val()
+
+        if (plant == "Select Plant" || zone == "Select Zone" || station == "Select Station" || date == "dd/mm/yyyy") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please Select All Data',
+                confirmButtonColor: '#D80032'
+            })
+        } else {
+            var tabel = $('#example1').DataTable({
+                "orderCellsTop": false,
+                "bFilter": true,
+                "bSort": true,
+                "excludedColumns": [1, 2, 3],
+                "zeroIndexed": false, // or true
+
+                "ajax": {
+                    // "type" : "GET",
+                    "url": "<?php echo base_url(); ?>Manage/SearchCheckData",
+                    "dataSrc": 'data',
+                    // "data" : {"stdate":"stdate","dept":"dept","line":"line"},
+                    //   "dataType": 'json',
+                    "data": function(a) {
+                        a.plant = $("#selectPlantNCNG").val();
+                        a.zone = $("#selectZoneData").val();
+                        a.station = $("#selectStationData").val();
+                        a.date = $("#CheckDatadatesearch").val();
+                    },
+                },
+                "columns": [
+
+                    {
+                        "data": "ifts_line_cd"
+                    },
+                    {
+                        "data": "ifts_line_cd"
+                    },
+                    {
+                        "data": "ifts_plan_date"
+                    },
+                    {
+                        "data": "ifts_seq_paln"
+                    },
+                    {
+                        "data": "ifts_part_no"
+                    },
+                    {
+                        "data": "ifts_snp"
+                    },
+                    {
+                        "data": "ifts_box"
+                    },
+                    {
+                        "data": "ifts_lot_no_prod"
+                    },
+                    {
+                        "data": "ifts_lot_current"
+                    },
+                    {
+                        "data": "mpa_name"
+                    },
+                    {
+                        "data": "mza_name"
+                    },
+                    {
+                        "data": "msa_station"
+                    },
+                    {
+                        "data": "iodc_created_date"
+                    }
+
+                ],
+            });
 
 
-        var path = $.ajax({
-            method: "POST",
-            url: "<?php echo base_url(); ?>Manage/SearchCheckData",
-            data: {
-                plant: plant,
-                zone: zone,
-                station: station
-            }
-        })
-        path.done(function(rs) {
+        }
 
-
-            var data = JSON.parse(rs);
-            var tb = " "
-            var i = 0
-
-            if (data == 0) {
-                swal({
-                    title: "warning",
-                    text: "Not have data",
-                    type: "warning",
-                    confirmButtonColor: '#D80032'
-                });
-
-            } else {
-
-                $.each(data, function(key, value) {
-                    tb += "<tr><td>" + parseInt(i + 1) + "</td>"
-                    tb += "<td>" + value["ifts_line_cd"] + "</td>"
-                    tb += "<td>" + value["ifts_plan_date"] + "</td>"
-                    tb += "<td>" + value["ifts_seq_paln"] + "</td>"
-                    tb += "<td>" + value["ifts_part_no"] + "</td>"
-                    tb += "<td>" + value["ifts_snp"] + "</td>"
-                    tb += "<td>" + value["ifts_box"] + "</td>"
-                    tb += "<td>" + value["ifts_lot_no_prod"] + "</td>"
-                    tb += "<td>" + value["ifts_lot_current"] + "</td>"
-                    tb += "<td>" + value["mpa_name"] + "</td>"
-                    tb += "<td>" + value["mza_name"] + "</td>"
-                    tb += "<td>" + value["msa_station"] + "</td>"
-                    tb += "<td>" + value["iodc_created_date"] + "</td>"
-                    tb += "</tr>"
-
-                    i++
-                })
-                $("#tbQgcheckdata").html(tb)
-
-            }
-
-
-
-
-        });
 
     }
 
@@ -4552,7 +4575,7 @@
 
 
 
-    $("#btnNCNGstart").click(function() {
+    $("#btnNCNGSearch").click(function() {
         NCNGStart()
     })
 
@@ -4561,6 +4584,7 @@
         var plant = $('#selectPlantNCNG').val()
         var zone = $('#selectZoneNCNG').val()
         var station = $('#selectStationNCNG').val()
+        var date = $('#NCNGdatesearch').val()
 
         var path = $.ajax({
             method: "POST",
@@ -4585,62 +4609,7 @@
                 });
 
             } else {
-                // $.each(data, function(key, value) {
-                //     tb += "<tr><td>" + parseInt(i + 1) + "</td>"
-                //     tb += "<td>" + value["idd_type"] + "</td>"
-                //     tb += "<td>" + value["ifts_plan_date"] + "</td>"
-                //     tb += "<td>" + value["ifts_part_no"] + "</td>"
-                //     tb += "<td>" + value["mpa_name"] + "</td>"
-                //     tb += "<td>" + value["mza_name"] + "</td>"
-                //     tb += "<td>" + value["msa_station"] + "</td>"
-                //     tb += "<td>" + value["idd_create_date"] + "</td>"
-
-                //     if ($table["idd_type"] == "NG") {
-                //         if ($table["idd_status"] == "5") {
-                //             tb += "<td>"
-                //             tb += "<div class=\"text-wrap text-center\" >"
-                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" "
-                //             tb += "id=btnconfirmNG$i clicked onclick='ChangeStatusNG(".$table["idd_id"].")' disabled > Confirm NG</button>"
-                //             tb += "</div>"
-                //             tb += "</td>"
-
-                //         } else {
-                //             tb += "<td>"
-                //             tb += "<div class=\"text-wrap text-center\" >"
-                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-md btn-danger shadow-sm  me-md-2 \""
-                //             tb += "id=btnconfirmNG$i onclick='ChangeStatusNG(".$table["idd_id"].")'> Confirm NG</button>"
-                //             tb += "</div>"
-                //             tb += "</td>"
-                //         }
-                //     } else if ($table["idd_type"] == "NC") {
-                //         if ($table["idd_status"] == "5" || $table["idd_status"] == "9") {
-                //             tb += "<td>"
-                //             tb += "<div class=\"text-wrap text-center\" >"
-                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \""
-                //             tb += "id=btnconfirmNC$i onclick='ChangeStatusNC(".$table["idd_id"].")' disabled> Confirm NC</button>"
-                //             tb += "</div> <br>"
-                //             tb += " <div class=\"text-wrap text-center\" >"
-                //             tb += " <button class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \""
-                //             tb += " id=btnrestoreNC$i onclick='RestoreNC(".$table["idd_id"].")' disabled> Restore NC</button>"
-                //             tb += "</div>"
-                //             tb += "<td>"
-                //         } else {
-                //             tb += "<td>"
-                //             tb += "<div class=\"text-wrap text-center\" >"
-                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \""
-                //             tb += "id=btnconfirmNC$i onclick='ChangeStatusNC(".$table["idd_id"].")'> Confirm NC</button>"
-                //             tb += "</div> <br>"
-                //             tb += "<div class=\"text-wrap text-center\" >"
-                //             tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-success shadow-sm  me-md-2 \""
-                //             tb += " id=btnrestoreNC$i onclick='RestoreNC(".$table["idd_id"].")'> Restore NC</button>"
-                //             tb += "</div>"
-                //             tb += "<td>"
-
-                //             i++
-                //         }
-                //     }
-
-                // })
+                
 
             }
 

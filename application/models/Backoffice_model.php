@@ -3008,10 +3008,10 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function SearchCheckData($plantID,$zoneID,$stationID)
+	public function SearchCheckData($plantID,$zoneID,$stationID , $Date)
 	{
 		$sql = "SELECT
-		iodc_id,
+		-- iodc_id,
 		ifts_line_cd,
 		ifts_plan_date,
 		ifts_seq_paln,
@@ -3020,11 +3020,8 @@ class Backoffice_model extends CI_Model
 		ifts_box,
 		ifts_lot_no_prod,
 		ifts_lot_current,
-		mpa.mpa_id , 
 		mpa_name,
-		mza.mza_id,
 		mza_name,
-		msa.msa_id,
 		msa_station ,
 		FORMAT (
 			iodc_created_date,
@@ -3038,7 +3035,7 @@ class Backoffice_model extends CI_Model
 	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
 	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
 	INNER JOIN mst_station_admin_app msa ON mcd.mcd_id = msa.msa_id
-	WHERE mpa.mpa_id = '{$plantID}' AND mza.mza_id = '{$zoneID}' AND msa.msa_id = '{$stationID}'";
+	WHERE mpa.mpa_id = '1' AND mza.mza_id = '2' AND msa.msa_id = '4' AND 	CAST(iodc_created_date AS DATE) ='{$Date}' ";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		return $row;

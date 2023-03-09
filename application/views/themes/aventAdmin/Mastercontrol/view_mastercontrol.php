@@ -2,10 +2,10 @@
     <div class="content-wrapper">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="<?php echo base_url() . "#"; ?>">Master Control</a>
+                <a class="nav-link active" aria-current="page" href="">Master Control</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url() . "#"; ?>">Detail of Master Table</a>
+                <a class="nav-link" href="">Detail of Master Table</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
