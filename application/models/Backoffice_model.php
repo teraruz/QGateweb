@@ -1130,7 +1130,7 @@ class Backoffice_model extends CI_Model
 		// } else {
 		// 	retur "false";
 		// }
-		if ($res) {
+		if ($row) {
 			return "true";
 		} else {
 			return "false";
@@ -3230,6 +3230,54 @@ class Backoffice_model extends CI_Model
 			return "pass";
 		}
 	
+	}
+	public function checknameoldedit($id){
+		$sql = "SELECT
+		*
+		FROM 
+		sys_permission_group_app
+		WHERE spg_id = '{$id}' ";
+		$res = $this->db->query($sql);
+		// $row = $res->result_array();
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0]["spg_name"];
+		} else {
+			return "false";
+		}
+
+	}
+
+	public function checknameduplicateedit($name){
+		$sql = " SELECT
+		*
+		FROM 
+		sys_permission_group_app
+		WHERE spg_name = '{$name}' ";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if($row){
+			return "duplicate";
+		}else{
+			return "pass";
+		}
+	}
+
+	public function modelcheckIDmenu($id){
+		$sql = "SELECT
+		*
+		FROM 
+		sys_permission_detail_app
+		WHERE spg_id = '{$id}' ";
+		$res = $this->db->query($sql);
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result[0]["sm_id"];
+		} else {
+			return "false";
+		}
+
+
 	}
 }
 

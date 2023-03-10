@@ -696,23 +696,46 @@ class manage extends CI_Controller
 
 		$empcodeadmin = $this->session->userdata("empcode");
 
-		$check =  $this->backoffice_model->checknameedit($id,$dropdowneditmenu);
-
-		if($check == "pass"){
-			$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id, $empcodeadmin);
-			$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
-
-			if ($checkInsertEditper == "true") {
-				$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
-				echo $InsertPer;
+		$checknameold =  $this->backoffice_model->checknameoldedit($id);
+		if ($checknameold == $editnameper) {
+			$check =  $this->backoffice_model->checknameedit($id, $dropdowneditmenu);
+			if ($check == "pass") {
+				$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
+				if ($checkInsertEditper == "true") {
+					$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
+					echo $InsertPer;
+				} else {
+					echo "false";
+				}
 			} else {
-				echo "false";
+				echo "duplicate";
 			}
-		}else{
-			echo "duplicate";
+		} else {
+			$checknameper = $this->backoffice_model->checknameduplicateedit($editnameper);
+			if ($checknameper == "pass") {
+				$checkSMID = $this->backoffice_model->modelcheckIDmenu($id);
+				// echo 	$checkSMID;
+				if ($checkSMID == $dropdowneditmenu) {
+					$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id, $empcodeadmin);
+					echo $updatenameper;
+				} else {
+					// echo "else";
+					$check =  $this->backoffice_model->checknameedit($id, $dropdowneditmenu);
+					if ($check == "pass") {
+						$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
+						echo $checkInsertEditper;
+						if ($checkInsertEditper == "true") {
+							$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
+							echo $InsertPer;
+						} else {
+							echo "false";
+						}
+					} else {
+						echo "duplicate";
+					}
+				}
+			}
 		}
-		
-		
 	}
 
 	// --------------------------------------------- Manage Menu App ------------------------------------------
@@ -1279,8 +1302,8 @@ class manage extends CI_Controller
 		$editdefectnameth = $_POST["editdefectnameth"];
 		$editdefectnameen = $_POST["editdefectnameen"];
 
-			$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
-			echo $rseditdefect;
+		$rseditdefect = $this->backoffice_model->modelEditDefect($IDeditdefect, $editdefectcode, $editdefectnameth, $editdefectnameen, $empcodeadmin);
+		echo $rseditdefect;
 	}
 
 	// ************************* Control PartNumber *************************************
@@ -1981,7 +2004,7 @@ class manage extends CI_Controller
 		$date =  $_GET["date"];
 
 
-		$Searchtable = $this->backoffice_model->SearchNCNGModle($plant, $zone, $station,$date);
+		$Searchtable = $this->backoffice_model->SearchNCNGModle($plant, $zone, $station, $date);
 		echo json_encode($Searchtable);
 	}
 	public function changeStatusNG()
