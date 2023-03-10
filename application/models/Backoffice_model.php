@@ -370,7 +370,7 @@ class Backoffice_model extends CI_Model
 	public function UpdateUserWeb($empcode, $firstname, $lastname, $email, $groupper, $plant, $empcodeadmin)
 	{
 		$sql = "UPDATE sys_staff_web SET ss_emp_code = '{$empcode}',ss_emp_fname = '{$firstname}',ss_emp_lname = '{$lastname}',ss_email = '{$email}' 
-		,spg_id = '{$groupper}',mpa_id = '{$plant}' ,ss_create_by='{$empcodeadmin}',ss_create_date = CURRENT_TIMESTAMP
+		,spg_id = '{$groupper}',mpa_id = '{$plant}' ,ss_update_by='{$empcodeadmin}',ss_update_date = CURRENT_TIMESTAMP
 		WHERE ss_emp_code = '{$empcode}'";
 		$res = $this->db->query($sql);
 		if ($res) {
@@ -3216,4 +3216,21 @@ class Backoffice_model extends CI_Model
 			}
 		}
 	}
+	public function checknameedit($id,$dropdowneditmenu){
+		$sql = "SELECT
+		*
+		FROM 
+		sys_permission_detail_app
+		WHERE spg_id = '{$id}' AND sm_id = '{$dropdowneditmenu}'";
+		$res = $this->db->query($sql);
+		$row = $res->result_array();
+		if($res){
+			return "duplicate";
+		}else{
+			return "pass";
+		}
+	
+	}
 }
+
+

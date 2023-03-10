@@ -1490,8 +1490,8 @@
                 window.location = "<?php echo base_url() ?>Manage/ManageUserApp";
             });
         } else {
-            if (isValidInput(addempcodeapp)) {
-                if (isValidInput(addnameapp)) {
+            if (isValidInput(editempcodeuserapp)) {
+                if (isValidInput(editnameapp)) {
                     var path = $.ajax({
                         method: "GET",
                         url: "<?php echo base_url(); ?>Manage/EditManageUserApp",
@@ -1688,6 +1688,12 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Checkbox is Empty',
+                        confirmButtonColor: '#D80032'
+                    })
+                }else if (rs == "duplicate") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data is Duplicate',
                         confirmButtonColor: '#D80032'
                     })
                 } else {
@@ -4154,7 +4160,7 @@
         var editstatusconfig = $('#editstatusconfig').val()
         var editinspectionconfig = $('#editinspectionconfig').val()
         var edittimeconfig = $('#edittimeconfig').val()
-        var editMacaddressconfig = $('#editMacaddressconfig').val()
+        var editMacaddressconfig = $('#editmacaddressconfig').val()
 
         var checkIDeditconfig = document.getElementById("IDeditconfig");
         var checkeditplantconfig = document.getElementById("editplantconfig");
@@ -4163,7 +4169,7 @@
         var checkedittypeconfig = document.getElementById("edittypeconfig");
         var checkeditstatusconfig = document.getElementById("editstatusconfig");
         var checkedittimeconfig = document.getElementById("edittimeconfig");
-        var checkeditMacaddressconfig = document.getElementById("editMacaddressconfig");
+        var checkeditMacaddressconfig = document.getElementById("editmacaddressconfig");
 
         if (checkIDeditconfig.value == "" || checkeditplantconfig.value == "" ||
             checkeditzoneconfig.value == "" || checkeditstationconfig.value == "" ||

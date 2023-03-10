@@ -693,18 +693,26 @@ class manage extends CI_Controller
 		$id = $_REQUEST["idper"];
 		$editnameper = $_REQUEST["editPermissionappname"];
 		$dropdowneditmenu = $_REQUEST["dropdowneditmenu"];
+
 		$empcodeadmin = $this->session->userdata("empcode");
 
-		$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id, $empcodeadmin);
+		$check =  $this->backoffice_model->checknameedit($id,$dropdowneditmenu);
 
-		$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
+		if($check == "pass"){
+			$updatenameper = $this->backoffice_model->modelUpdateNamePermissionApp($editnameper, $id, $empcodeadmin);
+			$checkInsertEditper = $this->backoffice_model->modelcheckInsertdataEditPerApp($id, $dropdowneditmenu);
 
-		if ($checkInsertEditper == "true") {
-			$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
-			echo $InsertPer;
-		} else {
-			echo "false";
+			if ($checkInsertEditper == "true") {
+				$InsertPer = $this->backoffice_model->modelInsertdataEditperApp($id, $dropdowneditmenu, $empcodeadmin);
+				echo $InsertPer;
+			} else {
+				echo "false";
+			}
+		}else{
+			echo "duplicate";
 		}
+		
+		
 	}
 
 	// --------------------------------------------- Manage Menu App ------------------------------------------
