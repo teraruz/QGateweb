@@ -1566,7 +1566,7 @@ class manage extends CI_Controller
 		$editnamezone = $_POST["editnamezone"];
 		$editlinezone = $_POST["editlinezone"];
 
-		$checkzone = $this->backoffice_model->modelCheckZone($addlinezone);
+		$checkzone = $this->backoffice_model->modelCheckZone($editnamezone);
 
 		if ($checkzone	== "pass") {
 			$rseditplantapp = $this->backoffice_model->modelEditZone($IDeditzone, $editnamezone, $editlinezone, $empcodeadmin);

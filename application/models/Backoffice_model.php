@@ -1877,7 +1877,7 @@ class Backoffice_model extends CI_Model
 	public function modelEditWorkShift($IDeditworkshift, $editshift, $editstarttime, $editendtime, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_work_shift_app 
-		SET mws_shift = '{$editshift}', mws_time_start = '{$editstarttime}', mws_time_end = '{$editendtime}',mws_create_by = '{$empcodeadmin}', mws_create_date = CURRENT_TIMESTAMP
+		SET mws_shift = '{$editshift}', mws_time_start = '{$editstarttime}', mws_time_end = '{$editendtime}',mws_update_by = '{$empcodeadmin}', mws_update_date = CURRENT_TIMESTAMP
 		WHERE  mws_id = '{$IDeditworkshift}'";
 		$res = $this->db->query($sql);
 		if ($res) {

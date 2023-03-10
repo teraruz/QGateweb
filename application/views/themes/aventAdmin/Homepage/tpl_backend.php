@@ -493,7 +493,7 @@
     };
 
     function isValidInput(input) {
-        var pattern = new RegExp(/^([a-z0-9 \t])+$/i);
+        var pattern = new RegExp(/^([a-z0-9-" "])+$/i);
         return pattern.test(input);
     }
 
@@ -2700,6 +2700,7 @@
         } else {
             if (isValidInput(addfaline)) {
                 if (isValidInput(addfaname)) {
+
                     var path = $.ajax({
                         method: "POST",
                         url: "<?php echo base_url(); ?>Manage/AddFACode",
@@ -2787,35 +2788,47 @@
             });
         } else {
             if (isValidInput(editfaname)) {
-                var path = $.ajax({
-                    method: "POST",
-                    url: "<?php echo base_url(); ?>Manage/EditFACode",
-                    data: {
-                        IDeditfacode: IDeditfacode,
-                        editfaline: editfaline,
-                        editfaname: editfaname
-                    }
-                })
-                path.done(function(rs) {
-                    if (rs === "true") {
-                        setTimeout(function() {
-                            swal({
-                                title: "Success",
-                                text: "FA Code is Updated!",
-                                type: "success",
-                                confirmButtonColor: '#D80032'
-                            }, function() {
-                                window.location = "<?php echo base_url() ?>Manage/FACode";
+                if (isValidInput(editfaline)) {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>Manage/EditFACode",
+                        data: {
+                            IDeditfacode: IDeditfacode,
+                            editfaline: editfaline,
+                            editfaname: editfaname
+                        }
+                    })
+                    path.done(function(rs) {
+                        if (rs === "true") {
+                            setTimeout(function() {
+                                swal({
+                                    title: "Success",
+                                    text: "FA Code is Updated!",
+                                    type: "success",
+                                    confirmButtonColor: '#D80032'
+                                }, function() {
+                                    window.location = "<?php echo base_url() ?>Manage/FACode";
+                                });
                             });
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'You Failed to Edit FA Code',
-                            confirmButtonColor: '#D80032'
-                        })
-                    }
-                });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You Failed to Edit FA Code',
+                                confirmButtonColor: '#D80032'
+                            })
+                        }
+                    });
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Cannot insert special character in FA name',
+                        confirmButtonColor: '#D80032'
+                    })
+
+                }
+
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -3017,39 +3030,49 @@
                 confirmButtonColor: '#D80032'
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/AddDefect",
-                data: {
-                    adddefectcode: adddefectcode,
-                    adddefectnameth: adddefectnameth,
-                    adddefectnameen: adddefectnameen
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You have Successfully Add Defect.',
-                        confirmButtonColor: '#D80032'
+            if (isValidInput(adddefectcode)) {
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>Manage/Defect";
-                    })
-                } else if (rs == "duplicate") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Defect Code is Duplicate',
-                        confirmButtonColor: '#D80032'
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Add Defect',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            })
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/AddDefect",
+                    data: {
+                        adddefectcode: adddefectcode,
+                        adddefectnameth: adddefectnameth,
+                        adddefectnameen: adddefectnameen
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'You have Successfully Add Defect.',
+                            confirmButtonColor: '#D80032'
+
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url() ?>Manage/Defect";
+                        })
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Defect Code is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Add Defect',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Employee Code',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     };
 
@@ -3093,43 +3116,51 @@
                 window.location = "<?php echo base_url() ?>Manage/Defect";
             });
         } else {
-
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>Manage/EditDefect",
-                data: {
-                    IDeditdefect: IDeditdefect,
-                    editdefectcode: editdefectcode,
-                    editdefectnameth: editdefectnameth,
-                    editdefectnameen: editdefectnameen
-                }
-            })
-            path.done(function(rs) {
-                if (rs === "true") {
-                    setTimeout(function() {
-                        swal({
-                            title: "Success",
-                            text: "Defect is Updated!",
-                            type: "success",
-                            confirmButtonColor: '#D80032'
-                        }, function() {
-                            window.location = "<?php echo base_url() ?>Manage/Defect";
+            if (isValidInput(editdefectcode)) {
+                var path = $.ajax({
+                    method: "POST",
+                    url: "<?php echo base_url(); ?>Manage/EditDefect",
+                    data: {
+                        IDeditdefect: IDeditdefect,
+                        editdefectcode: editdefectcode,
+                        editdefectnameth: editdefectnameth,
+                        editdefectnameen: editdefectnameen
+                    }
+                })
+                path.done(function(rs) {
+                    if (rs === "true") {
+                        setTimeout(function() {
+                            swal({
+                                title: "Success",
+                                text: "Defect is Updated!",
+                                type: "success",
+                                confirmButtonColor: '#D80032'
+                            }, function() {
+                                window.location = "<?php echo base_url() ?>Manage/Defect";
+                            });
                         });
-                    });
-                } else if (rs == "duplicate") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Defect Code is Duplicate',
-                        confirmButtonColor: '#D80032'
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'You Failed to Edit Defect',
-                        confirmButtonColor: '#D80032'
-                    })
-                }
-            });
+                    } else if (rs == "duplicate") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Defect Code is Duplicate',
+                            confirmButtonColor: '#D80032'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'You Failed to Edit Defect',
+                            confirmButtonColor: '#D80032'
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Cannot insert special character in Employee Code',
+                    confirmButtonColor: '#D80032'
+                })
+            }
         }
     }
 
@@ -4501,7 +4532,7 @@
                     }
                 })
                 path.done(function(rs) {
-                  
+
                     if (rs === "false") {
                         Swal.fire({
 

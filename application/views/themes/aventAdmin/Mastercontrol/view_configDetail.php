@@ -299,7 +299,7 @@
 
                   <div class="form-group"
                     <label for="empcode">Mac Address :</label>
-                    <input class="form-control" type="text" id="editMacaddressconfig" name="editMacaddressconfig" placeholder="-">
+                    <input class="form-control" type="text" id="editmacaddressconfig" name="editmacaddressconfig" placeholder="-">
                   </div>
 
                   <div class="form-group"
