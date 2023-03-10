@@ -4689,7 +4689,6 @@
                     }
                 })
                 path.done(function(rs) {
-                    alert(rs)
 
                     if (rs === "false") {
                         Swal.fire({
