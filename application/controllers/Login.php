@@ -101,11 +101,11 @@ class Login extends CI_Controller
 			}
 		}
 	}
-	public function Home()
-	{
-		$this->template->set_master_template('themes/' . $this->theme . '/Login/view_Homepage.php');
-		$this->template->render();
-	}
+	// public function Home()
+	// {
+	// 	$this->template->set_master_template('themes/' . $this->theme . '/Login/view_Homepage.php');
+	// 	$this->template->render();
+	// }
 	public function cCheckEmail()
 	{
 		$email = $_POST["email"];

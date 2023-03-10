@@ -196,19 +196,19 @@ class manage extends CI_Controller
 		$res = $this->backoffice_model->modelEditUser($empcode);
 		echo json_encode($res);
 	}
-	public function saveEdit()
-	{
-		$empcode = $_POST["empcode"];
-		$groupper = $_POST["groupper"];
-		$editemail = $_POST["editemail"];
-		if ($editemail !== " ") {
-			$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
-			$rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail);
-			echo $rs;
-		} else {
-			echo "false";
-		}
-	}
+	// public function saveEdit()
+	// {
+	// 	$empcode = $_POST["empcode"];
+	// 	$groupper = $_POST["groupper"];
+	// 	$editemail = $_POST["editemail"];
+	// 	if ($editemail !== " ") {
+	// 		$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
+	// 		$rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail);
+	// 		echo $rs;
+	// 	} else {
+	// 		echo "false";
+	// 	}
+	// }
 	public function addManageUserWeb()
 	{
 		$empcodeadmin = $this->session->userdata("empcode");
