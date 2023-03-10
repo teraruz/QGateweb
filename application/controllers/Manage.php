@@ -1912,7 +1912,7 @@ class manage extends CI_Controller
 		$data["getplant"] = $this->backoffice_model->modelGetPlantApp();
 		$data["getzone"] = $this->backoffice_model->modelgetZoneApp();
 		$data["getstation"] = $this->backoffice_model->modelgetStationApp();
-		// $data["tableCheckData"] = $this->backoffice_model->getTableCheckData();
+		$data["tableCheckData"] = $this->backoffice_model->getTableCheckData();
 		$data["menu"] = $this->backoffice_model->modelShowMenu($empcode);
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
@@ -1932,9 +1932,10 @@ class manage extends CI_Controller
 
 		// echo $date;
 		$Searchtable = $this->backoffice_model->SearchCheckData($plant, $zone, $station, $date);
-		$datares = array("data" => $Searchtable);
-		echo json_encode($datares);
+		// $datares = array("data" => $Searchtable);
+		echo json_encode($Searchtable);
 	}
+
 	public function NCNGData()
 	{
 		$empcode = $this->session->userdata("empcode");
@@ -1966,11 +1967,13 @@ class manage extends CI_Controller
 	public function SearchNCNG()
 	{
 
-		$plant = $_POST["plant"];
-		$zone = $_POST["zone"];
-		$station = $_POST["station"];
+		$plant = $_GET["plant"];
+		$zone = $_GET["zone"];
+		$station = $_GET["station"];
+		$date =  $_GET["date"];
 
-		$Searchtable = $this->backoffice_model->SearchNCNG($plant, $zone, $station);
+
+		$Searchtable = $this->backoffice_model->SearchNCNGModle($plant, $zone, $station,$date);
 		echo json_encode($Searchtable);
 	}
 	public function changeStatusNG()

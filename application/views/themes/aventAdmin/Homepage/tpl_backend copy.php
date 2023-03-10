@@ -464,17 +464,26 @@
 <!----------------------------------------------------- Manage User Web  ------------------------------------------------------------>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable({});
-        // $('#exampletest').DataTable({
-        //     buttons: [{
-        //         extend: 'excelHtml5',
-        //         className: 'btn btn-primary',
-        //         exportOptions: {
-        //             columns: [0, 1, 2, 3, 4, 5, 6]
-        //             // columns: ':visible'
-        //         }
-        //     }, ]
-        // });
+        $('#example').DataTable({
+            buttons: [{
+                extend: 'excelHtml5',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    // columns: ':visible'
+                }
+            }, ]
+        });
+        $('#exampletest').DataTable({
+            buttons: [{
+                extend: 'excelHtml5',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    // columns: ':visible'
+                }
+            }, ]
+        });
     });
 
 
@@ -4474,91 +4483,88 @@
 
     function checkDataStart() {
 
-        var plant = $('#selectPlantData').val()
+        var plant = $('#selectPlantNCNG').val()
         var zone = $('#selectZoneData').val()
         var station = $('#selectStationData').val()
         var date = $('#CheckDatadatesearch').val()
+        var i = 0
 
-        var checkdate = document.getElementById("CheckDatadatesearch")
-
-        if (plant == "Select Plant" || zone == "Select Zone" || station == "Select Station" || !checkdate.value) {
+        if (plant == "Select Plant" || zone == "Select Zone" || station == "Select Station" || date == "dd/mm/yyyy") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Please Select All Data',
                 confirmButtonColor: '#D80032'
             })
         } else {
-            try {
-                var path = $.ajax({ // ajax frist
-                    method: "get",
-                    dataType: "json",
-                    url: "<?php echo base_url(); ?>Manage/SearchCheckData",
-                    data: {
-                        "plant": plant,
-                        "zone": zone,
-                        "station": station,
-                        "date": date,
+            var tabel = $('#example1').DataTable({
+                "orderCellsTop": false,
+                "bFilter": true,
+                "bSort": true,
+                "excludedColumns": [1, 2, 3],
+                "zeroIndexed": false, // or true
+
+                "ajax": {
+                    // "type" : "GET",
+                    "url": "<?php echo base_url(); ?>Manage/SearchCheckData",
+                    "dataSrc": 'data',
+                    // "data" : {"stdate":"stdate","dept":"dept","line":"line"},
+                    //   "dataType": 'json',
+                    "data": function(a) {
+                        a.plant = $("#selectPlantNCNG").val();
+                        a.zone = $("#selectZoneData").val();
+                        a.station = $("#selectStationData").val();
+                        a.date = $("#CheckDatadatesearch").val();
+                    },
+                },
+
+                "columns": [
+
+                    {
+                        "data":"iodc_id"
+                    },
+
+                    {
+                        "data": "ifts_line_cd"
+                    },
+                    {
+                        "data": "ifts_plan_date"
+                    },
+                    {
+                        "data": "ifts_seq_paln"
+                    },
+                    {
+                        "data": "ifts_part_no"
+                    },
+                    {
+                        "data": "ifts_snp"
+                    },
+                    {
+                        "data": "ifts_box"
+                    },
+                    {
+                        "data": "ifts_lot_no_prod"
+                    },
+                    {
+                        "data": "ifts_lot_current"
+                    },
+                    {
+                        "data": "mpa_name"
+                    },
+                    {
+                        "data": "mza_name"
+                    },
+                    {
+                        "data": "msa_station"
+                    },
+                    {
+                        "data": "iodc_created_date"
                     }
-                })
-                path.done(function(rs) {
-                  
-                    if (rs === "false") {
-                        Swal.fire({
 
-                            icon: 'error',
-                            title: 'DATA NOT FOUND',
-                            confirmButtonColor: '#D80032'
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/QgateCheckData";
+                ],
+            });
 
 
-                        })
-
-
-                    } else {
-                        getDetailCheckDataQgate(rs)
-                    }
-
-
-
-                })
-
-            } catch (err) {
-                // $("#tableQgateCheckData").show("fast")
-                $("#tableQgateCheckData").html("")
-
-
-            }
         }
-    }
-
-    function getDetailCheckDataQgate(rs) {
-        console.log(rs)
-        var tb = ""
-        var i = 0
-        $.each(rs, function(key, value) {
-            tb += "<tr><td>" + parseInt(i + 1) + "</td>";
-            tb += "<td>" + value["ifts_line_cd"] + "</td>";
-            tb += "<td>" + value["ifts_plan_date"] + "</td>";
-            tb += "<td>" + value["ifts_seq_paln"] + "</td>";
-            tb += "<td>" + value["ifts_part_no"] + "</td>";
-            tb += "<td>" + value["ifts_snp"] + "</td>";
-            tb += "<td>" + value["ifts_box"] + "</td>";
-            tb += "<td>" + value["ifts_lot_no_prod"] + "</td>";
-            tb += "<td>" + value["ifts_lot_current"] + "</td>";
-            tb += "<td>" + value["mpa_name"] + "</td>";
-            tb += "<td>" + value["mza_name"] + "</td>";
-            tb += "<td>" + value["msa_station"] + "</td>";
-            tb += "<td>" + value["iodc_created_date"] + "</td>";
-            tb += "</tr>";
-            i++
-        })
-
-        $("#tableQgateCheckData").html(tb)
-        // $("#tableQgateCheckData").show()
-
-
-
 
 
     }
@@ -4576,201 +4582,127 @@
     })
 
 
-    // function NCNGStart() {
-
-    //     var plant = $('#selectPlantNCNG').val()
-    //     var zone = $('#selectZoneNCNG').val()
-    //     var station = $('#selectStationNCNG').val()
-    //     var date = $('#NCNGdatesearch').val()
-
-    //     if (plant == "Select Plant" || zone == "Select Zone" || station == "Select Station" || date == "dd/mm/yyyy") {
-    //         Swal.fire({
-    //             icon: 'warning',
-    //             title: 'Please Select All Data',
-    //             confirmButtonColor: '#D80032'
-    //         })
-    //     } else {
-    //         var tabel = $('#example2').DataTable({
-    //             "orderCellsTop": false,
-    //             "bFilter": true,
-    //             "bSort": true,
-    //             "excludedColumns": [1, 2, 3],
-    //             "zeroIndexed": false, // or true
-
-    //             "ajax": {
-    //                 // "type" : "GET",
-    //                 "url": "<?php echo base_url(); ?>Manage/SearchNCNG",
-    //                 "dataSrc": 'data',
-    //                 // "data" : {"stdate":"stdate","dept":"dept","line":"line"},
-    //                 //   "dataType": 'json',
-    //                 "data": function(a) {
-    //                     a.plant = $('#selectPlantNCNG').val()
-    //                     a.zone = $("#selectZoneNCNG").val();
-    //                     a.station = $("#selectStationNCNG").val();
-    //                     a.date = $("#NCNGdatesearch").val();
-    //                 },
-    //             },
-    //             "columns": [
-
-    //                 {
-    //                     "data": "ifts_line_cd"
-    //                 },
-    //                 {
-    //                     "data": "ifts_line_cd"
-    //                 },
-    //                 {
-    //                     "data": "ifts_plan_date"
-    //                 },
-    //                 {
-    //                     "data": "ifts_seq_paln"
-    //                 },
-    //                 {
-    //                     "data": "ifts_part_no"
-    //                 },
-    //                 {
-    //                     "data": "ifts_snp"
-    //                 },
-    //                 {
-    //                     "data": "ifts_box"
-    //                 },
-    //                 {
-    //                     "data": "ifts_lot_no_prod"
-    //                 },
-    //                 {
-    //                     "data": "ifts_lot_current"
-    //                 },
-    //                 {
-    //                     "data": "mpa_name"
-    //                 },
-    //                 {
-    //                     "data": "mza_name"
-    //                 },
-    //                 {
-    //                     "data": "msa_station"
-    //                 },
-    //                 {
-    //                     "data": "iodc_created_date"
-    //                 }
-
-    //             ],
-    //         });
-
-
-    //     }
-
-
-    // }
-
-
     function NCNGStart() {
+
         var plant = $('#selectPlantNCNG').val()
         var zone = $('#selectZoneNCNG').val()
         var station = $('#selectStationNCNG').val()
         var date = $('#NCNGdatesearch').val()
-        var checkdate = document.getElementById("NCNGdatesearch")
 
-        if (plant == "Select Plant" || zone == "Select Zone" || station == "Select Station" || !checkdate.value) {
+        if (plant == "Select Plant" || zone == "Select Zone" || station == "Select Station" || date == "dd/mm/yyyy") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Please Select All Data',
                 confirmButtonColor: '#D80032'
             })
         } else {
-            try {
-                var path = $.ajax({
-                    method: "get",
-                    url: "<?php echo base_url(); ?>Manage/SearchNCNG",
-                    dataType: "json",
-                    data: {
-                        plant: plant,
-                        zone: zone,
-                        station: station,
-                        date: date,
+            var tabel = $('#example2').DataTable({
+                "orderCellsTop": false,
+                "bFilter": true,
+                "bSort": true,
+                "excludedColumns": [1, 2, 3],
+                "zeroIndexed": false, // or true
+
+                "ajax": {
+                    // "type" : "GET",
+                    "url": "<?php echo base_url(); ?>Manage/SearchNCNG",
+                    "dataSrc": 'data',
+                    // "data" : {"stdate":"stdate","dept":"dept","line":"line"},
+                    //   "dataType": 'json',
+                    "data": function(a) {
+                        a.plant = $('#selectPlantNCNG').val()
+                        a.zone = $("#selectZoneNCNG").val();
+                        a.station = $("#selectStationNCNG").val();
+                        a.date = $("#NCNGdatesearch").val();
+                    },
+                },
+                "columns": [
+
+                    {
+                        "data": "ifts_line_cd"
+                    },
+                    {
+                        "data": "ifts_line_cd"
+                    },
+                    {
+                        "data": "ifts_plan_date"
+                    },
+                    {
+                        "data": "ifts_seq_paln"
+                    },
+                    {
+                        "data": "ifts_part_no"
+                    },
+                    {
+                        "data": "ifts_snp"
+                    },
+                    {
+                        "data": "ifts_box"
+                    },
+                    {
+                        "data": "ifts_lot_no_prod"
+                    },
+                    {
+                        "data": "ifts_lot_current"
+                    },
+                    {
+                        "data": "mpa_name"
+                    },
+                    {
+                        "data": "mza_name"
+                    },
+                    {
+                        "data": "msa_station"
+                    },
+                    {
+                        "data": "iodc_created_date"
                     }
-                })
-                path.done(function(rs) {
-                    alert(rs)
 
-                    if (rs === "false") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'DATA NOT FOUND',
-                            confirmButtonColor: '#D80032'
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url() ?>Manage/NCNGData";
+                ],
+            });
 
-
-                        })
-                    } else {
-                        getDataDetailNCNG(rs)
-                    }
-
-
-
-                })
-
-            } catch {
-
-                $("#detailgetDaTaNCNG").html("")
-
-            }
 
         }
-    }
-
-    function getDataDetailNCNG(data) {
-        console.log("data==>>", data)
-        var tb = ""
-        var i = 0
-        $.each(data, function(key, value) {
-            tb += "<tr><td>" + parseInt(i + 1) + "</td>";
-            tb += "<td>" + value["idd_type"] + "</td>";
-            tb += "<td>" + value["ifts_part_no"] + "</td>";
-            tb += "<td>" + value["mpa_name"] + "</td>";
-            tb += "<td>" + value["mza_name"] + "</td>";
-            tb += "<td> " + value["msa_station"] + "</td>";
-            tb += "<td>" + value["idd_create_date"] + "</td>";
-            if (value["idd_type"] == "NG") {
-                if (value["idd_status"] == "5") {
-                    tb += "<td> <div class = \"text-wrap text-center\" > "
-                    tb += "<button class = \"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" id = btnconfirmNG" + i + " clicked onclick = 'ChangeStatusNG(" + value["idd_id"] + ")'disabled > Confirm NG < /button>"
-                    tb += "</div>"
-                    tb += "</td>";
-                } else {
-                    tb += "<td> <div class = \"text-wrap text-center\" > "
-                    tb += "<button  class=\"d-none d-sm-inline-block btn btn-md btn-danger shadow-sm  me-md-2 \" id=btnconfirmNG$i onclick='ChangeStatusNG(" + value["idd_id"] + ")'> Confirm NG</button>"
-                    tb += "</div>"
-                    tb += "</td>";
-
-                }
-            } else if (value["idd_type"] == "NC") {
-                if (value["idd_status"] == "5" || value["idd_status"] == "9") {
-                    tb += "<td><div class=\"text-wrap text-center\" >"
-                    tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"id=btnconfirmNC$i onclick='ChangeStatusNC(" + value["idd_id"] + ")' disabled> Confirm NC</button>"
-                    tb += "</div> <br>"
-                    tb += "<div class=\"text-wrap text-center\" >"
-                    tb += " <button class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \" id=btnrestoreNC$i onclick='RestoreNC(" + value["idd_id"] + ")' disabled> Restore NC</button>"
-                    tb += " </div>"
-                    tb += " </td>";
-                } else {
-                    tb += "<td><div class=\"text-wrap text-center\" >"
-                    tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"id=btnconfirmNC$i onclick='ChangeStatusNC(" + value["idd_id"] + ")'> Confirm NC</button>"
-                    tb += "</div> <br>"
-                    tb += "<div class=\"text-wrap text-center\" >"
-                    tb += "<button  class=\"d-none d-sm-inline-block btn btn-sm btn-success shadow-sm  me-md-2 \" id=btnrestoreNC$i onclick='RestoreNC(" + value["idd_id"] + ")'> Restore NC</button>"
-                    tb += " </div>"
-                    tb += "</td>"
-                }
-            }
-            tb += "</tr>";
-            i++
-        })
-
-        $("#detailgetDaTaNCNG").html(tb)
-
 
 
     }
+
+
+    // function NCNGStart() {
+    //     var plant = $('#selectPlantNCNG').val()
+    //     var zone = $('#selectZoneNCNG').val()
+    //     var station = $('#selectStationNCNG').val()
+    //     var date = $('#NCNGdatesearch').val()
+
+    //     var path = $.ajax({
+    //         method: "POST",
+    //         url: "<?php echo base_url(); ?>Manage/SearchNCNG",
+    //         data: {
+    //             plant: plant,
+    //             zone: zone,
+    //             station: station
+    //         }
+    //     })
+    //     path.done(function(rs) {
+    //         var data = JSON.parse(rs);
+    //         var tb = " "
+    //         var i = 0
+
+    //         if (data == 0) {
+    //             swal({
+    //                 title: "warning",
+    //                 text: "Not have data",
+    //                 type: "warning",
+    //                 confirmButtonColor: '#D80032'
+    //             });
+
+    //         } else {
+                
+
+    //         }
+
+    //     })
+    // }
 
 
 

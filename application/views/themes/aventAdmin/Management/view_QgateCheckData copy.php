@@ -16,7 +16,7 @@
                                     <div class="mb row col-md-6">
                                         <label class="col-form-label">Plant :</label>
                                         <div class="col-md-3">
-                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectPlantData" name="selectPlantNCNG">
+                                            <select class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" aria-label="Default select example" id="selectPlantNCNG" name="selectPlantNCNG">
                                                 <option selected>Select Plant</option>
 
                                                 <?php
@@ -97,47 +97,32 @@
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="display table" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Line</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plan Date</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Seq Plan</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part No</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">SNP</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Box</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Production Lot</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Qgate Lot</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plant</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Zone</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Station</th>
+                                <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableQgateCheckData">
+                        </tbody>
+                    </table>
 
-            <div class="card-table shadow col-12">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="display table" id="example" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">NO.</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Line</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plan Date</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Seq Plan</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Part No</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">SNP</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Box</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Production Lot</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Qgate Lot</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Plant</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Zone</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Station</th>
-                                            <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tableQgateCheckData">
-                                        <!-- <?php
-                                        $i = 0;
-                                        foreach ($tableCheckData as $checkdata) {
-                                            $i++;
-                                            // echo "<tr></tr></tr>";
-                                        }
-                                        ?> -->
-
-                                    </tbody>
-                                   
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+<!-- </div> -->

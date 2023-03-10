@@ -65,18 +65,18 @@
 
                                 </div>
 
-                                
+
 
                             </div>
                             <div class="row col-md">
-                                    <div class="mb row col-md-6">
-                                        <label class="col-form-label">Date :</label>
-                                        <div class="col-md-3">
+                                <div class="mb row col-md-6">
+                                    <label class="col-form-label">Date :</label>
+                                    <div class="col-md-3">
                                         <input class="form-input" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#ec0000;  height: calc(2.25rem + 2px);" type="date" placeholder="yyyy-mm-dd" min="01-01-1997" max="31-12-2050" id="NCNGdatesearch" name="NCNGdatesearch">
-                                        </div>
                                     </div>
-
                                 </div>
+
+                            </div>
 
 
                             <div class="col-3 col-sm text-center">
@@ -110,72 +110,8 @@
                                     <th style="border-bottom: 2px solid rgb(207 0 46); text-align: center;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id = tbNCNG >
-                                <?php
-                                $i = 0;
-                                foreach ($tableNCNG as $table) {
-                                    $i++;
-                                    echo "<tr>";
-                                    echo "<td>" . $i . "</td>";
-                                    echo "<td>" . $table["idd_type"] . "</td>";
-                                    echo "<td>" . $table["ifts_part_no"] . "</td>";
-                                    echo "<td>" . $table["mpa_name"] . "</td>";
-                                    echo "<td>" . $table["mza_name"] . "</td>";
-                                    echo "<td>" . $table["msa_station"] . "</td>";
-                                    echo "<td>" . $table["idd_create_date"] . "</td>";
+                            <tbody id="detailgetDaTaNCNG">
 
-                                    if ($table["idd_type"] == "NG") {
-                                        if ($table["idd_status"] == "5") {
-                                            echo "<td>
-                                                            <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-md btn-secondary shadow-sm  me-md-2 \" 
-                                                                id=btnconfirmNG$i clicked onclick='ChangeStatusNG(" . $table["idd_id"] . ")' disabled > Confirm NG</button>                          
-                                                            </div>
-                                           
-                                                        </td>";
-                                        } else {
-                                            echo "<td>
-                                                            <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-md btn-danger shadow-sm  me-md-2 \" 
-                                                                 id=btnconfirmNG$i onclick='ChangeStatusNG(" . $table["idd_id"] . ")'> Confirm NG</button>                              
-                                                            </div>
-                                        
-                                                           
-                                                        </td>";
-                                        }
-                                    } else if ($table["idd_type"] == "NC") {
-                                        if($table["idd_status"] == "5" || $table["idd_status"] == "9" ) {
-                                            echo "<td>
-                                                            <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
-                                                                id=btnconfirmNC$i onclick='ChangeStatusNC(" . $table["idd_id"] . ")' disabled> Confirm NC</button>                              
-                                                            </div> <br>
-
-                                                            <div class=\"text-wrap text-center\" >
-                                                                <button class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"
-                                                                id=btnrestoreNC$i onclick='RestoreNC(" . $table["idd_id"] . ")' disabled> Restore NC</button>                              
-                                                            </div>
-
-                                                        </td>";
-
-                                        }else{
-                                        echo "<td>
-                                                            <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm  me-md-2 \"
-                                                                id=btnconfirmNC$i onclick='ChangeStatusNC(" . $table["idd_id"] . ")'> Confirm NC</button>                              
-                                                            </div> <br>
-
-                                                            <div class=\"text-wrap text-center\" >
-                                                                <button  class=\"d-none d-sm-inline-block btn btn-sm btn-success shadow-sm  me-md-2 \"
-                                                                id=btnrestoreNC$i onclick='RestoreNC(" . $table["idd_id"] . ")'> Restore NC</button>                              
-                                                            </div>
-
-                                                        </td>";
-                                        }
-                                    }
-                                    echo "</tr>";
-                                }
-                                ?>
                             </tbody>
                         </table>
 

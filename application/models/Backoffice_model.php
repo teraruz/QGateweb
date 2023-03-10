@@ -389,7 +389,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 	public function checkAddNamePermissionWeb($permissionwebname)
-	{ 
+	{
 		$sql = "SELECT spg_name FROM sys_permission_group_web WHERE spg_name = '{$permissionwebname}'";
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
@@ -1103,7 +1103,7 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function modelUpdateNamePermissionApp($editnameper, $id ,$empcodeadmin)
+	public function modelUpdateNamePermissionApp($editnameper, $id, $empcodeadmin)
 	{
 		$sql = "UPDATE 
 		sys_permission_group_app 
@@ -2174,7 +2174,7 @@ class Backoffice_model extends CI_Model
 		$row = $res->result_array();
 		return $row;
 	}
-	public function modelEditSelectPart($IDeditselectp, $editselectpCon,$editselectpno, $editselectpname,$empcodeadmin)
+	public function modelEditSelectPart($IDeditselectp, $editselectpCon, $editselectpno, $editselectpname, $empcodeadmin)
 	{
 		$sql = "UPDATE mst_select_part_app 
 			SET mcd_id = '{$editselectpCon}',msp_part_no = '{$editselectpno}' , 
@@ -3008,10 +3008,10 @@ class Backoffice_model extends CI_Model
 		return $row;
 	}
 
-	public function SearchCheckData($plantID,$zoneID,$stationID , $Date)
+	public function SearchCheckData($plantID, $zoneID, $stationID, $Date)
 	{
 		$sql = "SELECT
-		-- iodc_id,
+		iodc_id,
 		ifts_line_cd,
 		ifts_plan_date,
 		ifts_seq_paln,
@@ -3035,17 +3035,23 @@ class Backoffice_model extends CI_Model
 	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
 	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
 	INNER JOIN mst_station_admin_app msa ON mcd.mcd_id = msa.msa_id
-	WHERE mpa.mpa_id = '1' AND mza.mza_id = '2' AND msa.msa_id = '4' AND 	CAST(iodc_created_date AS DATE) ='{$Date}' ";
+	WHERE mpa.mpa_id = '$plantID' AND mza.mza_id = '$zoneID' AND msa.msa_id = '$stationID' AND 	CAST(iodc_created_date AS DATE) ='{$Date}' ";
 		$res = $this->db->query($sql);
-		$row = $res->result_array();
-		return $row;
+		// $row = $res->result_array();
+		// return $row;
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result;
+		} else {
+			return "false";
+		}
 	}
 
 
 
 	// ---------------------------------------- NC NG Data ---------------------------------------------------------------------------------
 
-	public function SearchNCNG($plant,$zone,$station)
+	public function SearchNCNGModle($plant, $zone, $station,$date)
 	{
 		$sql = "SELECT
 		idd.idd_id,
@@ -3078,12 +3084,17 @@ class Backoffice_model extends CI_Model
 	INNER JOIN mst_plant_admin_app mpa ON mcd.mpa_id = mpa.mpa_id
 	INNER JOIN mst_zone_admin_app mza ON mcd.mza_id = mza.mza_id
 	INNER JOIN mst_station_admin_app msa ON mcd.msa_id = msa.msa_id
-WHERE mpa.mpa_id = '{$plant}' AND mza.mza_id = '{$zone}' AND msa.msa_id = '{$station}'";
+	WHERE mpa.mpa_id = '{$plant}' AND mza.mza_id = '{$zone}' AND msa.msa_id = '{$station}' AND 	CAST(idd_create_date AS DATE) ='{$date}'";
 
 		$res = $this->db->query($sql);
-		$row = $res->result_array();
-		return $row;
-
+		// $row = $res->result_array();
+		// return $row;
+		if ($res->num_rows() != 0) {
+			$result = $res->result_array();
+			return $result;
+		} else {
+			return "false";
+		}
 	}
 
 	public function getTableNCNG()
@@ -3160,7 +3171,7 @@ WHERE mpa.mpa_id = '{$plant}' AND mza.mza_id = '{$zone}' AND msa.msa_id = '{$sta
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["idd_status"];
-		if ($result == 0 || $result == 1 ) {
+		if ($result == 0 || $result == 1) {
 			$sql = "UPDATE info_defect_detail_app SET idd_status = 5 WHERE  idd_id = '{$ncid}'";
 			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
 			WHERE  idd_id = '{$ncid}'";
@@ -3192,7 +3203,7 @@ WHERE mpa.mpa_id = '{$plant}' AND mza.mza_id = '{$zone}' AND msa.msa_id = '{$sta
 		$res = $this->db->query($sql);
 		$row = $res->result_array();
 		$result = $row[0]["idd_status"];
-		if ($result == 5 || $result == 1 || $result == 0 ) {
+		if ($result == 5 || $result == 1 || $result == 0) {
 			$sql = "UPDATE info_defect_detail_app SET idd_status = 9 WHERE  idd_id = '{$ncid}'";
 			$sqlupdate = "UPDATE info_defect_detail_app SET idd_update_by = '{$empcodeadmin}' , idd_update_date = CURRENT_TIMESTAMP
 			WHERE  idd_id = '{$ncid}'";
